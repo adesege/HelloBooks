@@ -26,7 +26,7 @@ body {
 @media(min-width:576px){
   #bookList .sidebar ul{
   position: fixed;
-  top: 100px;
+  top: 145px;
 }
 #bookList .sidebar{
   display: flex;
