@@ -1,0 +1,31 @@
+extends ../layouts/dashboard
+
+block contentarea
+  <h4 class="title mb-4 mr-4">Books <a href="/books/add"><i class="fa fa-pencil"></i></a></h4>
+  <form class="form-inline mb-4">
+  <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+  <option value="">by date...</option>
+  <option value="">Today</option>
+  <option value="">Last 7 days</option>
+  <option value="">Last 14 days</option>
+  <option value="">A month ago</option>
+  </select>
+  <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+  <option value="">by name...</option>
+  <option value="">A-Z</option>
+  <option value="">Z-A</option>
+  </select>
+  <button type="submit" class="btn btn-sm btn-danger">filter</button>
+  </form>
+  <div class="card-columns">
+  for n in [...Array(11).keys()]
+    <div class="card mb-3">
+    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
+    <div class="card-block">
+    <h4 class="card-title"><a href="/books/add">Book title</a></h4>
+    <p class="card-text">June 24th, 2017 </p>
+    <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
+    </div>
+    </div><!--card-->
+  </div><!--card-columns-->
+  <a href="" class="btn btn-primary bg-light btn-block mb-3">See more</a>

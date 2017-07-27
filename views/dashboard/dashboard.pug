@@ -1,0 +1,18 @@
+extends ../layouts/dashboard
+
+block contentarea
+  <div class="row">
+  <div class="card-columns">
+  for n in [...Array(6).keys()]
+    <div class="card mb-3">
+    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
+    <div class="card-block">
+    <h4 class="card-title">Book title</h4>
+    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <a href="/book/borrow/this-is-a-nice-book" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+    <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+    </div>
+    </div><!--card-->
+  </div><!--card-columns-->
+  <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
+  </div><!--row-->

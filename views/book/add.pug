@@ -1,0 +1,44 @@
+extends ../layouts/dashboard
+
+block contentarea
+  <h4 class="title mb-4 mr-4">Add a book</h4>
+  <div class="row">
+  <div class="col-sm-6">
+  <div class="form-group">
+  <label>Book title</label>
+  <input type="text" class="form-control" placeholder="Book title">
+  </div><!--form-group-->
+  <div class="form-group">
+  <label>Short description about this book</label>
+  <textarea class="form-control" placeholder="Short description about this book" rows="5"></textarea>
+  </div>
+  <div class="form-group">
+  <label>Number of copies</label>
+  <input type="Number" class="form-control">
+  </div><!--form group-->
+  </div>
+  <div class="col-sm-6">
+  <div class="form-group">
+  <label>Book author</label>
+  <input type="text" class="form-control" placeholder="Book author">
+  </div><!--form group-->
+  <div class="form-group">
+  <label>ISSBN</label>
+  <input type="text" class="form-control" placeholder="ISSBN">
+  </div>
+  <div class="form-group">
+  <label>Category</label>
+  <select class="form-control">
+  <option value="">Please select...</option>
+  for n in [...Array(4).keys()]
+    <option value="">Category #{n+1}</option>
+  </select>
+  </div>
+  <div class="form-group">
+  <label for="exampleInputFile">File input</label>
+  <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+  <small id="fileHelp" class="form-text text-muted">Only images are allowed. Max. size = 2mb</small>
+  </div>
+  </div>
+  </div><!--row-->
+  <button type="button" class="btn btn-block btn-success">Add</button>
