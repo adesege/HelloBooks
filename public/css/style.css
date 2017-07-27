@@ -1,6 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #ccc;
+  background-color: rgba(0,0,0,0.02);
 }
 
 *{
@@ -90,7 +90,7 @@ body {
 }
 
 #bookDetails .body{
-  font-size: 18px;
+  font-size: 15px;
 }
 .avatar{
   width: 100px !important;
@@ -98,4 +98,47 @@ body {
   border-radius: 50px !important;
   text-align: center;
   vertical-align: middle;
+}
+
+.bg-books{
+  background-image: url('../images/bgbooks.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.collapse.show.sidebar{
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  z-index: 10000000;
+  width: 100vw;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  top: 70px;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
+    display: none;
+}
+
+.toolaction{
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  z-index: 100000;
+}
+
+.toolaction button{
+  border-radius: 25px !important;
+  width: 50px;
+  height: 50px;
 }

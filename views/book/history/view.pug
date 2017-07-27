@@ -1,7 +1,6 @@
 extends ../../layouts/dashboard
 
 block contentarea
-  <div class="row">
   <h4 class="title mb-4 mr-4">My borrowing history</h4>
   <form class="form-inline mb-4">
   <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
@@ -15,23 +14,23 @@ block contentarea
   <option value="">by name...</option>
   <option value="">A-Z</option>
   <option value="">Z-A</option>
-  </select>  
+  </select>
   <button type="submit" class="btn btn-sm btn-danger">filter</button>
   </form>
   <div class="card-columns">
-  for n in [...Array(12).keys()]
+  for n in [...Array(6).keys()]
     <div class="card mb-3">
     <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
     <div class="card-block">
-    <h4 class="card-title">Book title</h4>
-    <p class="card-text">June 24th, 2017 
-    if n%3==0
-      <i class="fa fa-check-circle text-success"></i>
-    else
-      <i class="fa fa-minus-circle text-danger"></i>
-    </p>
+    <h5 class="card-title"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h5>
+    <h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+    <small class="card-subtitle text-muted">June 24th, 2017 </small>
+    <p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/book/borrow/this-is-a-nice-book">read more</a></p>
+    button(class='btn btn-sm btn-success', data-toggle='tooltip', title='I\'ve returned this book', disabled)
+      <i class="fa fa-check-circle text-white"></i>
+    button(class='btn btn-sm btn-danger', data-toggle='tooltip', title='I\'m yet to return this book', disabled)
+      <i class="fa fa-minus-circle text-white"></i>
     </div>
     </div><!--card-->
   </div><!--card-columns-->
   <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
-  </div><!--row-->
