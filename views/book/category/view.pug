@@ -1,7 +1,10 @@
 extends ../../layouts/dashboard
 
 block contentarea
-  <h4 class="title mb-4 mr-4">Book categories <a href="javascript:void(0)" onclick="$('#addCategory').toggleClass('hidden-xl-down');"><i class="fa fa-plus-circle"></i></a></h4>
+  div.toolaction
+    <button type="button" class="btn btn-success" onclick="$('#addCategory').toggleClass('hidden-xl-down');"> <i class="fa fa-plus text-white"></i></button>
+  <h4 class="title mb-2 mr-4">Book categories <a href="javascript:void(0)" onclick="$('#addCategory').toggleClass('hidden-xl-down');"><i class="fa fa-plus-circle"></i></a></h4>
+  <div class="mb-4"><small>View books by category</small></div>
   <div class="hidden-xl-down row" id="addCategory">
   <form class="mb-4 col-sm-4">
   <h5 class="title mb-4 mr-4 text-center">Add category</h5>
@@ -13,14 +16,14 @@ block contentarea
   </form>
   </div>
   <form class="form-inline mb-4">
-  <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+  <select class="form-control custom-select form-control-sm mb-2 mr-sm-2 mb-sm-0">
   <option value="">by date...</option>
   <option value="">Today</option>
   <option value="">Last 7 days</option>
   <option value="">Last 14 days</option>
   <option value="">A month ago</option>
   </select>
-  <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+  <select class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0">
   <option value="">by name...</option>
   <option value="">A-Z</option>
   <option value="">Z-A</option>

@@ -27,8 +27,8 @@ body {
 #bookList .sidebar ul{
   word-wrap: normal;
   word-break: normal;
-  max-width: 115px;
 }
+
 @media(min-width:576px){
   #bookList .sidebar ul{
   position: fixed;
@@ -36,6 +36,18 @@ body {
 }
 #bookList .sidebar{
   display: flex;
+}
+#bookList .sidebar ul{
+  max-width: 115px;
+}
+}
+
+@media(max-width:575px){
+  #bookList .sidebar ul{
+    padding-bottom: 120px !important;
+}
+  #bookList .sidebar ul{
+  width: 100%;
 }
 }
 
@@ -110,7 +122,7 @@ body {
 .collapse.show.sidebar{
   position: fixed;
   background-color: rgb(255, 255, 255);
-  z-index: 10000000;
+  z-index: 100;
   width: 100vw;
   right: 0px;
   left: 0px;
@@ -135,7 +147,14 @@ body {
   position: fixed;
   bottom: 30px;
   right: 50px;
-  z-index: 100000;
+  z-index: 1000;
+}
+
+@media(max-width: 767px){
+  .toolaction{
+    right: 20px;
+    bottom: 20px;
+  }
 }
 
 .toolaction button{
@@ -157,5 +176,36 @@ body {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
+  }
+}
+
+.modal-dialog {
+  min-height: -webkit-calc(100vh - 60px);
+  min-height: -moz-calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: auto;
+}
+@media (max-width: 768px) {
+  .modal-dialog {
+    min-height: -webkit-calc(100vh - 20px);
+    min-height: -moz-calc(100vh - 20px);
+    min-height: calc(100vh - 20px);
   }
 }

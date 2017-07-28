@@ -1,0 +1,56 @@
+extends ../../layouts/dashboard
+
+block contentarea
+  <h4 class="title mb-2 mr-4">Stock management</h4>
+  <div class="mb-4"><small>Manage stock here</small></div>
+  <div class="row" id="stockManager">
+  <div class="col-sm-6 offset-sm-3">
+    <div id="stockFilterForm" class="bg-faded p-3">
+      <form>
+        <div class="form-group">
+          <input type="text" placeholder="Search by author" class="form-control">
+        </div>
+        <p class="text-center hidden-xs-down"><small>-- OR --</small></p>
+        <div class="form-group">
+          <select class="custom-select w-100">
+          <option>Filter by category</option>
+          for n in [...Array(6).keys()]
+            <option value="">Category #{n+1}</option>
+          </select>
+        </div>
+        <p class="text-center hidden-xs-down"><small>-- OR --</small></p>
+        <div class="form-group">
+          <select class="custom-select w-100">
+          <option>Filter by date</option>
+          <option value="">Today</option>
+          <option value="">7 days ago</option>
+          <option value="">2 weeks ago</option>
+          <option value="">a month ago</option>
+          <option value="">a while ago</option>
+          </select>
+        </div>
+        <div class="form-group text-right">
+        <button type="button" class="btn btn-success">Go!</button>
+        <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+      </form>
+    </div><!-- Stock filter form-->
+  </div>
+  </div><!--row-->
+
+
+  <h6 class="title my-5"><small>Showing 3 of 10 results</small></h6>
+    <div class="row">
+  for n in [...Array(3).keys()]
+    <div class="col-sm-4">
+    <div class="card mb-3">
+    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
+    <div class="card-block">
+    <h5 class="card-title"><a href="/book/stock/123#{n}">Book title</a></h5>
+    <h6><small class="card-subtitle text-muted">June 24th, 2017 </small></h6>
+    </div>
+    </div><!--card-->
+    </div>
+  </div><!--card-columns-->
+
+  <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>

@@ -16,6 +16,8 @@ var addbooks = require('./routes/book/add');
 var bookCategory = require('./routes/book/category');
 var catAdd = require('./routes/book/cat-add');
 var bookView = require('./routes/book/view');
+var stockView = require('./routes/book/stock/view');
+var stockShow = require('./routes/book/stock/show');
 
 var app = express();
 
@@ -42,6 +44,8 @@ app.use('/books/add', addbooks);
 app.use('/books/category', bookCategory);
 app.use('/books/category/add', catAdd);
 app.use('/books/view', bookView);
+app.use('/books/stock', stockView);
+app.use(stockShow);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

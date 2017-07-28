@@ -37,3 +37,7 @@ $(document).ready(function(){
     $row.remove();
   });
 })
+
+$(document).ready(function() {
+    $('#stockTable').DataTable();
+} );
