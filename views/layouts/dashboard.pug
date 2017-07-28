@@ -2,20 +2,20 @@ extends ../layouts/layout
 
 block content
   <nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
-  <div class="d-flex justify-content-start">
-  <button class="navbar-toggler btn-sm mr-1 p-0" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+  <div class="row align-items-start">
+  <button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span></button>
-  <a class="navbar-brand ml-auto p-2" href="#"><img src="/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+  <a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
   </div>
   </nav><!--navbar-->
   <div class="row" id="bookList">
-  <div class="col-sm-2">
-  <div class="collapse sidebar mb-3" id="sidebar">
+  <div class="col-sm-2 px-0">
+  <div class="collapse sidebar mb-3 h-100" id="sidebar">
   include ../components/dashboard/sidebar
   </div><!--sidebar-->
   </div><!--col-sm 2-->
 
-  <div class="col-sm-10 pr-3 pl-3 id="">
+  <div class="col-sm-10 pr-3 pl-3">
   block contentarea
   </div><!--col sm 10-->
 

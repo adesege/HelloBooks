@@ -1,5 +1,6 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: rgba(0,0,0,0.02);
 }
 
@@ -23,6 +24,11 @@ body {
   position: relative;
 }
 
+#bookList .sidebar ul{
+  word-wrap: normal;
+  word-break: normal;
+  max-width: 115px;
+}
 @media(min-width:576px){
   #bookList .sidebar ul{
   position: fixed;
@@ -33,11 +39,6 @@ body {
 }
 }
 
-@media(max-width:575px){
-  #bookList .sidebar ul{
-
-  }
-}
 
 .navbar-light .navbar-toggler {
     border-color: transparent;
@@ -52,7 +53,7 @@ body {
 
 .text-desc{
   font-size: 14px;
-  font-family: fantasy;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #topNav .logo-sm{
@@ -114,7 +115,7 @@ body {
   right: 0px;
   left: 0px;
   bottom: 0px;
-  top: 70px;
+  top: 90px;
   height: 100vh;
   overflow: hidden;
   overflow-y: auto;
@@ -141,4 +142,20 @@ body {
   border-radius: 25px !important;
   width: 50px;
   height: 50px;
+}
+
+@media(min-width:426px) and (max-width:767px){
+  #yetReturn .card-columns{
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+@media(min-width:768px) and (max-width:991px){
+  #yetReturn .card-columns{
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
 }
