@@ -29,18 +29,18 @@ block contentarea
   <input type="email" class="form-control form-control-sm" placeholder="Email address">
   </div>
   </div><!--form-group-->
-  <div class="form-group">
-  <label class="sr-only">Membership type</label>
-  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-  <div class="input-group-addon form-control-sm bg-info text-white" data-toggle="tooltip" title="Please select a membership type for this user"><i class="fa fa-trophy"></i></div>
-  <select class="custom-select custom-select-sm form-control form-control-sm">
-  <option value="">Membership type</option>
-  <option value="">Silver</option>
-  <option value="">Gold</option>
-  <option value="">Platinum</option>
-  </select>
-  </div>
-  </div><!--form-group-->
+  //-- <div class="form-group">
+    <label class="sr-only">Membership type</label>
+    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon form-control-sm bg-info text-white" data-toggle="tooltip" title="Please select a membership type for this user"><i class="fa fa-trophy"></i></div>
+    <select class="custom-select custom-select-sm form-control form-control-sm">
+    <option value="">Membership type</option>
+    <option value="">Silver</option>
+    <option value="">Gold</option>
+    <option value="">Platinum</option>
+    </select>
+    </div>
+    </div> form-group -->
   <div class="form-group text-center">
   <button type="button" class="btn btn-sm btn-success btn-block" name="button">Edit my profile</button>
   </div>
@@ -81,18 +81,22 @@ block contentarea
   <div class="col-sm-8 px-0">
   <h6 class="title">I'm yet to return...</h6>
   <div class="">
-  <div class="card-columns">
-  for n in [...Array(12).keys()]
-    <div class="card mb-3">
-    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
-    <div class="card-block">
-    <h5 class="card-title"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h5>
-    <h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-    <small class="card-subtitle text-muted">June 24th, 2017 </small>
-    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
-    </div>
-    </div><!--card-->
-  </div><!--card-columns-->
+  <div class="row">
+    for n in [...Array(9).keys()]
+      <div class="col-sm-6 col-md-12 col-lg-4 col-xs-12 mb-4">
+      <div class="row">
+      <div class="col-sm-6 col-6 align-self-center">
+      <img class="img-thumbnail" src="/images/banner.jpg" alt="Card image cap">
+      </div>
+      <div class="col-sm-6 col-6 p-sm-0 align-self-center">
+      <h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/stock/123#{n}">Book title</a></h6>
+      <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+      <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+      <a href="javascript:void(0)" class="card-link text-success" data-toggle="tooltip" title="Return book">Return</a>
+      </div><!--col sm 8-->
+      </div><!-- row -->
+      </div>
+    </div><!--row-->
   <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
   </div><!--row-->
   </div>
