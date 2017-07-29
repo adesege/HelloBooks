@@ -39,18 +39,23 @@ block contentarea
   </div><!--row-->
 
 
-  <h6 class="title my-5"><small>Showing 3 of 10 results</small></h6>
-    <div class="row">
-  for n in [...Array(3).keys()]
-    <div class="col-sm-4">
-    <div class="card mb-3">
-    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
-    <div class="card-block">
-    <h5 class="card-title"><a href="/book/stock/123#{n}">Book title</a></h5>
-    <h6><small class="card-subtitle text-muted">June 24th, 2017 </small></h6>
-    </div>
-    </div><!--card-->
-    </div>
-  </div><!--card-columns-->
+  <h6 class="title my-5"><small>Showing 8 of 10 results</small></h6>
+  <div class="row">
+    for n in [...Array(8).keys()]
+      <div class="col-sm-6 col-md-12 col-lg-3 col-xs-12 mb-4">
+      <div class="row">
+      <div class="col-sm-6 col-6 align-self-center">
+      <img class="img-thumbnail" src="/images/banner.jpg" alt="Card image cap">
+      </div>
+      <div class="col-sm-6 col-6 p-sm-0 align-self-center">
+      <h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/stock/123#{n}">Book title</a></h6>
+      <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+      <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+      <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
+      <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
+      </div><!--col sm 8-->
+      </div><!-- row -->
+      </div>
+    </div><!--row-->
 
   <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
