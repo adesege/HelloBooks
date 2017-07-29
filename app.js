@@ -18,6 +18,7 @@ var catAdd = require('./routes/book/cat-add');
 var bookView = require('./routes/book/view');
 var stockView = require('./routes/book/stock/view');
 var stockShow = require('./routes/book/stock/show');
+var settings = require('./routes/dashboard/settings');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/books/category/add', catAdd);
 app.use('/books/view', bookView);
 app.use('/books/stock', stockView);
 app.use(stockShow);
+app.use(settings);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

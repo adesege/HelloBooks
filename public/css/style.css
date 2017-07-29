@@ -217,3 +217,22 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#book-details .cover{
+  width: 100% !important;
+}
+
+.rating > span:hover:before {
+  content: "\2605";
+  position: absolute;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+  content: "\2605";
+  position: absolute;
+}

@@ -1,42 +1,44 @@
 extends ../../layouts/dashboard
 
+block dep_js
+  include ../../components/dashboard/confirmBorrow
 block contentarea
   <div class="row" id="borrowBook">
-  <div class="col-sm-7">
-  <img class="card-img-top w-100" src="/images/banner.png" alt="Card image cap">
-  <div class="btn-group mt-4 text-center d-block" role="group" aria-label="Basic example">
-  <a href="javascript:void(0)" class="btn btn-secondary border-0 borrowBook" data-toggle="tooltip" onclick="$('#borrowBookDiv').toggleClass('hidden-xl-down');" title="Borrow this book"><span class="spanText"><i class="fa fa-plus-square"></i></span></a>
-  <a href="#" class="btn btn-secondary border-0" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-  <div id="borrowBookDiv" class="mt-4 hidden-xl-down">
-  <form class="form-inline justify-content-center">
-  <label class="sr-only">When will you return this book?</label>
-  <div class="input-group">
-  <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-  <input type="text" class="form-control" placeholder="When will you return this book?">
-  <div class="input-group-addon p-0"><button type="button" class="btn btn-success"><i class="fa fa-check"></i></button></div>
-  </div>
-  </form>
-  </div><!--borrow book form-->
-  </div><!--btn-group-->
-  </div>
-  <div class="col-sm-5 mt-4">
-  <ul id="bookDetails">
-  <li>
-  <span class="title text-muted">Name:</span>
-  <span class="body">Lorem ipsum dolor sit amet.</span>
-  </li>
-  <li>
-  <span class="title text-muted">Authors:</span>
-  <span class="body">Author 1, Author 2, Author 3</span>
-  </li>
-  <li>
-  <span class="title text-muted">ISSBN:</span>
-  <span class="body">1234-4321-2314-2143</span>
-  </li>
-  <li>
-  <span class="title text-muted">Description:</span>
-  <span class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-  </li>
-  </ul>
+  <div class="col-sm-8">
+    div.row#book-details
+      div.col-sm-4
+        <img class="img-thumbnails cover" src="/images/1.jpg" alt="Card image cap">
+          <div class="btn-group btn-group-sm w-100 my-2" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> I want to... </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item" href="#">read</a>
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#confirmBorrowModal">borrow</a>
+            </div>
+          </div>
+      div.col-sm-8
+        div.details
+          h4.card-title.font-weight-bold A super book title
+          h6.card-subtitle by Author1 
+            <div class="rating d-inline">
+              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+          p.mt-3.
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+          hr
+          small.mt-1.d-block
+            em.d-block Published date: August 11, 1843
+            em.d-block ISSBN: 74638346556897
+            em.d-block Category: Category 1
+    div.related.row
+      div.col-sm-10.offset-sm-1
+        h4.title.text-center.my-5 Related
+        div.row
+          for n in [...Array(4).keys()]
+            div.col-sm-3
+              img(class='img-thumbnail h-100 w-100', src="/images/"+n+".jpg")
+
+    </div>
+  <div class="col-sm-4">
+  include ../../components/dashboard/left
   </div>
   </div><!--row-->

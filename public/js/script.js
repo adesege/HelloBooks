@@ -58,6 +58,17 @@ $(function() {
     });
 });
 
- function triggerUpload(elem){
+$(function() {
+  var $docInput=$('#docfile'),
+      $preview=$('#docpre');
+    $docInput.change(function(){
+        var files = !!this.files ? this.files : [];
+        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+            console.log(files[0])
+            $preview.html(files[0].name).addClass('mt-3')
+    });
+});
+
+function triggerUpload(elem){
 document.getElementById(elem).click(); 
 }
