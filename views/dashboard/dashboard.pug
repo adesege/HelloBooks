@@ -2,8 +2,25 @@ extends ../layouts/dashboard
 
 block contentarea
   <div class="row">
-  div.col-sm-3
-    Hello
+  div.col-sm-3.flex-last.flex-sm-first.mb-5
+    <div class="card mb-3">
+    <div class="card-header">
+      <span>Most read</span>
+    </div>
+    for n in [...Array(2).keys()]
+      <div class="card-block">
+        <a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail" src="/images/#{n+1}.jpg" alt="Card image cap"></a>
+      </div><!--card block-->
+    </div><!--card-->
+    <div class="card">
+    <div class="card-header">
+      <span>Browse by</span>
+    </div>
+      <div class="card-block">
+    for n in [...Array(4).keys()]
+        <a href="/books/view/" class="d-block ">>> Category #{n+1}</a>
+    </div><!--card block-->
+    </div><!--card-->
   div.col-sm-9
     <h4 class="title mb-2 mr-4">Dashboard</h4>
     <div class="mb-4"><small>Welcome Tayo. Here are some books you may find interesting. Use the form below to filter through the list.</small></div>
