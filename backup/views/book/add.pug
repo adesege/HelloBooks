@@ -1,0 +1,78 @@
+extends ../layouts/dashboard
+
+block contentarea
+  <div class="mb-5">
+  <h4 class="title mb-2 mr-4">Add a book</h4>
+  <div class="mb-4"><small>Add a book</small></div>
+  <div class="row">
+  <div class="col-sm-6">
+  <div class="form-group">
+  <label>Book title</label>
+  <input type="text" class="form-control" placeholder="Book title">
+  </div><!--form-group-->
+  <div class="form-group">
+  <label>Short description about this book</label>
+  <textarea class="form-control" placeholder="Short description about this book" rows="5"></textarea>
+  </div>
+  <div class="form-group">
+  <label class="custom-file">
+  <input type="file" id="file" class="custom-file-input">
+  <span class="custom-file-control"></span>
+  </label>
+  <small id="fileHelp" class="form-text text-muted">Only images are allowed. Max. size = 2mb</small>
+  </div>
+  </div>
+  <div class="col-sm-6">
+  <div class="form-group">
+  <label>Book author</label>
+  <input type="text" class="form-control" placeholder="Book author">
+  </div><!--form group-->
+  <div class="form-group">
+  <label>ISSBN</label>
+  <input type="text" class="form-control" placeholder="ISSBN">
+  </div>
+  <div class="form-group">
+  <label>Category</label>
+  <select class="form-control">
+  <option value="">Please select...</option>
+  for n in [...Array(4).keys()]
+    <option value="">Category #{n+1}</option>
+  </select>
+  </div>
+  </div><!--col-sm-6-->
+  </div><!--row-->
+  <div class="table-responsive text-center">
+    <table class="table" id="stockTable">
+    <thead class="thead-default">
+      <tr>
+        <th>No. of copies</th>
+        <th>Record date</th>
+        //- <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><input type="number" class="form-control" placeholder="Number of copies"></td>
+        <td><input type="date" class="form-control" placeholder="Record date"></td>
+        //- <td></td>
+    </tr>
+    //- for n in [...Array(3).keys()]
+      <tr>
+        <th scope="row">#{n+1}</th>
+        <td><input type="number" class="form-control" placeholder="Number of copies"></td>
+        <td><input type="date" class="form-control" placeholder="Record date"></td>
+        <td></td>
+      </tr>
+    </tbody>
+    //- <tfoot class="thead-default">
+      <tr>
+        <th colspan="4"><button class="btn btn-sm btn-danger" id="addMoreItem">Add more item</button></th>
+      </tr>
+      </tfoot>
+  </table>
+  </div>
+  <div class="d-flex justify-content-center">
+  <button type="button" class="btn btn-success mr-4">Add</button>
+  <button type="reset" class="btn btn-danger">Reset</button>
+  </div>
+  </div>

@@ -1,0 +1,45 @@
+extends ../../layouts/dashboard
+
+block contentarea
+  div.toolaction
+    <button type="button" class="btn btn-success" onclick="$('#addCategory').toggleClass('hidden-xl-down');"> <i class="fa fa-plus text-white"></i></button>
+  <h4 class="title mb-2 mr-4">Book categories <a href="javascript:void(0)" onclick="$('#addCategory').toggleClass('hidden-xl-down');"><i class="fa fa-plus-circle"></i></a></h4>
+  <div class="mb-4"><small>View books by category</small></div>
+  <div class="hidden-xl-down row" id="addCategory">
+  <form class="mb-4 col-sm-4">
+  <h5 class="title mb-4 mr-4 text-center">Add category</h5>
+  <div class="form-group">
+  <label>Category name</label>
+  <input type="text" class="form-control" placeholder="Name of the category">
+  </div>
+  <button type="button" class="btn btn-block btn-success">Add</button>
+  </form>
+  </div>
+  <form class="form-inline mb-4">
+  <select class="form-control custom-select form-control-sm mb-2 mr-sm-2 mb-sm-0">
+  <option value="">by date...</option>
+  <option value="">Today</option>
+  <option value="">Last 7 days</option>
+  <option value="">Last 14 days</option>
+  <option value="">A month ago</option>
+  </select>
+  <select class="form-control form-control-sm custom-select mb-2 mr-sm-2 mb-sm-0">
+  <option value="">by name...</option>
+  <option value="">A-Z</option>
+  <option value="">Z-A</option>
+  </select>
+  <button type="submit" class="btn btn-sm btn-danger">filter</button>
+  </form>
+  <div class="card-columns">
+  for n in [...Array(12).keys()]
+    <div class="card mb-3">
+    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
+    <div class="card-block">
+    <h4 class="card-title"><a href="#">Book category</a></h4>
+    <p class="card-text">June 24th, 2017 </p>
+    <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this category">Delete</a>
+    <a href="#" class="card-link" data-toggle="tooltip" title="Edit this category">Edit</a>
+    </div>
+    </div><!--card-->
+  </div><!--card-columns-->
+  <a href="" class="btn btn-primary bg-light btn-block mb-3">See more</a>

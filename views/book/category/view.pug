@@ -2,19 +2,9 @@ extends ../../layouts/dashboard
 
 block contentarea
   div.toolaction
-    <button type="button" class="btn btn-success" onclick="$('#addCategory').toggleClass('hidden-xl-down');"> <i class="fa fa-plus text-white"></i></button>
-  <h4 class="title mb-2 mr-4">Book categories <a href="javascript:void(0)" onclick="$('#addCategory').toggleClass('hidden-xl-down');"><i class="fa fa-plus-circle"></i></a></h4>
+    <button type="button" class="btn btn-success"> <i class="fa fa-plus text-white"></i></button>
+  <h4 class="title mb-2 mr-4">Book categories</h4>
   <div class="mb-4"><small>View books by category</small></div>
-  <div class="hidden-xl-down row" id="addCategory">
-  <form class="mb-4 col-sm-4">
-  <h5 class="title mb-4 mr-4 text-center">Add category</h5>
-  <div class="form-group">
-  <label>Category name</label>
-  <input type="text" class="form-control" placeholder="Name of the category">
-  </div>
-  <button type="button" class="btn btn-block btn-success">Add</button>
-  </form>
-  </div>
   <form class="form-inline mb-4">
   <select class="form-control custom-select form-control-sm mb-2 mr-sm-2 mb-sm-0">
   <option value="">by date...</option>
@@ -30,16 +20,39 @@ block contentarea
   </select>
   <button type="submit" class="btn btn-sm btn-danger">filter</button>
   </form>
-  <div class="card-columns">
-  for n in [...Array(12).keys()]
-    <div class="card mb-3">
-    <img class="card-img-top" src="/images/banner.png" alt="Card image cap">
-    <div class="card-block">
-    <h4 class="card-title"><a href="#">Book category</a></h4>
-    <p class="card-text">June 24th, 2017 </p>
-    <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this category">Delete</a>
-    <a href="#" class="card-link" data-toggle="tooltip" title="Edit this category">Edit</a>
-    </div>
-    </div><!--card-->
-  </div><!--card-columns-->
-  <a href="" class="btn btn-primary bg-light btn-block mb-3">See more</a>
+  <button type="button" class="btn btn-sm btn-primary mb-3" onclick="$('#addCategory').toggleClass('hidden-xl-down');"><i class="fa fa-plus-square-o"></i> Add</button>
+  
+    <div class="hidden-xl-down" id="addCategory">
+  <form class="mb-4 form-inline">
+  <div class="input-group">
+  <input type="text" class="form-control" placeholder="Name of the category">
+  <div class="input-group-btn"><button type="button" class="btn btn-success">Add</button></div>
+  </div>
+  </form>
+  </div>
+
+  <div class="table-responsive text-center">
+    <table class="table" id="stockTable">
+    <thead class="thead-default">
+      <tr>
+        <th>#</th>
+        <th>Category name</th>
+        <th>Date added</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      for n in [...Array(5).keys()]
+        <tr>
+        <td>#{n+1}</td>
+        <td>July #{(n+3)}, 2017</td>
+        <td>August #{n+2}, 2017</td>
+        <td>
+        <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+        <button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+        </td>
+        </tr>
+    </tbody>
+  </table>
+  </div>
+  <a href="" class="btn btn-primary bg-light btn-sm mb-3">See more</a>
