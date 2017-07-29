@@ -1,142 +1,214 @@
 <!DOCTYPE html>
 <html>
-<head><title>Books</title>
-  <link href="../../assets/vendor/tether/css/tether.min.css" style="stylesheet">
-  <link rel="stylesheet" href="../../assets/vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../assets/vendor/fa/css/font-awesome.min.css">
-  <link rel='stylesheet' href='../../assets/css/style.css' />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+<title>Books</title>
+<link src="../../assets//tether/css/tether.min.css"><link rel="stylesheet" href="../../assets///css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets///fa/css/font-awesome.min.css"><link rel='stylesheet' href='../../assets/css/style.css' />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<body>
-  <div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
-    <div class="d-flex justify-content-start">
-      <button class="navbar-toggler btn-sm mr-1 p-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span></button>
-        <a class="navbar-brand ml-auto p-2" href="#"><img src="../../assets/images/logo-icon.png" height="30" class="d-inline-block align-top" alt=""></a>
-      </div>
-    </nav><!--navbar-->
-    <div class="row" id="bookList">
-      <div class="col-sm-2">
-        <div class="collapse sidebar mb-3" id="sidebar"><ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="/dashboard">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/history">History</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/books/view">Books</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/books/category">Book category</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/me">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
-          </li>
-        </ul></div><!--sidebar-->
-      </div><!--col-sm 2-->
-      <div class="col-sm-10 pr-4 pl-4" id=""><h4 class="title mb-4 mr-4">Books <a href="/books/add"><i class="fa fa-pencil"></i></a></h4>
-        <form class="form-inline mb-4">
-          <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
-            <option value="">by date...</option>
-            <option value="">Today</option>
-            <option value="">Last 7 days</option>
-            <option value="">Last 14 days</option>
-            <option value="">A month ago</option>
-          </select>
-          <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
-            <option value="">by name...</option>
-            <option value="">A-Z</option>
-            <option value="">Z-A</option>
-          </select>
-          <button type="submit" class="btn btn-sm btn-danger">filter</button>
-        </form>
-        <div class="card-columns"><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--><div class="card mb-3">
-          <img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
-          <div class="card-block">
-            <h4 class="card-title"><a href="/books/add">Book title</a></h4>
-            <p class="card-text">June 24th, 2017 </p>
-            <a href="#" class="card-link" data-toggle="tooltip" title="Permanently delete this book">Delete</a>
-          </div>
-        </div><!--card--></div><!--card-columns-->
-        <a href="" class="btn btn-primary bg-light btn-block mb-3">See more</a></div><!--col sm 10-->
-      </div><!--row#bookList--></div>
-      <script type="text/javascript" src="../../assets/js/jquery.js"></script>
-      <script src="../../assets/vendor/tether/js/tether.min.js"></script>
-      <script type="text/javascript" src="../../assets/bootstrap/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="../../assets/js/script.js"></script>
-    </body>
-    </html>
+<body class="">
+<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
+<div class="row align-items-start">
+<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span></button>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="../../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+</div>
+</nav><!--navbar-->
+<div class="row" id="bookList">
+<div class="col-sm-2 px-0">
+<div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
+<li class="nav-item">
+<a class="nav-link active" href="/dashboard">Dashboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/history.html">History</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/category">Book category</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/books">Books</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/stock">Stock Management</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/profile.html">Profile</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout">Logout</a>
+</li>
+<li class="nav-item">
+<a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
+</li>
+</ul></div><!--sidebar-->
+</div><!--col-sm 2-->
+<div class="col-sm-10 pr-3 pl-3">
+<div class="toolaction"><button type="button" class="btn btn-success" data-toggle="button" aria-pressed="false" autocomplete="off" data-toggle="tooltip" title="Add a new book"> <i class="fa fa-plus text-white"></i></button></div><h4 class="title mb-2 mr-4">Books <a href="/books/add"><i class="fa fa-plus-circle"></i></a></h4>
+<div class="mb-4"><small>View books</small></div>
+<form class="form-inline mb-4">
+<select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+<option value="">by date...</option>
+<option value="">Today</option>
+<option value="">Last 7 days</option>
+<option value="">Last 14 days</option>
+<option value="">A month ago</option>
+</select>
+<select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+<option value="">by name...</option>
+<option value="">A-Z</option>
+<option value="">Z-A</option>
+</select>
+<button type="submit" class="btn btn-sm btn-danger">filter</button>
+</form>
+<div class="card-columns"><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
+<a href="/books/add" class="card-link" data-toggle="tooltip" title="Edit this book"><i class="fa fa-pencil"></i></a>
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div>
+</div><!--card--></div><!--card-columns-->
+<a href="" class="btn btn-primary bg-light btn-block mb-3">See more</a></div><!--col sm 10-->
+</div><!--row#bookList--></div>
+<script type="text/javascript" src="../../assets/js/jquery.js"></script>
+<script src="../../assets//tether/js/tether.min.js"></script><script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+<div class="modal-content border-0">
+<div class="modal-body pt-4 border-bottom-0">
+<form>
+<div class="form-group">
+<label class="sr-only" for="inlineFormInputGroup">Username</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon"><i class="fa fa-search"></i></div>
+<input type="text" class="form-control d-block" placeholder="Search text">
+</div>
+<small class="form-text">You can search a book by author or category. You can also search for other users, etc</small>
+</div>
+</form>
+</div>
+<div class="modal-footer border-top-0">
+<button type="button" class="btn btn-sm btn-primary">Search</button>
+<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<script src="../../assets/js/script.js"></script></body>
+</html>

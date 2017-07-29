@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<link src="../../assets/tether/css/tether.min.css"><link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='../../assets/css/style.css' />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body class="">
+<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
+<div class="row align-items-start">
+<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span></button>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="../../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+</div>
+</nav><!--navbar-->
+<div class="row" id="bookList">
+<div class="col-sm-2 px-0">
+<div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
+<li class="nav-item">
+<a class="nav-link active" href="/dashboard">Dashboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/history.html">History</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/category">Book category</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/books">Books</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/assets/books/stock">Stock Management</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/assets/me">Profile</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/assets/logout">Logout</a>
+</li>
+<li class="nav-item">
+<a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
+</li>
+</ul></div><!--sidebar-->
+</div><!--col-sm 2-->
+<div class="col-sm-10 pr-3 pl-3"><div class="row" id="borrowBook">
+<div class="col-sm-7">
+<img class="card-img-top w-100" src="../../assets/images/banner.png" alt="Card image cap">
+<div class="btn-group mt-4 text-center d-block" role="group" aria-label="Basic example">
+<a href="javascript:void(0)" class="btn btn-secondary border-0 borrowBook" data-toggle="tooltip" onclick="$('#borrowBookDiv').toggleClass('hidden-xl-down');" title="Borrow this book"><span class="spanText"><i class="fa fa-plus-square"></i></span></a>
+<a href="#" class="btn btn-secondary border-0" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+<div id="borrowBookDiv" class="mt-4 hidden-xl-down">
+<form class="form-inline justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control" placeholder="When will you return this book?">
+<div class="input-group-addon p-0"><button type="button" class="btn btn-success"><i class="fa fa-check"></i></button></div>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--btn-group-->
+</div>
+<div class="col-sm-5 mt-4">
+<ul id="bookDetails">
+<li>
+<span class="title text-muted">Name:</span>
+<span class="body">Lorem ipsum dolor sit amet.</span>
+</li>
+<li>
+<span class="title text-muted">Authors:</span>
+<span class="body">Author 1, Author 2, Author 3</span>
+</li>
+<li>
+<span class="title text-muted">ISSBN:</span>
+<span class="body">1234-4321-2314-2143</span>
+</li>
+<li>
+<span class="title text-muted">Description:</span>
+<span class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+</li>
+</ul>
+</div>
+</div><!--row--></div><!--col sm 10-->
+</div><!--row#bookList--></div>
+<script type="text/javascript" src="../../assets/js/jquery.js"></script>
+<script src="../../assets/tether/js/tether.min.js"></script><script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+<div class="modal-content border-0">
+<div class="modal-body pt-4 border-bottom-0">
+<form>
+<div class="form-group">
+<label class="sr-only" for="inlineFormInputGroup">Username</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon"><i class="fa fa-search"></i></div>
+<input type="text" class="form-control d-block" placeholder="Search text">
+</div>
+<small class="form-text">You can search a book by author or category. You can also search for other users, etc</small>
+</div>
+</form>
+</div>
+<div class="modal-footer border-top-0">
+<button type="button" class="btn btn-sm btn-primary">Search</button>
+<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<script src="../../assets/js/script.js"></script></body>
+</html>

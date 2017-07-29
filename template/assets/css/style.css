@@ -1,6 +1,7 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #ccc;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgba(0,0,0,0.02);
 }
 
 *{
@@ -23,21 +24,33 @@ body {
   position: relative;
 }
 
+#bookList .sidebar ul{
+  word-wrap: normal;
+  word-break: normal;
+}
+
 @media(min-width:576px){
   #bookList .sidebar ul{
   position: fixed;
-  top: 100px;
+  top: 145px;
 }
 #bookList .sidebar{
   display: flex;
+}
+#bookList .sidebar ul{
+  max-width: 115px;
 }
 }
 
 @media(max-width:575px){
   #bookList .sidebar ul{
-
-  }
+    padding-bottom: 120px !important;
 }
+  #bookList .sidebar ul{
+  width: 100%;
+}
+}
+
 
 .navbar-light .navbar-toggler {
     border-color: transparent;
@@ -52,7 +65,7 @@ body {
 
 .text-desc{
   font-size: 14px;
-  font-family: fantasy;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #topNav .logo-sm{
@@ -90,7 +103,7 @@ body {
 }
 
 #bookDetails .body{
-  font-size: 18px;
+  font-size: 15px;
 }
 .avatar{
   width: 100px !important;
@@ -98,4 +111,101 @@ body {
   border-radius: 50px !important;
   text-align: center;
   vertical-align: middle;
+}
+
+.bg-books{
+  background-image: url('../images/bgbooks.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.collapse.show.sidebar{
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+  width: 100vw;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  top: 90px;
+  height: 100vh;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.collapsing {
+    -webkit-transition: none;
+    transition: none;
+    display: none;
+}
+
+.toolaction{
+  position: fixed;
+  bottom: 30px;
+  right: 50px;
+  z-index: 1000;
+}
+
+@media(max-width: 767px){
+  .toolaction{
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+.toolaction button{
+  border-radius: 25px !important;
+  width: 50px;
+  height: 50px;
+}
+
+@media(min-width:426px) and (max-width:767px){
+  #yetReturn .card-columns{
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+}
+
+@media(min-width:768px) and (max-width:991px){
+  #yetReturn .card-columns{
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+.modal-dialog {
+  min-height: -webkit-calc(100vh - 60px);
+  min-height: -moz-calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+     -moz-box-orient: vertical;
+     -moz-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: auto;
+}
+@media (max-width: 768px) {
+  .modal-dialog {
+    min-height: -webkit-calc(100vh - 20px);
+    min-height: -moz-calc(100vh - 20px);
+    min-height: calc(100vh - 20px);
+  }
 }

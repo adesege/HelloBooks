@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Viewing stock</title>
+<link src="../../assets/tether/css/tether.min.css"><link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='../../assets/css/style.css' />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body class="">
+<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
+<div class="row align-items-start">
+<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span></button>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src=".../../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+</div>
+</nav><!--navbar-->
+<div class="row" id="bookList">
+<div class="col-sm-2 px-0">
+<div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
+<li class="nav-item">
+<a class="nav-link active" href="/dashboard">Dashboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/history.html">History</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/category">Book category</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/books">Books</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/stock">Stock Management</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/profile.html">Profile</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout">Logout</a>
+</li>
+<li class="nav-item">
+<a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
+</li>
+</ul></div><!--sidebar-->
+</div><!--col-sm 2-->
+<div class="col-sm-10 pr-3 pl-3">
+<div class="toolaction"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addStockModal" aria-pressed="false"> <i class="fa fa-plus text-white"></i></button></div><h4 class="title mb-2 mr-4">Viewing a stock</h4>
+<div class="mb-4"><small>You can add or edit stock information for this book here. Use the filter form to view from a particular page. </small></div>
+<form class="form-inline mb-4">
+<div class="form-group mr-2">
+<select class="custom-select custom-select-sm form-control-sm w-100">
+<option>Filter by date</option>
+<option value="">Today</option>
+<option value="">7 days ago</option>
+<option value="">2 weeks ago</option>
+<option value="">a month ago</option>
+<option value="">a while ago</option>
+</select>
+</div>
+<div class="form-group text-right">
+<button type="button" class="btn btn-sm btn-success">Go!</button>
+</div>
+</form>
+<button type="button" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#addStockModal"><i class="fa fa-plus-square-o"></i> Add</button>
+<div class="table-responsive text-center">
+<table class="table" id="stockTable">
+<thead class="thead-default">
+<tr>
+<th>No. of copies</th>
+<th>Record date</th>
+<th>Added on</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>July 31, 2017</td>
+<td>August 1, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>4</td>
+<td>July 31, 2017</td>
+<td>August 2, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>6</td>
+<td>July 31, 2017</td>
+<td>August 3, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>8</td>
+<td>July 31, 2017</td>
+<td>August 4, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>10</td>
+<td>July 31, 2017</td>
+<td>August 5, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>12</td>
+<td>July 31, 2017</td>
+<td>August 6, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>14</td>
+<td>July 31, 2017</td>
+<td>August 7, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>16</td>
+<td>July 31, 2017</td>
+<td>August 8, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>18</td>
+<td>July 31, 2017</td>
+<td>August 9, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr><tr>
+<td>20</td>
+<td>July 31, 2017</td>
+<td>August 10, 2017</td>
+<td>
+<button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
+<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-pencil-square-o"></i></button>
+</td>
+</tr></tbody>
+</table>
+</div></div><!--col sm 10-->
+</div><!--row#bookList--></div>
+<script type="text/javascript" src="../../assets/js/jquery.js"></script>
+<script src="../../assets/tether/js/tether.min.js"></script><script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script><script type="text/javascript" src="../../assets/js/script.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+<div class="modal-content border-0">
+<div class="modal-body pt-4 border-bottom-0">
+<form>
+<div class="form-group">
+<label class="sr-only" for="inlineFormInputGroup">Username</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon"><i class="fa fa-search"></i></div>
+<input type="text" class="form-control d-block" placeholder="Search text">
+</div>
+<small class="form-text">You can search a book by author or category. You can also search for other users, etc</small>
+</div>
+</form>
+</div>
+<div class="modal-footer border-top-0">
+<button type="button" class="btn btn-sm btn-primary">Search</button>
+<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div><div class="modal fade" data-backdrop="static" id="addStockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+<div class="modal-content border-0">
+<div class="modal-body pt-4 border-bottom-0">
+<form>
+<div class="form-group">
+<label class="sr-only" for="inlineFormInputGroup">Number of copies</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon"><i class="fa fa-hashtag"></i></div>
+<input type="number" class="form-control d-block" placeholder="Number of copies">
+</div>
+</div>
+<div class="form-group">
+<label class="sr-only" for="inlineFormInputGroup">Record date</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="date" class="form-control d-block" placeholder="Record date">
+</div>
+<small class="form-text">Record date is different from the date you add the record. </small>
+</div>
+</form>
+</div>
+<div class="modal-footer border-top-0">
+<button type="button" class="btn btn-sm btn-primary">Add</button>
+<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div></body>
+</html>

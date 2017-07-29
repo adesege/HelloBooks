@@ -1,102 +1,255 @@
 <!DOCTYPE html>
 <html>
-<head><title>View history</title>
-  <link href="../assets/vendor/tether/css/tether.min.css" style="stylesheet">
-  <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../assets/vendor/fa/css/font-awesome.min.css">
-  <link rel='stylesheet' href='../assets/css/style.css' />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+<title>Profile</title>
+<link src="../assets/tether/css/tether.min.css"><link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='../assets/css/style.css' />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
-<body>
-  <div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
-    <div class="d-flex justify-content-start">
-      <button class="navbar-toggler btn-sm mr-1 p-0" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span></button>
-        <a class="navbar-brand ml-auto p-2" href="#"><img src="../assets/images/logo-icon.png" height="30" class="d-inline-block align-top" alt=""></a>
-      </div>
-    </nav><!--navbar-->
-    <div class="row" id="bookList">
-      <div class="col-sm-2">
-        <div class="collapse sidebar mb-3" id="sidebar"><ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" href="/dashboard">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/history">History</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/books/view">Books</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/books/category">Book category</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/me">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
-          </li>
-        </ul></div><!--sidebar-->
-      </div><!--col-sm 2-->
-      <div class="col-sm-10 pr-4 pl-4" id=""><div class="row align-items-top" id="borrowBook">
-        <div class="col-sm-3 mt-4">
-          <div class="card mb-3">
-            <div class="text-center"><img class="card-img-top avatar mt-3" src="../assets/images/user.png" alt="Card image cap"></div>
-            <div class="card-block">
-              <h4 class="card-title"><i class="fa fa-user"></i> My name</h4>
-              <p class="card-text"><i class="fa fa-envelope"></i> My email address</p>
-              <a href="/book/borrow/this-is-a-nice-book" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-key"></i> Change password</a>
-            </div>
-          </div><!--card-->
-        </div>
-        <div class="col-sm-9">
-          <h3 class="title">I'm yet to return...</h3>
-          <div class="row">
-            <div class="card-columns"><div class="card mb-3">
-              <img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Book title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div><!--card--><div class="card mb-3">
-              <img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Book title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div><!--card--><div class="card mb-3">
-              <img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Book title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div><!--card--><div class="card mb-3">
-              <img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Book title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div><!--card--><div class="card mb-3">
-              <img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Book title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div><!--card--><div class="card mb-3">
-              <img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-              <div class="card-block">
-                <h4 class="card-title">Book title</h4>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div><!--card--></div><!--card-columns-->
-            <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
-          </div><!--row-->
-        </div>
-      </div><!--row--></div><!--col sm 10-->
-    </div><!--row#bookList--></div>
-    <script type="text/javascript" src="../assets/js/jquery.js"></script>
-    <script src="../assets/vendor/tether/js/tether.min.js"></script>
-    <script type="text/javascript" src="../assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../assets/js/script.js"></script>
-  </body>
-  </html>
+<body class="">
+<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
+<div class="row align-items-start">
+<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span></button>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+</div>
+</nav><!--navbar-->
+<div class="row" id="bookList">
+<div class="col-sm-2 px-0">
+<div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
+<li class="nav-item">
+<a class="nav-link active" href="/dashboard">Dashboard</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/history.html">History</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/category">Book category</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/books">Books</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/books/stock">Stock Management</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/dashboard/profile.html">Profile</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout">Logout</a>
+</li>
+<li class="nav-item">
+<a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
+</li>
+</ul></div><!--sidebar-->
+</div><!--col-sm 2-->
+<div class="col-sm-10 pr-3 pl-3"><div class="row pr-3 pl-3 px-sm-0" id="yetReturn">
+<div class="col-sm-4 mt-4 px-0 pr-sm-3">
+<div class="card mb-3">
+<div class="text-center"><img class="card-img-top avatar mt-3" src="../assets/images/user.png" alt="Card image cap"></div>
+<div class="card-block">
+<h6 class="card-title"><i class="fa fa-user text-info"></i> Fadojutimi Temitayo</h6>
+<p class="card-text">
+<span class="d-block"><i class="fa fa-envelope text-info"></i> My email address</span>
+<span class="d-block"><i class="fa fa-calendar-check-o text-info"></i> Jan. 12, 2011</span>
+<span class="d-block"><i class="fa fa-trophy text-danger"></i> Silver</span>
+</p>
+<a href="javascript:void(0)" onclick="$('#editProfile').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square"></i> Edit &nbsp;</a>
+<div id="editProfile" class="mt-4 hidden-xl-down">
+<form action="/login" method="post">
+<div class="form-group">
+<label class="sr-only">Name</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon form-control-sm bg-danger text-white" data-toggle="tooltip" title="Please input your name"><i class="fa fa-user"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Your name" required>
+</div>
+</div><!--form-group-->
+<div class="form-group">
+<label class="sr-only">Email address</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon form-control-sm bg-info text-white" data-toggle="tooltip" title="Please input your email address"><i class="fa fa-envelope"></i></div>
+<input type="email" class="form-control form-control-sm" placeholder="Email address">
+</div>
+</div><!--form-group-->
+<div class="form-group">
+<label class="sr-only">Membership type</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon form-control-sm bg-info text-white" data-toggle="tooltip" title="Please select a membership type for this user"><i class="fa fa-trophy"></i></div>
+<select class="custom-select custom-select-sm form-control form-control-sm">
+<option value="">Membership type</option>
+<option value="">Silver</option>
+<option value="">Gold</option>
+<option value="">Platinum</option>
+</select>
+</div>
+</div><!--form-group-->
+<div class="form-group text-center">
+<button type="button" class="btn btn-sm btn-success btn-block" name="button">Edit my profile</button>
+</div>
+</form>
+</div> <!--editProfile-->
+<a href="javascript:void(0)" onclick="$('#changePassword').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Change your password"><i class="fa fa-key"></i> Change password</a>
+<div id="changePassword" class="mt-4 hidden-xl-down">
+<form action="/login" method="post">
+<div class="form-group">
+<label class="sr-only">Current password</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon form-control-sm bg-danger text-white"><i class="fa fa-key"></i></div>
+<input type="password" class="form-control form-control-sm" placeholder="Current password">
+</div>
+</div><!--form-group-->
+<div class="form-group">
+<label class="sr-only">New password</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon form-control-sm bg-info text-white"><i class="fa fa-keyboard-o"></i></div>
+<input type="password" class="form-control form-control-sm" placeholder="New password">
+</div>
+</div><!--form-group-->
+<div class="form-group">
+<label class="sr-only">New password again</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon form-control-sm bg-info text-white"><i class="fa fa-keyboard-o"></i></div>
+<input type="password" class="form-control form-control-sm" placeholder="New password again">
+</div>
+</div><!--form-group-->
+<div class="form-group text-center">
+<button type="button" class="btn btn-sm btn-success btn-block" name="button">Change password</button>
+</div>
+</form>
+</div>
+</div>
+</div><!--card-->
+</div>
+<div class="col-sm-8 px-0">
+<h6 class="title">I'm yet to return...</h6>
+<div class="">
+<div class="card-columns"><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--><div class="card mb-3">
+<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
+<div class="card-block">
+<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
+<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
+<small class="card-subtitle text-muted">June 24th, 2017 </small>
+<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+</div>
+</div><!--card--></div><!--card-columns-->
+<button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
+</div><!--row-->
+</div>
+</div><!--row--></div><!--col sm 10-->
+</div><!--row#bookList--></div>
+<script type="text/javascript" src="../assets/js/jquery.js"></script>
+<script src="../assets/tether/js/tether.min.js"></script><script type="text/javascript" src="../assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm" role="document">
+<div class="modal-content border-0">
+<div class="modal-body pt-4 border-bottom-0">
+<form>
+<div class="form-group">
+<label class="sr-only" for="inlineFormInputGroup">Username</label>
+<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+<div class="input-group-addon"><i class="fa fa-search"></i></div>
+<input type="text" class="form-control d-block" placeholder="Search text">
+</div>
+<small class="form-text">You can search a book by author or category. You can also search for other users, etc</small>
+</div>
+</form>
+</div>
+<div class="modal-footer border-top-0">
+<button type="button" class="btn btn-sm btn-primary">Search</button>
+<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
+<script src="../assets/js/script.js"></script></body>
+</html>
