@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Books</title>
+<title>View books</title>
 <link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='/assets/css/style.css' />
+<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href="/assets/css/style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
-<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
-<div class="row align-items-start">
-<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span></button>
-<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+<div class="container"><nav class="navbar navbar-light justify-content-center navbar-toggleable-sm bg-faded" id="topNav">
+<button class="navbar-toggler navbar-toggler-left p-0" type="button" data-toggle="collapse" data-target="#sidebar" onclick="$('body').toggleClass('overflow-hidden')" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand mr-0 navbar-toggler-right" href="#"><span class="hidden-xs-down mr-3">Hello-Books</span><img src="/assets/images/logo-icon.png" style="width:30px; height:30px;" class="d-inline-block align-top" alt=""></a>
+<div class="navbar-collapse text-center" id="navbarNav">
+<a class="btn mr-sm-2 btn-sm btn-info" href="/notifications"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+<button type="button" class="btn mr-sm-2 btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-outline-info" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search-plus"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-danger"><i class="fa fa-power-off"></i></button>
 </div>
-</nav><!--navbar-->
-<div class="row" id="bookList">
+</nav>
+<div class="row mt-3" id="bookList">
 <div class="col-sm-2 px-0">
 <div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
 <li class="nav-item">
@@ -61,6 +66,11 @@
 <option value="">A month ago</option>
 </select>
 <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+<option value="">by status...</option>
+<option value="">Active</option>
+<option value="">Pending approval</option>
+</select>
+<select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
 <option value="">by name...</option>
 <option value="">A-Z</option>
 <option value="">Z-A</option>
@@ -74,9 +84,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -87,9 +99,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -100,9 +114,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -113,9 +129,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -126,9 +144,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -139,9 +159,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -152,9 +174,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->
@@ -165,9 +189,11 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-6 p-sm-0 align-self-center">
-<h6 class="mt-4 mt-sm-0 mb-0"><a href="/books/borrow">Book title</a></h6>
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
 <h6 class="mb-1 text-muted"><small>Author 1</small></h6>
 <h6 class="mb-1 text-muted"><small>June 1st, 2017</small></h6>
+<p class="small mb-1"><span class="text-success d-block">Active</span> 
+<span class="text-danger d-block">Pending approval</span></p>
 <a href="javascript:void(0)" class="card-link" data-toggle="tooltip" title="Edit book"><i class="fa fa-pencil"></i></a>
 <a href="#" class="card-link text-danger" data-toggle="tooltip" title="Delete"><i class="fa fa-remove"></i></a>
 </div><!--col sm 8-->

@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>My dashboard</title>
+<title>Dashboard</title>
 <link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='/assets/css/style.css' />
+<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href="/assets/css/style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
-<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
-<div class="row align-items-start">
-<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span></button>
-<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+<div class="container"><nav class="navbar navbar-light justify-content-center navbar-toggleable-sm bg-faded" id="topNav">
+<button class="navbar-toggler navbar-toggler-left p-0" type="button" data-toggle="collapse" data-target="#sidebar" onclick="$('body').toggleClass('overflow-hidden')" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand mr-0 navbar-toggler-right" href="#"><span class="hidden-xs-down mr-3">Hello-Books</span><img src="/assets/images/logo-icon.png" style="width:30px; height:30px;" class="d-inline-block align-top" alt=""></a>
+<div class="navbar-collapse text-center" id="navbarNav">
+<a class="btn mr-sm-2 btn-sm btn-info" href="/notifications"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+<button type="button" class="btn mr-sm-2 btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-outline-info" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search-plus"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-danger"><i class="fa fa-power-off"></i></button>
 </div>
-</nav><!--navbar-->
-<div class="row" id="bookList">
+</nav>
+<div class="row mt-3" id="bookList">
 <div class="col-sm-2 px-0">
 <div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
 <li class="nav-item">
@@ -55,20 +60,20 @@
 <span>Most read</span>
 </div>
 <div class="row m-2"><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/books/borrow"><img class="img-thumbnail w-100 h-100" src="/assets/images/1.jpg" alt="Card image cap"></a>
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/1.jpg" alt="Card image cap"></a>
 </div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/books/borrow"><img class="img-thumbnail w-100 h-100" src="/assets/images/2.jpg" alt="Card image cap"></a>
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/2.jpg" alt="Card image cap"></a>
 </div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/books/borrow"><img class="img-thumbnail w-100 h-100" src="/assets/images/3.jpg" alt="Card image cap"></a>
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/3.jpg" alt="Card image cap"></a>
 </div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/books/borrow"><img class="img-thumbnail w-100 h-100" src="/assets/images/4.jpg" alt="Card image cap"></a>
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/4.jpg" alt="Card image cap"></a>
 </div></div><!--card block-->
 </div><!--card-->
-<div class="card">
+<div class="card mb-3">
 <div class="card-header">
 <span>Browse by</span>
 </div>
-<div class="card-block"><a href="/books/books/" class="d-block ">> Category 1</a><a href="/books/books/" class="d-block ">> Category 2</a><a href="/books/books/" class="d-block ">> Category 3</a><a href="/books/books/" class="d-block ">> Category 4</a></div><!--card block-->
+<div class="card-block"><a href="/books/books/" class="d-block small">> Category 1</a><a href="/books/books/" class="d-block small">> Category 2</a><a href="/books/books/" class="d-block small">> Category 3</a><a href="/books/books/" class="d-block small">> Category 4</a></div><!--card block-->
 </div><!--card-->
 </div>
 <div class="col-sm-8 col-md-7 col-lg-9"><h4 class="title mb-2 mr-4">Dashboard</h4>
@@ -86,7 +91,7 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/books/borrow">read more</a></small></p>
+<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
 <a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 <div class="mt-4 hidden-xl-down showBorrow">
@@ -108,7 +113,7 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/books/borrow">read more</a></small></p>
+<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
 <a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 <div class="mt-4 hidden-xl-down showBorrow">
@@ -130,7 +135,7 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/books/borrow">read more</a></small></p>
+<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
 <a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 <div class="mt-4 hidden-xl-down showBorrow">
@@ -152,7 +157,7 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/books/borrow">read more</a></small></p>
+<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
 <a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 <div class="mt-4 hidden-xl-down showBorrow">
@@ -174,7 +179,7 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/books/borrow">read more</a></small></p>
+<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
 <a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 <div class="mt-4 hidden-xl-down showBorrow">
@@ -196,7 +201,7 @@
 <img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
 <div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/books/borrow">read more</a></small></p>
+<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
 <a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 <div class="mt-4 hidden-xl-down showBorrow">

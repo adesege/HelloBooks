@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Book categories</title>
+<title>Book Categories</title>
 <link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='/assets/css/style.css' />
+<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href="/assets/css/style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
-<div class="container"><nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
-<div class="row align-items-start">
-<button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span></button>
-<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+<div class="container"><nav class="navbar navbar-light justify-content-center navbar-toggleable-sm bg-faded" id="topNav">
+<button class="navbar-toggler navbar-toggler-left p-0" type="button" data-toggle="collapse" data-target="#sidebar" onclick="$('body').toggleClass('overflow-hidden')" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand mr-0 navbar-toggler-right" href="#"><span class="hidden-xs-down mr-3">Hello-Books</span><img src="/assets/images/logo-icon.png" style="width:30px; height:30px;" class="d-inline-block align-top" alt=""></a>
+<div class="navbar-collapse text-center" id="navbarNav">
+<a class="btn mr-sm-2 btn-sm btn-info" href="/notifications"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+<button type="button" class="btn mr-sm-2 btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-outline-info" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search-plus"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-danger"><i class="fa fa-power-off"></i></button>
 </div>
-</nav><!--navbar-->
-<div class="row" id="bookList">
+</nav>
+<div class="row mt-3" id="bookList">
 <div class="col-sm-2 px-0">
 <div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
 <li class="nav-item">
@@ -78,8 +83,8 @@
 </div>
 <div class="table-responsive text-center">
 <table class="table" id="stockTable">
-<thead class="thead-default">
-<tr>
+<thead class="thead-default text-center">
+<tr class="text-center">
 <th>#</th>
 <th>Category name</th>
 <th>Date added</th>
@@ -88,7 +93,7 @@
 </thead>
 <tbody><tr>
 <td>1</td>
-<td>July 3, 2017</td>
+<td>Category 3</td>
 <td>August 2, 2017</td>
 <td>
 <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
@@ -96,7 +101,7 @@
 </td>
 </tr><tr>
 <td>2</td>
-<td>July 4, 2017</td>
+<td>Category 4</td>
 <td>August 3, 2017</td>
 <td>
 <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
@@ -104,7 +109,7 @@
 </td>
 </tr><tr>
 <td>3</td>
-<td>July 5, 2017</td>
+<td>Category 5</td>
 <td>August 4, 2017</td>
 <td>
 <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
@@ -112,7 +117,7 @@
 </td>
 </tr><tr>
 <td>4</td>
-<td>July 6, 2017</td>
+<td>Category 6</td>
 <td>August 5, 2017</td>
 <td>
 <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
@@ -120,7 +125,7 @@
 </td>
 </tr><tr>
 <td>5</td>
-<td>July 7, 2017</td>
+<td>Category 7</td>
 <td>August 6, 2017</td>
 <td>
 <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>
