@@ -209,3 +209,30 @@ body {
     min-height: calc(100vh - 20px);
   }
 }
+
+#image-cropper .preview{
+  width: 194px;
+  height: 290px;
+  background-color: rgba(0,0,0,0.2);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#book-details .cover{
+  width: 100% !important;
+}
+
+.rating > span:hover:before {
+  content: "\2605";
+  position: absolute;
+}
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+  content: "\2605";
+  position: absolute;
+}

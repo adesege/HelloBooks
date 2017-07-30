@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
-<link src="../..../assets/assets//tether/css/tether.min.css"><link rel="stylesheet" href="../..../assets/assets//css/bootstrap.min.css">
-<link rel="stylesheet" href="../..../assets/assets//fa/css/font-awesome.min.css"><link rel='stylesheet' href='../..../assets/assets//css/style.css' />
+<title>Add books</title>
+<link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='/assets/css/style.css' />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
@@ -11,7 +11,7 @@
 <div class="row align-items-start">
 <button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span></button>
-<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src=".../../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
 </div>
 </nav><!--navbar-->
 <div class="row" id="bookList">
@@ -39,6 +39,9 @@
 <a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
 </li>
 <li class="nav-item">
+<a class="nav-link" href="/dashboard/settings.html">Settings</a>
+</li>
+<li class="nav-item">
 <a class="nav-link" href="/logout">Logout</a>
 </li>
 <li class="nav-item">
@@ -46,89 +49,65 @@
 </li>
 </ul></div><!--sidebar-->
 </div><!--col-sm 2-->
-<div class="col-sm-10 pr-3 pl-3"><h4 class="title mb-2 mr-4">Stock management</h4>
-<div class="mb-4"><small>Manage stock here</small></div>
-<div class="row" id="stockManager">
-<div class="col-sm-6 offset-sm-3">
-<div id="stockFilterForm" class="bg-faded p-3">
-<form>
+<div class="col-sm-10 pr-3 pl-3"><div class="mb-5">
+<h4 class="title mb-2 mr-4">Add a book</h4>
+<div class="mb-4"><small>Add a book</small></div>
 <div class="form-group">
-<input type="text" placeholder="Search by author" class="form-control">
-</div>
-<p class="text-center hidden-xs-down"><small>-- OR --</small></p>
+<input type="text" class="form-control" placeholder="Book title">
+</div><!--form-group-->
+<div class="row">
+<div class="col-sm-6">
 <div class="form-group">
-<select class="custom-select w-100">
-<option>Filter by category</option><option value="">Category 1</option><option value="">Category 2</option><option value="">Category 3</option><option value="">Category 4</option><option value="">Category 5</option><option value="">Category 6</option></select>
+<textarea class="form-control" placeholder="Short description about this book" rows="5" style="min-height: 308px;"></textarea>
 </div>
-<p class="text-center hidden-xs-down"><small>-- OR --</small></p>
+</div><!--col-->
+<div class="col-sm-6">
 <div class="form-group">
-<select class="custom-select w-100">
-<option>Filter by date</option>
-<option value="">Today</option>
-<option value="">7 days ago</option>
-<option value="">2 weeks ago</option>
-<option value="">a month ago</option>
-<option value="">a while ago</option>
-</select>
+<input type="text" class="form-control" placeholder="Book author">
+</div><!--form group-->
+<div class="form-group">
+<input type="date" class="form-control" placeholder="Release date">
+</div><!--form group-->
+<div class="form-group">
+<input type="text" class="form-control" placeholder="Book url">
 </div>
-<div class="form-group text-right">
-<button type="button" class="btn btn-success">Go!</button>
-<button type="reset" class="btn btn-danger">Reset</button>
+<div class="form-group">
+<input type="number" class="form-control" placeholder="Number of copies">
 </div>
-</form>
-</div><!-- Stock filter form-->
+<div class="form-group">
+<input type="date" class="form-control" placeholder="Stock date">
 </div>
+<div class="form-group">
+<input type="number" class="form-control" placeholder="ISSBN">
+</div>
+<div class="form-group">
+<input type="date" class="form-control" placeholder="Published date">
+</div>
+<div class="form-group">
+<select class="form-control">
+<option value="">Please select a category...</option><option value="">Category 1</option><option value="">Category 2</option><option value="">Category 3</option><option value="">Category 4</option></select>
+</div>
+</div><!--col-sm-6-->
 </div><!--row-->
-<h6 class="title my-5"><small>Showing 3 of 10 results</small></h6>
-<div class="row"><div class="col-sm-4">
-<div class="card mb-3">
-<img class="card-img-top" src=".../../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/book/stock/1230">Book title</a></h5>
-<h6><small class="card-subtitle text-muted">June 24th, 2017 </small></h6>
+<div class="row mb-5">
+<div class="col-sm-3 col-9">
+<div id="image-cropper" class="hidden-xl-down">
+<div class="preview"></div>
+</div><!--image-cropper-->
 </div>
-</div><!--card-->
-</div><div class="col-sm-4">
-<div class="card mb-3">
-<img class="card-img-top" src=".../../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/book/stock/1231">Book title</a></h5>
-<h6><small class="card-subtitle text-muted">June 24th, 2017 </small></h6>
+<div class="col-sm-3 col-3 justify-content-center">
+<button class="btn btn-sm btn-default" href="javascript:void(0);" onclick="triggerUpload('imagefile')"><i class="fa fa-camera"> </i> <span class="hidden-xs-down">Add cover photo</span></button><div style="height: 0px; width: 0px;overflow:hidden;"><form><input id="imagefile" type="file" value="upload" class="cropit-image-input"/></form> </div>	
+<div class="" id="docpre"></div>
+<button class="btn mt-3 btn-sm btn-default" href="javascript:void(0);" onclick="triggerUpload('docfile')"><i class="fa fa-camera"> </i> <span class="hidden-xs-down">Add Document file</span></button><div style="height: 0px; width: 0px;overflow:hidden;"><form><input id="docfile" type="file" value="upload" class="cropit-image-input"/></form> </div>	
+</div><!--col-->
 </div>
-</div><!--card-->
-</div><div class="col-sm-4">
-<div class="card mb-3">
-<img class="card-img-top" src=".../../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/book/stock/1232">Book title</a></h5>
-<h6><small class="card-subtitle text-muted">June 24th, 2017 </small></h6>
+<div class="d-flex justify-content-center">
+<button type="button" class="btn btn-sm btn-success mr-4">Add</button>
+<button type="reset" class="btn btn-sm btn-danger">Reset</button>
 </div>
-</div><!--card-->
-</div></div><!--card-columns-->
-<button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button></div><!--col sm 10-->
+</div></div><!--col sm 10-->
 </div><!--row#bookList--></div>
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script src="../..../assets/assets//tether/js/tether.min.js"></script><script type="text/javascript" src="/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm" role="document">
-<div class="modal-content border-0">
-<div class="modal-body pt-4 border-bottom-0">
-<form>
-<div class="form-group">
-<label class="sr-only" for="inlineFormInputGroup">Username</label>
-<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-<div class="input-group-addon"><i class="fa fa-search"></i></div>
-<input type="text" class="form-control d-block" placeholder="Search text">
-</div>
-<small class="form-text">You can search a book by author or category. You can also search for other users, etc</small>
-</div>
-</form>
-</div>
-<div class="modal-footer border-top-0">
-<button type="button" class="btn btn-sm btn-primary">Search</button>
-<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
-<script src="/js/script.js"></script></body>
+<script type="text/javascript" src="/assets/js/jquery.js"></script>
+<script src="/assets/tether/js/tether.min.js"></script><script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/script.js"></script></body>
 </html>

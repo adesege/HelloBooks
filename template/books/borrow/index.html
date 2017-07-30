@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
-<link src="../../assets/tether/css/tether.min.css"><link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="../../assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='../../assets/css/style.css' />
+<title>View books details</title>
+<link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='/assets/css/style.css' />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
@@ -11,7 +11,7 @@
 <div class="row align-items-start">
 <button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span></button>
-<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="../../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
 </div>
 </nav><!--navbar-->
 <div class="row" id="bookList">
@@ -30,16 +30,19 @@
 <a class="nav-link" href="/books/books">Books</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/assets/books/stock">Stock Management</a>
+<a class="nav-link" href="/books/stock">Stock Management</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/assets/me">Profile</a>
+<a class="nav-link" href="/dashboard/profile.html">Profile</a>
 </li>
 <li class="nav-item">
 <a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/assets/logout">Logout</a>
+<a class="nav-link" href="/dashboard/settings.html">Settings</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout">Logout</a>
 </li>
 <li class="nav-item">
 <a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
@@ -47,58 +50,77 @@
 </ul></div><!--sidebar-->
 </div><!--col-sm 2-->
 <div class="col-sm-10 pr-3 pl-3"><div class="row" id="borrowBook">
-<div class="col-sm-7">
-<img class="card-img-top w-100" src="../../assets/images/banner.png" alt="Card image cap">
-<div class="btn-group mt-4 text-center d-block" role="group" aria-label="Basic example">
-<a href="javascript:void(0)" class="btn btn-secondary border-0 borrowBook" data-toggle="tooltip" onclick="$('#borrowBookDiv').toggleClass('hidden-xl-down');" title="Borrow this book"><span class="spanText"><i class="fa fa-plus-square"></i></span></a>
-<a href="#" class="btn btn-secondary border-0" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div id="borrowBookDiv" class="mt-4 hidden-xl-down">
-<form class="form-inline justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control" placeholder="When will you return this book?">
-<div class="input-group-addon p-0"><button type="button" class="btn btn-success"><i class="fa fa-check"></i></button></div>
+<div class="col-sm-8">
+<div class="row" id="book-details">
+  <div class="col-sm-4"><img class="img-thumbnails cover" src="/assets/images/1.jpg" alt="Card image cap">
+<div class="btn-group btn-group-sm w-100 my-2" role="group">
+<button id="btnGroupDrop1" type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> I want to... </button>
+<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+<a class="dropdown-item" href="#">read</a>
+<a class="dropdown-item" href="#" data-toggle="modal" data-target="#confirmBorrowModal">borrow</a>
 </div>
-</form>
-</div><!--borrow book form-->
-</div><!--btn-group-->
 </div>
-<div class="col-sm-5 mt-4">
-<ul id="bookDetails">
-<li>
-<span class="title text-muted">Name:</span>
-<span class="body">Lorem ipsum dolor sit amet.</span>
-</li>
-<li>
-<span class="title text-muted">Authors:</span>
-<span class="body">Author 1, Author 2, Author 3</span>
-</li>
-<li>
-<span class="title text-muted">ISSBN:</span>
-<span class="body">1234-4321-2314-2143</span>
-</li>
-<li>
-<span class="title text-muted">Description:</span>
-<span class="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-</li>
-</ul>
+  </div>
+  <div class="col-sm-8">
+    <div class="details">
+      <h4 class="card-title font-weight-bold">A super book title</h4>
+      <h6 class="card-subtitle">
+        by Author1 <div class="rating d-inline">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 </div>
+      </h6>
+      <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+      <hr><small class="mt-1 d-block"><em class="d-block">Published date: August 11, 1843</em><em class="d-block">ISSBN: 74638346556897</em><em class="d-block">Category: Category 1</em></small>
+    </div>
+  </div>
+</div>
+<div class="related row">
+  <div class="col-sm-10 offset-sm-1">
+    <h4 class="title text-center my-5">Related</h4>
+    <div class="row">
+      <div class="col-sm-3"><img class="img-thumbnail h-100 w-100" src="/assets/images/0.jpg"></div>
+      <div class="col-sm-3"><img class="img-thumbnail h-100 w-100" src="/assets/images/1.jpg"></div>
+      <div class="col-sm-3"><img class="img-thumbnail h-100 w-100" src="/assets/images/2.jpg"></div>
+      <div class="col-sm-3"><img class="img-thumbnail h-100 w-100" src="/assets/images/3.jpg"></div>
+    </div>
+  </div>
+</div></div>
+<div class="col-sm-4"><div class="card mb-3">
+<div class="card-header">
+<span>Most read</span>
+</div>
+<div class="row m-2"><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/1.jpg" alt="Card image cap"></a>
+</div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/2.jpg" alt="Card image cap"></a>
+</div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/3.jpg" alt="Card image cap"></a>
+</div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
+<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/4.jpg" alt="Card image cap"></a>
+</div></div><!--card block-->
+</div><!--card-->
+<div class="card">
+<div class="card-header">
+<span>Browse by</span>
+</div>
+<div class="card-block"><a href="/books/books/" class="d-block ">> Category 1</a><a href="/books/books/" class="d-block ">> Category 2</a><a href="/books/books/" class="d-block ">> Category 3</a><a href="/books/books/" class="d-block ">> Category 4</a></div><!--card block-->
+</div><!--card--></div>
 </div><!--row--></div><!--col sm 10-->
 </div><!--row#bookList--></div>
-<script type="text/javascript" src="../../assets/js/jquery.js"></script>
-<script src="../../assets/tether/js/tether.min.js"></script><script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<script type="text/javascript" src="/assets/js/jquery.js"></script>
+<script src="/assets/tether/js/tether.min.js"></script><script type="text/javascript" src="/assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="confirmBorrowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm" role="document">
 <div class="modal-content border-0">
+<div class="modal-header border-bottom-0 font-weight-bold"> When are you likely to return this book?
+</div>
 <div class="modal-body pt-4 border-bottom-0">
 <form>
 <div class="form-group">
 <label class="sr-only" for="inlineFormInputGroup">Username</label>
 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-<div class="input-group-addon"><i class="fa fa-search"></i></div>
-<input type="text" class="form-control d-block" placeholder="Search text">
+<div class="input-group-addon"><i class="fa fa-hashtag"></i></div>
+<input type="date" class="form-control d-block" placeholder="Please select...">
 </div>
-<small class="form-text">You can search a book by author or category. You can also search for other users, etc</small>
 </div>
 </form>
 </div>
@@ -109,5 +131,5 @@
 </div>
 </div>
 </div>
-<script src="../../assets/js/script.js"></script></body>
+<script src="/assets/js/script.js"></script></body>
 </html>

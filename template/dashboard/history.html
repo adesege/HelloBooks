@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
-<link src="/tether/css/tether.min.css"><link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='../assets/css/style.css' />
+<title>Borrowing history</title>
+<link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href='/assets/css/style.css' />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
@@ -11,7 +11,7 @@
 <div class="row align-items-start">
 <button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span></button>
-<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="../assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
+<a class="navbar-brand ml-auto p-2 col text-right" href="#"><img src="/assets/images/logo-icon.png" class="d-inline-block align-top w-50" alt=""></a>
 </div>
 </nav><!--navbar-->
 <div class="row" id="bookList">
@@ -39,6 +39,9 @@
 <a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
 </li>
 <li class="nav-item">
+<a class="nav-link" href="/dashboard/settings.html">Settings</a>
+</li>
+<li class="nav-item">
 <a class="nav-link" href="/logout">Logout</a>
 </li>
 <li class="nav-item">
@@ -47,81 +50,328 @@
 </ul></div><!--sidebar-->
 </div><!--col-sm 2-->
 <div class="col-sm-10 pr-3 pl-3"><h4 class="title mb-2 mr-4">My borrowing history</h4>
-<div class="mb-4"><small>I can view all my borrowing history here.</small></div>
+<div class="mb-1"><small>I can view all my borrowing history here.</small></div>
+<p>Borrowed 5, returned 3</p>
 <form class="form-inline mb-4">
 <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
-<option value="">by date..</option>
+<option value="">by date...</option>
 <option value="">Today</option>
 <option value="">Last 7 days</option>
 <option value="">Last 14 days</option>
 <option value="">A month ago</option>
 </select>
 <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
-<option value="">by name..</option>
+<option value="">by name...</option>
 <option value="">A-Z</option>
 <option value="">Z-A</option>
 </select>
 <button type="submit" class="btn btn-sm btn-danger">filter</button>
 </form>
-<div class="card-columns"><div class="card mb-3">
-<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
-<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-<small class="card-subtitle text-muted">June 24th, 2017 </small>
-<p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
-<button class="btn btn-sm btn-success" data-toggle="tooltip" title="I've returned this book" disabled><i class="fa fa-check-circle text-white"></i></button>
-<button class="btn btn-sm btn-danger" data-toggle="tooltip" title="I'm yet to return this book" disabled><i class="fa fa-minus-circle text-white"></i></button></div>
-</div><!--card--><div class="card mb-3">
-<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
-<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-<small class="card-subtitle text-muted">June 24th, 2017 </small>
-<p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
-<button class="btn btn-sm btn-success" data-toggle="tooltip" title="I've returned this book" disabled><i class="fa fa-check-circle text-white"></i></button>
-<button class="btn btn-sm btn-danger" data-toggle="tooltip" title="I'm yet to return this book" disabled><i class="fa fa-minus-circle text-white"></i></button></div>
-</div><!--card--><div class="card mb-3">
-<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
-<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-<small class="card-subtitle text-muted">June 24th, 2017 </small>
-<p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
-<button class="btn btn-sm btn-success" data-toggle="tooltip" title="I've returned this book" disabled><i class="fa fa-check-circle text-white"></i></button>
-<button class="btn btn-sm btn-danger" data-toggle="tooltip" title="I'm yet to return this book" disabled><i class="fa fa-minus-circle text-white"></i></button></div>
-</div><!--card--><div class="card mb-3">
-<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
-<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-<small class="card-subtitle text-muted">June 24th, 2017 </small>
-<p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
-<button class="btn btn-sm btn-success" data-toggle="tooltip" title="I've returned this book" disabled><i class="fa fa-check-circle text-white"></i></button>
-<button class="btn btn-sm btn-danger" data-toggle="tooltip" title="I'm yet to return this book" disabled><i class="fa fa-minus-circle text-white"></i></button></div>
-</div><!--card--><div class="card mb-3">
-<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
-<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-<small class="card-subtitle text-muted">June 24th, 2017 </small>
-<p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
-<button class="btn btn-sm btn-success" data-toggle="tooltip" title="I've returned this book" disabled><i class="fa fa-check-circle text-white"></i></button>
-<button class="btn btn-sm btn-danger" data-toggle="tooltip" title="I'm yet to return this book" disabled><i class="fa fa-minus-circle text-white"></i></button></div>
-</div><!--card--><div class="card mb-3">
-<img class="card-img-top" src="../assets/images/banner.png" alt="Card image cap">
-<div class="card-block">
-<h5 class="card-title"><a href="/books/borrow">Book title</a></h5>
-<h6 class="card-subtitle text-muted">Author 1, Author 2</h6>
-<small class="card-subtitle text-muted">June 24th, 2017 </small>
-<p class="card-text mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <a href="/books/borrow">read more</a></p>
-<button class="btn btn-sm btn-success" data-toggle="tooltip" title="I've returned this book" disabled><i class="fa fa-check-circle text-white"></i></button>
-<button class="btn btn-sm btn-danger" data-toggle="tooltip" title="I'm yet to return this book" disabled><i class="fa fa-minus-circle text-white"></i></button></div>
-</div><!--card--></div><!--card-columns-->
+<div class="row"><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4">
+<div class="row">
+<div class="col-sm-6 col-6 align-self-center">
+<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
+</div>
+<div class="col-sm-6 col-6 p-sm-0 align-self-center">
+<h6 class="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/this-is-a-nice-book">Book title</a></h6>
+<h6 class="mb-1 text-muted"><small>Author 1</small></h6>
+<p class="mb-0"><small>June 27th, 2017</small></p>
+<p class="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
+<a href="javascript:void(0)" class="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+<a href="javascript:void(0)" class="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+<div class="mt-4 hidden-xl-down showBorrow">
+<form class="justify-content-center">
+<label class="sr-only">When will you return this book?</label>
+<div class="input-group">
+<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+<input type="text" class="form-control form-control-sm" placeholder="Return date">
+</div>
+<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
+</div>
+</form>
+</div><!--borrow book form-->
+</div><!--col sm 8-->
+</div><!-- row -->
+</div></div><!--row-->
 <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button></div><!--col sm 10-->
 </div><!--row#bookList--></div>
-<script type="text/javascript" src="/js/jquery.js"></script>
-<script src="/tether/js/tether.min.js"></script><script type="text/javascript" src="/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<script type="text/javascript" src="/assets/js/jquery.js"></script>
+<script src="/assets/tether/js/tether.min.js"></script><script type="text/javascript" src="/assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm" role="document">
 <div class="modal-content border-0">
 <div class="modal-body pt-4 border-bottom-0">
@@ -143,5 +393,5 @@
 </div>
 </div>
 </div>
-<script src="/js/script.js"></script></body>
+<script src="/assets/js/script.js"></script></body>
 </html>
