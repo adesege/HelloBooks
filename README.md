@@ -5,5 +5,9 @@ A simple application that helps manage a library and its processes like stocking
 
 # Installation
 
-Download ````Web Server```` for Chrome and point to ````template/```` directory.
+* Download ````Web Server```` for Chrome.
+* Go to `chrome://apps`. Click on the `web server` icon.
+* In the pop up window, point to ````/path/to/hellobooks/template/```` directory.
+
+Web page will be served at `http://localhost:8000/` by default.
 
