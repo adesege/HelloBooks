@@ -2,6 +2,7 @@ extends ../../layouts/dashboard
 
 block dep_js
   include ../../components/dashboard/confirmBorrow
+  include ../../components/dashboard/search
 block contentarea
   <div class="row" id="borrowBook">
   <div class="col-sm-8">
@@ -15,7 +16,7 @@ block contentarea
               <a class="dropdown-item" href="#" data-toggle="modal" data-target="#confirmBorrowModal">borrow</a>
             </div>
           </div>
-      div.col-sm-8
+      div.col-sm-8.mt-3.mt-sm-0
         div.details
           h4.card-title.font-weight-bold A super book title
           h6.card-subtitle by Author1 
@@ -31,12 +32,32 @@ block contentarea
             em.d-block Category: Category 1
     div.related.row
       div.col-sm-10.offset-sm-1
-        h4.title.text-center.my-5 Related
-        div.row
+        h4.title.text-center.mt-5.mb-3 Related
+        div.row.mx-auto
           for n in [...Array(4).keys()]
-            div.col-sm-3
+            div.col-sm-3.col-6.p-1
               img(class='img-thumbnail h-100 w-100', src="/images/"+n+".jpg")
 
+    div.comments
+      h4.title.mt-5.mb-3 Reviews
+        hr
+      div.card.mb-3
+        div.card-block.p-0
+          form
+            div.form-group.mb-0
+              textarea(style="min-height:120px;", class='form-control border-0', placeholder="What do you think about this great book?")
+        div.card-footer.text-right
+          div.form-group.mb-0
+            <div class="rating d-inline mr-2">
+              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+            button(class='btn btn-outline-info btn-sm mr-2', data-toggle="tooltip", title="Add an image").
+              <i class="fa fa-camera-retro"></i>
+            button(class='btn btn-success btn-sm').
+              Submit
+      for n in [...Array(4).keys()]
+        include ../../components/dashboard/comments
+      <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
     </div>
   <div class="col-sm-4">
   include ../../components/dashboard/left

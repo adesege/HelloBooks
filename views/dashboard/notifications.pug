@@ -1,0 +1,13 @@
+extends ../layouts/dashboard
+
+block contentarea
+  <h4 class="title mb-2 mr-4">Notifications</h4>
+  <div class="mb-4"><small>You can view all your notifications here</small></div>
+  <div class="row">
+  div.col-sm-4.flex-first.flex-sm-first.mb-5.col-md-4.col-lg-3.pr-sm-0
+    include ../components/dashboard/notifications/left
+  div.col-sm-8.col-md-8.col-lg-9.pr-sm-0
+    for n in [...Array(6).keys()]
+      include ../components/dashboard/notifications/main
+    <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
+  </div><!-- row -->

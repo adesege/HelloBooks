@@ -33,8 +33,8 @@ block contentarea
 
   <div class="table-responsive text-center">
     <table class="table" id="stockTable">
-    <thead class="thead-default">
-      <tr>
+    <thead class="thead-default text-center">
+      <tr class="text-center">
         <th>#</th>
         <th>Category name</th>
         <th>Date added</th>
@@ -45,7 +45,7 @@ block contentarea
       for n in [...Array(5).keys()]
         <tr>
         <td>#{n+1}</td>
-        <td>July #{(n+3)}, 2017</td>
+        <td>Category #{(n+3)}</td>
         <td>August #{n+2}, 2017</td>
         <td>
         <button type="button" class="btn btn-sm btn-info mb-2 mb-sm-0"><i class="fa fa-pencil-square-o"></i></button>

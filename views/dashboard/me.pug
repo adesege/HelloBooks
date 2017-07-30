@@ -10,7 +10,17 @@ block contentarea
   <p class="card-text">
   <span class="d-block"><i class="fa fa-envelope text-info"></i> My email address</span>
   <span class="d-block"><i class="fa fa-calendar-check-o text-info"></i> Jan. 12, 2011</span>
-  <span class="d-block"><i class="fa fa-trophy text-danger"></i> Silver</span>
+  <span class="d-block"><i class="fa fa-book text-primary"></i> Read <strong>5</strong> books. Borrowed 3 books. Returned 1 book</span>
+  <span class="d-block"><i class="fa fa-trophy text-danger"></i> 
+      <div class="userbar" style="background-color: #7785A0;">Novice</div>
+      <div class="userbar" style="background-color: #616161;">Amateur</div>
+      <div class="userbar" style="background-color: #712828;">Senior</div>
+      <div class="userbar" style="background-color: #507051;">Enthusiast</div>
+      <div class="userbar" style="background-color: #00a7b6;">Expert</div>
+      <div class="userbar" style="background-color: #004d94;">Leader</div>
+      <div class="userbar" style="background-color: #7700af;">Veteran</div>
+      <div class="userbar" style="background-color: #b52ac5;">Master</div>
+  </span>
   </p>
   <a href="javascript:void(0)" onclick="$('#editProfile').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Edit"><i class="fa fa-pencil-square"></i> Edit &nbsp;</a>
   <div id="editProfile" class="mt-4 hidden-xl-down">
@@ -77,6 +87,19 @@ block contentarea
   </div>
   </div>
   </div><!--card-->
+  <div class="card mb-3">
+    <div class="card-header">
+    <span>Reading list</span>
+    </div>
+
+    <div class="row m-2">
+    for n in [...Array(4).keys()]
+        <div class="col-sm-6 col-6 px-0 pr-1 mb-1">
+        <a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/images/#{n+1}.jpg" alt="Card image cap"></a>
+        </div>
+    <button type="button" class="btn btn-primary bg-light btn-block">See more</button>
+    </div><!--card block-->
+    </div><!--card-->
   </div>
   <div class="col-sm-8 px-0">
   <h6 class="title">I'm yet to return...</h6>

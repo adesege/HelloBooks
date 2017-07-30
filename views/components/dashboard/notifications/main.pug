@@ -1,0 +1,26 @@
+div.row.mb-3.bordered.p-2.mx-auto
+    div.col-sm-2.col-4.col-md-4.text-center.px-0.col-lg-2
+        img(src="/images/user.png", class="rounded-circle img-thumbnail w-100", style="border-radius:50px !important;")
+        p.small.font-weight-bold.mb-1.
+            User's name
+        p.small.
+            <i class='fa fa-calendar'></i>
+            Feb 14th, 2017
+    div.col-sm-10.col-8.col-md-8.col-lg-10.pr-0
+        p.title.font-weight-bold.mb-1 A very good notification title 
+            span.text-success.mx-3.small read
+            span.text-warning.small unread
+        
+        p.small.mb-2.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        div.p-2.text-center.text-lg-left
+            button(type='button', class="btn btn-sm btn-success mr-2 mb-2", data-toggle="tooltip", title="Returned book")
+                <i class='fa fa-check'></i> 
+                span.hidden-xs-down returned
+            button(type='button', class="btn btn-sm btn-info mr-2 mb-2", data-toggle="tooltip", title="Borrowed book")
+                <i class='fa fa-info'></i> 
+                span.hidden-xs-down borrowed
+            button(type='button', class="btn btn-sm btn-warning mr-2 mb-2", data-toggle="tooltip", title="User has been surcharged")
+                <i class='fa fa-check'></i> 
+                span.hidden-xs-down surcharged
+                    
