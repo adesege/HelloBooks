@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "webpack webpack.config.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -15,6 +16,12 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "html-webpack-plugin": "^2.29.0",
+    "nodemon": "^1.11.0",
+    "pug-html-loader": "^1.1.5",
+    "webpack": "^3.4.1"
   }
 }

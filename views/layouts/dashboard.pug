@@ -3,6 +3,13 @@ extends ../layouts/layout
 block dep_js
   include ../components/dashboard/search
 block content
+  <nav class="navbar navbar-light bg-faded">
+  <button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span></button>
+  <a class="navbar-brand" href="#">
+    <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+    </a>
+  </nav>
   <nav class="navbar navbar-light navbar-toggleable mb-3" id="topNav">
   <div class="row align-items-start">
   <button class="navbar-toggler btn-sm mr-1 p-0 col align-self-center text-left" onclick="$('body').slideDown('fast').toggleClass('overflow-hidden')" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
