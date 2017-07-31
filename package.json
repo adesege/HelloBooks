@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
-    "dev": "nodemon server/server.js & webpack --config=webpack.config.js",
-    "watch": "webpack --watch --config=webpack.config.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/server.js && npm run build",
+    "build": "webpack --watch --config ./webpack.config.js --progress --colors"
   },
   "repository": {
     "type": "git",
@@ -22,11 +21,18 @@
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "css-loader": "^0.28.4",
+    "eslint-config-airbnb-base": "^11.3.1",
     "nodemon": "^1.11.0",
     "style-loader": "^0.18.2",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "react-hot-loader": "^3.0.0-beta.5",
+    "webpack-dev-middleware": "^1.8.3",
+    "webpack-hot-middleware": "^2.12.2"
   },
   "dependencies": {
-    "express": "^4.15.3"
+    "express": "^4.15.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.3.2",
+    "redux": "^3.6.0"
   }
 }

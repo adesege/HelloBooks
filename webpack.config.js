@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports={
     externals: {
@@ -7,8 +8,17 @@ module.exports={
     entry: './server/server.js',
     output: {
         filename: 'app.js',
-        path: path.resolve(__dirname, 'template/assets/js/')
+        path: path.resolve(__dirname, 'template/assets/js/'),
+        publicPath: 'templates/assets'
     },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            /*compress: {
+            warnings: false
+        }*/
+    })
+    ],
     module: {
         rules: [
         {
@@ -28,6 +38,15 @@ module.exports={
                 presets: ['env']
             }
             }
+        },
+        {
+            test: /.jsx?$/,
+            loader: 'babel-loader',
+            include: path.join(__dirname, 'client'),
+            exclude: /node_modules/,
+            query: {
+                presets: ['es2015', 'react']
+                    }
         }
         ]
     }
