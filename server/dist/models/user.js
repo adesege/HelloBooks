@@ -14,6 +14,7 @@ exports.default = function (sequelize, DataTypes) {
   var User = sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         isAlpha: true,
         notEmpty: true,
@@ -27,6 +28,7 @@ exports.default = function (sequelize, DataTypes) {
     userGroup: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         isEmail: true,
         notEmpty: true,
@@ -47,7 +49,9 @@ exports.default = function (sequelize, DataTypes) {
     isValidated: DataTypes.INTEGER,
     password: {
       type: DataTypes.STRING,
-      notEmpty: true
+      notEmpty: true,
+      allowNull: false,
+      validate: {}
     },
     id: {
       type: DataTypes.INTEGER,

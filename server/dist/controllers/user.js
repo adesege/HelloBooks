@@ -26,9 +26,6 @@ exports.default = {
     var password = User.generateHash(req.body.password);
     var name = req.body.name;
     var email = req.body.email;
-    if (name.length < 3) {
-      return res.status(400).send({ message: 'The name you entered must be more than 3 characters', status: 'Bad Request', code: 400 });
-    }
     User.create({
       password: password,
       name: name,

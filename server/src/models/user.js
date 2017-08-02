@@ -4,6 +4,7 @@ export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         isAlpha: true,
         notEmpty: true,
@@ -17,6 +18,7 @@ export default (sequelize, DataTypes) => {
     userGroup: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         isEmail: true,
         notEmpty: true,
@@ -35,7 +37,10 @@ export default (sequelize, DataTypes) => {
     isValidated: DataTypes.INTEGER,
     password: {
       type: DataTypes.STRING,
-      notEmpty: true
+      notEmpty: true,
+      allowNull: false,
+      validate: {
+      }
     },
     id: {
       type: DataTypes.INTEGER,
