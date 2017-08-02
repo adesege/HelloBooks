@@ -1,12 +1,14 @@
-const path = require('path')
-const express = require('express')
+const path = require('path');
 
+const express = require('express');
 
-    const app = express();
-    const indexPath = path.join(__dirname, '../template/index.html');
+const app = express();
+const indexPath = path.join(__dirname, '../template/index.html');
 
-    app.use(express.static(path.join(__dirname, '../template/')));
-    app.get('/', function (_, res) { res.sendFile(indexPath) });
+app.use(express.static(path.join(__dirname, '../template/')));
 
-    app.listen(8080)
-console.log(`Listening at http://localhost:8080`)
+app.get('/', (_, res) => { res.sendFile(indexPath); });
+
+app.listen(8080);
+
+console.log('Listening at http://localhost:8080');
