@@ -7,7 +7,38 @@ module.exports = {
   },
   devtool: 'inline-source-map',
   output: {
-    filename: '[name].js',
+    filename: 'app.js',
     path: path.resolve(__dirname, 'client')
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader?cacheDirectory=true',
+          options: {
+            presets: ['env']
+          }
+        }
+      },
+      {
+        test: /.jsx?$/,
+        loader: 'babel-loader',
+        include: path.join(__dirname, 'client'),
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015']
+        }
+      }
+    ]
   }
 };
