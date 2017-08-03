@@ -1,4 +1,6 @@
-function randomString(limit = 5) {
+import bcrypt from 'bcrypt';
+
+const randomString = (limit = 5) => {
   let randArray = '';
   limit = [...Array(parseInt(limit, 10)).keys()];
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -7,8 +9,12 @@ function randomString(limit = 5) {
     return randArray;
   });
   return randomStrings.join('');
-}
+};
+
+
+const validatePassword = (password, hash) => bcrypt.compareSync(password, hash);
 
 export default {
-  randomString
+  randomString,
+  validatePassword
 };

@@ -16,8 +16,14 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: true,
-        notEmpty: true,
+        notEmpty: {
+          args: true,
+          msg: 'The name field is required'
+        },
+        is: {
+          args: /^[\w ]+$/,
+          msg: 'Name must contain alphabet characters only'
+        },
         min: 3
       }
     },
@@ -30,15 +36,15 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isEmail: true,
-        notEmpty: true,
+        notEmpty: { args: true, msg: 'The email field is required' },
+        isEmail: { args: true, msg: 'The email field is not a valid email address' },
         isUnique: function isUnique(value, next) {
           User.find({
             where: { email: value },
             attributes: ['id']
           }).done(function (error) {
             if (error) {
-              return next('This email address already belongs to someone');
+              return next('This email address already belongs to a user');
             }
             next();
           });
@@ -49,9 +55,13 @@ exports.default = function (sequelize, DataTypes) {
     isValidated: DataTypes.INTEGER,
     password: {
       type: DataTypes.STRING,
-      notEmpty: true,
       allowNull: false,
-      validate: {}
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'The password field is required'
+        }
+      }
     },
     id: {
       type: DataTypes.INTEGER,
@@ -63,10 +73,13 @@ exports.default = function (sequelize, DataTypes) {
     tableName: 'User'
   });
 
-  User.prototype.validPassword = function (password) {
-    return _bcrypt2.default.compareSync(password, undefined.password);
+  User.prototype.validPassword = function validPassword(password) {
+    return _bcrypt2.default.compareSync(password, this.password);
   };
   User.generateHash = function (password) {
+    if (password === null || password === undefined) {
+      return '';
+    }
     return _bcrypt2.default.hashSync(password, _bcrypt2.default.genSaltSync(8), null);
   };
 

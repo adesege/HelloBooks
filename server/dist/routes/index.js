@@ -15,9 +15,10 @@ var userController = _controllers2.default.users;
 exports.default = function (app) {
   app.get('/api', function (req, res) {
     return res.status(200).send({
-      message: 'Welcome to the Todos API!'
+      message: 'Welcome to Hello-Books api. !'
     });
   });
 
-  app.post('/api/users/signup', userController.create);
+  app.post('/api/users/signup', userController.signup);
+  app.post('/api/users/signin', userController.signin);
 };
