@@ -5,7 +5,8 @@
   "scripts": {
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon server/dist/index.js",
-    "build": "webpack --watch --config ./webpack.config.js --progress --colors"
+    "build": "webpack --watch --config ./webpack.config.js --progress --colors",
+    "test": "mocha tests"
   },
   "repository": {
     "type": "git",
@@ -34,12 +35,16 @@
     "babel-core": "^6.25.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
+    "chai": "^4.1.0",
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
+    "mocha": "^3.5.0",
+    "mochai": "^0.2.5",
     "morgan": "^1.8.2",
     "pg": "^7.0.2",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.4.2",
+    "supertest": "^3.0.0",
     "webpack": "^3.4.1"
   }
 }
