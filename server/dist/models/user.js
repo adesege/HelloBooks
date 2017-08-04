@@ -38,9 +38,9 @@ exports.default = function (sequelize, DataTypes) {
       validate: {
         notEmpty: { args: true, msg: 'The email field is required' },
         isEmail: { args: true, msg: 'The email field is not a valid email address' },
-        isUnique: function isUnique(value, next) {
+        isUnique: function isUnique(email, next) {
           User.find({
-            where: { email: value },
+            where: { email: email },
             attributes: ['id']
           }).done(function (error) {
             if (error) {

@@ -1,4 +1,3 @@
-import Sequelize from 'sequelize';
 import jwt from 'jsonwebtoken';
 import app from '../app';
 import model from '../models';
@@ -24,7 +23,10 @@ export default {
     {
       fields: ['name', 'email', 'password', 'key']
     })
-      .then(() => res.status(201).send({ message: 'Your account has been created successfully. Go to the login page to sign in to your account.', status: 'Created', code: 201 }))
+      .then(() => res.status(201).send({
+        message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
+        status: 'Created',
+        code: 201 }))
       .catch(error => res.status(400).send({
         message: error.errors[0].message,
         status: 'Bad Request',

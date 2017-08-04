@@ -28,9 +28,9 @@ export default (sequelize, DataTypes) => {
       validate: {
         notEmpty: { args: true, msg: 'The email field is required' },
         isEmail: { args: true, msg: 'The email field is not a valid email address' },
-        isUnique(value, next) {
+        isUnique(email, next) {
           User.find({
-            where: { email: value },
+            where: { email },
             attributes: ['id']
           }).done((error) => {
             if (error) { return next('This email address already belongs to a user'); }

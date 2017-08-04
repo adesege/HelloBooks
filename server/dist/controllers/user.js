@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _sequelize = require('sequelize');
-
-var _sequelize2 = _interopRequireDefault(_sequelize);
-
 var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
@@ -44,7 +40,10 @@ exports.default = {
     }, {
       fields: ['name', 'email', 'password', 'key']
     }).then(function () {
-      return res.status(201).send({ message: 'Your account has been created successfully. Go to the login page to sign in to your account.', status: 'Created', code: 201 });
+      return res.status(201).send({
+        message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
+        status: 'Created',
+        code: 201 });
     }).catch(function (error) {
       return res.status(400).send({
         message: error.errors[0].message,

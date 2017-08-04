@@ -40,10 +40,6 @@ app.set('views', _path2.default.join(__dirname, 'views'));
 app.set('view engine', '');
 app.set('secret', 'aaCaCRaCR}aCR}!aCR}!%aCR}!%^aCR}!%^<aCR}!%^<yaCR}!%^<ys');
 
-app.get('/', function (_, res) {
-  res.render('template');
-});
-
 (0, _routes2.default)(app);
 
 // catch 404 and forward to error handler

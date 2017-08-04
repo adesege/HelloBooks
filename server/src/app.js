@@ -16,9 +16,7 @@ app.use(express.static(path.join(__dirname, '../template/')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '');
-app.set('secret', 'aaCaCRaCR}aCR}!aCR}!%aCR}!%^aCR}!%^<aCR}!%^<yaCR}!%^<ys')
-
-app.get('/', (_, res) => { res.render('template'); });
+app.set('secret', 'aaCaCRaCR}aCR}!aCR}!%aCR}!%^aCR}!%^<aCR}!%^<yaCR}!%^<ys');
 
 routes(app);
 
