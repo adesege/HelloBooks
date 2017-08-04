@@ -21,40 +21,32 @@ module.exports = {
       },
       author: {
         type: Sequelize.STRING,
-        defaulltValue: ' ',
-        allowNull: false
+        defaulltValue: ' '
       },
       bookURL: {
         type: Sequelize.STRING,
-        defaulltValue: ' ',
-        allowNull: false
+        defaulltValue: ' '
       },
       ISSBN: {
         type: Sequelize.STRING,
-        defaulltValue: ' ',
-        allowNull: false
+        defaulltValue: ' '
       },
       publishedDate: {
         type: Sequelize.STRING,
-        defaulltValue: ' ',
-        allowNull: false
+        defaulltValue: ' '
       },
       bookCategoryId: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       coverPhotoId: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       documentPath: {
         type: Sequelize.STRING(1000),
-        defaulltValue: ' ',
-        allowNull: false
+        defaulltValue: ' '
       },
       userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
