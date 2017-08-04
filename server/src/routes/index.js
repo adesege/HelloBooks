@@ -3,7 +3,7 @@ import controllers from '../controllers';
 import authMiddleware from '../middlewares/authenticate';
 
 const userController = controllers.users;
-const bookController = controllers.books;
+const bookController = controllers.bookController;
 const apiRoutes = express.Router();
 
 export default (app) => {
@@ -15,8 +15,12 @@ export default (app) => {
 
   apiRoutes.post('/users/signup', userController.signup);
   apiRoutes.post('/users/signin', userController.signin);
+  
 
-  apiRoutes.post('/books', authMiddleware, bookController.create);
+  apiRoutes.route('/books')
+    .post(authMiddleware, bookController.create)
+    .put(authMiddleware, bookController.edit)
+    .get(authMiddleware, bookController.get);
 
   app.use('/api', apiRoutes);
 };

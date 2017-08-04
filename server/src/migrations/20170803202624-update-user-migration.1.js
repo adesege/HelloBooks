@@ -9,9 +9,11 @@ module.exports = {
       },
       onDelete: 'set default'
     });*/
-    /*return queryInterface.addColumn('Book', ['ISSBN'], {
-      type: Sequelize.String
-    });*/
+    return queryInterface.addColumn('Book', ['deletedAt'], {
+      allowNull: false,
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
+    });
   },
 
   down(queryInterface) {

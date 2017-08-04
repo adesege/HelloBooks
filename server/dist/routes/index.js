@@ -19,7 +19,7 @@ var _authenticate2 = _interopRequireDefault(_authenticate);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var userController = _controllers2.default.users;
-var bookController = _controllers2.default.books;
+var bookController = _controllers2.default.bookController;
 var apiRoutes = _express2.default.Router();
 
 exports.default = function (app) {
@@ -36,7 +36,7 @@ exports.default = function (app) {
   apiRoutes.post('/users/signup', userController.signup);
   apiRoutes.post('/users/signin', userController.signin);
 
-  apiRoutes.post('/books', _authenticate2.default, bookController.create);
+  apiRoutes.route('/books').post(_authenticate2.default, bookController.create).put(_authenticate2.default, bookController.edit).get(_authenticate2.default, bookController.get);
 
   app.use('/api', apiRoutes);
 };

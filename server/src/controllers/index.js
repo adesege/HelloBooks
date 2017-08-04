@@ -1,7 +1,7 @@
 import users from './user';
-import books from './book';
+import bookController from './book';
 
 export default {
   users,
-  books
+  bookController
 };

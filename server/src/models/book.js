@@ -1,6 +1,16 @@
 
 export default (sequelize, DataTypes) => {
   const Book = sequelize.define('Book', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'You haven\'t selected a book to update.'
+        }
+      }
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -44,7 +54,16 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
 
     },
-    ISSBN: DataTypes.STRING,
+    ISBN: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Please input an ISBN number.'
+        }
+      }
+    },
     publishedDate: DataTypes.STRING,
     bookCategoryId: DataTypes.INTEGER,
     coverPhotoId: DataTypes.INTEGER,

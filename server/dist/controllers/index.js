@@ -16,5 +16,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
   users: _user2.default,
-  books: _book2.default
+  bookController: _book2.default
 };
