@@ -13,9 +13,10 @@ export default (app) => {
     message: 'Welcome to Hello-Books api. !',
   }));
 
-  apiRoutes.post('/users/signup', userController.signup);
-  apiRoutes.post('/users/signin', userController.signin);
-  
+  apiRoutes.route('/users')
+    .post('/signup', userController.signup)
+    .post('/signin', userController.signin)
+    .get('/:userId/books', userController.books);
 
   apiRoutes.route('/books')
     .post(authMiddleware, bookController.create)
