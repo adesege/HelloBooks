@@ -17,9 +17,9 @@ block contentarea
     <input type="text" placeholder="Enter author's name" class="form-control form-control-sm mt-2 mt-sm-0 mb-2 mr-sm-2 mb-sm-0">
     <button type="submit" class="btn btn-sm btn-danger">filter</button>
     </form>
-    <div class="row">
-    for n in [...Array(6).keys()]
+    <div class="row" id="bookList">
+    for n in [...Array(12).keys()]
       include ../components/dashboard/booklist
     </div><!--row-->
-    <button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
+    <button type="button" class="btn btn-primary bg-light btn-block mb-3 mx-0">See more</button>
   </div><!-- row -->

@@ -72,3 +72,11 @@ $(function() {
 function triggerUpload(elem){
 document.getElementById(elem).click(); 
 }
+
+function toggleSideNav(that){
+  //$('#sidebar ul').toggle('hide');
+}
+
+function closeNav(that){
+  $(that).parents('#sidebar').removeClass('show');
+}
