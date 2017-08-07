@@ -75,6 +75,6 @@ export default (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'Book'
   });
-  
+
   return Book;
 };
