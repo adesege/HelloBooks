@@ -8,16 +8,27 @@ block contentarea
     <h4 class="title mb-2 mr-4">Dashboard</h4>
     <div class="mb-4"><small>Welcome Tayo. Here are some books you may find interesting. Use the form below to filter through the list.</small></div>
     <form class="form-inline mb-4">
-    <select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+    <div class="form-group">
+    <select class="form-control form-control-sm mb-md-2 ml-md-2">
     <option value="">Choose a category</option>
     for n in [...Array(3).keys()]
       <option value="">Category #{n+1}</option>
     </select>
-    <div class="ml-4 mr-4 text-center"> -OR- </div>
-    <input type="text" placeholder="Enter author's name" class="form-control form-control-sm mt-2 mt-sm-0 mb-2 mr-sm-2 mb-sm-0">
+    </div>
+    <div class="form-group mb-md-2 ml-md-2">
+    <input type="text" placeholder="Enter author's name" class="form-control form-control-sm">
+    </div>
+    <div class="form-group mb-md-2 ml-md-2">
+    <input type="text" placeholder="Enter Book title" class="form-control form-control-sm">
+    </div>
+    <div class="form-group mb-md-2 ml-md-2">
+    <input type="text" placeholder="Enter Book description" class="form-control form-control-sm">
+    </div>
+    <div class="form-group mb-md-2 ml-2">
     <button type="submit" class="btn btn-sm btn-danger">filter</button>
+    </div>
     </form>
-    <div class="row" id="bookList">
+    <div class="row pr-3" id="bookList">
     for n in [...Array(12).keys()]
       include ../components/dashboard/booklist
     </div><!--row-->

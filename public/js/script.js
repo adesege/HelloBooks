@@ -80,3 +80,12 @@ function toggleSideNav(that){
 function closeNav(that){
   $(that).parents('#sidebar').removeClass('show');
 }
+
+let notiHolder = $('#notificationHolder');
+$('body').on('mouseenter','#notificationInfo', function(e){
+  notiHolder.show();
+});
+
+$('body').on('click', function(e){
+  notiHolder.hide();
+});

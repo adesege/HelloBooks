@@ -324,7 +324,13 @@ body {
 
 #bookList .book a{
   position: absolute;
-  left: 10px;
+  left: 20px;
   top: 0;
   font-size: 25px;
+}
+
+#notificationHolder{
+  position: absolute;
+  width: 300px;
+  display: none;
 }

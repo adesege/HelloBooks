@@ -9,14 +9,29 @@ block content
     <span class="navbar-toggler-icon"></span>
   </button>
   <a class="navbar-brand mr-0 navbar-toggler-right" href="#"><span class="hidden-md-down mr-3">Hello-Books</span><img src="/images/logo-icon.png" style="width:30px; height:30px;" class="d-inline-block align-top" alt=""></a>
-    <a class="btn mr-sm-2 btn-sm btn-info" href="/notifications"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+    
+    <div class="d-inline-block dropdown">
+    <a class="btn mr-sm-2 btn-sm btn-info dropdown-toggle" data-toggle="dropdown" href="/notifications" id="notificationInfo"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+
+    <div class="list-group dropdown-menu" id="notificationHolder">
+    for n in [...Array(3).keys()]
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Notification #{n+1}</h5>
+          <small>#{n+4} days ago</small>
+        </div>
+        <p class="mb-1 small">Donec id elit non mi porta gravida at eget metus.</p>
+      </a>
+    </div>
+    
+    </div>
     <button type="button" class="btn mr-sm-2 btn-sm btn-primary"><i class="fa fa-cog"></i></button>
-    <button type="button" class="btn mr-sm-2 btn-sm btn-outline-info" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search-plus"></i></button>
+    <button type="button" class="btn mr-sm-2 btn-sm btn-outline-info"><i class="fa fa-user"></i></button>
     <button type="button" class="btn mr-sm-2 btn-sm btn-danger"><i class="fa fa-power-off"></i></button>
     <form class="form-inline hidden-sm-down d-inline-flex">
     <div class="input-group">
-      <input type="text" class="form-control form-control-sm" placeholder="Username" aria-describedby="basic-addon1">
-      <span class="input-group-addon input-group-sm" id="basic-addon1">@</span>
+      <input type="text" class="form-control form-control-sm" placeholder="Search here" aria-describedby="basic-addon1">
+      <button class="input-group-addon input-group-sm" id="basic-addon1"><i class="fa fa-search"></i></button>
     </div>
   </form>
   </div>
