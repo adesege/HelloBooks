@@ -97,7 +97,7 @@ class userClass {
      * @param {object} req 
      * @param {object} res
      * @return {object} response 
-     */
+  */
   static books(req, res) {
     const userId = req.params.userId;
     if (userId === null || userId === '') {

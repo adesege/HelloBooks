@@ -125,7 +125,7 @@ class bookClass {
         if (books) {
           res.status(200).send({ message: books, status: 'OK', code: 200 });
         } else {
-          res.status(204).send({ message: 'No record available', status: 'No Content', code: 204 });
+          res.status(404).send({ message: 'No record available', status: 'No Content', code: 404 });
         }
       })
       .catch(error => res.status(500).send({
@@ -229,7 +229,7 @@ class bookClass {
           status: 'OK',
           code: 200 });
       } else {
-        res.status(204).send({ message: 'No record available', status: 'No Content', code: 204 });
+        res.status(404).send({ message: 'No record available', status: 'No Content', code: 404 });
       }
     }).catch(error => res.status(400).send({
       message: error.message,
@@ -286,7 +286,7 @@ class bookClass {
           code: 400
         }));
       } else {
-        res.status(204).send({ message: 'No record available', status: 'No Content', code: 204 });
+        return res.status(404).json({ message: 'No record available', status: 'Not Found', code: 404 });
       }
     }).catch(error => res.status(400).send({
       message: error.message,
