@@ -10,16 +10,16 @@ router.use((req, res, next) => {
   if (token) {
     jwt.verify(token, app.get('secret'), (err, decoded) => {
       if (err) {
-        return res.status(400).send({
+        return res.status(401).send({
           status: 'Unauthorized',
           message: 'Failed to authenticate user.',
-          code: 400 });
+          code: 401 });
       }
       req.decoded = decoded;
       next();
     });
   } else {
-    return res.status(403).send({
+    return res.status(401).send({
       status: 'Unauthorized',
       message: 'Failed to authenticate user.',
       code: 401

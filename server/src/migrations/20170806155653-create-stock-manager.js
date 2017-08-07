@@ -1,8 +1,6 @@
-
-
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable('borrowedBooks', {
+    return queryInterface.createTable('stockManager', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,13 +10,10 @@ module.exports = {
       bookId: {
         type: Sequelize.INTEGER
       },
-      userId: {
+      quantity: {
         type: Sequelize.INTEGER
       },
-      isReturned: {
-        type: Sequelize.BOOLEAN
-      },
-      returnedDate: {
+      recordDate: {
         type: Sequelize.DATEONLY
       },
       createdAt: {
@@ -32,6 +27,6 @@ module.exports = {
     });
   },
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('borrowedBooks');
+    return queryInterface.dropTable('stockManager');
   }
 };

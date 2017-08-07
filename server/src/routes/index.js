@@ -4,24 +4,27 @@ import authMiddleware from '../middlewares/authenticate';
 
 const userController = controllers.users;
 const bookController = controllers.bookController;
-const apiRoutes = express.Router();
+const router = express.Router();
 
 export default (app) => {
   app.get('/', (_, res) => { res.render('template'); });
 
-  apiRoutes.get('/', (req, res) => res.status(200).send({
+  router.get('/', (req, res) => res.status(200).send({
     message: 'Welcome to Hello-Books api. !',
   }));
 
-  apiRoutes.route('/users')
-    .post('/signup', userController.signup)
-    .post('/signin', userController.signin)
-    .get('/:userId/books', userController.books);
+  router.post('/users/signup', userController.signup);
+  router.post('/users/signin', userController.signin);
 
-  apiRoutes.route('/books')
+  router.route('/users/:userId/books')
+    .post(authMiddleware, bookController.borrowBook)
+    .get(authMiddleware, bookController.getBorrowBook)
+    .put(authMiddleware, bookController.returnBorrowedBook);
+
+  router.route('/books')
     .post(authMiddleware, bookController.create)
     .put(authMiddleware, bookController.edit)
     .get(authMiddleware, bookController.get);
 
-  app.use('/api', apiRoutes);
+  app.use('/api', router);
 };

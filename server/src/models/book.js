@@ -68,11 +68,13 @@ export default (sequelize, DataTypes) => {
     bookCategoryId: DataTypes.INTEGER,
     coverPhotoId: DataTypes.INTEGER,
     documentPath: DataTypes.STRING(1000),
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    quantity: DataTypes.INTEGER
   },
   {
     freezeTableName: true,
     tableName: 'Book'
   });
+  
   return Book;
 };
