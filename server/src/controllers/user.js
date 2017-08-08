@@ -63,7 +63,7 @@ class userClass {
       .then((user) => {
         if (user) {
           if (!user.validPassword(password)) {
-            res.status(400).send({
+            return res.status(400).send({
               message: 'You provided a wrong password',
               status: 'Bad Request',
               code: 400 });
@@ -73,7 +73,7 @@ class userClass {
             secret,
             { expiresIn: 24 * 60 * 60 }
           );
-          res.status(200).send(
+          return res.status(200).send(
             {
               token,
               userId: user.id,
@@ -82,9 +82,8 @@ class userClass {
               status: 'OK',
               code: 200
             });
-        } else {
-          res.status(400).send({ message: 'User not found', status: 'Bad Request', code: 400 });
         }
+        return res.status(404).send({ message: 'User not found', status: 'Bad Request', code: 404 });
       })
       .catch(error => res.status(500).send({
         message: error.message,

@@ -6,7 +6,7 @@
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon ./server/dist/index.js",
     "build": "webpack --watch --config ./webpack.config.js --progress --colors",
-    "test": "mocha server/src/tests/index.js"
+    "test": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
   },
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",
     "express": "^4.15.3",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^7.4.1",
     "mocha": "^3.5.0",
     "mochai": "^0.2.5",
