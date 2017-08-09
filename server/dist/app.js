@@ -1,6 +1,9 @@
 'use strict';
 
-<<<<<<< HEAD
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
@@ -24,22 +27,14 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var app = (0, _express2.default)();
-
-// Log requests to the console.
 app.use((0, _morgan2.default)('dev'));
-// Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
+app.use(_express2.default.static(_path2.default.join(__dirname, '../../template')));
+app.set('view engine', _path2.default.join(__dirname, '../../template'));
+app.set('secret', 'aaCaCRaCR}aCR}!aCR}!%aCR}!%^aCR}!%^<aCR}!%^<yaCR}!%^<ys');
 
 (0, _routes2.default)(app);
-
-app.use(_express2.default.static(_path2.default.join(__dirname, '../template/')));
-// view engine setup
-app.set('views', _path2.default.join(__dirname, 'views'));
-app.set('view engine', '');
-app.get('/', function (_, res) {
-  res.render('template');
-});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -59,23 +54,4 @@ app.use(function (err, req, res) {
   res.render('error');
 });
 
-app.listen(8080);
-
-console.log('Listening at http://localhost:8080');
-=======
-var _http = require('http');
-
-var _http2 = _interopRequireDefault(_http);
-
-var _app = require('./app');
-
-var _app2 = _interopRequireDefault(_app);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var port = parseInt(process.env.PORT, 10) || 8080;
-_app2.default.set('port', port);
-
-var server = _http2.default.createServer(_app2.default);
-server.listen(port);
->>>>>>> dev
+exports.default = app;
