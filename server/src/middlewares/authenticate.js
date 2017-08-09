@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import express from 'express';
 import app from '../app';
 
 const router = function router(req, res, next) {
@@ -13,6 +12,18 @@ const router = function router(req, res, next) {
           status: 'Unauthorized',
           message: 'Failed to authenticate user.',
           code: 401 });
+      }
+
+      const userId = req.body.userId || req.query.userId || req.params.userId;
+      if (userId || userId !== undefined) {
+        const tokenUserId = decoded.user;
+        if (parseInt(userId, 10) === parseInt(tokenUserId, 10)) {
+        } else {
+          return res.status(400).send({
+            status: 'Forbidden',
+            message: 'Sorry, this is not you.',
+            code: 400 });
+        }
       }
       req.decoded = decoded;
       next();

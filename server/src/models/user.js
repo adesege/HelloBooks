@@ -21,7 +21,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     userRank: DataTypes.STRING,
-    userGroup: DataTypes.STRING,
+    userGroup: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

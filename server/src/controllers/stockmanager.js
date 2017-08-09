@@ -17,7 +17,7 @@ class stockManagerClass {
   static create(req, res) {
     const quantity = req.body.quantity || '';
     const recordDate = req.body.record_date || '';
-    const bookId = req.query.book_id || '';
+    const bookId = req.query.book_id || req.body.book_id || '';
 
     Book.findById(bookId)
       .then((book) => {
@@ -31,11 +31,14 @@ class stockManagerClass {
             {
               fields: ['quantity', 'recordDate', 'bookId']
             })
-            .then(() => res.status(201).send({
-              message: 'Stock added successfully',
-              status: 'Created',
-              code: 201
-            }))
+            .then((id) => {
+              res.status(201).send({
+                message: 'Stock added successfully',
+                id: id.get('id'),
+                status: 'Created',
+                code: 201
+              });
+            })
             .catch(error => res.status(400).send({
               message: error.message,
               status: 'Bad Request',

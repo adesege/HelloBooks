@@ -22,15 +22,17 @@ class userClass {
     const name = req.body.name || '';
     const email = req.body.email || '';
     password = User.generateHash(password) || '';
+    const userGroup = req.body.group || '';
 
     User.create({
       password,
       name,
       email,
+      userGroup,
       key: randomString(10)
     },
     {
-      fields: ['name', 'email', 'password', 'key']
+      fields: ['name', 'email', 'password', 'key', 'userGroup']
     })
       .then(() => res.status(201).send({
         message: 'Your account has been created successfully. Go to the login page to sign in to your account.',

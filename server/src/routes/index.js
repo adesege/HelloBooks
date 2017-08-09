@@ -11,7 +11,7 @@ const adminMiddleware = middlewares.adminAuthenticate;
 const router = express.Router();
 
 export default (app) => {
-  app.get('/', (_, res) => { res.render('template'); });
+  app.get('/', (_, res) => { res.render('template/index'); });
 
   router.get('/', (req, res) => res.status(200).send({
     message: 'Welcome to Hello-Books api. !',
@@ -22,13 +22,13 @@ export default (app) => {
 
   router.route('/users/:userId/books')
     .post(authMiddleware, userMiddleware, bookController.borrowBook)
-    .get(authMiddleware, userMiddleware, bookController.getBorrowBook)
+    .get(authMiddleware, userMiddleware, bookController.getBorrowedBook)
     .put(authMiddleware, userMiddleware, bookController.returnBorrowedBook);
 
   router.route('/books')
     .post(authMiddleware, adminMiddleware, bookController.create)
     .put(authMiddleware, adminMiddleware, bookController.edit)
-    .get(authMiddleware, bookController.get);
+    .get(authMiddleware, authMiddleware, bookController.get);
 
   router.route('/books/stocks')
     .post(authMiddleware, adminMiddleware, stockController.create)

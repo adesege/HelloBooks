@@ -1,7 +1,9 @@
+import moment from 'moment';
 import model from '../models';
 
 const Book = model.Book;
 const borrowedBook = model.borrowedBook;
+const stockManager = model.stockManager;
 
 /**
  * @class bookClass
@@ -21,10 +23,12 @@ class bookClass {
     const publishedDate = req.body.published_date || '';
     const bookURL = req.body.book_url || '';
     const ISBN = req.body.isbn || '';
-    const bookCategoryId = req.body.book_category || '';
-    const coverPhotoId = req.body.cover_photo || '';
+    const bookCategoryId = req.body.book_category || 0;
+    const coverPhotoId = req.body.cover_photo || 0;
     const documentPath = req.body.document_path || '';
     const userId = req.decoded.user;
+    const stock = req.body.stock;
+    delete req.body.stock;
 
     Book.create(
       {
@@ -40,13 +44,23 @@ class bookClass {
         userId
       },
       {
-        fields: ['title', 'description', 'author', 'userId']
+        fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
       })
-      .then(() => res.status(201).send({
-        message: 'Book added successfully',
-        status: 'Created',
-        code: 201
-      }))
+      .then((id) => {
+        const bookId = id.get('id');
+        stock.bookId = bookId;
+        stockManager.create(stock).then(() => res.status(201).send({
+          message: 'Book added successfully',
+          id: bookId,
+          status: 'Created',
+          code: 201
+        })
+        ).catch(error => res.status(400).send({
+          message: error.message,
+          status: 'Bad Request',
+          code: 400
+        }));
+      })
       .catch(error => res.status(400).send({
         message: error.message,
         status: 'Bad Request',
@@ -59,10 +73,10 @@ class bookClass {
       }));
   }
   /**
-     * 
-     * @param {object} req 
+     *
+     * @param {object} req
      * @param {object} res
-     * @returns {void} 
+     * @returns {void}
      */
   static edit(req, res) {
     const title = req.body.title || '';
@@ -122,11 +136,7 @@ class bookClass {
   static get(req, res) {
     Book.findAll()
       .then((books) => {
-        if (books) {
-          res.status(200).send({ message: books, status: 'OK', code: 200 });
-        } else {
-          res.status(404).send({ message: 'No record available', status: 'No Content', code: 404 });
-        }
+        res.status(200).send({ message: books, status: 'OK', code: 200 });
       })
       .catch(error => res.status(500).send({
         message: error.message,
@@ -145,7 +155,7 @@ class bookClass {
     const userId = req.params.userId;
     let returnedDate = req.body.return_date || '';
     const isReturned = false;
-    returnedDate = new Date(returnedDate);
+    returnedDate = moment(returnedDate, 'DD-MM-YYYY');
 
     Book.findById(bookId)
       .then((book) => {
@@ -186,9 +196,10 @@ class bookClass {
               {
                 fields: ['bookId', 'userId', 'returnedDate', 'isReturned']
               })
-              .then(() => res.status(201).send({
+              .then(id => res.status(201).send({
                 message: 'You have successfully  borrowed this book',
                 status: 'Created',
+                id: id.get('id'),
                 code: 201
               }))
               .catch(error => res.status(400).send({
@@ -215,7 +226,7 @@ class bookClass {
     * @param {object} res 
     * @return {object} response
   */
-  static getBorrowBook(req, res) {
+  static getBorrowedBook(req, res) {
     const userId = req.params.userId;
     const isReturned = req.query.returned;
 

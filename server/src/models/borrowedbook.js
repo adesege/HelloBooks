@@ -65,5 +65,20 @@ export default (sequelize, DataTypes) => {
     });
   });
 
+  borrowedBook.afterBulkCreate((borrowed) => {
+    const bookId = borrowed.bookId;
+    Book.findById(bookId).then((book) => {
+      if (book.quantity >= 0) {
+        book.update({
+          quantity: book.quantity - 1
+        }, {
+          where: { id: bookId }
+        })
+          .then()
+          .catch(() => {});
+      }
+    });
+  });
+
   return borrowedBook;
 };
