@@ -5,6 +5,7 @@
   "scripts": {
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon ./server/dist/index.js",
+    "start": "node ./server/dist/index.js",
     "test": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
   },
   "repository": {
