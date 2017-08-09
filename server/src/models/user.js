@@ -6,8 +6,14 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlpha: true,
-        notEmpty: true,
+        notEmpty: {
+          args: true,
+          msg: 'The name field is required'
+        },
+        is: {
+          args: /^[\w ]+$/,
+          msg: 'Name must contain alphabet characters only'
+        },
         min: 3
       }
     },
@@ -15,19 +21,27 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     userRank: DataTypes.STRING,
-    userGroup: DataTypes.STRING,
+    userGroup: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isEmail: true,
-        notEmpty: true,
-        isUnique(value, next) {
+        notEmpty: { args: true, msg: 'The email field is required' },
+        isEmail: {
+          args: true,
+          msg: 'The email field is not a valid email address'
+        },
+        isUnique(email, next) {
           User.find({
-            where: { email: value },
+            where: { email },
             attributes: ['id']
           }).done((error) => {
-            if (error) { return next('This email address already belongs to someone'); }
+            if (error) {
+              return next('This email address already belongs to a user');
+            }
             next();
           });
         }
@@ -37,23 +51,33 @@ export default (sequelize, DataTypes) => {
     isValidated: DataTypes.INTEGER,
     password: {
       type: DataTypes.STRING,
-      notEmpty: true,
       allowNull: false,
       validate: {
+        notEmpty: {
+          args: true,
+          msg: 'The password field is required'
+        }
       }
     },
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
     }
-  }, {
+  },
+  {
     freezeTableName: true,
     tableName: 'User'
   });
 
-  User.prototype.validPassword = password => bcrypt.compareSync(password, this.password);
-  User.generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  User.prototype.validPassword = function validPassword(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
+  User.generateHash = (password) => {
+    if (password === null || password === undefined) { return ''; }
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  };
 
   return User;
 };

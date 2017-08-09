@@ -1,4 +1,4 @@
-function randomString(limit = 5) {
+const randomString = (limit = 5) => {
   let randArray = '';
   limit = [...Array(parseInt(limit, 10)).keys()];
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -7,7 +7,7 @@ function randomString(limit = 5) {
     return randArray;
   });
   return randomStrings.join('');
-}
+};
 
 export default {
   randomString

@@ -4,31 +4,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-<<<<<<< HEAD
-=======
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
 
->>>>>>> dev
 var _controllers = require('../controllers');
 
 var _controllers2 = _interopRequireDefault(_controllers);
 
-<<<<<<< HEAD
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var userController = _controllers2.default.users;
-
-exports.default = function (app) {
-  app.get('/api', function (req, res) {
-    return res.status(200).send({
-      message: 'Welcome to the Todos API!'
-    });
-  });
-
-  app.post('/api/users/signup', userController.create);
-=======
 var _middlewares = require('../middlewares');
 
 var _middlewares2 = _interopRequireDefault(_middlewares);
@@ -64,5 +47,4 @@ exports.default = function (app) {
   router.route('/books/stocks').post(authMiddleware, adminMiddleware, stockController.create).delete(authMiddleware, adminMiddleware, stockController.delete).get(authMiddleware, adminMiddleware, stockController.get);
 
   app.use('/api', router);
->>>>>>> dev
 };

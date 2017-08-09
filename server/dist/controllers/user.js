@@ -4,11 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-<<<<<<< HEAD
-var _sequelize = require('sequelize');
-
-var _sequelize2 = _interopRequireDefault(_sequelize);
-=======
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _jsonwebtoken = require('jsonwebtoken');
@@ -18,7 +13,6 @@ var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 var _app = require('../app');
 
 var _app2 = _interopRequireDefault(_app);
->>>>>>> dev
 
 var _models = require('../models');
 
@@ -30,40 +24,6 @@ var _utils2 = _interopRequireDefault(_utils);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-<<<<<<< HEAD
-var randomString = _utils2.default.randomString;
-var User = _models2.default.User;
-
-exports.default = {
-  create: function create(req, res) {
-    var password = User.generateHash(req.body.password);
-    var name = req.body.name;
-    var email = req.body.email;
-    User.create({
-      password: password,
-      name: name,
-      email: email,
-      key: randomString(10)
-    }, {
-      fields: ['name', 'email', 'password', 'key']
-    }).then(function () {
-      return res.status(201).send({ message: 'Your account has been created successfully. Go to the login page to sign in to your account.', status: '200 OK', code: 200 });
-    }).catch(_sequelize2.default.ValidationError, function (error) {
-      return res.status(400).send({
-        message: error.errors[0].message,
-        status: 'Bad Request',
-        code: 400
-      });
-    }).catch(function (error) {
-      return res.status(400).send({
-        message: error.errors[0].message,
-        status: 'Internal Server Error',
-        code: 500
-      });
-    });
-  }
-};
-=======
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var randomString = _utils2.default.randomString;
@@ -201,4 +161,3 @@ var userClass = function () {
 }();
 
 exports.default = userClass;
->>>>>>> dev

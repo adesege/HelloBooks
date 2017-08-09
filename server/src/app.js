@@ -5,20 +5,14 @@ import bodyParser from 'body-parser';
 import routes from './routes';
 
 const app = express();
-
-// Log requests to the console.
 app.use(logger('dev'));
-// Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, '../../template')));
+app.set('view engine', path.join(__dirname, '../../template'));
+app.set('secret', 'aaCaCRaCR}aCR}!aCR}!%aCR}!%^aCR}!%^<aCR}!%^<yaCR}!%^<ys');
 
 routes(app);
-
-app.use(express.static(path.join(__dirname, '../template/')));
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '');
-app.get('/', (_, res) => { res.render('template'); });
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -38,6 +32,4 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
-app.listen(8080);
-
-console.log('Listening at http://localhost:8080');
+export default app;

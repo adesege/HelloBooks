@@ -26,7 +26,6 @@ module.exports = {
     },
     userGroup: {
       allowNull: false,
-      defaultValue: 'user',
       type: Sequelize.STRING
     },
     isActive: {

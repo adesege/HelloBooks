@@ -16,10 +16,6 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-<<<<<<< HEAD
-        isAlpha: true,
-        notEmpty: true,
-=======
         notEmpty: {
           args: true,
           msg: 'The name field is required'
@@ -28,7 +24,6 @@ exports.default = function (sequelize, DataTypes) {
           args: /^[\w ]+$/,
           msg: 'Name must contain alphabet characters only'
         },
->>>>>>> dev
         min: 3
       }
     },
@@ -36,29 +31,14 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     userRank: DataTypes.STRING,
-<<<<<<< HEAD
-    userGroup: DataTypes.STRING,
-=======
     userGroup: {
       type: DataTypes.STRING,
       allowNull: false
     },
->>>>>>> dev
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-<<<<<<< HEAD
-        isEmail: true,
-        notEmpty: true,
-        isUnique: function isUnique(value, next) {
-          User.find({
-            where: { email: value },
-            attributes: ['id']
-          }).done(function (error) {
-            if (error) {
-              return next('This email address already belongs to someone');
-=======
         notEmpty: { args: true, msg: 'The email field is required' },
         isEmail: {
           args: true,
@@ -71,7 +51,6 @@ exports.default = function (sequelize, DataTypes) {
           }).done(function (error) {
             if (error) {
               return next('This email address already belongs to a user');
->>>>>>> dev
             }
             next();
           });
@@ -82,11 +61,6 @@ exports.default = function (sequelize, DataTypes) {
     isValidated: DataTypes.INTEGER,
     password: {
       type: DataTypes.STRING,
-<<<<<<< HEAD
-      notEmpty: true,
-      allowNull: false,
-      validate: {}
-=======
       allowNull: false,
       validate: {
         notEmpty: {
@@ -94,7 +68,6 @@ exports.default = function (sequelize, DataTypes) {
           msg: 'The password field is required'
         }
       }
->>>>>>> dev
     },
     id: {
       type: DataTypes.INTEGER,
@@ -106,12 +79,6 @@ exports.default = function (sequelize, DataTypes) {
     tableName: 'User'
   });
 
-<<<<<<< HEAD
-  User.prototype.validPassword = function (password) {
-    return _bcrypt2.default.compareSync(password, undefined.password);
-  };
-  User.generateHash = function (password) {
-=======
   User.prototype.validPassword = function validPassword(password) {
     return _bcrypt2.default.compareSync(password, this.password);
   };
@@ -120,7 +87,6 @@ exports.default = function (sequelize, DataTypes) {
     if (password === null || password === undefined) {
       return '';
     }
->>>>>>> dev
     return _bcrypt2.default.hashSync(password, _bcrypt2.default.genSaltSync(8), null);
   };
 
