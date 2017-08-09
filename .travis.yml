@@ -6,4 +6,4 @@ before_script:
 script:
   - npm test
 after_success:
-  - CODECLIMATE_REPO_TOKEN=`$REPO_TOKEN_CODECLIMATE` codeclimate-test-reporter < coverage/lcov.info
+  - CODECLIMATE_REPO_TOKEN=CODECLIMATE_TOKEN codeclimate-test-reporter < coverage/lcov.info
