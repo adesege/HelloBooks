@@ -22,15 +22,17 @@ class userClass {
     const name = req.body.name || '';
     const email = req.body.email || '';
     password = User.generateHash(password) || '';
+    const userGroup = req.body.group || '';
 
     User.create({
       password,
       name,
       email,
+      userGroup,
       key: randomString(10)
     },
     {
-      fields: ['name', 'email', 'password', 'key']
+      fields: ['name', 'email', 'password', 'key', 'userGroup']
     })
       .then(() => res.status(201).send({
         message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
@@ -63,7 +65,7 @@ class userClass {
       .then((user) => {
         if (user) {
           if (!user.validPassword(password)) {
-            res.status(400).send({
+            return res.status(400).send({
               message: 'You provided a wrong password',
               status: 'Bad Request',
               code: 400 });
@@ -73,7 +75,7 @@ class userClass {
             secret,
             { expiresIn: 24 * 60 * 60 }
           );
-          res.status(200).send(
+          return res.status(200).send(
             {
               token,
               userId: user.id,
@@ -82,9 +84,8 @@ class userClass {
               status: 'OK',
               code: 200
             });
-        } else {
-          res.status(400).send({ message: 'User not found', status: 'Bad Request', code: 400 });
         }
+        return res.status(404).send({ message: 'User not found', status: 'Bad Request', code: 404 });
       })
       .catch(error => res.status(500).send({
         message: error.message,
@@ -97,7 +98,7 @@ class userClass {
      * @param {object} req 
      * @param {object} res
      * @return {object} response 
-     */
+  */
   static books(req, res) {
     const userId = req.params.userId;
     if (userId === null || userId === '') {

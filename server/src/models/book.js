@@ -4,6 +4,7 @@ export default (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
       validate: {
         notEmpty: {
           args: true,
@@ -44,10 +45,11 @@ export default (sequelize, DataTypes) => {
           args: true,
           msg: 'The Author field is required.'
         },
-        isAlpha: {
-          args: true,
-          msg: 'Only letters are  allowed'
+        min: {
+          args: 3,
+          msg: 'Author field must not be less than 3 characters'
         }
+
       }
     },
     bookURL: {

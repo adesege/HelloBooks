@@ -21,24 +21,30 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     userRank: DataTypes.STRING,
-    userGroup: DataTypes.STRING,
+    userGroup: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: { args: true, msg: 'The email field is required' },
-        isEmail: { args: true, msg: 'The email field is not a valid email address' },
+        isEmail: {
+          args: true,
+          msg: 'The email field is not a valid email address'
+        },
         isUnique(email, next) {
           User.find({
             where: { email },
             attributes: ['id']
           }).done((error) => {
-            if (error) { return next('This email address already belongs to a user'); }
+            if (error) {
+              return next('This email address already belongs to a user');
+            }
             next();
           });
-        },
-
-
+        }
       }
     },
     isActive: DataTypes.INTEGER,
@@ -58,7 +64,8 @@ export default (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     }
-  }, {
+  },
+  {
     freezeTableName: true,
     tableName: 'User'
   });
@@ -66,6 +73,7 @@ export default (sequelize, DataTypes) => {
   User.prototype.validPassword = function validPassword(password) {
     return bcrypt.compareSync(password, this.password);
   };
+
   User.generateHash = (password) => {
     if (password === null || password === undefined) { return ''; }
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
