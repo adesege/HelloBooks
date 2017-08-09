@@ -6,7 +6,7 @@
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon ./server/dist/index.js",
     "build": "webpack --watch --config ./webpack.config.js --progress --colors",
-    "test": "mocha tests"
+    "test": "mocha server/src/tests/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
+    "chai-http": "^3.0.0",
     "coveralls": "^2.13.1",
     "css-loader": "^0.28.4",
     "eslint": "^4.3.0",

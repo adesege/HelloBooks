@@ -4,6 +4,7 @@ import authMiddleware from '../middlewares/authenticate';
 
 const userController = controllers.users;
 const bookController = controllers.bookController;
+const stockController = controllers.stockController;
 const router = express.Router();
 
 export default (app) => {
@@ -25,6 +26,11 @@ export default (app) => {
     .post(authMiddleware, bookController.create)
     .put(authMiddleware, bookController.edit)
     .get(authMiddleware, bookController.get);
+
+  router.route('/books/stocks')
+    .post(authMiddleware, stockController.create)
+    .delete(authMiddleware, stockController.delete)
+    .get(authMiddleware, stockController.get);
 
   app.use('/api', router);
 };
