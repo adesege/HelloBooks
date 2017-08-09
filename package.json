@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "hello-books",
   "version": "1.0.0",
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
@@ -53,6 +54,31 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.4.2",
     "supertest": "^3.0.0",
+=======
+  "name": "hellobooks",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "build": "webpack webpack.config.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "morgan": "~1.8.1",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "html-webpack-plugin": "^2.29.0",
+    "nodemon": "^1.11.0",
+    "pug-html-loader": "^1.1.5",
+>>>>>>> ab49884427ef665f55f36afc091783f951786fa3
     "webpack": "^3.4.1"
   }
 }

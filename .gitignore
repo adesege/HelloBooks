@@ -1,3 +1,7 @@
 node_modules/
+<<<<<<< HEAD
 server/**/config.json
 server/dist/
+=======
+.eslintrc.json
+>>>>>>> ab49884427ef665f55f36afc091783f951786fa3
