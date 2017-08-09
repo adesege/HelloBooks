@@ -1,19 +1,12 @@
-import express from 'express';
-
-const router = express.Router();
-
-router.use((req, res, next) => {
-  const userId = req.body.userId || req.query.userId || req.params.userId;
-  const tokenUserId = req.decoded.user;
-  console.log(userId);
-
-  if (userId !== tokenUserId) {
-    return res.status(400).send({
+const router = (req, res, next) => {
+  const group = req.decoded.group;
+  if (group !== 'user') {
+    return res.status(403).send({
       status: 'Forbidden',
-      message: 'Sorry, this is not you.',
+      message: 'Well, you need to be a user to go in here',
       code: 403 });
   }
   next();
-});
+};
 
 export default router;

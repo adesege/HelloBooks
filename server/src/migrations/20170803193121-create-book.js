@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING,
         defaulltValue: ' '
       },
-      ISSBN: {
+      ISBN: {
         type: Sequelize.STRING,
         defaulltValue: ' '
       },
