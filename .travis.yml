@@ -1,18 +1,13 @@
 language: node_js
 node_js:
   - node
+services:  - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter
+  - psql -c 'drop database if exists helloBooksTest;' -U postgres
+  - psql -c 'create database hellobooksTest;' -U postgres
+  - NODE_ENV=test sequelize db:migrate --env test
 script:
   - npm test
 after_success:
   - CODECLIMATE_REPO_TOKEN=CODECLIMATE_TOKEN codeclimate-test-reporter < coverage/lcov.info
-env:
-  - DB=postgresql
-services:
-  - postgresql
-before_script:
-  - npm install -g sequelize
-  - psql -c 'create database travis;' -U postgres
-script:
-  - sequelize db:migrate --env production
