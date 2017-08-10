@@ -28,10 +28,10 @@ var router = _express2.default.Router();
 
 exports.default = function (app) {
   app.get('/', function (_, res) {
-    res.render('template/index');
+    res.render('index.html');
   });
 
-  router.get('/', function (req, res) {
+  router.get('api/', function (req, res) {
     return res.status(200).send({
       message: 'Welcome to Hello-Books api. !'
     });

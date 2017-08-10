@@ -4,8 +4,8 @@
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
     "babel": "babel server/src/ --watch --out-dir server/dist/",
-    "watch": "nodemon ./server/dist/index.js",
-    "start": "node ./server/dist/index.js",
+    "watch": "nodemon ./server/dist/server.js",
+    "start": "node ./server/dist/server.js",
     "test": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
   },
   "repository": {
@@ -41,6 +41,7 @@
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
     "chai": "^4.1.0",
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
     "faker": "^4.1.0",
     "jsonwebtoken": "^7.4.1",
