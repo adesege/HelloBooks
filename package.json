@@ -8,7 +8,11 @@
     "start": "node ./server/dist/server.js",
     "build": "npm run babel",
     "test:dev": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
+<<<<<<< HEAD
     "test": "NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
+=======
+    "test": "sequelize db:migrate --env test&NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
+>>>>>>> f6ef9cd77e0d192911cbac2e34fe32b99092a32f
   },
   "repository": {
     "type": "git",
