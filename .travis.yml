@@ -5,6 +5,7 @@ services:
   - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter
+  - npm install -g sequelize
   - psql -c 'drop database if exists hellobooksTest;' -U postgres
   - psql -c 'create database hellobooksTest;' -U postgres
   - NODE_ENV=test npm run test:db
