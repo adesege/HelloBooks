@@ -1,18 +1,14 @@
 {
   "development": {
     "username": "postgres",
-    "password": "adesege",
-    "database": "helloBooks",
+    "password": "",
+    "database": "",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "adesege",
-    "database": "helloBooksTest",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "logging": false
+    "use_env_variable": "TEST_DATABASE_URL",
+    "dialect": "postgres"
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
