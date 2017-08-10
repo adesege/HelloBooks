@@ -4,9 +4,6 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import ejs from 'ejs';
 import routes from './routes';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 const app = express();
 const renderFile = ejs.renderFile;
