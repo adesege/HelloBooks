@@ -36,10 +36,10 @@ var bookClass = function () {
     key: 'create',
 
     /**
-     * 
-     * @param {object} req 
+     *
+     * @param {object} req
      * @param {object} res
-     * @return {void} 
+     * @return {void}
      */
     value: function create(req, res) {
       var title = req.body.title || '';
@@ -155,10 +155,10 @@ var bookClass = function () {
       });
     }
     /**
-     * 
+     *
      * @method get
-     * @param {object} req 
-     * @param {object} res 
+     * @param {object} req
+     * @param {object} res
      * @return {object} response
      */
 
@@ -176,10 +176,10 @@ var bookClass = function () {
       });
     }
     /**
-     * 
-     * @param {object} req 
+     *
+     * @param {object} req
      * @param {object} res
-     * @return {object} response 
+     * @return {object} response
      */
 
   }, {
@@ -255,9 +255,9 @@ var bookClass = function () {
       }).catch(function () {});
     }
     /**
-      * 
-      * @param {object} req 
-      * @param {object} res 
+      *
+      * @param {object} req
+      * @param {object} res
       * @return {object} response
     */
 
@@ -288,9 +288,9 @@ var bookClass = function () {
       });
     }
     /**
-     * 
-     * @param {object} req 
-     * @param {object} res 
+     *
+     * @param {object} req
+     * @param {object} res
      * @return {object} response
      */
 

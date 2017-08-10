@@ -12,9 +12,9 @@ const User = model.User;
  */
 class userClass {
   /**
-   * 
-   * @param {object} req 
-   * @param {object} res 
+   *
+   * @param {object} req
+   * @param {object} res
    * @return {object} response
    */
   static signup(req, res) {
@@ -51,8 +51,8 @@ class userClass {
   }
 
   /**
-   * 
-   * @param {object} req 
+   *
+   * @param {object} req
    * @param {object} res
    * @return {object} response
    */
@@ -94,10 +94,10 @@ class userClass {
       }));
   }
   /**
-     * 
-     * @param {object} req 
+     *
+     * @param {object} req
      * @param {object} res
-     * @return {object} response 
+     * @return {object} response
   */
   static books(req, res) {
     const userId = req.params.userId;

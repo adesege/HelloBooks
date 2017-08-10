@@ -11,10 +11,10 @@ const stockManager = model.stockManager;
  */
 class bookClass {
   /**
-   * 
-   * @param {object} req 
+   *
+   * @param {object} req
    * @param {object} res
-   * @return {void} 
+   * @return {void}
    */
   static create(req, res) {
     const title = req.body.title || '';
@@ -127,10 +127,10 @@ class bookClass {
       }));
   }
   /**
-   * 
+   *
    * @method get
-   * @param {object} req 
-   * @param {object} res 
+   * @param {object} req
+   * @param {object} res
    * @return {object} response
    */
   static get(req, res) {
@@ -145,10 +145,10 @@ class bookClass {
       }));
   }
   /**
-   * 
-   * @param {object} req 
+   *
+   * @param {object} req
    * @param {object} res
-   * @return {object} response 
+   * @return {object} response
    */
   static borrowBook(req, res) {
     const bookId = req.query.book_id;
@@ -221,9 +221,9 @@ class bookClass {
       }).catch(() => {});
   }
   /**
-    * 
-    * @param {object} req 
-    * @param {object} res 
+    *
+    * @param {object} req
+    * @param {object} res
     * @return {object} response
   */
   static getBorrowedBook(req, res) {
@@ -249,9 +249,9 @@ class bookClass {
     }));
   }
   /**
-   * 
-   * @param {object} req 
-   * @param {object} res 
+   *
+   * @param {object} req
+   * @param {object} res
    * @return {object} response
    */
   static returnBorrowedBook(req, res) {

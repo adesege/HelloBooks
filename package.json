@@ -7,7 +7,8 @@
     "watch": "nodemon ./server/dist/server.js",
     "start": "node ./server/dist/server.js",
     "build": "npm run babel",
-    "test": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
+    "test:dev": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
+    "test": "sequelize db:migrate --env test&NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000"
   },
   "repository": {
     "type": "git",
@@ -38,7 +39,7 @@
     "babel-core": "^6.25.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
-    "chai": "^4.1.0",
+    "chai": "^4.1.1",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
     "faker": "^4.1.0",
@@ -48,6 +49,7 @@
     "pg": "^7.1.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.4.2",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "webpack": "^3.5.2"
   }
 }
