@@ -7,3 +7,7 @@ script:
   - npm test
 after_success:
   - CODECLIMATE_REPO_TOKEN=CODECLIMATE_TOKEN codeclimate-test-reporter < coverage/lcov.info
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database travis;' -U postgres
