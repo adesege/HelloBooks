@@ -54,5 +54,4 @@ export default (app) => {
     res.status(err.status || 500);
     res.send({ message: res.locals.message, status: 'Not Found', code: err.status });
   });
-
 };
