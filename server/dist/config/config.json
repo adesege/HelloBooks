@@ -7,10 +7,7 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
-    "password": "adesege",
-    "database": "helloBooksTest",
-    "host": "127.0.0.1",
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres",
     "logging": false
   },
