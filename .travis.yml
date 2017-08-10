@@ -1,8 +1,12 @@
 language: node_js
 node_js:
   - node
+services:  - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter
+  - psql -c 'drop database if exists helloBooksTest;' -U postgres
+  - psql -c 'create database hellobooksTest;' -U postgres
+  - NODE_ENV=test sequelize db:migrate --env test
 script:
   - npm test
 after_success:
