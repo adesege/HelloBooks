@@ -7,14 +7,9 @@
     "dialect": "postgres"
   },
   "test": {
-<<<<<<< HEAD
     "use_env_variable": "TEST_DATABASE_URL",
     "dialect": "postgres",
     "logging": false
-=======
-    "use_env_variable": "DATABASE_URL",
-    "dialect": "postgres"
->>>>>>> f6ef9cd77e0d192911cbac2e34fe32b99092a32f
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
