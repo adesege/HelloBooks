@@ -2,9 +2,7 @@ import chai from 'chai';
 import request from 'supertest';
 import faker from 'faker';
 import app from '../app';
-import models from '../models';
 
-const sequelize = models.sequelize;
 const expect = chai.expect;
 const email = faker.internet.email();
 const adminEmail = faker.internet.email();
@@ -39,7 +37,6 @@ let setUser = '';
 let setAdmin = '';
 let stockId = '';
 let requestApp = request(app);
-const userModel = models.User;
 
 describe('API Tests', () => { // Describe the API test suite
   /**
