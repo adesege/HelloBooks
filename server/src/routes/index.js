@@ -11,9 +11,9 @@ const adminMiddleware = middlewares.adminAuthenticate;
 const router = express.Router();
 
 export default (app) => {
-  app.get('/', (_, res) => { res.render('template/index'); });
+  app.get('/', (_, res) => { res.render('index.html'); });
 
-  router.get('/', (req, res) => res.status(200).send({
+  router.get('api/', (req, res) => res.status(200).send({
     message: 'Welcome to Hello-Books api. !',
   }));
 

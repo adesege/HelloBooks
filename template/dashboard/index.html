@@ -2,227 +2,168 @@
 <html>
 <head>
 <title>Dashboard</title>
-<link src="/assets/tether/css/tether.min.css"><link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/fa/css/font-awesome.min.css"><link rel='stylesheet' href="/assets/css/style.css" />
+<link src="/tether/css/tether.min.css"><link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/fa/css/font-awesome.min.css"><link rel='stylesheet' href="/css/style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body class="">
-<div class="container"><nav class="navbar navbar-light justify-content-center navbar-toggleable-sm bg-faded" id="topNav">
-<button class="navbar-toggler navbar-toggler-left p-0" type="button" data-toggle="collapse" data-target="#sidebar" onclick="$('body').toggleClass('overflow-hidden')" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+<div class="container-fluid"><nav class="navbar navbar-light fixed-top justify-content-start bg-faded" id="topNav">
+<div class="navbar-collapse text-center" id="navbarNav">
+<button class="navbar-toggler navbar-toggler-left p-0 align-items-center" type="button" data-toggle="collapse" data-target="#sidebar" onclick="toggleSideNav(this);" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
-<a class="navbar-brand mr-0 navbar-toggler-right" href="#"><span class="hidden-xs-down mr-3">Hello-Books</span><img src="/assets/images/logo-icon.png" style="width:30px; height:30px;" class="d-inline-block align-top" alt=""></a>
-<div class="navbar-collapse text-center" id="navbarNav">
-<a class="btn mr-sm-2 btn-sm btn-info" href="/notifications"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+<a class="navbar-brand mr-0 navbar-toggler-right" href="#"><span class="hidden-md-down mr-3">Hello-Books</span><img src="/images/logo-icon.png" style="width:30px; height:30px;" class="d-inline-block align-top" alt=""></a>
+<div class="d-inline-block dropdown">
+<a class="btn mr-sm-2 btn-sm btn-info dropdown-toggle" data-toggle="dropdown" href="/notifications" id="notificationInfo"><i class="fa fa-envelope-open"></i> <i class="badge badge-danger">3</i></a>
+<div class="list-group dropdown-menu" id="notificationHolder"><a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+<div class="d-flex w-100 justify-content-between">
+<h5 class="mb-1">Notification 1</h5>
+<small>4 days ago</small>
+</div>
+<p class="mb-1 small">Donec id elit non mi porta gravida at eget metus.</p>
+</a><a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+<div class="d-flex w-100 justify-content-between">
+<h5 class="mb-1">Notification 2</h5>
+<small>5 days ago</small>
+</div>
+<p class="mb-1 small">Donec id elit non mi porta gravida at eget metus.</p>
+</a><a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+<div class="d-flex w-100 justify-content-between">
+<h5 class="mb-1">Notification 3</h5>
+<small>6 days ago</small>
+</div>
+<p class="mb-1 small">Donec id elit non mi porta gravida at eget metus.</p>
+</a></div>
+</div>
 <button type="button" class="btn mr-sm-2 btn-sm btn-primary"><i class="fa fa-cog"></i></button>
-<button type="button" class="btn mr-sm-2 btn-sm btn-outline-info" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search-plus"></i></button>
+<button type="button" class="btn mr-sm-2 btn-sm btn-outline-info"><i class="fa fa-user"></i></button>
 <button type="button" class="btn mr-sm-2 btn-sm btn-danger"><i class="fa fa-power-off"></i></button>
+<form class="form-inline hidden-sm-down d-inline-flex">
+<div class="input-group">
+<input type="text" class="form-control form-control-sm" placeholder="Search here" aria-describedby="basic-addon1">
+<button class="input-group-addon input-group-sm" id="basic-addon1"><i class="fa fa-search"></i></button>
+</div>
+</form>
 </div>
 </nav>
-<div class="row mt-3" id="bookList">
-<div class="col-sm-2 px-0">
-<div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column py-4 px-4 py-sm-0 px-sm-0">
-<li class="nav-item">
-<a class="nav-link active" href="/dashboard">Dashboard</a>
+<div class="collapse sidebar mb-3 h-100" id="sidebar"><ul class="nav flex-column">
+<li class="nav-item closeBtn" onclick="closeNav(this)">
+<a href="javascript:void(0)" class="nav-link">&times;</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/dashboard/history.html">History</a>
+<a class="nav-link active" href="/dashboard"><i class="fa fa-th-large"></i> Dashboard</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/books/category">Book category</a>
+<a class="nav-link" href="/dashboard/history.html"><i class="fa fa-bookmark"></i> History</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/books/books">Books</a>
+<a class="nav-link" href="/books/category"><i class="fa fa-th-list"></i> Book category</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/books/stock">Stock Management</a>
+<a class="nav-link" href="/books/books/index.html"><i class="fa fa-book"></i> Books</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/dashboard/profile.html">Profile</a>
+<a class="nav-link" href="/books/stock"><i class="fa fa-archive"></i> Stock Manager</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">Search</a>
+<a class="nav-link" href="/dashboard/profile.html"><i class="fa fa-user"></i> Profile</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/dashboard/settings.html">Settings</a>
+<a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search-plus"></i> Search</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="/logout">Logout</a>
+<a class="nav-link" href="/dashboard/settings.html"><i class="fa fa-cog"></i> Settings</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="/logout"><i class="fa fa-power-off"></i> Logout</a>
 </li>
 <li class="nav-item">
 <a class="nav-link disabled" href="#">&copy; 2017. All rights reserved.</a>
 </li>
 </ul></div><!--sidebar-->
-</div><!--col-sm 2-->
-<div class="col-sm-10 pr-3 pl-3"><div class="row">
+<div id="contentArea"><div class="row">
 <div class="col-sm-4 flex-last flex-sm-first mb-5 col-md-5 col-lg-3"><div class="card mb-3">
 <div class="card-header">
 <span>Most read</span>
 </div>
 <div class="row m-2"><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/1.jpg" alt="Card image cap"></a>
+<a href="/books/borrow/index.html"><img class="img-thumbnail w-100 h-100" src="/images/1.jpg" alt="Card image cap"></a>
 </div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/2.jpg" alt="Card image cap"></a>
+<a href="/books/borrow/index.html"><img class="img-thumbnail w-100 h-100" src="/images/2.jpg" alt="Card image cap"></a>
 </div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/3.jpg" alt="Card image cap"></a>
+<a href="/books/borrow/index.html"><img class="img-thumbnail w-100 h-100" src="/images/3.jpg" alt="Card image cap"></a>
 </div><div class="col-sm-6 col-6 px-0 pr-1 mb-1">
-<a href="/book/borrow/this-is-a-nice-book"><img class="img-thumbnail w-100 h-100" src="/assets/images/4.jpg" alt="Card image cap"></a>
+<a href="/books/borrow/index.html"><img class="img-thumbnail w-100 h-100" src="/images/4.jpg" alt="Card image cap"></a>
 </div></div><!--card block-->
 </div><!--card-->
 <div class="card mb-3">
 <div class="card-header">
 <span>Browse by</span>
 </div>
-<div class="card-block"><a href="/books/books/" class="d-block small">> Category 1</a><a href="/books/books/" class="d-block small">> Category 2</a><a href="/books/books/" class="d-block small">> Category 3</a><a href="/books/books/" class="d-block small">> Category 4</a></div><!--card block-->
+<div class="card-block"><a href="/books/books/index.html" class="d-block small">> Category 1</a><a href="/books/books/index.html" class="d-block small">> Category 2</a><a href="/books/books/index.html" class="d-block small">> Category 3</a><a href="/books/books/index.html" class="d-block small">> Category 4</a></div><!--card block-->
 </div><!--card-->
 </div>
 <div class="col-sm-8 col-md-7 col-lg-9"><h4 class="title mb-2 mr-4">Dashboard</h4>
 <div class="mb-4"><small>Welcome Tayo. Here are some books you may find interesting. Use the form below to filter through the list.</small></div>
 <form class="form-inline mb-4">
-<select class="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0">
+<div class="form-group">
+<select class="form-control form-control-sm mb-md-2 ml-md-2">
 <option value="">Choose a category</option><option value="">Category 1</option><option value="">Category 2</option><option value="">Category 3</option></select>
-<div class="ml-4 mr-4 text-center"> -OR- </div>
-<input type="text" placeholder="Enter author's name" class="form-control form-control-sm mt-2 mt-sm-0 mb-2 mr-sm-2 mb-sm-0">
+</div>
+<div class="form-group mb-md-2 ml-md-2">
+<input type="text" placeholder="Enter author's name" class="form-control form-control-sm">
+</div>
+<div class="form-group mb-md-2 ml-md-2">
+<input type="text" placeholder="Enter Book title" class="form-control form-control-sm">
+</div>
+<div class="form-group mb-md-2 ml-md-2">
+<input type="text" placeholder="Enter Book description" class="form-control form-control-sm">
+</div>
+<div class="form-group mb-md-2 ml-2">
 <button type="submit" class="btn btn-sm btn-danger">filter</button>
-</form>
-<div class="row"><div class="col-sm-6 col-md-12 col-lg-6 col-xl-6 col-xs-12 mb-4">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-6 align-self-center">
-<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
 </div>
-<div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
-<a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+</form>
+<div class="row pr-3" id="bookList"><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div class="mt-4 hidden-xl-down showBorrow">
-<form class="justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control form-control-sm" placeholder="Return date">
-</div>
-<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
-</div>
-</form>
-</div><!--borrow book form-->
-</div><!--col sm 8-->
-</div><!-- row -->
-</div><div class="col-sm-6 col-md-12 col-lg-6 col-xl-6 col-xs-12 mb-4">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-6 align-self-center">
-<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
-</div>
-<div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
-<a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div class="mt-4 hidden-xl-down showBorrow">
-<form class="justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control form-control-sm" placeholder="Return date">
-</div>
-<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
-</div>
-</form>
-</div><!--borrow book form-->
-</div><!--col sm 8-->
-</div><!-- row -->
-</div><div class="col-sm-6 col-md-12 col-lg-6 col-xl-6 col-xs-12 mb-4">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-6 align-self-center">
-<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
-</div>
-<div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
-<a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div class="mt-4 hidden-xl-down showBorrow">
-<form class="justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control form-control-sm" placeholder="Return date">
-</div>
-<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
-</div>
-</form>
-</div><!--borrow book form-->
-</div><!--col sm 8-->
-</div><!-- row -->
-</div><div class="col-sm-6 col-md-12 col-lg-6 col-xl-6 col-xs-12 mb-4">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-6 align-self-center">
-<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
-</div>
-<div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
-<a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div class="mt-4 hidden-xl-down showBorrow">
-<form class="justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control form-control-sm" placeholder="Return date">
-</div>
-<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
-</div>
-</form>
-</div><!--borrow book form-->
-</div><!--col sm 8-->
-</div><!-- row -->
-</div><div class="col-sm-6 col-md-12 col-lg-6 col-xl-6 col-xs-12 mb-4">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-6 align-self-center">
-<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
-</div>
-<div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
-<a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div class="mt-4 hidden-xl-down showBorrow">
-<form class="justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control form-control-sm" placeholder="Return date">
-</div>
-<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
-</div>
-</form>
-</div><!--borrow book form-->
-</div><!--col sm 8-->
-</div><!-- row -->
-</div><div class="col-sm-6 col-md-12 col-lg-6 col-xl-6 col-xs-12 mb-4">
-<div class="row">
-<div class="col-sm-6 col-md-4 col-6 align-self-center">
-<img class="img-thumbnail" src="/assets/images/banner.jpg" alt="Card image cap">
-</div>
-<div class="col-sm-6 col-md-8 col-6 p-sm-0 align-self-center">
-<p class="mb-0"><small>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.<a href="/book/borrow/this-is-a-nice-book">read more</a></small></p>
-<a href="javascript:void(0)" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" class="card-link" data-toggle="tooltip" title="Borrow this book"><i class="fa fa-plus-square"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
 <a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
-<div class="mt-4 hidden-xl-down showBorrow">
-<form class="justify-content-center">
-<label class="sr-only">When will you return this book?</label>
-<div class="input-group">
-<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-<input type="text" class="form-control form-control-sm" placeholder="Return date">
-</div>
-<div class="form-group mt-1"><button type="button" class="btn btn-block btn-success btn-sm"><i class="fa fa-check"></i></button>
-</div>
-</form>
-</div><!--borrow book form-->
-</div><!--col sm 8-->
-</div><!-- row -->
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
+</div><div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book">
+<img class="img-thumbnail" src="/images/2.jpg" alt="Card image cap">
+<a href="#" class="card-link" data-toggle="tooltip" title="Add to reading list"><i class="fa fa-bookmark"></i></a>
 </div></div><!--row-->
-<button type="button" class="btn btn-primary bg-light btn-block mb-3">See more</button>
-</div></div><!-- row --></div><!--col sm 10-->
-</div><!--row#bookList--></div>
-<script type="text/javascript" src="/assets/js/jquery.js"></script>
-<script src="/assets/tether/js/tether.min.js"></script><script type="text/javascript" src="/assets/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<button type="button" class="btn btn-primary bg-light btn-block mb-3 mx-0">See more</button>
+</div></div><!-- row --></div><!--col sm 10--></div>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/tether/js/tether.min.js"></script><script type="text/javascript" src="/js/bootstrap.min.js"></script><div class="modal fade" data-backdrop="static" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm" role="document">
 <div class="modal-content border-0">
 <div class="modal-body pt-4 border-bottom-0">
@@ -244,5 +185,5 @@
 </div>
 </div>
 </div>
-<script src="/assets/js/script.js"></script></body>
+<script src="/js/script.js"></script></body>
 </html>

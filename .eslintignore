@@ -2,3 +2,4 @@ node_modules/
 client/
 template/
 template/assets/js/**
+server/dist/**
