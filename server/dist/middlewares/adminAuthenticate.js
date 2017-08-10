@@ -9,7 +9,8 @@ var router = function router(req, res, next) {
     return res.status(403).send({
       status: 'Forbidden',
       message: 'Well, you need to be an admin to go in here',
-      code: 403 });
+      code: 403
+    });
   }
   next();
 };

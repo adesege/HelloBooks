@@ -43,9 +43,9 @@ var userClass = function () {
     key: 'signup',
 
     /**
-     * 
-     * @param {object} req 
-     * @param {object} res 
+     *
+     * @param {object} req
+     * @param {object} res
      * @return {object} response
      */
     value: function signup(req, res) {
@@ -84,8 +84,8 @@ var userClass = function () {
     }
 
     /**
-     * 
-     * @param {object} req 
+     *
+     * @param {object} req
      * @param {object} res
      * @return {object} response
      */
@@ -125,10 +125,10 @@ var userClass = function () {
       });
     }
     /**
-       * 
-       * @param {object} req 
+       *
+       * @param {object} req
        * @param {object} res
-       * @return {object} response 
+       * @return {object} response
     */
 
   }, {
