@@ -1,5 +1,5 @@
 node_modules/
 client/
 template/
-server/**/tests/
 template/assets/js/**
+server/dist/**
