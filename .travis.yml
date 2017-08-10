@@ -5,9 +5,7 @@ services:
   - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter
-  - psql -c 'drop database if exists helloBooksTest;' -U postgres
-  - psql -c 'create database hellobooksTest;' -U postgres
-  - NODE_ENV=test&&npm run migrate
+  - npm run test:db
 script:
   - npm test
 after_success:
