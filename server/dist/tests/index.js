@@ -16,13 +16,8 @@ var _app = require('../app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _models = require('../models');
-
-var _models2 = _interopRequireDefault(_models);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var sequelize = _models2.default.sequelize;
 var expect = _chai2.default.expect;
 var email = _faker2.default.internet.email();
 var adminEmail = _faker2.default.internet.email();
@@ -57,7 +52,6 @@ var setUser = '';
 var setAdmin = '';
 var stockId = '';
 var requestApp = (0, _supertest2.default)(_app2.default);
-var userModel = _models2.default.User;
 
 describe('API Tests', function () {
   // Describe the API test suite
