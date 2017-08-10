@@ -1,3 +1,2 @@
 node_modules/
-server/**/config.json
-server/dist/
+server/src/config.json
