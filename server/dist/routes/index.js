@@ -30,7 +30,6 @@ exports.default = function (app) {
   app.get('/', function (_, res) {
     res.render('index.html');
   });
-
   app.get('/api/', function (req, res) {
     return res.status(200).send({
       message: 'Welcome to Hello-Books api!'

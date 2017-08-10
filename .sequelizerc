@@ -6,4 +6,8 @@ module.exports = {
     "models-path": path.resolve('./server/dist/models'),
     "seeders-path": path.resolve('./server/dist/seeders'),
     "migrations-path": path.resolve('./server/dist/migrations')
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> deploy-heroku

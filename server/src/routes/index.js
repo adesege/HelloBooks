@@ -12,7 +12,6 @@ const router = express.Router();
 
 export default (app) => {
   app.get('/', (_, res) => { res.render('index.html'); });
-
   app.get('/api/', (req, res) => res.status(200).send({
     message: 'Welcome to Hello-Books api!',
   }));
