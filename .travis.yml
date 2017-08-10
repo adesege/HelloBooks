@@ -1,11 +1,12 @@
 language: node_js
 node_js:
   - node
-services:
-  - postgresql
+services:  - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter
-  - npm run test:db
+  - psql -c 'drop database if exists hellobooksTest;' -U postgres
+  - psql -c 'create database hellobooksTest;' -U postgres
+  - NODE_ENV=test npm run test:db
 script:
   - npm test
 after_success:
