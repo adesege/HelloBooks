@@ -1,9 +1,9 @@
-import authenticate from './authenticate';
-import userAuthenticate from './userAuthenticate';
-import adminAuthenticate from './adminAuthenticate';
+import middleware from './middleware';
+import userMiddleware from './userMiddleware';
+import adminMiddleware from './adminMiddleware';
 
 export default {
-  authenticate,
-  userAuthenticate,
-  adminAuthenticate
+  middleware,
+  userMiddleware,
+  adminMiddleware
 };

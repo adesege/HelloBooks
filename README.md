@@ -6,9 +6,9 @@ Built on `Javascript` with `Postgres` as database.
 
 # HOW TO INSTALL
 ## PRE-REQUISITES
-    You will need to have the following installed in your working environment before this application can work.
-    * Latest version of Nodejs - comes with a Node Package Manager
-    * Postgresql
+You will need to have the following installed in your working environment before this application can work.
+* Latest version of Nodejs - comes with a Node Package Manager
+* Postgresql
 ## INSTALLING
 1. Download or clone this branch at https://github.com/adesege/HelloBooks.git
 2. Install dependencies by running `npm install`. Ensure you are in your working directory. Run `cd /path/to/HelloBooks` to change.
