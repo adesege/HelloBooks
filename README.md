@@ -1,4 +1,4 @@
-# HELLO-BOOKS [![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=development)](https://travis-ci.org/adesege/HelloBooks)
+# HELLO-BOOKS [![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=development)](https://travis-ci.org/adesege/HelloBooks) [![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=development)](https://coveralls.io/github/adesege/HelloBooks?branch=development)
 
 A simple application that helps manage a library and its processes like stocking, tracking and renting books.
 
