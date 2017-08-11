@@ -43,7 +43,7 @@ exports.default = function (app) {
 
   router.route('/books/stocks').post(authMiddleware, adminMiddleware, stockController.create).delete(authMiddleware, adminMiddleware, stockController.delete).get(authMiddleware, adminMiddleware, stockController.get);
 
-  app.use('/api', router);
+  app.use('/api/v1', router);
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
