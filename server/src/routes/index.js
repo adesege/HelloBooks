@@ -32,7 +32,7 @@ export default (app) => {
     .delete(authMiddleware, adminMiddleware, stockController.delete)
     .get(authMiddleware, adminMiddleware, stockController.get);
 
-  app.use('/api', router);
+  app.use('/api/v1', router);
 
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
