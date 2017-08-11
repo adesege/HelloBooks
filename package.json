@@ -9,7 +9,7 @@
     "build": "npm run babel",
     "test:dev": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
     "test": "NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
-    "test:db": "NODE_ENV=test sequelize db:migrate:undo:all && NODE_ENV=test sequelize db:migrate"
+    "test:db": "sequelize db:migrate --env test"
   },
   "repository": {
     "type": "git",
@@ -50,6 +50,7 @@
     "pg": "^7.1.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.4.2",
+    "sequelize-cli": "^2.8.0",
     "supertest": "^3.0.0",
     "webpack": "^3.5.2"
   }
