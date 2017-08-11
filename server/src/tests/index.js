@@ -2,6 +2,7 @@ import chai from 'chai';
 import request from 'supertest';
 import faker from 'faker';
 import app from '../app';
+import utils from '../utils';
 
 const expect = chai.expect;
 const email = faker.internet.email();
