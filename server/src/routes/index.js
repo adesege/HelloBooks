@@ -1,6 +1,6 @@
 import express from 'express';
-import controllers from '../controllers/index';
-import middlewares from '../middlewares/index';
+import controllers from '../controllers';
+import middlewares from '../middlewares';
 
 const userController = controllers.users;
 const bookController = controllers.bookController;
@@ -32,7 +32,7 @@ export default (app) => {
     .delete(authMiddleware, adminMiddleware, stockController.delete)
     .get(authMiddleware, adminMiddleware, stockController.get);
 
-  app.use('/api/v1', router);
+  app.use('/api', router);
 
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
