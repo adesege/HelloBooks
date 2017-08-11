@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "DB_NAME",
-    "password": "DB_PASSWORD",
-    "database": "DB_NAME",
-    "host": "DB_HOST",
+    "username": "drqrrewj",
+    "password": "2UyDrY3zBC_8Z9BfIyUmVjQVOlGbljTP",
+    "database": "drqrrewj",
+    "host": "babar.elephantsql.com",
     "dialect": "postgres"
   },
   "test": {
@@ -15,10 +15,10 @@
     "logging": false
   },
   "production": {
-    "username": "DB_NAME",
-    "password": "DB_PASSWORD",
-    "database": "DB_NAME",
-    "host": "DB_HOST",
+    "username": "drqrrewj",
+    "password": "2UyDrY3zBC_8Z9BfIyUmVjQVOlGbljTP",
+    "database": "drqrrewj",
+    "host": "babar.elephantsql.com",
     "dialect": "postgres"
   }
 }
