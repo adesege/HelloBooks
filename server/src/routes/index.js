@@ -23,9 +23,9 @@ export default (app) => {
     .put(authMiddleware, userMiddleware, bookController.returnBorrowedBook);
 
   router.route('/books')
-    .post(authMiddleware, authMiddleware, bookController.create)
-    .put(authMiddleware, authMiddleware, bookController.edit)
-    .get(authMiddleware, authMiddleware, bookController.get);
+    .post(authMiddleware, bookController.create)
+    .put(authMiddleware, bookController.edit)
+    .get(authMiddleware bookController.get);
 
   router.route('/books/stocks')
     .post(authMiddleware, adminMiddleware, stockController.create)
