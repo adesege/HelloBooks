@@ -1,8 +1,8 @@
-import users from './user';
-import bookController from './book';
-import stockController from './stockManager';
+import users from './userclass';
+import bookController from './bookclass';
+import stockController from './stockmanagerclass';
 
-export default {
+export default { // export object so we can easily access each controller file
   users,
   bookController,
   stockController
