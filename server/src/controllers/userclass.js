@@ -3,16 +3,16 @@ import app from '../app';
 import model from '../models';
 import utils from '../utils';
 
-const randomString = utils.randomString;
-const User = model.User;
+const randomString = utils.randomString; // generates random strings
+const User = model.User; // get User model
 
 /**
  * @class userClass
  * @classdesc User Class
  */
-class userClass {
+class UserClass {
   /**
-   *
+   * @method signup
    * @param {object} req
    * @param {object} res
    * @return {object} response
@@ -30,14 +30,12 @@ class userClass {
       email,
       userGroup,
       key: randomString(10)
-    },
-    {
+    }, {
       fields: ['name', 'email', 'password', 'key', 'userGroup']
-    })
-      .then(() => res.status(201).send({
-        message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
-        status: 'Created',
-        code: 201 }))
+    }).then(() => res.status(201).send({
+      message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
+      status: 'Created',
+      code: 201 }))
       .catch(error => res.status(400).send({
         message: error.message,
         status: 'Bad Request',
@@ -51,7 +49,7 @@ class userClass {
   }
 
   /**
-   *
+   * @method signin
    * @param {object} req
    * @param {object} res
    * @return {object} response
@@ -94,7 +92,7 @@ class userClass {
       }));
   }
   /**
-     *
+     * @method books
      * @param {object} req
      * @param {object} res
      * @return {object} response
@@ -122,4 +120,4 @@ class userClass {
       }));
   }
 }
-export default userClass;
+export default UserClass;
