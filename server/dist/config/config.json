@@ -1,6 +1,9 @@
 {
   "development": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "DB_NAME",
+    "password": "DB_PASSWORD",
+    "database": "DB_NAME",
+    "host": "DB_HOST",
     "dialect": "postgres"
   },
   "test": {
@@ -12,7 +15,10 @@
     "logging": false
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "DB_NAME",
+    "password": "DB_PASSWORD",
+    "database": "DB_NAME",
+    "host": "DB_HOST",
     "dialect": "postgres"
   }
 }
