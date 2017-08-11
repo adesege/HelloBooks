@@ -7,22 +7,23 @@ Object.defineProperty(exports, "__esModule", {
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
-var _index = require('../controllers/index');
 
-var _index2 = _interopRequireDefault(_index);
+var _controllers = require('../controllers');
 
-var _index3 = require('../middlewares/index');
+var _controllers2 = _interopRequireDefault(_controllers);
 
-var _index4 = _interopRequireDefault(_index3);
+var _middlewares = require('../middlewares');
+
+var _middlewares2 = _interopRequireDefault(_middlewares);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var userController = _index2.default.users;
-var bookController = _index2.default.bookController;
-var stockController = _index2.default.stockController;
-var authMiddleware = _index4.default.middleware;
-var userMiddleware = _index4.default.userMiddleware;
-var adminMiddleware = _index4.default.adminMiddleware;
+var userController = _controllers2.default.users;
+var bookController = _controllers2.default.bookController;
+var stockController = _controllers2.default.stockController;
+var authMiddleware = _middlewares2.default.middleware;
+var userMiddleware = _middlewares2.default.userMiddleware;
+var adminMiddleware = _middlewares2.default.adminMiddleware;
 var router = _express2.default.Router();
 
 exports.default = function (app) {
@@ -42,7 +43,7 @@ exports.default = function (app) {
 
   router.route('/books/stocks').post(authMiddleware, adminMiddleware, stockController.create).delete(authMiddleware, adminMiddleware, stockController.delete).get(authMiddleware, adminMiddleware, stockController.get);
 
-  app.use('/api/v1', router);
+  app.use('/api', router);
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {

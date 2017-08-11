@@ -1,6 +1,6 @@
 import express from 'express';
-import controllers from '../controllers/index';
-import middlewares from '../middlewares/index';
+import controllers from '../controllers';
+import middlewares from '../middlewares';
 
 const userController = controllers.users;
 const bookController = controllers.bookController;
