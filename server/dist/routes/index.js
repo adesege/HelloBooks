@@ -7,7 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
-
 var _index = require('../controllers/index');
 
 var _index2 = _interopRequireDefault(_index);
