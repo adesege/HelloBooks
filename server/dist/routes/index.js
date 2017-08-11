@@ -7,23 +7,21 @@ Object.defineProperty(exports, "__esModule", {
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
+var _index = require('../controllers/index');
 
-var _controllers = require('../controllers');
+var _index2 = _interopRequireDefault(_index);
 
-var _controllers2 = _interopRequireDefault(_controllers);
+var _index3 = require('../middlewares/index');
 
-var _middlewares = require('../middlewares');
-
-var _middlewares2 = _interopRequireDefault(_middlewares);
+var _index4 = _interopRequireDefault(_index3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var userController = _controllers2.default.users;
 var bookController = _controllers2.default.bookController;
 var stockController = _controllers2.default.stockController;
 var authMiddleware = _middlewares2.default.middleware;
 var userMiddleware = _middlewares2.default.userMiddleware;
-var adminMiddleware = _middlewares2.default.adminMiddleware;
+var adminMiddleware = _middlewares2.default.adminMiddleware
 var router = _express2.default.Router();
 
 exports.default = function (app) {
