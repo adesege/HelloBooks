@@ -1,8 +1,7 @@
 language: node_js
 node_js:
   - node
-services:
-  - postgresql
+services:  - postgresql
 before_script:
   - npm install -g codeclimate-test-reporter
   - npm install -g sequelize
