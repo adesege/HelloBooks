@@ -98,6 +98,9 @@ var UserClass = function () {
       var password = req.body.password || '';
       var email = req.body.email || '';
 
+      if (email === '') return res.status(400).send({ message: 'The email field is required' });
+      if (password === '') return res.status(400).send({ message: 'The password field is required' });
+
       User.findOne({ where: { email: email } }).then(function (user) {
         if (user) {
           if (!user.validPassword(password)) {

@@ -62,6 +62,9 @@ class UserClass {
     const password = req.body.password || '';
     const email = req.body.email || '';
 
+    if (email === '') return res.status(400).send({ message: 'The email field is required' });
+    if (password === '') return res.status(400).send({ message: 'The password field is required' });
+
     User.findOne({ where: { email } })
       .then((user) => {
         if (user) {
