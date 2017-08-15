@@ -1,4 +1,4 @@
-# HELLO-BOOKS [![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=test-deploy)](https://travis-ci.org/adesege/HelloBooks) [![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=test-deploy)](https://coveralls.io/github/adesege/HelloBooks?branch=test-deploy) [![Code Climate](https://codeclimate.com/github/adesege/HelloBooks/badges/gpa.svg)](https://codeclimate.com/github/adesege/HelloBooks)
+# HELLO-BOOKS [![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=test-deploy)](https://travis-ci.org/adesege/HelloBooks) [![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=test-deploy)](https://coveralls.io/github/adesege/HelloBooks?branch=test-deploy) [![Code Climate](https://codeclimate.com/github/adesege/HelloBooks/badges/gpa.svg?branch=test-deploy)](https://codeclimate.com/github/adesege/HelloBooks?branch=test-deploy)
 
 A simple application that helps manage a library and its processes like stocking, tracking and renting books.
 
