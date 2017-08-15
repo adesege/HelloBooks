@@ -69,6 +69,13 @@ var UserClass = function () {
           status: 'Created',
           code: 201 });
       }).catch(function (error) {
+        error.errors.map(function (value) {
+          delete value.__raw;
+          delete value.path;
+          delete value.type;
+          delete value.value;
+          return value;
+        });
         return res.status(400).send({
           message: error.errors,
           status: 'Bad Request',
