@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "",
-    "database": "",
-    "host": "127.0.0.1",
+    "username": "drqrrewj",
+    "password": "2UyDrY3zBC_8Z9BfIyUmVjQVOlGbljTP",
+    "database": "drqrrewj",
+    "host": "babar.elephantsql.com",
     "dialect": "postgres"
   },
   "test": {
@@ -15,7 +15,10 @@
     "logging": false
   },
   "production": {
-    "use_env_variable": "DATABASE_URL",
+    "username": "drqrrewj",
+    "password": "2UyDrY3zBC_8Z9BfIyUmVjQVOlGbljTP",
+    "database": "drqrrewj",
+    "host": "babar.elephantsql.com",
     "dialect": "postgres"
   }
 }

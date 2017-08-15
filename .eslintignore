@@ -3,3 +3,4 @@ client/
 template/
 template/assets/js/**
 server/dist/**
+.idea/

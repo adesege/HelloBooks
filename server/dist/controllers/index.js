@@ -19,7 +19,7 @@ var _stockmanagerclass2 = _interopRequireDefault(_stockmanagerclass);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = { // export object so we can easily access each controller file
-  users: _userclass2.default,
-  bookController: _bookclass2.default,
-  stockController: _stockmanagerclass2.default
+  UserClass: _userclass2.default,
+  BookClass: _bookclass2.default,
+  StockManagerClass: _stockmanagerclass2.default
 };
