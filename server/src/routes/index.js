@@ -2,9 +2,15 @@ import express from 'express';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 
+<<<<<<< HEAD
 const userController = controllers.users;
 const bookController = controllers.bookController;
 const stockController = controllers.stockController;
+=======
+const UserClass = controllers.UserClass;
+const BookClass = controllers.BookClass;
+const StockManagerClass = controllers.StockManagerClass;
+>>>>>>> implement-lf-feedback
 const authMiddleware = middlewares.middleware;
 const userMiddleware = middlewares.userMiddleware;
 const adminMiddleware = middlewares.adminMiddleware;
@@ -14,23 +20,29 @@ export default (app) => {
   app.get('/', (_, res) => { res.render('index.html'); }); // pipe template/index.html to view
   app.get('/api/', (req, res) => res.status(200).send({ message: 'Welcome to Hello-Books api!' }));
 
-  router.post('/users/signup', userController.signup);
-  router.post('/users/signin', userController.signin);
+  router.post('/users/signup', UserClass.signup);
+  router.post('/users/signin', UserClass.signin);
 
   router.route('/users/:userId/books')
-    .post(authMiddleware, userMiddleware, bookController.borrowBook)
-    .get(authMiddleware, userMiddleware, bookController.getBorrowedBook)
-    .put(authMiddleware, userMiddleware, bookController.returnBorrowedBook);
+    .post(authMiddleware, userMiddleware, BookClass.borrowBook)
+    .get(authMiddleware, userMiddleware, BookClass.getBorrowedBook)
+    .put(authMiddleware, userMiddleware, BookClass.returnBorrowedBook);
 
   router.route('/books')
+<<<<<<< HEAD
     .post(authMiddleware, authMiddleware, bookController.create)
     .put(authMiddleware, authMiddleware, bookController.edit)
     .get(authMiddleware, authMiddleware, bookController.get);
+=======
+    .post(authMiddleware, authMiddleware, BookClass.create)
+    .put(authMiddleware, authMiddleware, BookClass.edit)
+    .get(authMiddleware, authMiddleware, BookClass.get);
+>>>>>>> implement-lf-feedback
 
   router.route('/books/stocks')
-    .post(authMiddleware, adminMiddleware, stockController.create)
-    .delete(authMiddleware, adminMiddleware, stockController.delete)
-    .get(authMiddleware, adminMiddleware, stockController.get);
+    .post(authMiddleware, adminMiddleware, StockManagerClass.create)
+    .delete(authMiddleware, adminMiddleware, StockManagerClass.delete)
+    .get(authMiddleware, adminMiddleware, StockManagerClass.get);
 
   app.use('/api', router);
 
