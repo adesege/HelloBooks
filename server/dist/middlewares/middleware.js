@@ -18,33 +18,24 @@ var router = function router(req, res, next) {
   var token = req.body.authenticate_token || req.query.authenticate_token || req.headers['authenticate-token'];
 
   if (token) {
+    /* decode jwt token */
     _jsonwebtoken2.default.verify(token, _app2.default.get('secret'), function (err, decoded) {
       if (err) {
-        return res.status(401).send({
-          status: 'Unauthorized',
-          message: 'Failed to authenticate user.',
-          code: 401 });
+        return res.status(401).send({ message: 'Failed to authenticate user.' });
       }
 
-      var userId = req.body.userId || req.query.userId || req.params.userId;
+      var userId = req.body.userId || req.query.userId || req.params.userId; // get userId from request object
       if (userId || userId !== undefined) {
         var tokenUserId = decoded.user;
         if (parseInt(userId, 10) === parseInt(tokenUserId, 10)) {} else {
-          return res.status(400).send({
-            status: 'Forbidden',
-            message: 'Sorry, this is not you.',
-            code: 400 });
+          return res.status(400).send({ message: 'Sorry, this is not you.' });
         }
       }
       req.decoded = decoded;
       next();
     });
   } else {
-    return res.status(401).send({
-      status: 'Unauthorized',
-      message: 'Failed to authenticate user.',
-      code: 401
-    });
+    return res.status(401).send({ message: 'Failed to authenticate user.' });
   }
 };
 

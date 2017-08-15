@@ -18,32 +18,30 @@ var _middlewares2 = _interopRequireDefault(_middlewares);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var userController = _controllers2.default.users;
-var bookController = _controllers2.default.bookController;
-var stockController = _controllers2.default.stockController;
-var authMiddleware = _middlewares2.default.authenticate;
-var userMiddleware = _middlewares2.default.userAuthenticate;
-var adminMiddleware = _middlewares2.default.adminAuthenticate;
+var UserClass = _controllers2.default.UserClass;
+var BookClass = _controllers2.default.BookClass;
+var StockManagerClass = _controllers2.default.StockManagerClass;
+var authMiddleware = _middlewares2.default.middleware;
+var userMiddleware = _middlewares2.default.userMiddleware;
+var adminMiddleware = _middlewares2.default.adminMiddleware;
 var router = _express2.default.Router();
 
 exports.default = function (app) {
   app.get('/', function (_, res) {
     res.render('index.html');
-  });
+  }); // pipe template/index.html to view
   app.get('/api/', function (req, res) {
-    return res.status(200).send({
-      message: 'Welcome to Hello-Books api!'
-    });
+    return res.status(200).send({ message: 'Welcome to Hello-Books api!' });
   });
 
-  router.post('/users/signup', userController.signup);
-  router.post('/users/signin', userController.signin);
+  router.post('/users/signup', UserClass.signup);
+  router.post('/users/signin', UserClass.signin);
 
-  router.route('/users/:userId/books').post(authMiddleware, userMiddleware, bookController.borrowBook).get(authMiddleware, userMiddleware, bookController.getBorrowedBook).put(authMiddleware, userMiddleware, bookController.returnBorrowedBook);
+  router.route('/users/:userId/books').post(authMiddleware, userMiddleware, BookClass.borrowBook).get(authMiddleware, userMiddleware, BookClass.getBorrowedBook).put(authMiddleware, userMiddleware, BookClass.returnBorrowedBook);
 
-  router.route('/books').post(authMiddleware, adminMiddleware, bookController.create).put(authMiddleware, adminMiddleware, bookController.edit).get(authMiddleware, authMiddleware, bookController.get);
+  router.route('/books').post(authMiddleware, authMiddleware, BookClass.create).put(authMiddleware, authMiddleware, BookClass.edit).get(authMiddleware, authMiddleware, BookClass.get);
 
-  router.route('/books/stocks').post(authMiddleware, adminMiddleware, stockController.create).delete(authMiddleware, adminMiddleware, stockController.delete).get(authMiddleware, adminMiddleware, stockController.get);
+  router.route('/books/stocks').post(authMiddleware, adminMiddleware, StockManagerClass.create).delete(authMiddleware, adminMiddleware, StockManagerClass.delete).get(authMiddleware, adminMiddleware, StockManagerClass.get);
 
   app.use('/api', router);
 
@@ -59,7 +57,6 @@ exports.default = function (app) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-
     // render the error page
     res.status(err.status || 500);
     res.send({ message: res.locals.message, status: 'Not Found', code: err.status });

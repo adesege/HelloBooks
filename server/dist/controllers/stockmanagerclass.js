@@ -22,19 +22,19 @@ var stockManager = _models2.default.stockManager;
  * @classdesc Book Class
  */
 
-var stockManagerClass = function () {
-  function stockManagerClass() {
-    _classCallCheck(this, stockManagerClass);
+var StockManagerClass = function () {
+  function StockManagerClass() {
+    _classCallCheck(this, StockManagerClass);
   }
 
-  _createClass(stockManagerClass, null, [{
+  _createClass(StockManagerClass, null, [{
     key: 'create',
 
     /**
-     * 
-     * @param {object} req 
+     *
+     * @param {object} req
      * @param {object} res
-     * @return {void} 
+     * @return {void}
      */
     value: function create(req, res) {
       var quantity = req.body.quantity || '';
@@ -50,87 +50,60 @@ var stockManagerClass = function () {
           }, {
             fields: ['quantity', 'recordDate', 'bookId']
           }).then(function (id) {
-            res.status(201).send({
-              message: 'Stock added successfully',
-              id: id.get('id'),
-              status: 'Created',
-              code: 201
+            return res.status(201).send({ message: 'Stock added successfully', id: id.get('id')
             });
           }).catch(function (error) {
-            return res.status(400).send({
-              message: error.message,
-              status: 'Bad Request',
-              code: 400
-            });
+            return res.status(400).send({ message: error.message });
           }).catch(function (error) {
-            return res.status(500).send({
-              message: error.message,
-              status: 'Internal Server Error',
-              code: 500
-            });
+            return res.status(500).send({ message: error.message });
           });
         } else {
-          return res.status(404).send({
-            message: 'Book not found',
-            status: 'Not Found',
-            code: 404
-          });
+          return res.status(404).send({ message: 'Book not found' });
         }
       });
     }
     /**
-       * 
-       * @param {object} req 
+       *
+       * @param {object} req
        * @param {object} res
-       * @returns {void} 
+       * @returns {void}
        */
 
   }, {
     key: 'delete',
     value: function _delete(req, res) {
+      // delete a book
       var id = req.query.id || '';
-
       stockManager.findById(id).then(function (stock) {
         if (stock !== null) {
-          stockManager.destroy({
+          stockManager.destroy({ // delete record from stockManager
             where: { id: id }
           }).then(function () {
             Book.findById(stock.bookId).then(function (book) {
               if (book.quantity >= 0) {
-                book.update({ quantity: book.quantity - stock.quantity }, { where: { id: stock.bookId }
+                book.update( // update count in book table
+                { quantity: book.quantity - stock.quantity }, { where: { id: stock.bookId }
                 }).then().catch(function (error) {
-                  return res.status(400).send({
-                    message: error.message,
-                    status: 'Bad Request',
-                    code: 400
-                  });
+                  return res.status(400).send({ message: error.message });
                 });
               }
             });
-            return res.status(200).send({ message: 'Stock deleted successfully', status: 'OK', code: 200 });
+            return res.status(200).send({ message: 'Stock deleted successfully' });
           }).catch(function (error) {
-            return res.status(400).send({
-              message: error.message,
-              status: 'Bad Request',
-              code: 400
-            });
+            return res.status(400).send({ message: error.message });
           });
         } else {
-          return res.status(400).send({ message: 'Stock not found', status: 'Not Found', code: 404 });
+          return res.status(400).send({ message: 'Stock not found' });
         }
       }).catch(function (error) {
-        return res.status(500).send({
-          message: error.message,
-          status: 'Internal Server Error',
-          code: 500
-        });
+        return res.status(500).send({ message: error.message });
       });
     }
     /**
-     * 
+     *
      * @method get
-     * @param {object} req 
-     * @param {object} res 
+     * @param {object} req
+     * @param {object} res
      * @return {object} response
      */
 
@@ -139,21 +112,16 @@ var stockManagerClass = function () {
     value: function get(req, res) {
       stockManager.findAll().then(function (stocks) {
         if (stocks) {
-          res.status(200).send({ message: stocks, status: 'OK', code: 200 });
-        } else {
-          res.status(404).send({ message: 'No record available', status: 'No Content', code: 404 });
+          return res.status(200).send({ message: stocks });
         }
+        return res.status(404).send({ message: 'No record available' });
       }).catch(function (error) {
-        return res.status(500).send({
-          message: error.message,
-          status: 'Internal Server Error',
-          code: 500
-        });
+        return res.status(500).send({ message: error.message });
       });
     }
   }]);
 
-  return stockManagerClass;
+  return StockManagerClass;
 }();
 
-exports.default = stockManagerClass;
+exports.default = StockManagerClass;

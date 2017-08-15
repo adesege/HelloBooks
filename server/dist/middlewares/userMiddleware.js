@@ -5,12 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 var router = function router(req, res, next) {
   var group = req.decoded.group;
-  if (group !== 'admin') {
-    return res.status(403).send({
-      status: 'Forbidden',
-      message: 'Well, you need to be an admin to go in here',
-      code: 403
-    });
+  if (group !== 'user') {
+    // check that the signed in user is a user
+    return res.status(403).send({ message: 'Well, you need to be a user to go in here' });
   }
   next();
 };

@@ -1,15 +1,15 @@
-# HELLO-BOOKS [![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=development)](https://travis-ci.org/adesege/HelloBooks)
+# HELLO-BOOKS [![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=development)](https://travis-ci.org/adesege/HelloBooks) [![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=development)](https://coveralls.io/github/adesege/HelloBooks?branch=development) [![Code Climate](https://codeclimate.com/github/adesege/HelloBooks/badges/gpa.svg)](https://codeclimate.com/github/adesege/HelloBooks)
 
 A simple application that helps manage a library and its processes like stocking, tracking and renting books.
 
 Built on `Javascript` with `Postgres` as database.
 
-# HOW TO INSTALL
-## PRE-REQUISITES
+## HOW TO INSTALL
+### PRE-REQUISITES
 You will need to have the following installed in your working environment before this application can work.
 * Latest version of Nodejs - comes with a Node Package Manager
 * Postgresql
-## INSTALLING
+### INSTALLING
 1. Download or clone this branch at https://github.com/adesege/HelloBooks.git
 2. Install dependencies by running `npm install`. Ensure you are in your working directory. Run `cd /path/to/HelloBooks` to change.
 3. Start the server by running `npm run watch`.
@@ -18,10 +18,9 @@ The application listens on port `8080` by default unless otherwise started in th
 
 Visit `http://localhost:8000` to access the front end or `http://localhost:8000/api` to access the `api` endpoint.
 
-# ENDPOINTS
+## ENDPOINTS
 The endpoints are listed below.
 Where `:versionNumber` is the API version number.
-
 `/api/:versionNumber`
 1. `/users`
     *    *POST* /signup - Creates a user
@@ -38,10 +37,10 @@ Where `:versionNumber` is the API version number.
     *    *DELETE* - Allow admin delete a book
     *    *GET* / - Allow admin get stock
 
-# JSON WEB TOKEN
+## JSON WEB TOKEN
 This application uses JSON web token to sign and verify user token. The default expiration time is `24 hours` but this can be modified in the application config.
 
-# MIDDLEWARES
+## MIDDLEWARES
 Some endpoints are restricted to logged users and admins only. E.g. Only admin can access `api/:versionNumber/books/stocks`.
 
 There are three middlewares defined in this application.
@@ -49,7 +48,7 @@ There are three middlewares defined in this application.
 * userAuthenticate middleware - verifies if the user is `user`
 * adminAuthenticate middleware - checks if the user is `admin`.
 
-# RESPONSE STATUSES
+## RESPONSE STATUSES
 These  are the common status codes used in the app.
 
 1. `400 Bad Request` - Used when there is a validation error.
@@ -60,5 +59,5 @@ These  are the common status codes used in the app.
 6. `403 Forbidden` - Used when a user is accessing a restricted end point.
 7. `201 Created` - Used when a new record is inserted into the database.
 
-# CONTRIBUTING
+## CONTRIBUTING
 All contributions are welcome. Just create a push request, mention me and I will have a look at it.

@@ -6,10 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
 var _models = require('../models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -23,20 +19,20 @@ var borrowedBook = _models2.default.borrowedBook;
 var stockManager = _models2.default.stockManager;
 
 /**
- * @class bookClass
+ * @class BookClass
  * @classdesc Book Class
  */
 
-var bookClass = function () {
-  function bookClass() {
-    _classCallCheck(this, bookClass);
+var BookClass = function () {
+  function BookClass() {
+    _classCallCheck(this, BookClass);
   }
 
-  _createClass(bookClass, null, [{
+  _createClass(BookClass, null, [{
     key: 'create',
 
     /**
-     *
+     * @method create
      * @param {object} req
      * @param {object} res
      * @return {void}
@@ -74,33 +70,19 @@ var bookClass = function () {
         stockManager.create(stock).then(function () {
           return res.status(201).send({
             message: 'Book added successfully',
-            id: bookId,
-            status: 'Created',
-            code: 201
+            id: bookId
           });
         }).catch(function (error) {
-          return res.status(400).send({
-            message: error.message,
-            status: 'Bad Request',
-            code: 400
-          });
+          return res.status(400).send({ message: error.message });
         });
       }).catch(function (error) {
-        return res.status(400).send({
-          message: error.message,
-          status: 'Bad Request',
-          code: 400
-        });
+        return res.status(400).send({ message: error.message });
       }).catch(function (error) {
-        return res.status(500).send({
-          message: error.message,
-          status: 'Internal Server Error',
-          code: 500
-        });
+        return res.status(500).send({ message: error.message });
       });
     }
     /**
-       *
+       * @method edit
        * @param {object} req
        * @param {object} res
        * @returns {void}
@@ -135,23 +117,15 @@ var bookClass = function () {
           }, {
             where: { id: id }
           }).then(function () {
-            res.status(200).send({ message: 'Book successfully updated', status: 'OK', code: 200 });
+            res.status(200).send({ message: 'Book successfully updated' });
           }).catch(function (error) {
-            return res.status(400).send({
-              message: error.message,
-              status: 'Bad Request',
-              code: 400
-            });
+            return res.status(400).send({ message: error.message });
           });
         } else {
-          res.status(400).send({ message: 'Book not found', status: 'Not Found', code: 404 });
+          res.status(400).send({ message: 'Book not found' });
         }
       }).catch(function (error) {
-        return res.status(500).send({
-          message: error.message,
-          status: 'Internal Server Error',
-          code: 500
-        });
+        return res.status(500).send({ message: error.message });
       });
     }
     /**
@@ -165,18 +139,15 @@ var bookClass = function () {
   }, {
     key: 'get',
     value: function get(req, res) {
+      // get all the books in the database
       Book.findAll().then(function (books) {
-        res.status(200).send({ message: books, status: 'OK', code: 200 });
+        res.status(200).send({ message: books });
       }).catch(function (error) {
-        return res.status(500).send({
-          message: error.message,
-          status: 'Internal Server Error',
-          code: 500
-        });
+        return res.status(500).send({ message: error.message });
       });
     }
     /**
-     *
+     * @method borrowBook
      * @param {object} req
      * @param {object} res
      * @return {object} response
@@ -189,34 +160,23 @@ var bookClass = function () {
       var userId = req.params.userId;
       var returnedDate = req.body.return_date || '';
       var isReturned = false;
-      returnedDate = (0, _moment2.default)(returnedDate, 'DD-MM-YYYY');
+      returnedDate = new Date(returnedDate);
 
       Book.findById(bookId).then(function (book) {
         if (!book) {
-          res.status(404).send({
-            message: 'Sorry, we can\'t find this book',
-            status: 'Not Found',
-            code: 404
-          });
-          return;
+          // check if no book can be found
+          return res.status(404).send({ message: 'Sorry, we can\'t find this book' });
         }
 
         if (book.quantity <= 0) {
-          res.status(404).send({
-            message: 'There are no more copies left of this book to borrow',
-            status: 'Not Found',
-            code: 404
-          });
-          return;
+          // check if book quantity is less than or equal to zero
+          return res.status(404).send({ message: 'There are no more copies left of this book to borrow' });
         }
 
         borrowedBook.findOne({ where: { bookId: bookId, userId: userId, isReturned: isReturned } }).then(function (borrowed) {
           if (borrowed) {
-            res.status(403).send({
-              message: 'You have already borrowed this book. Please return it before you can borrow it again.',
-              status: 'Forbidden',
-              code: 403 });
-            return;
+            return res.status(403).send({
+              message: 'You have already borrowed this book. Please return it before you can borrow it again.' });
           }
           borrowedBook.create({
             bookId: bookId,
@@ -228,34 +188,26 @@ var bookClass = function () {
           }).then(function (id) {
             return res.status(201).send({
               message: 'You have successfully  borrowed this book',
-              status: 'Created',
-              id: id.get('id'),
-              code: 201
+              id: id.get('id')
             });
           }).catch(function (error) {
             return res.status(400).send({
-              message: error.message,
-              status: 'Bad Request',
-              code: 400
+              message: error.message
             });
           }).catch(function (error) {
             return res.status(500).send({
-              message: error.message,
-              status: 'Internal Server Error',
-              code: 500
+              message: error.message
             });
           });
         }).catch(function (error) {
           return res.status(400).send({
-            message: error.message,
-            status: 'Bad Request',
-            code: 400
+            message: error.message
           });
         });
       }).catch(function () {});
     }
     /**
-      *
+      * @method getBorrowedBook
       * @param {object} req
       * @param {object} res
       * @return {object} response
@@ -273,17 +225,14 @@ var bookClass = function () {
       }).then(function (books) {
         if (books) {
           res.status(200).send({
-            message: books,
-            status: 'OK',
-            code: 200 });
+            message: books
+          });
         } else {
-          res.status(404).send({ message: 'No record available', status: 'No Content', code: 404 });
+          res.status(404).send({ message: 'No record available' });
         }
       }).catch(function (error) {
         return res.status(400).send({
-          message: error.message,
-          status: 'Bad Request',
-          code: 400
+          message: error.message
         });
       });
     }
@@ -303,19 +252,15 @@ var bookClass = function () {
       var id = req.query.id;
 
       if (userId === undefined) {
-        res.status(400).send({
-          message: 'Invalid user',
-          status: 'Bad Request',
-          code: 400 });
-        return;
+        return res.status(400).send({
+          message: 'Invalid user'
+        });
       }
 
       if (bookId === undefined) {
-        res.status(400).send({
-          message: 'Please select a book to return',
-          status: 'Bad Request',
-          code: 400 });
-        return;
+        return res.status(400).send({
+          message: 'Please select a book to return'
+        });
       }
 
       borrowedBook.findOne({
@@ -328,31 +273,20 @@ var bookClass = function () {
           }, {
             where: { id: id, userId: userId, bookId: bookId, isReturned: false }, individualHooks: true
           }).then(function () {
-            res.status(200).send({
-              message: 'You have successfully returned this book',
-              status: 'OK',
-              code: 200 });
+            res.status(200).send({ message: 'You have successfully returned this book' });
           }).catch(function (error) {
-            return res.status(400).send({
-              message: error.message,
-              status: 'Bad Request',
-              code: 400
-            });
+            return res.status(400).send({ message: error.message });
           });
         } else {
-          return res.status(404).json({ message: 'No record available', status: 'Not Found', code: 404 });
+          return res.status(404).json({ message: 'No record available' });
         }
       }).catch(function (error) {
-        return res.status(400).send({
-          message: error.message,
-          status: 'Bad Request',
-          code: 400
-        });
+        return res.status(400).send({ message: error.message });
       });
     }
   }]);
 
-  return bookClass;
+  return BookClass;
 }();
 
-exports.default = bookClass;
+exports.default = BookClass;

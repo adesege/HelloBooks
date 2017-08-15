@@ -4,22 +4,22 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _user = require('./user');
+var _userclass = require('./userclass');
 
-var _user2 = _interopRequireDefault(_user);
+var _userclass2 = _interopRequireDefault(_userclass);
 
-var _book = require('./book');
+var _bookclass = require('./bookclass');
 
-var _book2 = _interopRequireDefault(_book);
+var _bookclass2 = _interopRequireDefault(_bookclass);
 
-var _stockManager = require('./stockManager');
+var _stockmanagerclass = require('./stockmanagerclass');
 
-var _stockManager2 = _interopRequireDefault(_stockManager);
+var _stockmanagerclass2 = _interopRequireDefault(_stockmanagerclass);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-  users: _user2.default,
-  bookController: _book2.default,
-  stockController: _stockManager2.default
+exports.default = { // export object so we can easily access each controller file
+  UserClass: _userclass2.default,
+  BookClass: _bookclass2.default,
+  StockManagerClass: _stockmanagerclass2.default
 };
