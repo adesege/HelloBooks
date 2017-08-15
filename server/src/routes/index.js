@@ -2,15 +2,9 @@ import express from 'express';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 
-<<<<<<< HEAD
-const userController = controllers.users;
-const bookController = controllers.bookController;
-const stockController = controllers.stockController;
-=======
 const UserClass = controllers.UserClass;
 const BookClass = controllers.BookClass;
 const StockManagerClass = controllers.StockManagerClass;
->>>>>>> implement-lf-feedback
 const authMiddleware = middlewares.middleware;
 const userMiddleware = middlewares.userMiddleware;
 const adminMiddleware = middlewares.adminMiddleware;
@@ -29,15 +23,9 @@ export default (app) => {
     .put(authMiddleware, userMiddleware, BookClass.returnBorrowedBook);
 
   router.route('/books')
-<<<<<<< HEAD
-    .post(authMiddleware, authMiddleware, bookController.create)
-    .put(authMiddleware, authMiddleware, bookController.edit)
-    .get(authMiddleware, authMiddleware, bookController.get);
-=======
     .post(authMiddleware, authMiddleware, BookClass.create)
     .put(authMiddleware, authMiddleware, BookClass.edit)
     .get(authMiddleware, authMiddleware, BookClass.get);
->>>>>>> implement-lf-feedback
 
   router.route('/books/stocks')
     .post(authMiddleware, adminMiddleware, StockManagerClass.create)
