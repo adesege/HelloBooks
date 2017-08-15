@@ -7,11 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
-<<<<<<< HEAD
-
-var _index = require('../controllers/index');
-=======
->>>>>>> update controllers and middlewares
 
 var _controllers = require('../controllers');
 
