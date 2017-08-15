@@ -112,7 +112,7 @@ var UserClass = function () {
             message: 'Successfully validated'
           });
         }
-        return res.status(404).send({ message: 'User not found', status: 'Bad Request', code: 404 });
+        return res.status(404).send({ message: 'User not found' });
       }).catch(function (error) {
         return res.status(500).send({
           message: error.message
