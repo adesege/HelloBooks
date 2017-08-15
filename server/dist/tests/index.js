@@ -16,10 +16,6 @@ var _app = require('../app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _utils = require('../utils');
-
-var _utils2 = _interopRequireDefault(_utils);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var expect = _chai2.default.expect;
