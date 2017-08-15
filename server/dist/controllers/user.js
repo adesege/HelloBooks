@@ -70,7 +70,7 @@ var UserClass = function () {
           code: 201 });
       }).catch(function (error) {
         return res.status(400).send({
-          message: error.message,
+          message: error.errors,
           status: 'Bad Request',
           code: 400
         });

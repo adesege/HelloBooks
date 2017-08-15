@@ -36,11 +36,13 @@ class UserClass {
       message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
       status: 'Created',
       code: 201 }))
-      .catch(error => res.status(400).send({
-        message: error.message,
-        status: 'Bad Request',
-        code: 400
-      }))
+      .catch((error) => {
+        return res.status(400).send({
+          message: error.errors,
+          status: 'Bad Request',
+          code: 400
+        });
+      })
       .catch(error => res.status(500).send({
         message: error.message,
         status: 'Internal Server Error',
