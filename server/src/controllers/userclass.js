@@ -7,7 +7,7 @@ const randomString = utils.randomString; // generates random strings
 const User = model.User; // get User model
 
 /**
- * @class userClass
+ * @class UserClass
  * @classdesc User Class
  */
 class UserClass {

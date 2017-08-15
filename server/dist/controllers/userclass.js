@@ -30,7 +30,7 @@ var randomString = _utils2.default.randomString; // generates random strings
 var User = _models2.default.User; // get User model
 
 /**
- * @class userClass
+ * @class UserClass
  * @classdesc User Class
  */
 
