@@ -1,6 +1,6 @@
 import middleware from './middleware';
-import userMiddleware from './usermiddleware';
-import adminMiddleware from './adminmiddleware';
+import userMiddleware from './userMiddleware';
+import adminMiddleware from './adminMiddleware';
 
 export default {
   middleware,
