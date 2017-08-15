@@ -19,7 +19,7 @@ var borrowedBook = _models2.default.borrowedBook;
 var stockManager = _models2.default.stockManager;
 
 /**
- * @class bookClass
+ * @class BookClass
  * @classdesc Book Class
  */
 

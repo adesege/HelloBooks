@@ -5,7 +5,7 @@ const borrowedBook = model.borrowedBook;
 const stockManager = model.stockManager;
 
 /**
- * @class bookClass
+ * @class BookClass
  * @classdesc Book Class
  */
 class BookClass {
