@@ -100,12 +100,13 @@ var UserClass = function () {
 
       if (email === '') return res.status(400).send({ message: 'The email field is required' });
       if (password === '') return res.status(400).send({ message: 'The password field is required' });
-      
+
       User.findOne({ where: { email: email } }).then(function (user) {
         if (user) {
           if (!user.validPassword(password)) {
             return res.status(400).send({
               message: 'You provided a wrong password' });
+          }
           var token = _jsonwebtoken2.default.sign({ user: user.id, group: user.userGroup }, secret, { expiresIn: 24 * 60 * 60 });
           return res.status(200).send({
             token: token,
