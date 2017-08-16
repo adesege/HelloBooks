@@ -16,10 +16,6 @@ var _app = require('../app');
 
 var _app2 = _interopRequireDefault(_app);
 
-var _utils = require('../utils');
-
-var _utils2 = _interopRequireDefault(_utils);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var expect = _chai2.default.expect;
@@ -163,7 +159,7 @@ describe('API Tests', function () {
         requestApp.post('/api/books').send(book).set('authenticate-token', token).end(function (err, res) {
           bookId = res.body.id;
           expect(res.statusCode).to.equal(201);
-          expect(res.body.status).to.equal('Created');
+          expect(res.body.message).to.equal('Book added successfully');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -176,7 +172,7 @@ describe('API Tests', function () {
         book.description = 'Purple Hibiscus was written by Chimamanda Adichie';
         requestApp.put('/api/books?book_id=' + bookId).send(book).set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.status).to.equal('OK');
+          expect(res.body.message).to.equal('Book successfully updated');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -193,7 +189,7 @@ describe('API Tests', function () {
           requestApp.post('/api/books/stocks').send(stock).set('authenticate-token', token).end(function (err, res) {
             stockId = res.body.id;
             expect(res.statusCode).to.equal(201);
-            expect(res.body.status).to.equal('Created');
+            expect(res.body.message).to.equal('Stock added successfully');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -204,7 +200,6 @@ describe('API Tests', function () {
           var token = setAdmin.token;
           requestApp.get('/api/books/stocks').send().set('authenticate-token', token).end(function (err, res) {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -215,7 +210,6 @@ describe('API Tests', function () {
           var token = setAdmin.token;
           requestApp.delete('/api/books/stocks?id=' + stockId).set('authenticate-token', token).end(function (err, res) {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -231,7 +225,6 @@ describe('API Tests', function () {
         var token = setUser.token;
         requestApp.get('/api/books').set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.status).to.equal('OK');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -245,7 +238,6 @@ describe('API Tests', function () {
         requestApp.post('/api/users/' + userId + '/books?book_id=' + bookId).send({ return_date: '10-09-2017' }).set('authenticate-token', token).end(function (err, res) {
           borrowedBookId = res.body.id;
           expect(res.statusCode).to.equal(201);
-          expect(res.body.status).to.equal('Created');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -257,7 +249,6 @@ describe('API Tests', function () {
         var token = setUser.token;
         requestApp.get('/api/users/' + userId + '/books?returned=false').set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.status).to.equal('OK');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -269,7 +260,6 @@ describe('API Tests', function () {
         var token = setUser.token;
         requestApp.put('/api/users/' + userId + '/books?id=' + borrowedBookId).send({ book_id: bookId }).set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.status).to.equal('OK');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -285,7 +275,6 @@ describe('API Tests', function () {
       it('should return Unauthorized status', function (done) {
         (0, _supertest2.default)(_app2.default).get('/api/books').set('authenticate-token', 'invalidToken').end(function (err, res) {
           expect(res.statusCode).to.equal(401);
-          expect(res.body.status).to.equal('Unauthorized');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -300,7 +289,6 @@ describe('API Tests', function () {
         var token = setUser.token;
         requestApp.get('/api/users/' + userId + '/books?returned=false').set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.status).to.equal('OK');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -314,7 +302,6 @@ describe('API Tests', function () {
         var token = setUser.token;
         requestApp.get('/api/books/stocks').set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(403);
-          expect(res.body.status).to.equal('Forbidden');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();
@@ -325,7 +312,6 @@ describe('API Tests', function () {
         var token = setAdmin.token;
         requestApp.get('/api/books/stocks').set('authenticate-token', token).end(function (err, res) {
           expect(res.statusCode).to.equal(200);
-          expect(res.body.status).to.equal('OK');
           expect(res.body).to.be.an('object');
           if (err) return done(err);
           done();

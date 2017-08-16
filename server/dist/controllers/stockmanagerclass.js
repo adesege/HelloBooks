@@ -18,8 +18,8 @@ var Book = _models2.default.Book;
 var stockManager = _models2.default.stockManager;
 
 /**
- * @class bookClass
- * @classdesc Book Class
+ * @class StockManagerClass
+ * @classdesc Stock Manager Class
  */
 
 var StockManagerClass = function () {

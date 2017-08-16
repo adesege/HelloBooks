@@ -4,8 +4,8 @@ const Book = model.Book;
 const stockManager = model.stockManager;
 
 /**
- * @class bookClass
- * @classdesc Book Class
+ * @class StockManagerClass
+ * @classdesc Stock Manager Class
  */
 class StockManagerClass {
   /**

@@ -19,7 +19,7 @@ var borrowedBook = _models2.default.borrowedBook;
 var stockManager = _models2.default.stockManager;
 
 /**
- * @class bookClass
+ * @class BookClass
  * @classdesc Book Class
  */
 
@@ -122,7 +122,7 @@ var BookClass = function () {
             return res.status(400).send({ message: error.message });
           });
         } else {
-          res.status(400).send({ message: 'Book not found', status: 'Not Found', code: 404 });
+          res.status(400).send({ message: 'Book not found' });
         }
       }).catch(function (error) {
         return res.status(500).send({ message: error.message });
@@ -278,7 +278,7 @@ var BookClass = function () {
             return res.status(400).send({ message: error.message });
           });
         } else {
-          return res.status(404).json({ message: 'No record available', status: 'Not Found', code: 404 });
+          return res.status(404).json({ message: 'No record available' });
         }
       }).catch(function (error) {
         return res.status(400).send({ message: error.message });
