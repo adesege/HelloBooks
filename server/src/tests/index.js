@@ -2,7 +2,6 @@ import chai from 'chai';
 import request from 'supertest';
 import faker from 'faker';
 import app from '../app';
-import utils from '../utils';
 
 const expect = chai.expect;
 const email = faker.internet.email();
@@ -147,7 +146,7 @@ describe('API Tests', () => { // Describe the API test suite
           .end((err, res) => {
             bookId = res.body.id;
             expect(res.statusCode).to.equal(201);
-            expect(res.body.status).to.equal('Created');
+            expect(res.body.message).to.equal('Book added successfully');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -164,7 +163,7 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
+            expect(res.body.message).to.equal('Book successfully updated');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -184,7 +183,7 @@ describe('API Tests', () => { // Describe the API test suite
             .end((err, res) => {
               stockId = res.body.id;
               expect(res.statusCode).to.equal(201);
-              expect(res.body.status).to.equal('Created');
+              expect(res.body.message).to.equal('Stock added successfully');
               expect(res.body).to.be.an('object');
               if (err) return done(err);
               done();
@@ -199,7 +198,6 @@ describe('API Tests', () => { // Describe the API test suite
             .set('authenticate-token', token)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.status).to.equal('OK');
               expect(res.body).to.be.an('object');
               if (err) return done(err);
               done();
@@ -213,7 +211,6 @@ describe('API Tests', () => { // Describe the API test suite
             .set('authenticate-token', token)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
-              expect(res.body.status).to.equal('OK');
               expect(res.body).to.be.an('object');
               if (err) return done(err);
               done();
@@ -231,7 +228,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -249,7 +245,6 @@ describe('API Tests', () => { // Describe the API test suite
           .end((err, res) => {
             borrowedBookId = res.body.id;
             expect(res.statusCode).to.equal(201);
-            expect(res.body.status).to.equal('Created');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -264,7 +259,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -280,7 +274,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -297,7 +290,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', 'invalidToken')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
-            expect(res.body.status).to.equal('Unauthorized');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -314,7 +306,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -330,7 +321,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(403);
-            expect(res.body.status).to.equal('Forbidden');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -344,7 +334,6 @@ describe('API Tests', () => { // Describe the API test suite
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
-            expect(res.body.status).to.equal('OK');
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
