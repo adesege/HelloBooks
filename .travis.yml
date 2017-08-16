@@ -10,8 +10,18 @@ before_script:
   - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
+  - npm run build
   - NODE_ENV=test npm run test:db
 script:
   - npm test
 after_success:
   - CODECLIMATE_REPO_TOKEN=CODECLIMATE_TOKEN codeclimate-test-reporter < coverage/lcov.info
+env:
+  - DB=postgresql
+services:
+  - postgresql
+before_script:
+  - npm install -g sequelize
+  - psql -c 'create database travis;' -U postgres
+script:
+  - sequelize db:migrate --env production
