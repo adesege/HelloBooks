@@ -7,7 +7,7 @@ const randomString = utils.randomString; // generates random strings
 const User = model.User; // get User model
 
 /**
- * @class userClass
+ * @class UserClass
  * @classdesc User Class
  */
 class UserClass {
@@ -33,18 +33,21 @@ class UserClass {
     }, {
       fields: ['name', 'email', 'password', 'key', 'userGroup']
     }).then(() => res.status(201).send({
-      message: 'Your account has been created successfully. Go to the login page to sign in to your account.',
-      status: 'Created',
-      code: 201 }))
-      .catch(error => res.status(400).send({
-        message: error.message,
-        status: 'Bad Request',
-        code: 400
-      }))
+      message: 'Your account has been created successfully. Go to the login page to sign in to your account.' }))
+      .catch((error) => {
+        error.errors.map((value) => {
+          delete value.__raw;
+          delete value.path;
+          delete value.type;
+          delete value.value;
+          return value;
+        });
+        return res.status(400).send({
+          message: error.errors
+        });
+      })
       .catch(error => res.status(500).send({
-        message: error.message,
-        status: 'Internal Server Error',
-        code: 500
+        message: error.message
       }));
   }
 
@@ -59,14 +62,15 @@ class UserClass {
     const password = req.body.password || '';
     const email = req.body.email || '';
 
+    if (email === '') return res.status(400).send({ message: 'The email field is required' });
+    if (password === '') return res.status(400).send({ message: 'The password field is required' });
+
     User.findOne({ where: { email } })
       .then((user) => {
         if (user) {
           if (!user.validPassword(password)) {
             return res.status(400).send({
-              message: 'You provided a wrong password',
-              status: 'Bad Request',
-              code: 400 });
+              message: 'You provided a wrong password' });
           }
           const token = jwt.sign(
             { user: user.id, group: user.userGroup },
@@ -78,17 +82,13 @@ class UserClass {
               token,
               userId: user.id,
               group: user.userGroup,
-              message: 'Successfully validated',
-              status: 'OK',
-              code: 200
+              message: 'Successfully validated'
             });
         }
-        return res.status(404).send({ message: 'User not found', status: 'Bad Request', code: 404 });
+        return res.status(404).send({ message: 'User not found' });
       })
       .catch(error => res.status(500).send({
-        message: error.message,
-        status: 'Internal Server Error',
-        code: 500
+        message: error.message
       }));
   }
   /**
@@ -101,22 +101,18 @@ class UserClass {
     const userId = req.params.userId;
     if (userId === null || userId === '') {
       res.status(400).send({
-        message: 'User not found',
-        status: 'Not Found',
-        code: 404 });
+        message: 'User not found' });
     }
     User.findAll({})
       .then((books) => {
         if (books) {
-          res.status(200).send({ message: books, status: 'OK', code: 200 });
+          res.status(200).send({ message: books });
         } else {
-          res.status(400).send({ message: 'No record available', status: 'No Content', code: 204 });
+          res.status(400).send({ message: 'No record available' });
         }
       })
       .catch(error => res.status(500).send({
-        message: error.message,
-        status: 'Internal Server Error',
-        code: 500
+        message: error.message
       }));
   }
 }

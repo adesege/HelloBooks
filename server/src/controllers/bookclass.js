@@ -5,7 +5,7 @@ const borrowedBook = model.borrowedBook;
 const stockManager = model.stockManager;
 
 /**
- * @class bookClass
+ * @class BookClass
  * @classdesc Book Class
  */
 class BookClass {
@@ -29,21 +29,20 @@ class BookClass {
     const stock = req.body.stock;
     delete req.body.stock;
 
-    Book.create(
-      {
-        title,
-        description,
-        author,
-        publishedDate,
-        bookURL,
-        ISBN,
-        bookCategoryId,
-        coverPhotoId,
-        documentPath,
-        userId
-      }, {
-        fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
-      }).then((id) => {
+    Book.create({
+      title,
+      description,
+      author,
+      publishedDate,
+      bookURL,
+      ISBN,
+      bookCategoryId,
+      coverPhotoId,
+      documentPath,
+      userId
+    }, {
+      fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
+    }).then((id) => {
       const bookId = id.get('id');
       stock.bookId = bookId;
       stockManager.create(stock).then(() => res.status(201).send({
@@ -92,7 +91,7 @@ class BookClass {
           }).catch(error => res.status(400)
             .send({ message: error.message }));
         } else {
-          res.status(400).send({ message: 'Book not found', status: 'Not Found', code: 404 });
+          res.status(400).send({ message: 'Book not found' });
         }
       }).catch(error => res.status(500).send({ message: error.message }));
   }
@@ -220,7 +219,7 @@ class BookClass {
           res.status(200).send({ message: 'You have successfully returned this book' });
         }).catch(error => res.status(400).send({ message: error.message }));
       } else {
-        return res.status(404).json({ message: 'No record available', status: 'Not Found', code: 404 });
+        return res.status(404).json({ message: 'No record available' });
       }
     }).catch(error => res.status(400).send({ message: error.message }));
   }
