@@ -4,3 +4,4 @@ template/
 template/assets/js/**
 server/dist/**
 .idea/
+template/**/*.js
