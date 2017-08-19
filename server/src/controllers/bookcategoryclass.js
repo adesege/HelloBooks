@@ -80,11 +80,11 @@ class BookCategoryClass {
   static update(req, res) {
     const id = req.query.id || '';
     const name = req.body.name || '';
-    bookCategory.findById({ id })
+    bookCategory.findById(id)
       .then((category) => {
-        if (category.length !== 0) {
-          bookCategory.update({ name }, { where: { id } })
-            .then(() => res.status(200).send({ message: category }))
+        if (category !== null) {
+          return bookCategory.update({ name }, { where: { id } })
+            .then(() => res.status(200).send({ message: 'Category updated successfully' }))
             .catch(error => res.status(400).send({ message: error.message }));
         }
         return res.status(204).send({ message: 'No record available' });
