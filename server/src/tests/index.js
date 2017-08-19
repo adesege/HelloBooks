@@ -23,7 +23,7 @@ const book = {
   description: 'Half of a yellow sun is a book by Chimamanda Adichie',
   author: 'Chimamanda Adichie',
   published_date: '07-09-2017',
-  isbn: '1234-432-543',
+  isbn: faker.random.number().toString(),
   stock: {
     quantity: 12,
     recordDate: '08-09-2017'
@@ -32,6 +32,9 @@ const book = {
 const stock = {
   quantity: 3,
   record_date: '07-09-2017'
+};
+const bookCategory = {
+  name: faker.random.word()
 };
 let setUser = '';
 let setAdmin = '';
@@ -131,14 +134,80 @@ describe('API Tests', () => { // Describe the API test suite
       });
     });
   });
+
+
   /**
    * @function describe(name, callBack) Describe Books
    */
   describe('Books', () => {
     let bookId = '';
+    let bookCategoryId = '';
+    describe('# Books Category', () => {
+      it('should be able to add a book category', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .post('/api/books/categories')
+          .send(bookCategory)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            bookCategoryId = res.body.id;
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.message).to.equal('Category added successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should get all books categories', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .get('/api/books/categories')
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should update a book category', (done) => {
+        const token = setAdmin.token;
+        bookCategory.name = 'A new category name';
+        requestApp
+          .put(`/api/books/categories?id=${bookCategoryId}`)
+          .send(bookCategory)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('Category updated successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should be delete a book category', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .delete('/api/books/categories')
+          .send({ id: bookCategoryId })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('Category deleted successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+
     describe('# Admin', () => {
       it('should be able to add a book', (done) => {
         const token = setAdmin.token;
+        book.book_category_id = bookCategoryId;
         requestApp
           .post('/api/books')
           .send(book)

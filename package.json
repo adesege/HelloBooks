@@ -9,7 +9,7 @@
     "build": "babel server/src/ --out-dir server/dist/",
     "heroku-postbuild": "npm run build",
     "test:dev": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
-    "test": "NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
+    "test": "NODE_ENV=test mocha server/dist/tests/index.js --timeout 100000",
     "test:db": "sequelize db:migrate --env test"
   },
   "repository": {

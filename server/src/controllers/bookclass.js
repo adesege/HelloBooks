@@ -26,31 +26,61 @@ class BookClass {
     const coverPhotoId = req.body.cover_photo || 0;
     const documentPath = req.body.document_path || '';
     const userId = req.decoded.user;
-    const stock = req.body.stock;
+    const stock = req.body.stock || {};
+    stock.record_date = stock.recordDate || stock.record_date || '';
     delete req.body.stock;
 
-    Book.create({
-      title,
-      description,
-      author,
-      publishedDate,
-      bookURL,
-      ISBN,
-      bookCategoryId,
-      coverPhotoId,
-      documentPath,
-      userId
-    }, {
-      fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
-    }).then((id) => {
-      const bookId = id.get('id');
-      stock.bookId = bookId;
-      stockManager.create(stock).then(() => res.status(201).send({
-        message: 'Book added successfully',
-        id: bookId
-      })).catch(error => res.status(400).send({ message: error.message }));
-    }).catch(error => res.status(400).send({ message: error.message }))
-      .catch(error => res.status(500).send({ message: error.message }));
+    if (stock.length === 0) {
+      return res.status(400)
+        .send({ message: 'You must set a stock information for this book' });
+    }
+
+    if (stock.quantity === undefined) {
+      return res.status(400)
+        .send({ message: 'The stock quantity is required' });
+    }
+
+    if (stock.record_date === undefined) {
+      return res.status(400)
+        .send({ message: 'The stock record date is required' });
+    }
+
+    Book.findOne({ where: { title } })
+      .then((book) => {
+        if (book !== null) {
+          return res.status(400)
+            .send({ message: 'A book with the same title already exist' });
+        }
+        Book.findOne({ where: { ISBN } })
+          .then((bookIsbn) => {
+            if (bookIsbn !== null) {
+              return res.status(400)
+                .send({ message: 'A book with the same ISBN already exist' });
+            }
+
+            Book.create({
+              title,
+              description,
+              author,
+              publishedDate,
+              bookURL,
+              ISBN,
+              bookCategoryId,
+              coverPhotoId,
+              documentPath,
+              userId
+            }, {
+              fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
+            }).then((id) => {
+              const bookId = id.get('id');
+              stock.bookId = bookId;
+              stockManager.create(stock).then(() => res.status(201).send({
+                message: 'Book added successfully',
+                id: bookId
+              })).catch(error => res.status(400).send({ message: error.message })); // Stock manager create
+            }).catch(error => res.status(400).send({ message: error.message })); // Book create
+          }).catch(error => res.status(400).send({ message: error.message })); // find by ISBN
+      }).catch(error => res.status(400).send({ message: error.message })); // Find by title
   }
   /**
      * @method edit
@@ -65,7 +95,7 @@ class BookClass {
     const publishedDate = req.body.published_date || '';
     const bookURL = req.body.book_url || '';
     const ISBN = req.body.isbn || '';
-    const bookCategoryId = req.body.book_category || 0;
+    const bookCategoryId = req.body.book_category_id || 0;
     const coverPhotoId = req.body.cover_photo || 0;
     const documentPath = req.body.document_path || '';
     const id = req.query.book_id;
@@ -103,7 +133,7 @@ class BookClass {
    * @return {object} response
    */
   static get(req, res) { // get all the books in the database
-    Book.findAll()
+    Book.findAll({})
       .then((books) => {
         res.status(200).send({ message: books });
       }).catch(error => res.status(500).send({ message: error.message }));

@@ -5,6 +5,7 @@ import middlewares from '../middlewares';
 const UserClass = controllers.UserClass;
 const BookClass = controllers.BookClass;
 const StockManagerClass = controllers.StockManagerClass;
+const BookCategoryClass = controllers.BookCategoryClass;
 const authMiddleware = middlewares.middleware;
 const userMiddleware = middlewares.userMiddleware;
 const adminMiddleware = middlewares.adminMiddleware;
@@ -26,6 +27,12 @@ export default (app) => {
     .post(authMiddleware, authMiddleware, BookClass.create)
     .put(authMiddleware, authMiddleware, BookClass.edit)
     .get(authMiddleware, authMiddleware, BookClass.get);
+
+  router.route('/books/categories')
+    .post(authMiddleware, adminMiddleware, BookCategoryClass.add)
+    .put(authMiddleware, adminMiddleware, BookCategoryClass.update)
+    .delete(authMiddleware, adminMiddleware, BookCategoryClass.delete)
+    .get(authMiddleware, authMiddleware, BookCategoryClass.get);
 
   router.route('/books/stocks')
     .post(authMiddleware, adminMiddleware, StockManagerClass.create)
