@@ -1,13 +1,17 @@
 {
   "name": "hello-books",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.0",
+    "npm": "3.10.10"
+  },
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon ./server/dist/server.js",
     "start": "NODE_ENV=production node ./server/dist/server.js",
     "build": "babel server/src/ --out-dir server/dist/",
-    "heroku-postbuild": "npm run build",
+    "postinstall": "npm run build",
     "test:dev": "SET NODE_ENV=test&& mocha server/dist/tests/index.js --timeout 100000",
     "test": "NODE_ENV=test mocha server/dist/tests/index.js --timeout 100000",
     "test:db": "sequelize db:migrate --env test"
