@@ -27,6 +27,7 @@ class BookClass {
     const documentPath = req.body.document_path || '';
     const userId = req.decoded.user;
     const stock = req.body.stock || {};
+    stock.record_date = stock.recordDate || stock.record_date || '';
     delete req.body.stock;
 
     if (stock.length === 0) {
