@@ -30,7 +30,7 @@ export default (app) => {
 
   router.route('/books/categories')
     .post(authMiddleware, adminMiddleware, BookCategoryClass.add)
-    .put(authMiddleware, authMiddleware, BookClass.edit)
+    .put(authMiddleware, adminMiddleware, BookCategoryClass.update)
     .delete(authMiddleware, adminMiddleware, BookCategoryClass.delete)
     .get(authMiddleware, authMiddleware, BookCategoryClass.get);
 
