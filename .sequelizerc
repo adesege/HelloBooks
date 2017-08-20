@@ -4,6 +4,6 @@ const version = 'v1';
 module.exports = {
     "config": path.resolve('./server/config', 'config.json'),
     "models-path": path.resolve(`./server/src/api/${version}/models`),
-    "seeders-path": path.resolve('./server/src/api/${version}/seeders'),
-    "migrations-path": path.resolve('./server/src/api/${version}/migrations')
+    "seeders-path": path.resolve(`./server/src/api/${version}/seeders`),
+    "migrations-path": path.resolve(`./server/src/api/${version}/migrations`)
 };
