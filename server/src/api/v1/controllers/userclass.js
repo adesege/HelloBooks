@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import app from '../app';
+import app from '../../../express';
 import model from '../models';
 import utils from '../utils';
 
