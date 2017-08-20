@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import app from '../app';
+import app from '../../../express';
 
 const router = function router(req, res, next) {
   const token = req.body.authenticate_token || req.query.authenticate_token ||

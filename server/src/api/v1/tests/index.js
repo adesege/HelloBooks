@@ -1,7 +1,7 @@
 import chai from 'chai';
 import request from 'supertest';
 import faker from 'faker';
-import app from '../app';
+import app from '../../../express';
 
 const expect = chai.expect;
 const email = faker.internet.email();
@@ -51,7 +51,7 @@ describe('API Tests', () => { // Describe the API test suite
      */
     describe('# Signup', () => {
       it('should create a user', (done) => {
-        requestApp.post('/api/users/signup').send(user).end((err, res) => {
+        requestApp.post('/api/v1/users/signup').send(user).end((err, res) => {
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
           if (err) return done(err);
@@ -60,7 +60,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should create an admin', (done) => {
-        requestApp.post('/api/users/signup').send(admin).end((err, res) => {
+        requestApp.post('/api/v1/users/signup').send(admin).end((err, res) => {
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
           if (err) return done(err);
@@ -69,7 +69,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not create a user with same email address twice', (done) => {
-        request(app).post('/api/users/signup').send(user).end((err, res) => {
+        request(app).post('/api/v1/users/signup').send(user).end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
           if (err) return done(err);
@@ -78,7 +78,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not create a user if one or more field is empty', (done) => {
-        request(app).post('/api/users/signup').send({}).end((err, res) => {
+        request(app).post('/api/v1/users/signup').send({}).end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
           if (err) return done(err);
@@ -92,7 +92,7 @@ describe('API Tests', () => { // Describe the API test suite
     describe('# Signin', () => {
       it('should log a user in', (done) => {
         requestApp = request(app);
-        requestApp.post('/api/users/signin').send(user).end((err, res) => {
+        requestApp.post('/api/v1/users/signin').send(user).end((err, res) => {
           setUser = res.body;
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -103,7 +103,7 @@ describe('API Tests', () => { // Describe the API test suite
 
       it('should log an admin in', (done) => {
         requestApp = request(app);
-        requestApp.post('/api/users/signin').send(admin).end((err, res) => {
+        requestApp.post('/api/v1/users/signin').send(admin).end((err, res) => {
           setAdmin = res.body;
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
@@ -114,7 +114,7 @@ describe('API Tests', () => { // Describe the API test suite
 
       it('should not log a user in with a wrong email address', (done) => {
         user.email = 'wrong@email.com';
-        request(app).post('/api/users/signin').send(user).end((err, res) => {
+        request(app).post('/api/v1/users/signin').send(user).end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
           if (err) return done(err);
@@ -125,7 +125,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('should not log a user in with a wrong password', (done) => {
         user.password = '2345';
         user.email = email;
-        request(app).post('/api/users/signin').send(user).end((err, res) => {
+        request(app).post('/api/v1/users/signin').send(user).end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
           if (err) return done(err);
@@ -146,7 +146,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('should be able to add a book category', (done) => {
         const token = setAdmin.token;
         requestApp
-          .post('/api/books/categories')
+          .post('/api/v1/books/categories')
           .send(bookCategory)
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -162,7 +162,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('should get all books categories', (done) => {
         const token = setAdmin.token;
         requestApp
-          .get('/api/books/categories')
+          .get('/api/v1/books/categories')
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -176,7 +176,7 @@ describe('API Tests', () => { // Describe the API test suite
         const token = setAdmin.token;
         bookCategory.name = 'A new category name';
         requestApp
-          .put(`/api/books/categories?id=${bookCategoryId}`)
+          .put(`/api/v1/books/categories?id=${bookCategoryId}`)
           .send(bookCategory)
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -191,7 +191,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('should be delete a book category', (done) => {
         const token = setAdmin.token;
         requestApp
-          .delete('/api/books/categories')
+          .delete('/api/v1/books/categories')
           .send({ id: bookCategoryId })
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -209,7 +209,7 @@ describe('API Tests', () => { // Describe the API test suite
         const token = setAdmin.token;
         book.book_category_id = bookCategoryId;
         requestApp
-          .post('/api/books')
+          .post('/api/v1/books')
           .send(book)
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -227,7 +227,7 @@ describe('API Tests', () => { // Describe the API test suite
         book.title = 'Purple Hibiscus';
         book.description = 'Purple Hibiscus was written by Chimamanda Adichie';
         requestApp
-          .put(`/api/books?book_id=${bookId}`)
+          .put(`/api/v1/books?book_id=${bookId}`)
           .send(book)
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -246,7 +246,7 @@ describe('API Tests', () => { // Describe the API test suite
           const token = setAdmin.token;
           stock.book_id = bookId;
           requestApp
-            .post('/api/books/stocks')
+            .post('/api/v1/books/stocks')
             .send(stock)
             .set('authenticate-token', token)
             .end((err, res) => {
@@ -262,7 +262,7 @@ describe('API Tests', () => { // Describe the API test suite
         it('should be able to get all stocks', (done) => {
           const token = setAdmin.token;
           requestApp
-            .get('/api/books/stocks')
+            .get('/api/v1/books/stocks')
             .send()
             .set('authenticate-token', token)
             .end((err, res) => {
@@ -276,7 +276,7 @@ describe('API Tests', () => { // Describe the API test suite
         it(`should delete stock with id ${stockId}`, (done) => {
           const token = setAdmin.token;
           requestApp
-            .delete(`/api/books/stocks?id=${stockId}`)
+            .delete(`/api/v1/books/stocks?id=${stockId}`)
             .set('authenticate-token', token)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
@@ -293,7 +293,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('should be able to get all the books in the Library', (done) => {
         const token = setUser.token;
         requestApp
-          .get('/api/books')
+          .get('/api/v1/books')
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -308,7 +308,7 @@ describe('API Tests', () => { // Describe the API test suite
         const userId = setUser.userId;
         // book.book_id = bookId;
         requestApp
-          .post(`/api/users/${userId}/books?book_id=${bookId}`)
+          .post(`/api/v1/users/${userId}/books?book_id=${bookId}`)
           .send({ return_date: '10-09-2017' })
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -324,7 +324,7 @@ describe('API Tests', () => { // Describe the API test suite
         const userId = setUser.userId;
         const token = setUser.token;
         requestApp
-          .get(`/api/users/${userId}/books?returned=false`)
+          .get(`/api/v1/users/${userId}/books?returned=false`)
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -338,7 +338,7 @@ describe('API Tests', () => { // Describe the API test suite
         const userId = setUser.userId;
         const token = setUser.token;
         requestApp
-          .put(`/api/users/${userId}/books?id=${borrowedBookId}`)
+          .put(`/api/v1/users/${userId}/books?id=${borrowedBookId}`)
           .send({ book_id: bookId })
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -355,7 +355,7 @@ describe('API Tests', () => { // Describe the API test suite
     describe('# Authenticate', () => { // Describe Authenticate middleware
       it('should return Unauthorized status', (done) => {
         request(app)
-          .get('/api/books')
+          .get('/api/v1/books')
           .set('authenticate-token', 'invalidToken')
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
@@ -371,7 +371,7 @@ describe('API Tests', () => { // Describe the API test suite
         const userId = setUser.userId;
         const token = setUser.token;
         requestApp
-          .get(`/api/users/${userId}/books?returned=false`)
+          .get(`/api/v1/users/${userId}/books?returned=false`)
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -386,7 +386,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('normal user should not be able to view admin page', (done) => {
         const token = setUser.token;
         requestApp
-          .get('/api/books/stocks')
+          .get('/api/v1/books/stocks')
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(403);
@@ -399,7 +399,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('admin user should be able to view admin page', (done) => {
         const token = setAdmin.token;
         requestApp
-          .get('/api/books/stocks')
+          .get('/api/v1/books/stocks')
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);

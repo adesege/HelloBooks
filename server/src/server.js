@@ -1,8 +1,8 @@
 import http from 'http';
-import app from './app';
+import express from './express';
 
 const port = parseInt(process.env.PORT, 10) || 8090;
-app.set('port', port);
+express.set('port', port);
 
-const server = http.createServer(app);
+const server = http.createServer(express);
 server.listen(port);

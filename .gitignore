@@ -1,6 +1,4 @@
 node_modules/
-server/src/config.json
 .env
 .idea/
 server/dist/**/*.js
-!server/dist/config
