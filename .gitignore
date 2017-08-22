@@ -1,6 +1,5 @@
 node_modules/
 **/node_modules/
-.env
 .idea/
 client/src/assets/css/*.css
 server/dist/**
