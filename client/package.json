@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "4.0.0-alpha.6",
     "font-awesome": "^4.7.0",
     "jquery": "^3.0.0",
     "node-sass-chokidar": "0.0.3",
