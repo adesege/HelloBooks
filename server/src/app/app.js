@@ -7,8 +7,8 @@ import routes from './routes';
 export default (app) => {
   const renderFile = ejs.renderFile;
   app.use(logger('dev'));
-  app.use(express.static(path.join(__dirname, '../../../template/assets/')));
-  app.set('views', path.join(__dirname, '../../../template'));
+  app.use(express.static(path.join(__dirname, '../../../client/assets/')));
+  app.set('views', path.join(__dirname, '../../../client'));
   app.engine('.html', renderFile);
 
   app.use(routes);
