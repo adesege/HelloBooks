@@ -8,6 +8,7 @@ notifications:
 services:
   - postgresql
 before_script:
+  - cd $TEST_DIR
   - npm install -g codeclimate-test-reporter
   - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
@@ -15,6 +16,6 @@ before_script:
   - npm run build;
   - NODE_ENV=test npm run test:db
 script:
-  - cd $TEST_DIR && npm test
+  - npm test
 after_success:
   - CODECLIMATE_REPO_TOKEN=CODECLIMATE_TOKEN codeclimate-test-reporter < coverage/lcov.info
