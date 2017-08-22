@@ -12,7 +12,10 @@ before_script:
   - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
-  - if[$TEST_DIR=="server"]; then npm run build;
+  - |
+    if[$TEST_DIR=="server"]; then
+      npm run build;
+    fi
   - NODE_ENV=test npm run test:db
 script:
   - cd $TEST_DIR && npm test
