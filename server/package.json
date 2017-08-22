@@ -11,7 +11,7 @@
     "webpack": "webpack",
     "babel": "babel src/ --watch --out-dir dist/",
     "watch": "nodemon --watch dist ./dist/server.js",
-    "start": "NODE_ENV=production node ./dist/server.js",
+    "start:prod": "NODE_ENV=production node ./dist/server.js",
     "build": "babel src/ --out-dir dist/",
     "heroku-postbuild": "npm run build",
     "test:dev": "SET NODE_ENV=test&& mocha dist/api/v1/tests/index.js --timeout 100000",
