@@ -8,7 +8,7 @@ notifications:
 services:
   - postgresql
 before_script:
-  - cd $TEST_DIR
+  - cd TEST_DIR
   - npm install -g codeclimate-test-reporter
   - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
