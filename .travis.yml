@@ -13,7 +13,7 @@ before_script:
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - |
-    if[$TEST_DIR=="server"]; then
+    if[ "$TEST_DIR" == "server" ]; then
       npm run build;
     fi
   - NODE_ENV=test npm run test:db
