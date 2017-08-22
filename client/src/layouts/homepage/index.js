@@ -20,7 +20,7 @@ class HomepageLayout extends React.Component {
     );
   }
 
-  componentDidMount() {
+  componentWillMount() {
     $('body').addClass('bg-books');
   }
 }

@@ -4,3 +4,4 @@ node_modules/
 .idea/
 client/src/assets/css/*.css
 server/dist/**
+client/build/**
