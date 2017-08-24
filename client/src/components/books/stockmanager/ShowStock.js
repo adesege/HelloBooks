@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import 'bootstrap/js/src/modal';
+import 'bootstrap/js/dist/modal';
 import AddStock from '../../../modal/stockmanager/AddStock';
 
 window.$ = $;
