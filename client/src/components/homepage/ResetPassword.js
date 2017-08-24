@@ -8,7 +8,7 @@ export default () => (
       <div className="text-desc text-center col-sm-10 offset-sm-1">
         <p className="mb-3">Having trouble signing in to your account? Provide the email address you used to register and we will send you a password reset link</p></div>
     </div>{ /* row */ }
-    <form action="/login" method="post" className="row">
+    <form action="/dashboard" method="post" className="row">
       <div className="col-sm-10 offset-sm-1">
         <div className="form-group">
           <label className="sr-only" htmlFor="inlineFormInputGroup">Email address</label>

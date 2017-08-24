@@ -9,7 +9,7 @@ export default () => (
         <p className="mb-3">It takes less than 30 seconds to create an account. We just need some little details from you.</p>
       </div>
     </div>
-    <form action="/login" method="post" className="row">
+    <form action="/dashboard" method="post" className="row">
       <div className="col-sm-10 offset-sm-1">
         <div className="form-group">
           <label className="sr-only">Name</label>
