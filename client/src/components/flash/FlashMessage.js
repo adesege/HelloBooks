@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class FlashMessage extends React.Component {
-  componentWillUpdate() {
+  componentWillUnmount() {
     this.props.deleteFlashMessage(this.props.message.id);
   }
   render() {
