@@ -13,11 +13,7 @@
     "watch": "nodemon --watch server/dist ./server/dist/server.js",
     "start": "NODE_ENV=production node ./server/dist/server.js",
     "build": "babel server/src/ --out-dir server/dist/",
-<<<<<<< HEAD
     "heroku-postbuild": "cd client && npm install && npm run build && cd ../server && npm run build",
-=======
-    "heroku-postbuild": "npm run build",
->>>>>>> 57180ba44b666f56ac38e6d5cb85e1cb5613caed
     "test:dev": "SET NODE_ENV=test&& mocha server/dist/api/v1/tests/index.js --timeout 100000",
     "test": "NODE_ENV=test mocha server/dist/api/v1/tests/index.js --timeout 100000",
     "test:db": "sequelize db:migrate --env test"

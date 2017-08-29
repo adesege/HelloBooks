@@ -1,13 +1,7 @@
 node_modules/
-<<<<<<< HEAD
 **/node_modules/
 .env
 .idea/
 client/src/assets/css/*.css
 server/dist/**
 client/build/**
-=======
-.env
-.idea/
-server/dist/**/*.js
->>>>>>> 57180ba44b666f56ac38e6d5cb85e1cb5613caed
