@@ -9,7 +9,7 @@ import Profile from '../components/profile/';
 import Settings from '../components/Settings';
 
 import Login from '../components/homepage/Login';
-import Signup from '../components/homepage/Signup';
+import Signup from '../components/homepage/signup/Signup';
 import ResetPassword from '../components/homepage/ResetPassword';
 
 import Dashboard from '../components/dashboard/Dashboard';

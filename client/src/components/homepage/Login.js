@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
+import FlashMessagesList from '../flash/FlashMessagesList';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default () => (
   <div>
     <form action="/dashboard" method="get" className="row">
       <div className="col-sm-10 offset-sm-1">
+        <FlashMessagesList />
         <div className="form-group">
           <label className="sr-only" htmlFor="inlineFormInputGroup">Username</label>
           <div className="input-group mb-2 mr-sm-2 mb-sm-0">
