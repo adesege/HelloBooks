@@ -9,12 +9,14 @@ const adminEmail = faker.internet.email();
 const user = {
   name: 'Test Test',
   password: '1234',
+  confirmPassword: '1234',
   email,
   group: 'user'
 };
 const admin = {
   name: 'Admin Test',
   password: '2345',
+  confirmPassword: '2345',
   email: adminEmail,
   group: 'admin'
 };
