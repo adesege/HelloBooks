@@ -1,0 +1,340 @@
+@import './_variables.scss';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/font-awesome/scss/font-awesome.scss';
+
+body {
+    font-size: 14px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgba(0,0,0,0.02);
+  }
+
+  *{
+    border-radius: 0 !important;
+  }
+  .bordered{
+    border: 1px solid #E08484;
+  }
+
+  .position-relative{
+    position: relative;
+  }
+
+  #homeLogin{
+    background-color: #fff;
+  }
+
+  #homeLogin > form{
+    margin-top: 30px;
+  }
+
+
+  .card img{
+    width: 100%;
+  }
+
+  #bookList{
+    position: relative;
+  }
+
+  #sidebar.sidebar {
+      height: 100%; /* 100% Full-height */
+      position: fixed; /* Stay in place */
+      z-index: 10000; /* Stay on top */
+      top: 0;
+      left: 0;
+      width: 200px;
+      background-color: #f7f7f7; /* Black*/
+      overflow-x: hidden; /* Disable horizontal scroll */
+      padding-top: 30px; /* Place content 60px from the top */
+  }
+
+  #sidebar .closeBtn {
+      position: absolute;
+      top: 0;
+      right: 10px;
+      font-size: 20px;
+  }
+
+  #sidebar .sidebar ul{
+    word-wrap: normal;
+    word-break: normal;
+  }
+
+  #sidebar ul li a{
+    color: #000;
+  }
+
+  #sidebar ul li:hover{
+    border: 1px solid #ddd;
+  }
+
+  #sidebar .collapsing {
+      -webkit-transition: none;
+      transition: none;
+      display: none;
+  }
+
+  #contentArea{
+    margin-top: 5em;
+  }
+
+  @media(min-width:576px){
+    /*#bookList .sidebar ul{
+    position: fixed;
+  }
+  #bookList .sidebar{
+    display: flex;
+  }
+  #bookList .sidebar ul{
+    max-width: 115px;
+  }*/
+  }
+
+  @media(max-width:575px){
+    /*#bookList .sidebar ul{
+      padding-bottom: 120px !important;
+  }
+    #bookList .sidebar ul{
+    width: 100%;
+  }*/
+  }
+
+
+  .navbar-light .navbar-toggler {
+      border-color: transparent;
+  }
+
+
+
+  .logo-title{
+    font-family: cursive, Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    font-size: 40px;
+  }
+
+  .navbar-brand span{
+    font-family: cursive, Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  }
+  .text-desc{
+    font-size: 14px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  #topNav .logo-sm{
+    width: 50px;
+    height: 50px;
+  }
+
+  #topNav .logo-title{
+    font-size: 28px;
+  }
+
+  #topNav .navbar-brand > .row{
+    margin-bottom: 0 !important;
+  }
+
+  #bookDetails{
+    list-style-type: none;
+    padding-left: 0;
+    background-color: #fff;
+    padding: 15px 15px;
+  }
+
+  #bookDetails li{
+    border-bottom: 1px solid #999;
+    padding-bottom: 15px;
+    padding-top: 15px;
+  }
+
+  #bookDetails li:last-child{
+    border-bottom: 0;
+  }
+
+  #bookDetails li span{
+    display: block;
+  }
+
+  #bookDetails .body{
+    font-size: 15px;
+  }
+  .avatar{
+    width: 100px !important;
+    height: 100px;
+    border-radius: 50px !important;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .bg-books{
+    background-image: url('../images/bgbooks.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /*.collapse.show.sidebar{
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    z-index: 100;
+    width: 100vw;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    top: 60px;
+    height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+  }*/
+
+  .overflow-hidden{
+    overflow: hidden;
+  }
+
+  .toolaction{
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+    z-index: 1000;
+  }
+
+  @media(max-width: 767px){
+    .toolaction{
+      right: 20px;
+      bottom: 20px;
+    }
+  }
+
+  .toolaction button{
+    border-radius: 25px !important;
+    width: 50px;
+    height: 50px;
+  }
+
+  @media(min-width:426px) and (max-width:767px){
+    #yetReturn .card-columns{
+      -webkit-column-count: 1;
+      -moz-column-count: 1;
+      column-count: 1;
+    }
+  }
+
+  @media(min-width:768px) and (max-width:991px){
+    #yetReturn .card-columns{
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+    }
+  }
+
+  .modal-dialog {
+    min-height: -webkit-calc(100vh - 60px);
+    min-height: -moz-calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+       -moz-box-orient: vertical;
+       -moz-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    overflow: auto;
+  }
+  @media (max-width: 768px) {
+    .modal-dialog {
+      min-height: -webkit-calc(100vh - 20px);
+      min-height: -moz-calc(100vh - 20px);
+      min-height: calc(100vh - 20px);
+    }
+  }
+
+  #image-cropper .preview{
+    width: 194px;
+    height: 290px;
+    background-color: rgba(0,0,0,0.2);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  #book-details .cover{
+    width: 100% !important;
+  }
+
+  .rating > span:hover:before {
+    content: "\2605";
+    position: absolute;
+  }
+
+  .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+  }
+
+  .userbar {
+      font-family: Arial, sans-serif;
+    position: relative;
+    display: inline-block;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 1);
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      border-top-right-radius: 7px;
+      border-bottom-left-radius: 7px;
+      text-shadow: 0px 0px 1px rgba(0,0,0,0.6), 0px 0px 3px rgba(0,0,0,0.6);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, 0.9);
+      text-transform: lowercase;
+      overflow: hidden;
+      line-height: 23px;
+      width: 125px;
+      margin: auto;
+  }
+
+  .userbar:after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 100%);
+  }
+
+  .userbar:before {
+      content: "";
+      display: block;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 12px;
+      background-blend-mode: overlay;
+      background-color: rgba(255, 255, 255, 0.17);
+  }
+
+  #bookList .book a{
+    position: absolute;
+    left: 20px;
+    top: 0;
+    font-size: 25px;
+  }
+
+  #notificationHolder{
+    position: absolute;
+    width: 300px;
+    display: none;
+  }

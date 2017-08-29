@@ -19,11 +19,15 @@ class UserClass {
    */
   static signup(req, res) {
     let password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
     const name = req.body.name || '';
     const email = req.body.email || '';
     password = User.generateHash(password) || '';
     const userGroup = req.body.group || '';
 
+    if (confirmPassword !== req.body.password) {
+      return res.status(400).send({ message: 'The password field is not the same ' });
+    }
     User.create({
       password,
       name,
