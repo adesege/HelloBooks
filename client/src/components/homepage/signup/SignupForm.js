@@ -27,15 +27,19 @@ class SignupForm extends React.Component {
     this.setState({ isLoading: true });
     this.props.userSignupRequest(this.state).then(
       (data) => {
+        document.getElementById('signupForm').reset();
+
         this.setState({
-          isLoading: false
+          isLoading: false,
+          name: '',
+          email: ''
         });
 
         this.props.addFlashMessage({
           type: 'success',
           text: data.data
         });
-        this.context.router.push('/');
+        // this.context.router.push('/');
       },
       (errors) => {
         this.setState({
@@ -52,7 +56,7 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="row">
+      <form onSubmit={this.onSubmit} className="row" id="signupForm">
         <div className="col-sm-10 offset-sm-1">
           <FlashMessagesList />
           <div className="form-group">

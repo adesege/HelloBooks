@@ -8,7 +8,7 @@ import Logout from '../components/Logout';
 import Profile from '../components/profile/';
 import Settings from '../components/Settings';
 
-import Login from '../components/homepage/Login';
+import Login from '../components/homepage/login/Login';
 import Signup from '../components/homepage/signup/Signup';
 import ResetPassword from '../components/homepage/ResetPassword';
 
@@ -29,6 +29,9 @@ import Notifications from '../components/notifications/';
 import HomepageLayout from '../layouts/homepage';
 import DashboardLayout from '../layouts/dashboard';
 
+import middleware from '../middlewares/middleware';
+import adminMiddleware from '../middlewares/adminMiddleware';
+
 export default (
   <Route path="/" component={App}>
 
@@ -39,22 +42,22 @@ export default (
       <Route path="logout" component={Logout} />
     </Route>
 
-    <Route component={DashboardLayout}>
+    <Route component={middleware(DashboardLayout)}>
       <Route path="dashboard" component={Dashboard} />
       <Route path="me" component={Profile} />
-      <Route path="settings" component={Settings} />
-      <Route path="notifications" component={Notifications} />
+      <Route path="settings" component={adminMiddleware(Settings)} />
+      <Route path="notifications" component={adminMiddleware(Notifications)} />
 
       <Route path="books">
         <IndexRoute component={Books}/>
-        <Route path="add" component={AddBooks} />
+        <Route path="add" component={adminMiddleware(AddBooks)} />
         <Route path="view" component={ViewBooks} />
         <Route path="histories" component={Histories} />
-        <Route path="categories" component={Categories} />
+        <Route path="categories" component={adminMiddleware(Categories)} />
 
         <Route path="stock-manager">
-          <IndexRoute component={StockManager}/>
-          <Route path="show" component={ShowStock}/>
+          <IndexRoute component={adminMiddleware(StockManager)}/>
+          <Route path="show" component={adminMiddleware(ShowStock)}/>
         </Route>
 
       </Route>

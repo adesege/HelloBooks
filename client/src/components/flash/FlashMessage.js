@@ -17,16 +17,21 @@ class FlashMessage extends React.Component {
         'alert-info': type === 'info'
       })}>
         {(Object.prototype.hasOwnProperty.call(text, 'message')
-        && typeof text.message === 'object') ? (
+        && typeof text.message === 'object') &&
             <ul>
               { text.message.map((value, index) =>
                 <li key={index}>{value.message}</li>
               ) }
             </ul>
-          )
-          : (
-            text.message
-          )}
+        }
+        {(Object.prototype.hasOwnProperty.call(text, 'message')
+            && typeof text === 'object') &&
+              text.message
+        }
+
+        {typeof text === 'string' &&
+          text
+        }
       </div>
     );
   }

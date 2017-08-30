@@ -1,9 +1,13 @@
 import React from 'react';
-import $ from 'jquery';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import logoIcon from '../../assets/images/logo-icon.png';
+import { logout } from '../../actions/auth';
+
+const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
-export default class Navigation extends React.Component {
+class Menu extends React.Component {
   componentDidMount() {
     const notiHolder = $('#notificationHolder');
     $('body').on('mouseenter', '#notificationInfo', (e) => {
@@ -14,7 +18,16 @@ export default class Navigation extends React.Component {
       notiHolder.hide();
     });
   }
+
+  logout(e) {
+    e.preventDefault();
+    this.props.logout();
+    this.context.router.push('/');
+  }
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+    const { group } = this.props.auth.user;
     return (
       <nav className="navbar navbar-light fixed-top justify-content-start bg-faded" id="topNav">
         <div className="navbar-collapse text-center" id="navbarNav">
@@ -42,9 +55,11 @@ export default class Navigation extends React.Component {
               ))}
             </div>
           </div>
+          {(isAuthenticated && group === 'admin') &&
           <button type="button" className="btn mr-sm-2 btn-sm btn-primary"><i className="fa fa-cog"></i></button>
+          }
           <button type="button" className="btn mr-sm-2 btn-sm btn-outline-info"><i className="fa fa-user"></i></button>
-          <button type="button" className="btn mr-sm-2 btn-sm btn-danger"><i className="fa fa-power-off"></i></button>
+          <button type="button" className="btn mr-sm-2 btn-sm btn-danger" onClick={this.logout.bind(this)}><i className="fa fa-power-off"></i></button>
           <form className="form-inline hidden-sm-down d-inline-flex">
             <div className="input-group">
               <input type="text" className="form-control form-control-sm" placeholder="Search here" aria-describedby="basic-addon1"/>
@@ -56,3 +71,18 @@ export default class Navigation extends React.Component {
     );
   }
 }
+
+Menu.propTypes = {
+  auth: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
+};
+Menu.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+export default connect(mapStateToProps, { logout })(Menu);
