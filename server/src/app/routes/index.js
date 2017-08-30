@@ -2,11 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-<<<<<<< HEAD
 router.get('*', (_, res) => { res.render('index.html'); }); // pipe template/index.html to view
-=======
-router.get('/', (_, res) => { res.render('index.html'); }); // pipe template/index.html to view
->>>>>>> 57180ba44b666f56ac38e6d5cb85e1cb5613caed
 
 // catch 404 and forward to error handler
 router.use((req, res, next) => {
