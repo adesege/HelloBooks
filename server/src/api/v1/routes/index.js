@@ -39,7 +39,7 @@ router.route('/books/stocks')
   .get(authMiddleware, adminMiddleware, StockManagerClass.get);
 
 
-// catch 404 and forward to error handler
+/* // catch 404 and forward to error handler
 router.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
@@ -55,5 +55,5 @@ router.use((err, req, res) => {
   res.status(err.status || 500);
   res.send({ message: res.locals.message, status: 'Not Found', code: err.status });
 });
-
+ */
 export default router;
