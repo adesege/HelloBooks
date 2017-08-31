@@ -81,7 +81,7 @@ class LoginForm extends React.Component {
           icon="lock"
         >
           <p
-            className="font-small blue-text d-flex justify-content-end">
+            className="font-small d-flex justify-content-end">
         Forgot <Link to="/reset-password" className="blue-text ml-1"> Password?</Link>
           </p>
         </InputField>
