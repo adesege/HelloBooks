@@ -25,7 +25,7 @@ class FlashMessage extends React.Component {
             </ul>
         }
         {(Object.prototype.hasOwnProperty.call(text, 'message')
-            && typeof text === 'object') &&
+            && typeof text.message === 'string') &&
               text.message
         }
 
