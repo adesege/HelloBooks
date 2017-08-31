@@ -10,7 +10,7 @@ import Settings from '../components/Settings';
 
 import Login from '../components/homepage/login/Login';
 import Signup from '../components/homepage/signup/Signup';
-import ResetPassword from '../components/homepage/ResetPassword';
+import ResetPassword from '../components/homepage/resetpassword/ResetPassword';
 
 import Dashboard from '../components/dashboard/Dashboard';
 import Histories from '../components/books/Histories';

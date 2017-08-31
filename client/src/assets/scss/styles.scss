@@ -1,6 +1,8 @@
 @import './_variables.scss';
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import './material.css';
 @import 'node_modules/font-awesome/scss/font-awesome.scss';
+@import './common.scss';
 
 body {
     font-size: 14px;
@@ -338,3 +340,10 @@ body {
     width: 300px;
     display: none;
   }
+
+  .md-form .prefix ~ input, .md-form .prefix ~ textarea {
+    padding-left: 3rem;
+    width: calc(100% - 3rem);
+    padding-right: 0px;
+    margin-left: 0px;
+}

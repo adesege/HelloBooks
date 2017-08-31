@@ -6,11 +6,11 @@ import { addFlashMessage } from '../actions/flashMessages';
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default function middleware(ComposedComponent) {
   class Middleware extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
       if (!this.props.isAuthenticated) {
         this.props.addFlashMessage({
           type: 'error',
-          text: 'You need to be logged in to access this page'
+          text: 'You need to be logged in to access that page'
         });
         this.context.router.push('/');
       }

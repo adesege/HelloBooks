@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import '../assets/css/styles.css';
 import '../assets/js/axios';
+import '../assets/js/material';
 
 window.$ = $;
 window.jQuery = $;

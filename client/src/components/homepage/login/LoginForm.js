@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import FlashMessagesList from '../../flash/FlashMessagesList';
 import setAuthorizationToken from '../../../assets/js/setAuthorizationToken';
+import InputField from '../../form/InputField';
+import Button from '../../form/Button';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class LoginForm extends React.Component {
@@ -59,27 +62,36 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="row">
-        <div className="col-sm-10 offset-sm-1">
-          <FlashMessagesList />
-          <div className="form-group">
-            <label className="sr-only" htmlFor="inlineFormInputGroup">Email address</label>
-            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div className="input-group-addon"><i className="fa fa-user"></i></div>
-              <input type="email" className="form-control" id="inlineFormInputGroup" placeholder="Email address" name="email" onChange={this.onChange} />
-            </div>
-          </div> { /* form-group */ }
-          <div className="form-group">
-            <label className="sr-only" htmlFor="inlineFormInputGroup">Password</label>
-            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div className="input-group-addon"><i className="fa fa-keyboard-o"></i></div>
-              <input type="password" className="form-control" id="inlineFormInputGroup" placeholder="Password" name="password" onChange={this.onChange} />
-            </div>
-          </div> { /* form-group */ }
-          <div className="form-group text-center">
-            <button disabled={this.state.isLoading} type="submit" className="btn btn-success btn-block" name="button">Login</button>
-          </div>
-        </div>
+      <form onSubmit={this.onSubmit}>
+        <FlashMessagesList />
+        <InputField
+          type="email"
+          label="Email address"
+          name="email"
+          value={this.state.email}
+          onChange={this.onChange}
+          icon="user"
+        />
+
+        <InputField
+          type="password"
+          label="Password"
+          name="password"
+          onChange={this.onChange}
+          icon="lock"
+        >
+          <p
+            className="font-small blue-text d-flex justify-content-end">
+        Forgot <Link to="/reset-password" className="blue-text ml-1"> Password?</Link>
+          </p>
+        </InputField>
+
+        <Button
+          disabled={this.state.isLoading}
+          className="btn-success btn-block"
+          name="Login"
+          label = "Login"
+        />
       </form>
     );
   }

@@ -6,7 +6,7 @@ import { addFlashMessage } from '../actions/flashMessages';
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default function adminMiddleware(ComposedComponent) {
   class AdminMiddleware extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
       if (this.props.group !== 'admin') {
         this.props.addFlashMessage({
           type: 'error',
