@@ -6,13 +6,13 @@ class InputField extends React.Component {
   render() {
     const { icon, type, placeholder, name, onChange, label, labelClass } = this.props;
     return (
-      <div className="md-form">
+      <div className="md-form form-sm">
         {icon &&
         <i className={`fa fa-${icon} prefix grey-text`} ></i>
         }
         <input
           type={type}
-          className="form-control"
+          className={icon ? 'form-control px-0' : 'form-control px-0'}
           id={name}
           placeholder={placeholder}
           name={name}

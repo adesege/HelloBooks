@@ -1,22 +1,43 @@
 import React from 'react';
-import $ from 'jquery';
-import { Link } from 'react-router';
-import image from '../../assets/images/2.jpg';
-
-window.$ = $;
-window.jQuery = $;
+import { connect } from 'react-redux';
+import { Route, Link } from 'react-router';
+import PropTypes from 'prop-types';
+import image from '../../../assets/images/2.jpg';
+import Button from '../../form/Button';
+import BooksList from './BooksList';
+import getBooks from '../../../actions/books';
+import BooksModal from './BooksModal';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
-export default class Histories extends React.Component {
+class Books extends React.Component {
+  constructor(props) {
+    super(props);
+    this.goToAddPage = this.goToAddPage.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getBooks();
+  }
+
+  goToAddPage(event) {
+    this.context.router.push('/books/add');
+  }
+
   render() {
     return (
       <div>
+        {this.props.children}
         <div className="toolaction">
-          <button type="button" className="btn btn-success" aria-pressed="false" autoComplete="off" data-toggle="tooltip" title="Add a new book"> <i className="fa fa-plus text-white"></i></button>
+          <Button
+            type="button"
+            icon="plus"
+            iconClass="text-white"
+            className="btn-success p-0"
+            id="add-books-btn"
+            onClick={this.goToAddPage}
+          />
         </div>
-        <h4 className="title mb-2 mr-4">Books
-          <Link to="/books/add"><i className="fa fa-plus-circle"></i></Link>
-        </h4>
+        <h4 className="title mb-2 mr-4">Books</h4>
         <div className="mb-4">
           <small>View books</small>
         </div>
@@ -41,9 +62,10 @@ export default class Histories extends React.Component {
           <input type="text" className="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0" placeholder="by author"/>
           <button type="submit" className="btn btn-sm btn-danger">filter</button>
         </form>
+        <BooksList content={this.props.books} />
         <div className="row">
           { [...Array(12)].map((val, index) => (
-            <div className="col-sm-6 col-md-6 col-lg-3 col-xs-12 mb-4">
+            <div className="col-sm-6 col-md-6 col-lg-3 col-xs-12 mb-4" key={index}>
               <div className="row">
                 <div className="col-sm-6 col-6 align-self-center">
                   <img className="img-thumbnail" src={image} alt="Card cap"/>
@@ -54,8 +76,8 @@ export default class Histories extends React.Component {
                   <h6 className="mb-1 text-muted"><small>June 1st, 2017</small></h6>
                   <p className="small mb-1"><span className="text-success d-block">Active</span>
                     <span className="text-danger d-block">Pending approval</span></p>
-                  <a href="#top" className="card-link" data-toggle="tooltip" title="Edit book"><i className="fa fa-pencil"></i></a>
-                  <a href="#top" className="card-link text-danger" data-toggle="tooltip" title="Delete"><i className="fa fa-remove"></i></a>
+                  <a href="#top" className="card-link"  title="Edit book"><i className="fa fa-pencil"></i></a>
+                  <a href="#top" className="card-link text-danger"  title="Delete"><i className="fa fa-remove"></i></a>
                 </div> {/* col sm 8 */}
               </div>{/* row */}
             </div>
@@ -65,3 +87,16 @@ export default class Histories extends React.Component {
     );
   }
 }
+Books.proptypes = {
+  books: PropTypes.array.isRequired,
+  getBooks: PropTypes.func.isRequired
+};
+
+Books.contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  books: state.books
+});
+export default connect(mapStateToProps, { getBooks })(Books);

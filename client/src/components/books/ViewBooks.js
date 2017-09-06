@@ -67,7 +67,7 @@ export default class Histories extends React.Component {
                   <div className="rating d-inline mr-2">
                     <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                   </div>
-                  <button className="btn btn-outline-info btn-sm mr-2" data-toggle="tooltip" title="Add an image">
+                  <button className="btn btn-outline-info btn-sm mr-2"  title="Add an image">
                     <i className="fa fa-camera-retro"></i>
                   </button>
                   <button className="btn btn-success btn-sm">Submit</button>
@@ -87,10 +87,10 @@ export default class Histories extends React.Component {
                 <div className="col-sm-10 col-8 col-md-8 col-lg-10 pr-0">
                   <p className="small mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   <div className="p-2 text-center text-lg-left">
-                    <a className="mr-3 mb-2" data-toggle="tooltip" title="Like" href="#top">
+                    <a className="mr-3 mb-2"  title="Like" href="#top">
                       <i className='fa fa-thumbs-up'></i>
                       <span>1 Likes</span></a>
-                    <a className="mr-2 mb-2" data-toggle="tooltip" title="Reply" href="#top">
+                    <a className="mr-2 mb-2"  title="Reply" href="#top">
                       <i className='fa fa-reply'></i>
                       <span>Reply</span>
                     </a>

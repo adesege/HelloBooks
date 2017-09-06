@@ -16,8 +16,8 @@ import Dashboard from '../components/dashboard/Dashboard';
 import Histories from '../components/books/Histories';
 import Categories from '../components/books/Categories';
 
-import Books from '../components/books/Books';
-import AddBooks from '../components/books/AddBooks';
+import Books from '../components/books/books/Books';
+import BooksModal from '../components/books/books/BooksModal';
 import ViewBooks from '../components/books/ViewBooks';
 
 import StockManager from '../components/books/stockmanager/StockManager';
@@ -49,8 +49,10 @@ export default (
       <Route path="notifications" component={adminMiddleware(Notifications)} />
 
       <Route path="books">
-        <IndexRoute component={Books}/>
-        <Route path="add" component={adminMiddleware(AddBooks)} />
+        <IndexRoute component={Books} />
+        <Route component={Books}>
+          <Route path="add" component={BooksModal} />
+          </Route>
         <Route path="view" component={ViewBooks} />
         <Route path="histories" component={Histories} />
         <Route path="categories" component={adminMiddleware(Categories)} />
