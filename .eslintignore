@@ -1,7 +1,7 @@
 node_modules/
 client/
 template/
-template/assets/js/**
+template/assets/**
 server/dist/**
 .idea/
 template/**/*.js
