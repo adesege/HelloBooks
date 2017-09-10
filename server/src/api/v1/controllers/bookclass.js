@@ -23,7 +23,6 @@ class BookClass {
     const bookURL = req.body.book_url || '';
     const ISBN = req.body.isbn || '';
     const bookCategoryId = req.body.book_category || 0;
-<<<<<<< HEAD
     const coverPhotoPath = req.body.coverPhotoPath || '';
     const documentPath = req.body.document_path || '';
     const userId = req.decoded.user;
@@ -33,11 +32,6 @@ class BookClass {
         record_date: req.body.stock_record_date
       };
     }
-=======
-    const coverPhotoId = req.body.cover_photo || 0;
-    const documentPath = req.body.document_path || '';
-    const userId = req.decoded.user;
->>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
     const stock = req.body.stock || {};
     stock.record_date = stock.recordDate || stock.record_date || '';
     delete req.body.stock;
@@ -63,7 +57,6 @@ class BookClass {
           return res.status(400)
             .send({ message: 'A book with the same title already exist' });
         }
-<<<<<<< HEAD
         Book.create({
           title,
           description,
@@ -86,38 +79,6 @@ class BookClass {
           })).catch(error => res.status(400).send({ message: error.errors })); // Stock manager create
         }).catch(error => res.status(400).send({ message: error.errors })); // Book create
       }).catch(error => res.status(400).send({ message: error.errors })); // Find by title
-=======
-        Book.findOne({ where: { ISBN } })
-          .then((bookIsbn) => {
-            if (bookIsbn !== null) {
-              return res.status(400)
-                .send({ message: 'A book with the same ISBN already exist' });
-            }
-
-            Book.create({
-              title,
-              description,
-              author,
-              publishedDate,
-              bookURL,
-              ISBN,
-              bookCategoryId,
-              coverPhotoId,
-              documentPath,
-              userId
-            }, {
-              fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
-            }).then((id) => {
-              const bookId = id.get('id');
-              stock.bookId = bookId;
-              stockManager.create(stock).then(() => res.status(201).send({
-                message: 'Book added successfully',
-                id: bookId
-              })).catch(error => res.status(400).send({ message: error.message })); // Stock manager create
-            }).catch(error => res.status(400).send({ message: error.message })); // Book create
-          }).catch(error => res.status(400).send({ message: error.message })); // find by ISBN
-      }).catch(error => res.status(400).send({ message: error.message })); // Find by title
->>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
   }
   /**
      * @method edit

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 I hope you love Font Awesome. If you've found it useful, please do me a favor and check out my latest project,
 Fort Awesome (https://fortawesome.com). It makes it easy to put the perfect icons on your website. Choose from our awesome,
 comprehensive icon sets or copy and paste your own.
@@ -6,12 +5,3 @@ comprehensive icon sets or copy and paste your own.
 Please. Check it out.
 
 -Dave Gandy
-=======
-I hope you love Font Awesome. If you've found it useful, please do me a favor and check out my latest project,
-Fort Awesome (https://fortawesome.com). It makes it easy to put the perfect icons on your website. Choose from our awesome,
-comprehensive icon sets or copy and paste your own.
-
-Please. Check it out.
-
--Dave Gandy
->>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8

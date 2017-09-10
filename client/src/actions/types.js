@@ -5,7 +5,6 @@ export const DELETE_FLASH_MESSAGE = 'DELETE_FLASH_MESSAGE';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 export const SET_BOOKS = 'SET_BOOKS';
-<<<<<<< HEAD
 
 export const ADD_BOOK = 'ADD_BOOK';
 
@@ -14,5 +13,3 @@ export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_IMAGE_DATA = 'SET_IMAGE_DATA';
 
 export const DELETE_IMAGE_DATA = 'DELETE_IMAGE_DATA';
-=======
->>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
