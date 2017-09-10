@@ -38,8 +38,13 @@ module.exports = {
       bookCategoryId: {
         type: Sequelize.INTEGER
       },
+<<<<<<< HEAD
       coverPhotoPath: {
         type: Sequelize.STRING
+=======
+      coverPhotoId: {
+        type: Sequelize.INTEGER
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
       },
       documentPath: {
         type: Sequelize.STRING(1000),

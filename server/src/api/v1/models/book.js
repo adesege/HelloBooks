@@ -1,10 +1,13 @@
 
+<<<<<<< HEAD
 import cloudinary from 'cloudinary';
 
 
 const CLOUDINARY_UPLOAD_PRESET = 'hellobooks';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/adesege/upload';
 
+=======
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
 export default (sequelize, DataTypes) => {
   const Book = sequelize.define('Book', {
     id: {
@@ -21,7 +24,10 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+<<<<<<< HEAD
       unique: true,
+=======
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
       validate: {
         notEmpty: {
           args: true,
@@ -66,7 +72,10 @@ export default (sequelize, DataTypes) => {
     ISBN: {
       type: DataTypes.STRING,
       allowNull: false,
+<<<<<<< HEAD
       unique: true,
+=======
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
       validate: {
         notEmpty: {
           args: true,
@@ -76,11 +85,15 @@ export default (sequelize, DataTypes) => {
     },
     publishedDate: DataTypes.STRING,
     bookCategoryId: DataTypes.INTEGER,
+<<<<<<< HEAD
     coverPhotoPath: {
       type: DataTypes.STRING,
       validate: {
       }
     },
+=======
+    coverPhotoId: DataTypes.INTEGER,
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
     documentPath: DataTypes.STRING(1000),
     userId: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER

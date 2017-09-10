@@ -1,16 +1,27 @@
 {
   "development": {
+<<<<<<< HEAD
     "username": "Adesege",
+=======
+    "username": "postgres",
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
     "password": "adesege",
     "database": "helloBooks",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
+<<<<<<< HEAD
     "username": "Adesege",
     "password": "adesege",
     "database": "helloBooksTest",
     "host": "localhost",
+=======
+    "username": "postgres",
+    "password": "",
+    "database": "travis",
+    "host": "127.0.0.1",
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
     "dialect": "postgres",
     "logging": false
   },

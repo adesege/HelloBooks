@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 env:
   global:
     - CC_TEST_REPORTER_ID=$CODECLIMATE_REPO_TOKEN
@@ -17,20 +18,40 @@ script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 node_js:
   - node
+=======
+language: node_js
+node_js:
+  - node
+env:
+  - TEST_DIR=server
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
 notifications:
   email: false
 services:
   - postgresql
 before_script:
+<<<<<<< HEAD
   - npm install -g codeclimate-test-reporter
   - npm install -g sequelize
   - psql -c 'drop database if exists testdb;' -U postgres
   - psql -c 'create database testdb;' -U postgres
   - psql -c "CREATE USER ekundayo WITH PASSWORD 'ekundayo';" -U postgres
+=======
+  - cd $TEST_DIR && npm install && npm install -g codeclimate-test-reporter
+  - npm install -g sequelize
+  - psql -c 'drop database if exists travis;' -U postgres
+  - psql -c 'create database travis;' -U postgres
+  - npm run build
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
   - NODE_ENV=test npm run test:db
 script:
   - npm test
 after_success:
+<<<<<<< HEAD
   - npm run coverage
   - codeclimate-test-reporter < coverage/lcov.info
+=======
+  - -npm run coverage
+  - CODECLIMATE_REPO_TOKEN=CODECLIMATE_TOKEN codeclimate-test-reporter < coverage/lcov.info
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
   - coveralls < coverage/lcov.info

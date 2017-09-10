@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 repo_token: $COVERALLS_TOKEN
+=======
+repo_token: COVERALLS_TOKEN
+>>>>>>> ad44c0c7b60423889f2e4e3e79b032885217e1d8
