@@ -1,2 +1,5 @@
 exclude_paths:
 - "template/**/*.js"
+- "node_modules/"
+- "templates/"
+- "server/dist/**"

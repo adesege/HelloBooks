@@ -22,11 +22,16 @@ class Modal extends React.Component {
   componentWillUnmount() {
     const modalId = this.modalId;
     const $modal = $(`#${modalId}`);
-    $('body').click((event) => {
-      if ($modal.attr('data-dismiss') !== 'modal') { console.log('==========');
-      $modal.modal('hide');
-      }
+    const $closeBtn = $modal.find('div button.btn[data-dismiss="modal"]');
+    $closeBtn.attr('isClicked', false);
+    $('html, body').on('click', $closeBtn, (e) => {
+      e.preventDefault();
+      $closeBtn.attr('isClicked', true);
     });
+
+    if (!$closeBtn.attr('isClicked')) {
+      $modal.modal('hide');
+    }
   }
 
 
@@ -65,7 +70,8 @@ Modal.propTypes = {
   btnClass: PropTypes.string,
   btnLabel: PropTypes.string,
   size: PropTypes.string,
-  headerOptions: PropTypes.array
+  headerOptions: PropTypes.array,
+  btnDisabled: PropTypes.bool
 
 };
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class InputField extends React.Component {
   render() {
-    const { icon, type, placeholder, name, onChange, label, labelClass } = this.props;
+    const { icon, type, placeholder, name, onChange, label, labelClass, hide, children, ...rest } = this.props;
     return (
-      <div className="md-form form-sm">
+      <div
+        className={classnames('md-form form-sm', { 'hide-input-container': hide })}>
         {icon &&
         <i className={`fa fa-${icon} prefix grey-text`} ></i>
         }
@@ -16,9 +18,10 @@ class InputField extends React.Component {
           id={name}
           placeholder={placeholder}
           name={name}
-          onChange={onChange} />
+          onChange={onChange}
+          {...rest} />
         <label className={labelClass} htmlFor={name}>{label}</label>
-        {this.props.children}
+        {children}
       </div>
     );
   }

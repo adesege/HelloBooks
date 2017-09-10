@@ -1,22 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router';
 import PropTypes from 'prop-types';
-import image from '../../../assets/images/2.jpg';
 import Button from '../../form/Button';
 import BooksList from './BooksList';
-import getBooks from '../../../actions/books';
-import BooksModal from './BooksModal';
+import { getBooks, setBooks } from '../../../actions/books';
+import { addFlashMessage } from '../../../actions/flashMessages';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Books extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+    };
     this.goToAddPage = this.goToAddPage.bind(this);
   }
 
   componentDidMount() {
-    this.props.getBooks();
+    this.props.getBooks().then(
+      (data) => {
+        this.props.setBooks(data.data);
+      },
+      (errors) => {
+        this.props.addFlashMessage({
+          type: 'error',
+          text: errors.response.data
+        });
+      }
+    );
   }
 
   goToAddPage(event) {
@@ -63,7 +73,7 @@ class Books extends React.Component {
           <button type="submit" className="btn btn-sm btn-danger">filter</button>
         </form>
         <BooksList content={this.props.books} />
-        <div className="row">
+        {/*         <div className="row">
           { [...Array(12)].map((val, index) => (
             <div className="col-sm-6 col-md-6 col-lg-3 col-xs-12 mb-4" key={index}>
               <div className="row">
@@ -71,18 +81,24 @@ class Books extends React.Component {
                   <img className="img-thumbnail" src={image} alt="Card cap"/>
                 </div>
                 <div className="col-sm-6 col-6 p-sm-0 align-self-center">
-                  <h6 className="mt-4 mt-sm-0 mb-0"><a href="/books/borrow/index.html">Book title</a></h6>
+                  <h6 className="mt-4 mt-sm-0 mb-0">
+                    <a href="/books/borrow/index.html">Book title</a>
+                    </h6>
                   <h6 className="mb-1 text-muted"><small>Author 1</small></h6>
                   <h6 className="mb-1 text-muted"><small>June 1st, 2017</small></h6>
                   <p className="small mb-1"><span className="text-success d-block">Active</span>
                     <span className="text-danger d-block">Pending approval</span></p>
-                  <a href="#top" className="card-link"  title="Edit book"><i className="fa fa-pencil"></i></a>
-                  <a href="#top" className="card-link text-danger"  title="Delete"><i className="fa fa-remove"></i></a>
-                </div> {/* col sm 8 */}
-              </div>{/* row */}
+                  <a href="#top" className="card-link" title="Edit book">
+                    <i className="fa fa-pencil"></i>
+                    </a>
+                  <a href="#top" className="card-link text-danger" title="Delete">
+                    <i className="fa fa-remove"></i>
+                    </a>
+                </div>
+              </div>
             </div>
           ))}
-        </div>
+        </div> */}      
       </div>
     );
   }
@@ -99,4 +115,4 @@ Books.contextTypes = {
 const mapStateToProps = state => ({
   books: state.books
 });
-export default connect(mapStateToProps, { getBooks })(Books);
+export default connect(mapStateToProps, { getBooks, addFlashMessage, setBooks })(Books);

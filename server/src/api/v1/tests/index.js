@@ -21,15 +21,13 @@ const admin = {
   group: 'admin'
 };
 const book = {
-  title: 'Half of a yellow sun',
+  title: `Half of a yellow sun ${faker.random.number()}`,
   description: 'Half of a yellow sun is a book by Chimamanda Adichie',
   author: 'Chimamanda Adichie',
   published_date: '07-09-2017',
   isbn: faker.random.number().toString(),
-  stock: {
-    quantity: 12,
-    recordDate: '08-09-2017'
-  }
+  stock_quantity: 12,
+  stock_record_date: '08-09-2017'
 };
 const stock = {
   quantity: 3,
@@ -233,6 +231,7 @@ describe('API Tests', () => { // Describe the API test suite
           .send(book)
           .set('authenticate-token', token)
           .end((err, res) => {
+            console.log(res.body);
             expect(res.statusCode).to.equal(200);
             expect(res.body.message).to.equal('Book successfully updated');
             expect(res.body).to.be.an('object');

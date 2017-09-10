@@ -52,7 +52,8 @@ export default (
         <IndexRoute component={Books} />
         <Route component={Books}>
           <Route path="add" component={BooksModal} />
-          </Route>
+          <Route path="edit/:id" component={BooksModal} />
+        </Route>
         <Route path="view" component={ViewBooks} />
         <Route path="histories" component={Histories} />
         <Route path="categories" component={adminMiddleware(Categories)} />

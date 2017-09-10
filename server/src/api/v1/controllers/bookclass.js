@@ -23,9 +23,15 @@ class BookClass {
     const bookURL = req.body.book_url || '';
     const ISBN = req.body.isbn || '';
     const bookCategoryId = req.body.book_category || 0;
-    const coverPhotoId = req.body.cover_photo || 0;
+    const coverPhotoPath = req.body.coverPhotoPath || '';
     const documentPath = req.body.document_path || '';
     const userId = req.decoded.user;
+    if (req.body.stock_quantity || req.body.stock_record_date) {
+      req.body.stock = {
+        quantity: req.body.stock_quantity,
+        record_date: req.body.stock_record_date
+      };
+    }
     const stock = req.body.stock || {};
     stock.record_date = stock.recordDate || stock.record_date || '';
     delete req.body.stock;
@@ -51,36 +57,28 @@ class BookClass {
           return res.status(400)
             .send({ message: 'A book with the same title already exist' });
         }
-        Book.findOne({ where: { ISBN } })
-          .then((bookIsbn) => {
-            if (bookIsbn !== null) {
-              return res.status(400)
-                .send({ message: 'A book with the same ISBN already exist' });
-            }
-
-            Book.create({
-              title,
-              description,
-              author,
-              publishedDate,
-              bookURL,
-              ISBN,
-              bookCategoryId,
-              coverPhotoId,
-              documentPath,
-              userId
-            }, {
-              fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoId', 'documentPath']
-            }).then((id) => {
-              const bookId = id.get('id');
-              stock.bookId = bookId;
-              stockManager.create(stock).then(() => res.status(201).send({
-                message: 'Book added successfully',
-                id: bookId
-              })).catch(error => res.status(400).send({ message: error.message })); // Stock manager create
-            }).catch(error => res.status(400).send({ message: error.message })); // Book create
-          }).catch(error => res.status(400).send({ message: error.message })); // find by ISBN
-      }).catch(error => res.status(400).send({ message: error.message })); // Find by title
+        Book.create({
+          title,
+          description,
+          author,
+          publishedDate,
+          bookURL,
+          ISBN,
+          bookCategoryId,
+          coverPhotoPath,
+          documentPath,
+          userId
+        }, {
+          fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoPath', 'documentPath']
+        }).then((id) => {
+          const bookId = id.get('id');
+          stock.bookId = bookId;
+          stockManager.create(stock).then(() => res.status(201).send({
+            message: 'Book added successfully',
+            id: bookId
+          })).catch(error => res.status(400).send({ message: error.errors })); // Stock manager create
+        }).catch(error => res.status(400).send({ message: error.errors })); // Book create
+      }).catch(error => res.status(400).send({ message: error.errors })); // Find by title
   }
   /**
      * @method edit
