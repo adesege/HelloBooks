@@ -5,3 +5,6 @@ node_modules/
 client/src/assets/css/*.css
 server/dist/**
 client/build/**
+coverage/
+.nyc_output/
+.DS_STORE

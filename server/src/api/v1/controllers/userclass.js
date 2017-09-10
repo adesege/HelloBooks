@@ -23,7 +23,7 @@ class UserClass {
     const name = req.body.name || '';
     const email = req.body.email || '';
     password = User.generateHash(password) || '';
-    const userGroup = req.body.group || '';
+    const userGroup = req.body.group || 'user';
 
     if (confirmPassword !== req.body.password) {
       return res.status(400).send({ message: 'The password field is not the same ' });

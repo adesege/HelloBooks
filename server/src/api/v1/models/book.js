@@ -15,6 +15,7 @@ export default (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
@@ -59,6 +60,7 @@ export default (sequelize, DataTypes) => {
     ISBN: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
@@ -68,7 +70,11 @@ export default (sequelize, DataTypes) => {
     },
     publishedDate: DataTypes.STRING,
     bookCategoryId: DataTypes.INTEGER,
-    coverPhotoId: DataTypes.INTEGER,
+    coverPhotoPath: {
+      type: DataTypes.STRING,
+      validate: {
+      }
+    },
     documentPath: DataTypes.STRING(1000),
     userId: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER

@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import triggerUpload from '../../assets/js/script';
+import triggerUpload from '../../../assets/js/script';
 
 window.$ = $;
 window.jQuery = $;

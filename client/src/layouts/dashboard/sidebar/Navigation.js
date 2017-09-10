@@ -1,16 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
-export default class Navigation extends React.Component {
+class Navigation extends React.Component {
   componentDidMount() {
     $('.closeBtn').click(function (e) { // eslint-disable-line func-names
       $(this).parents('#sidebar').removeClass('show');
     });
   }
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+    const { group } = this.props.auth.user;
     return (
       <div className="collapse sidebar mb-3 h-100" id="sidebar"><ul className="nav flex-column">
         <li className="nav-item closeBtn">
@@ -26,21 +31,25 @@ export default class Navigation extends React.Component {
             <i className="fa fa-bookmark"></i> History
           </Link>
         </li>
+        {(isAuthenticated && group === 'admin') &&
         <li className="nav-item">
           <Link className="nav-link" to="/books/categories">
             <i className="fa fa-th-list"></i> Book category
           </Link>
         </li>
+        }
         <li className="nav-item">
           <Link className="nav-link" to="/books">
             <i className="fa fa-book"></i> Books
           </Link>
         </li>
+        {(isAuthenticated && group === 'admin') &&
         <li className="nav-item">
           <Link className="nav-link" to="/books/stock-manager">
             <i className="fa fa-archive"></i> Stock Manager
           </Link>
         </li>
+        }
         <li className="nav-item">
           <Link className="nav-link" to="/me">
             <i className="fa fa-user"></i> Profile
@@ -51,16 +60,13 @@ export default class Navigation extends React.Component {
             <i className="fa fa-search-plus"></i> Search
           </Link>
         </li>
+        {(isAuthenticated && group === 'admin') &&
         <li className="nav-item">
           <Link className="nav-link" to="/settings">
             <i className="fa fa-cog"></i> Settings
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/logout">
-            <i className="fa fa-power-off"></i> Logout
-          </Link>
-        </li>
+        }
         <li className="nav-item">
           <a className="nav-link disabled">&copy; 2017. All rights reserved.</a>
         </li>
@@ -68,3 +74,13 @@ export default class Navigation extends React.Component {
     );
   }
 }
+
+Navigation.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+export default connect(mapStateToProps)(Navigation);

@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import FlashMessagesList from '../../flash/FlashMessagesList';
+import InputField from '../../form/InputField';
+import Button from '../../form/Button';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class SignupForm extends React.Component {
@@ -27,15 +30,19 @@ class SignupForm extends React.Component {
     this.setState({ isLoading: true });
     this.props.userSignupRequest(this.state).then(
       (data) => {
+        document.getElementById('signupForm').reset();
+
         this.setState({
-          isLoading: false
+          isLoading: false,
+          name: '',
+          email: ''
         });
 
         this.props.addFlashMessage({
           type: 'success',
           text: data.data
         });
-        this.context.router.push('/');
+        // this.context.router.push('/');
       },
       (errors) => {
         this.setState({
@@ -52,66 +59,51 @@ class SignupForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit} className="row">
-        <div className="col-sm-10 offset-sm-1">
-          <FlashMessagesList />
-          <div className="form-group">
-            <label className="sr-only">Name</label>
-            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div className="input-group-addon"><i className="fa fa-user"></i></div>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Your full name"
-                value={this.state.name}
-                name="name"
-                onChange={this.onChange}
-              />
-            </div>
-          </div> { /* form-group */ }
-          <div className="form-group">
-            <label className="sr-only">Email address</label>
-            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div className="input-group-addon"><i className="fa fa-envelope"></i></div>
-              <input
-                type="email"
-                className="form-control"
-                placeholder="Email address"
-                value={this.state.email}
-                name="email"
-                onChange={this.onChange}
-              />
-            </div>
-          </div> { /* form-group */ }
-          <div className="form-group">
-            <label className="sr-only">Password</label>
-            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div className="input-group-addon"><i className="fa fa-key"></i></div>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Your password"
-                name="password"
-                onChange={this.onChange}
-              />
-            </div>
-          </div> { /* form-group */ }
-          <div className="form-group">
-            <label className="sr-only">Confirm password</label>
-            <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div className="input-group-addon"><i className="fa fa-keyboard-o"></i></div>
-              <input
-                type="password"
-                className="form-control"
-                placeholder="Your password again"
-                name="confirmPassword"
-                onChange={this.onChange}
-              />
-            </div>
-          </div> { /* form-group */ }
-          <div className="form-group text-center">
-            <button disabled={this.state.isLoading} type="submit" className="btn btn-success btn-block" name="button">Create my account</button>
+      <form onSubmit={this.onSubmit} id="signupForm">
+        <FlashMessagesList />
+        <InputField
+          label="Name"
+          name="name"
+          onChange={this.onChange}
+          value={this.state.name}
+          icon="user"
+        />
+
+        <InputField
+          label="Email address"
+          name="email"
+          onChange={this.onChange}
+          value={this.state.email}
+          icon="envelope"
+        />
+
+        <InputField
+          label="Password"
+          name="password"
+          onChange={this.onChange}
+          icon="lock"
+        />
+        <InputField
+          label="Password again"
+          name="confirmPassword"
+          onChange={this.onChange}
+          icon="lock"
+        />
+
+
+        <div className="row align-items-center mb-4">
+          <div className="col-md-3 col-md-6">
+            <Button
+              disabled={this.state.isLoading}
+              className="btn-success btn-block z-depth-1"
+              name="Signup"
+              label = "Signup"
+            />
           </div>
+          <div className="col-md-6">
+            <p className="font-small grey-text mb-0 d-flex justify-content-end"><Link to="/" className="blue-text ml-1">I already have an account</Link></p>
+          </div>
+
         </div>
       </form>
     );

@@ -1,6 +1,8 @@
 @import './_variables.scss';
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import './material.css';
 @import 'node_modules/font-awesome/scss/font-awesome.scss';
+@import './common.scss';
 
 body {
     font-size: 14px;
@@ -224,7 +226,11 @@ body {
     }
   }
 
-  .modal-dialog {
+body.modal-open {
+    overflow: hidden !important;
+}
+
+.modal-dialog {
     min-height: -webkit-calc(100vh - 60px);
     min-height: -moz-calc(100vh - 60px);
     min-height: calc(100vh - 60px);
@@ -245,14 +251,28 @@ body {
        -moz-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    overflow: auto;
+    overflow-y: auto;
   }
+  .modal-body{
+    max-height: -webkit-calc(100vh - 200px);
+    max-height: -moz-calc(100vh - 200px);
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
   @media (max-width: 768px) {
     .modal-dialog {
       min-height: -webkit-calc(100vh - 20px);
       min-height: -moz-calc(100vh - 20px);
       min-height: calc(100vh - 20px);
     }
+    .modal-body{
+    max-height: -webkit-calc(100vh - 160px);
+    max-height: -moz-calc(100vh - 160px);
+      max-height: calc(100vh - 160px);
+    }
+
   }
 
   #image-cropper .preview{
@@ -338,3 +358,17 @@ body {
     width: 300px;
     display: none;
   }
+
+.text-black{
+  color: #000 !important;
+}
+
+.btn{
+  padding: 0.5rem 1rem !important;
+}
+
+.hide-input-container{
+  width: 0px;
+  height: 0px;
+  margin: 0px;
+}

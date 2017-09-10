@@ -44,8 +44,8 @@ export default class Histories extends React.Component {
                   <h6 className="mb-1 text-muted"><small>Author 1</small></h6>
                   <p className="mb-0"><small>June 27th, 2017</small></p>
                   <p className="mb-0 text-danger"><small>3 days since book was borrowed</small></p>
-                  <a href="#top" className="card-link d-block" data-toggle="tooltip" title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
-                  <a href="#top" className="card-link d-block ml-0" data-toggle="tooltip" title="I'm yet to return this book"><small>Return</small></a>
+                  <a href="#top" className="card-link d-block"  title="Book returned" onclick="$('.showBorrow').toggleClass('hidden-xl-down');" ><small>Returned</small></a>
+                  <a href="#top" className="card-link d-block ml-0"  title="I'm yet to return this book"><small>Return</small></a>
                   <div className="mt-4 hidden-xl-down showBorrow">
                     <form className="justify-content-center">
                       <label className="sr-only">When will you return this book?</label>

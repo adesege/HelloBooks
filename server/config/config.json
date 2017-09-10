@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "Adesege",
     "password": "adesege",
     "database": "helloBooks",
     "host": "localhost",
