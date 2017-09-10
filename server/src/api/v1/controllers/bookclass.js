@@ -69,16 +69,33 @@ class BookClass {
           documentPath,
           userId
         }, {
-          fields: ['title', 'description', 'author', 'userId', 'publishedDate', 'bookURL', 'ISBN', 'bookCategoryId', 'coverPhotoPath', 'documentPath']
+          fields: [
+            'title',
+            'description',
+            'author',
+            'userId',
+            'publishedDate',
+            'bookURL',
+            'ISBN',
+            'bookCategoryId',
+            'coverPhotoPath',
+            'documentPath'
+          ]
         }).then((id) => {
           const bookId = id.get('id');
           stock.bookId = bookId;
           stockManager.create(stock).then(() => res.status(201).send({
             message: 'Book added successfully',
             id: bookId
-          })).catch(error => res.status(400).send({ message: error.errors })); // Stock manager create
-        }).catch(error => res.status(400).send({ message: error.errors })); // Book create
-      }).catch(error => res.status(400).send({ message: error.errors })); // Find by title
+          })).catch(error =>
+            res.status(400)
+              .send({ message: error.errors })); // Stock manager create
+        }).catch(error =>
+          res.status(400)
+            .send({ message: error.errors })); // Book create
+      }).catch(error =>
+        res.status(400)
+          .send({ message: error.errors })); // Find by title
   }
   /**
      * @method edit
