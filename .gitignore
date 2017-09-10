@@ -7,3 +7,4 @@ server/dist/**
 client/build/**
 coverage/
 .nyc_output/
+.DS_STORE
