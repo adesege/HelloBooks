@@ -1,7 +1,10 @@
 node_modules/
+**/node_nodules/
 client/
 template/
 template/assets/**
 server/dist/**
 .idea/
 template/**/*.js
+client/**/**/*.scss
+client/public/**
