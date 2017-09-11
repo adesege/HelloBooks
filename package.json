@@ -7,7 +7,7 @@
   },
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
-    "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly | coveralls",
+    "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha server/dist/api/v1/tests/index.js",
     "webpack": "webpack",
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon --watch server/dist ./server/dist/server.js",
