@@ -27,6 +27,13 @@ router.route('/books')
   .post(authMiddleware, BookClass.create)
   .get(authMiddleware, BookClass.get);
 
+router.route('/books/stocks')
+  .post(authMiddleware, adminMiddleware, StockManagerClass.create)
+  .get(authMiddleware, adminMiddleware, StockManagerClass.get);
+
+router.route('/books/categories')
+  .post(authMiddleware, adminMiddleware, BookCategoryClass.add)
+  .get(authMiddleware, BookCategoryClass.get);
 
 router.route('/books/:id')
   .get(authMiddleware, authMiddleware, BookClass.get)
@@ -35,17 +42,11 @@ router.route('/books/:id')
 router.route('/books/:bookId')
   .put(authMiddleware, authMiddleware, BookClass.edit);
 
-router.route('/books/categories')
-  .post(authMiddleware, adminMiddleware, BookCategoryClass.add)
-  .get(authMiddleware, authMiddleware, BookCategoryClass.get);
 
 router.route('/books/categories/:categoryId')
   .put(authMiddleware, adminMiddleware, BookCategoryClass.update)
   .delete(authMiddleware, adminMiddleware, BookCategoryClass.delete);
 
-router.route('/books/stocks')
-  .post(authMiddleware, adminMiddleware, StockManagerClass.create)
-  .get(authMiddleware, adminMiddleware, StockManagerClass.get);
 router.route('/books/stocks/:stockId')
   .delete(authMiddleware, adminMiddleware, StockManagerClass.delete);
 

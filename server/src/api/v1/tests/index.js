@@ -408,4 +408,19 @@ describe('API Tests', () => { // Describe the API test suite
       });
     });
   });
+
+  describe('Client App', () => { // Describe Client App
+    describe('# Entry point', () => { // Describe entry point
+      it('should return 200 Ok', (done) => {
+        request(app)
+          .get('/test')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+  });
 });

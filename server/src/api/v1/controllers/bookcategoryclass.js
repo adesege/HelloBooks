@@ -67,7 +67,7 @@ class BookCategoryClass {
           return res.status(200).send({ message: category });
         }
         return res.status(204).send({ message: 'No record available' });
-      }).catch(error => res.status(500).send({ message: error.message }));
+      }).catch(error => res.status(400).send({ message: error.message }));
   }
 
   /**
