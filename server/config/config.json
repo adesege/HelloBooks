@@ -1,0 +1,24 @@
+{
+  "development": {
+    "username": "Adesege",
+    "password": "adesege",
+    "database": "helloBooks",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "",
+    "database": "travis",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "production": {
+    "username": "drqrrewj",
+    "password": "2UyDrY3zBC_8Z9BfIyUmVjQVOlGbljTP",
+    "database": "drqrrewj",
+    "host": "babar.elephantsql.com",
+    "dialect": "postgres"
+  }
+}

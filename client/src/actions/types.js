@@ -1,0 +1,21 @@
+export const ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
+
+export const DELETE_FLASH_MESSAGE = 'DELETE_FLASH_MESSAGE';
+
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+export const SET_BOOKS = 'SET_BOOKS';
+
+export const ADD_BOOK = 'ADD_BOOK';
+
+export const SET_IS_LOADING = 'SET_IS_LOADING';
+
+export const SET_IMAGE_DATA = 'SET_IMAGE_DATA';
+
+export const DELETE_IMAGE_DATA = 'DELETE_IMAGE_DATA';
+
+export const BOOK_FETCHED = 'BOOK_FETCHED';
+
+export const BOOK_UPDATED = 'BOOK_UPDATED';
+
+export const BOOK_DELETED = 'BOOK_DELETED';

@@ -1,6 +1,10 @@
 node_modules/
-server/src/config.json
+**/node_modules/
 .env
 .idea/
-server/dist/**/*.js
-!server/dist/config
+client/src/assets/css/*.css
+server/dist/**
+client/build/**
+coverage/
+.nyc_output/
+.DS_STORE

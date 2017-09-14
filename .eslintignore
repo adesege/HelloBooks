@@ -1,6 +1,9 @@
 node_modules/
 client/
 template/
-template/assets/js/**
+template/assets/**
 server/dist/**
 .idea/
+template/**
+client/src/assets/**
+client/public/**
