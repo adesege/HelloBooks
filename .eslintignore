@@ -1,5 +1,4 @@
 node_modules/
-client/
 template/
 template/assets/**
 server/dist/**
@@ -7,3 +6,6 @@ server/dist/**
 template/**
 client/src/assets/**
 client/public/**
+coverage/
+.nyc_output/
+server/src/docs/
