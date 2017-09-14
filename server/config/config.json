@@ -7,9 +7,9 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "Adesege",
-    "password": "adesege",
-    "database": "helloBooksTest",
+    "username": "postgres",
+    "password": "",
+    "database": "travis",
     "host": "localhost",
     "dialect": "postgres",
     "logging": false
