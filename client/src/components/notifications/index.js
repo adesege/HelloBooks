@@ -25,9 +25,9 @@ export default class Notifications extends React.Component {
                   <p className="title font-weight-bold mb-1">A very good notification title <span className="text-success mx-3 small">read</span><span className="text-warning small">unread</span></p>
                   <p className="small mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                   <div className="p-2 text-center text-lg-left">
-                    <button className="btn btn-sm btn-success mr-2 mb-2" type="button"  title="Returned book"><i className='fa fa-check'></i> <span className="hidden-xs-down">returned</span></button>
-                    <button className="btn btn-sm btn-info mr-2 mb-2" type="button"  title="Borrowed book"><i className='fa fa-info'></i> <span className="hidden-xs-down">borrowed</span></button>
-                    <button className="btn btn-sm btn-warning mr-2 mb-2" type="button"  title="User has been surcharged"><i className='fa fa-check'></i> <span className="hidden-xs-down">surcharged</span></button>
+                    <button className="btn btn-sm btn-success mr-2 mb-2" type="button" title="Returned book"><i className='fa fa-check'></i> <span className="hidden-xs-down">returned</span></button>
+                    <button className="btn btn-sm btn-info mr-2 mb-2" type="button" title="Borrowed book"><i className='fa fa-info'></i> <span className="hidden-xs-down">borrowed</span></button>
+                    <button className="btn btn-sm btn-warning mr-2 mb-2" type="button" title="User has been surcharged"><i className='fa fa-check'></i> <span className="hidden-xs-down">surcharged</span></button>
                   </div>
                 </div>
               </div>

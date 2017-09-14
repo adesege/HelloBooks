@@ -18,7 +18,8 @@ import Categories from '../components/books/Categories';
 
 import Books from '../components/books/books/Books';
 import BooksModal from '../components/books/books/BooksModal';
-import ViewBooks from '../components/books/ViewBooks';
+import DeleteModal from '../components/books/books/DeleteModal';
+import ViewBooks from '../components/books/view/ViewBooks';
 
 import StockManager from '../components/books/stockmanager/StockManager';
 import ShowStock from '../components/books/stockmanager/ShowStock';
@@ -53,8 +54,9 @@ export default (
         <Route component={Books}>
           <Route path="add" component={BooksModal} />
           <Route path="edit/:id" component={BooksModal} />
+          <Route path="delete/:id" component={DeleteModal} />
         </Route>
-        <Route path="view" component={ViewBooks} />
+        <Route path="view/:id" component={ViewBooks} />
         <Route path="histories" component={Histories} />
         <Route path="categories" component={adminMiddleware(Categories)} />
 

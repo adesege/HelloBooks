@@ -65,10 +65,10 @@ export default class StockManager extends React.Component {
                   </h6>
                   <h6 className="mb-1 text-muted"><small>Author 1</small></h6>
                   <h6 className="mb-1 text-muted"><small>June 1st, 2017</small></h6>
-                  <Link to="/books/stock-manager/show" className="card-link"  title="Edit book">
+                  <Link to="/books/stock-manager/show" className="card-link" title="Edit book">
                     <i className="fa fa-pencil"></i>
                   </Link>
-                  <a href="#top" className="card-link text-danger"  title="Delete">
+                  <a href="#top" className="card-link text-danger" title="Delete">
                     <i className="fa fa-remove"></i>
                   </a>
                 </div>{/* col sm 8 */}

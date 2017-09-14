@@ -43,7 +43,7 @@ class StockManagerClass {
      * @returns {void}
      */
   static delete(req, res) { // delete a book
-    const id = req.query.id || '';
+    const id = req.params.stockId || '';
     stockManager.findById(id)
       .then((stock) => {
         if (stock !== null) {
