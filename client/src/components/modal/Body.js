@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Body extends React.Component {

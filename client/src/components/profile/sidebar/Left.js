@@ -50,7 +50,7 @@ export default class LeftSidebar extends React.Component {
                 <div className="userbar" style={{ backgroundColor: '#b52ac5' }}>Master</div>
               </span>
             </div>
-            <a href="#top" className="card-link editProfile"  title="Edit">
+            <a href="#top" className="card-link editProfile" title="Edit">
               <i className="fa fa-pencil-square"></i> Edit &nbsp;
             </a>
             <div id="editProfile" className="mt-4 hidden-xl-down">
@@ -58,7 +58,7 @@ export default class LeftSidebar extends React.Component {
                 <div className="form-group">
                   <label className="sr-only">Name</label>
                   <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div className="input-group-addon form-control-sm bg-danger text-white"  title="Please input your name">
+                    <div className="input-group-addon form-control-sm bg-danger text-white" title="Please input your name">
                       <i className="fa fa-user"></i>
                     </div>
                     <input type="text" className="form-control form-control-sm" placeholder="Your name" required/>
@@ -67,7 +67,7 @@ export default class LeftSidebar extends React.Component {
                 <div className="form-group">
                   <label className="sr-only">Email address</label>
                   <div className="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div className="input-group-addon form-control-sm bg-info text-white"  title="Please input your email address"><i className="fa fa-envelope"></i></div>
+                    <div className="input-group-addon form-control-sm bg-info text-white" title="Please input your email address"><i className="fa fa-envelope"></i></div>
                     <input type="email" className="form-control form-control-sm" placeholder="Email address"/>
                   </div>
                 </div>{/* form-group */}
@@ -76,7 +76,7 @@ export default class LeftSidebar extends React.Component {
                 </div>
               </form>
             </div> {/* editProfile */}
-            <a href="#top" className="card-link changePassword"  title="Change your password"><i className="fa fa-key"></i> Change password</a>
+            <a href="#top" className="card-link changePassword" title="Change your password"><i className="fa fa-key"></i> Change password</a>
             <div id="changePassword" className="mt-4 hidden-xl-down">
               <form action="/login" method="post">
                 <div className="form-group">

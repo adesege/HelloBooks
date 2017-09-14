@@ -9,7 +9,8 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import routes from './routes';
 import rootReducer from './reducers';
 import setAuthorizationToken from './assets/js/setAuthorizationToken';
-import { setCurrentUser, logout } from './actions/auth';
+import { setCurrentUser } from './actions/auth';
+import { addFlashMessage } from './actions/flashMessages';
 
 const store = createStore(
   rootReducer,
@@ -32,9 +33,12 @@ axios.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   store.dispatch(hideLoading());
-  // catches if the session ended!
   if (error.response.status === 401 || error.response.status === 403) {
-    store.dispatch(logout());
+    store.dispatch(addFlashMessage({
+      type: 'error',
+      text: error.response.data
+    }));
+    // store.dispatch(logout());
   }
   return Promise.reject(error);
 });
@@ -47,7 +51,6 @@ if (localStorage.authToken) {
 render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes}>
-      {/* <Route path="signup" component={Signup}/> */}
     </Router>
   </Provider>, document.getElementById('app')
 );

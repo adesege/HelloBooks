@@ -8,11 +8,11 @@ class Header extends React.Component {
     return (
       <div className="modal-header">
         <h5 className="modal-title">{title}</h5>
-        <div>
+        { headerOptions && <div>
           {
             headerOptions.map((element, index) => element)
           }
-        </div>
+        </div> }
       </div>
     );
   }

@@ -25,7 +25,7 @@ export default class Profile extends React.Component {
                     <h6 className="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/1230">Book title</a></h6>
                     <h6 className="mb-1 text-muted"><small>Author 1</small></h6>
                     <h6 className="mb-1 text-muted"><small>June 1st, 2017</small></h6>
-                    <a href="#top" className="card-link text-success"  title="Return book">Return</a>
+                    <a href="#top" className="card-link text-success" title="Return book">Return</a>
                   </div>{/* col sm 8 */}
                 </div>{/* row  */}
               </div>

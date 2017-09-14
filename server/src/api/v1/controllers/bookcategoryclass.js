@@ -38,7 +38,7 @@ class BookCategoryClass {
 * @returns {void}
 */
   static delete(req, res) { // delete a book
-    const id = req.body.id || '';
+    const id = req.params.categoryId || '';
     bookCategory.findById(id)
       .then((category) => {
         if (category !== null) {
@@ -67,7 +67,7 @@ class BookCategoryClass {
           return res.status(200).send({ message: category });
         }
         return res.status(204).send({ message: 'No record available' });
-      }).catch(error => res.status(500).send({ message: error.message }));
+      }).catch(error => res.status(400).send({ message: error.message }));
   }
 
   /**
@@ -78,7 +78,7 @@ class BookCategoryClass {
 * @return {object} response
   */
   static update(req, res) {
-    const id = req.query.id || '';
+    const id = req.params.categoryId || '';
     const name = req.body.name || '';
     bookCategory.findById(id)
       .then((category) => {

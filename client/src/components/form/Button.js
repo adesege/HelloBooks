@@ -19,7 +19,7 @@ class Button extends React.Component {
       <button
         disabled={disabled}
         type={type}
-        className={`btn ${className}`}
+        className={`btn btn-sm ${className}`}
         name={name}
         {...rest}
       >

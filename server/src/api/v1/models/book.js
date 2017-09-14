@@ -84,5 +84,12 @@ export default (sequelize, DataTypes) => {
     tableName: 'Book'
   });
 
+  Book.associate = (models) => {
+    Book.hasMany(models.stockManager, {
+      foreignKey: 'bookId',
+      as: 'stock'
+    });
+  };
+
   return Book;
 };

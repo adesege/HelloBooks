@@ -4,4 +4,6 @@ template/
 template/assets/**
 server/dist/**
 .idea/
-template/**/*.js
+template/**
+client/src/assets/**
+client/public/**

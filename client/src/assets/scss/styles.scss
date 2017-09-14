@@ -346,11 +346,12 @@ body.modal-open {
       background-color: rgba(255, 255, 255, 0.17);
   }
 
-  #bookList .book a{
+  #bookList .book .actions{
     position: absolute;
-    left: 20px;
-    top: 0;
-    font-size: 25px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 
   #notificationHolder{
