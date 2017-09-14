@@ -12,5 +12,5 @@ exclude_paths:
 - "test/"
 - "node_modules/"
 - "templates/"
-- "server/dist/**"
-- "**/node_modules/"
+- "server/dist/"
+- "client/node_modules/"
