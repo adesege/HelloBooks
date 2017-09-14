@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
-import 'bootstrap/js/src/modal';
+import 'bootstrap/js/dist/modal';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
