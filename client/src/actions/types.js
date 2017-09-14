@@ -13,3 +13,9 @@ export const SET_IS_LOADING = 'SET_IS_LOADING';
 export const SET_IMAGE_DATA = 'SET_IMAGE_DATA';
 
 export const DELETE_IMAGE_DATA = 'DELETE_IMAGE_DATA';
+
+export const BOOK_FETCHED = 'BOOK_FETCHED';
+
+export const BOOK_UPDATED = 'BOOK_UPDATED';
+
+export const BOOK_DELETED = 'BOOK_DELETED';

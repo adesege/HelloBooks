@@ -40,7 +40,7 @@ export default () => (
         { [...Array(12)].map((val, index) => (
           <div className="col-sm-6 col-md-6 col-lg-4 col-xl-3 pr-0 col-6 mb-4 book" key={index + 2}>
             <Link to="/books/view" className="h-100" style={{ position: 'unset' }}><img className="img-thumbnail" src={ logo1 } alt="Card cap" key={index + 3}/></Link>
-            <a href="#top" className="card-link"  title="Add to reading list" key={index + 4}>
+            <a href="#top" className="card-link" title="Add to reading list" key={index + 4}>
               <i className="fa fa-bookmark"></i>
             </a>
           </div>

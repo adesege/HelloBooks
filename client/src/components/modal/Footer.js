@@ -5,7 +5,7 @@ import Button from '../form/Button';
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Footer extends React.Component {
   render() {
-    const { closeClass, closeLabel, btnClass, btnLabel, btnOnClick, btnDisabled } = this.props;
+    const { closeClass, closeLabel, btnClass, btnLabel, btnOnClick, btnDisabled, closeOnClick } = this.props;
     return (
       <div className="modal-footer border-top-0">
         { btnClass &&
@@ -19,7 +19,8 @@ class Footer extends React.Component {
         {closeLabel &&
         <Button type="button"
           className={closeClass ? `btn-sm ${closeClass || ''}` : 'btn-sm btn-primary'}
-          data-dismiss="modal"
+          onClick={closeOnClick}
+          data-dismiss={closeOnClick ? '' : 'modal' }
           label={closeLabel} />
         }
       </div>

@@ -19,24 +19,35 @@ router.post('/users/signin', UserClass.signin);
 
 router.route('/users/:userId/books')
   .post(authMiddleware, userMiddleware, BookClass.borrowBook)
-  .get(authMiddleware, userMiddleware, BookClass.getBorrowedBook)
+  .get(authMiddleware, userMiddleware, BookClass.getBorrowedBook);
+router.route('/users/:userId/books/:borrowedBookId')
   .put(authMiddleware, userMiddleware, BookClass.returnBorrowedBook);
 
 router.route('/books')
-  .post(authMiddleware, authMiddleware, BookClass.create)
-  .put(authMiddleware, authMiddleware, BookClass.edit)
-  .get(authMiddleware, authMiddleware, BookClass.get);
+  .post(authMiddleware, BookClass.create)
+  .get(authMiddleware, BookClass.get);
+
+
+router.route('/books/:id')
+  .get(authMiddleware, authMiddleware, BookClass.get)
+  .delete(authMiddleware, adminMiddleware, BookClass.delete);
+
+router.route('/books/:bookId')
+  .put(authMiddleware, authMiddleware, BookClass.edit);
 
 router.route('/books/categories')
   .post(authMiddleware, adminMiddleware, BookCategoryClass.add)
-  .put(authMiddleware, adminMiddleware, BookCategoryClass.update)
-  .delete(authMiddleware, adminMiddleware, BookCategoryClass.delete)
   .get(authMiddleware, authMiddleware, BookCategoryClass.get);
+
+router.route('/books/categories/:categoryId')
+  .put(authMiddleware, adminMiddleware, BookCategoryClass.update)
+  .delete(authMiddleware, adminMiddleware, BookCategoryClass.delete);
 
 router.route('/books/stocks')
   .post(authMiddleware, adminMiddleware, StockManagerClass.create)
-  .delete(authMiddleware, adminMiddleware, StockManagerClass.delete)
   .get(authMiddleware, adminMiddleware, StockManagerClass.get);
+router.route('/books/stocks/:stockId')
+  .delete(authMiddleware, adminMiddleware, StockManagerClass.delete);
 
 
 /* // catch 404 and forward to error handler

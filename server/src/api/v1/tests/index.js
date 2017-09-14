@@ -176,7 +176,7 @@ describe('API Tests', () => { // Describe the API test suite
         const token = setAdmin.token;
         bookCategory.name = 'A new category name';
         requestApp
-          .put(`/api/v1/books/categories?id=${bookCategoryId}`)
+          .put(`/api/v1/books/categories/${bookCategoryId}`)
           .send(bookCategory)
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -191,8 +191,7 @@ describe('API Tests', () => { // Describe the API test suite
       it('should be delete a book category', (done) => {
         const token = setAdmin.token;
         requestApp
-          .delete('/api/v1/books/categories')
-          .send({ id: bookCategoryId })
+          .delete(`/api/v1/books/categories/${bookCategoryId}`)
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
@@ -227,7 +226,7 @@ describe('API Tests', () => { // Describe the API test suite
         book.title = 'Purple Hibiscus';
         book.description = 'Purple Hibiscus was written by Chimamanda Adichie';
         requestApp
-          .put(`/api/v1/books?book_id=${bookId}`)
+          .put(`/api/v1/books/${bookId}`)
           .send(book)
           .set('authenticate-token', token)
           .end((err, res) => {
@@ -276,7 +275,7 @@ describe('API Tests', () => { // Describe the API test suite
         it(`should delete stock with id ${stockId}`, (done) => {
           const token = setAdmin.token;
           requestApp
-            .delete(`/api/v1/books/stocks?id=${stockId}`)
+            .delete(`/api/v1/books/stocks/${stockId}`)
             .set('authenticate-token', token)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
@@ -338,8 +337,7 @@ describe('API Tests', () => { // Describe the API test suite
         const userId = setUser.userId;
         const token = setUser.token;
         requestApp
-          .put(`/api/v1/users/${userId}/books?id=${borrowedBookId}`)
-          .send({ book_id: bookId })
+          .put(`/api/v1/users/${userId}/books/${borrowedBookId}?bookId=${bookId}`)
           .set('authenticate-token', token)
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
