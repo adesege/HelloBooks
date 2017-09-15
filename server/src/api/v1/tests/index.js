@@ -307,8 +307,8 @@ describe('API Tests', () => { // Describe the API test suite
         const userId = setUser.userId;
         // book.book_id = bookId;
         requestApp
-          .post(`/api/v1/users/${userId}/books?book_id=${bookId}`)
-          .send({ return_date: '10-09-2017' })
+          .post(`/api/v1/users/${userId}/books`)
+          .send({ bookId })
           .set('authenticate-token', token)
           .end((err, res) => {
             borrowedBookId = res.body.id;

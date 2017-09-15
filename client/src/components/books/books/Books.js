@@ -72,7 +72,7 @@ class Books extends React.Component {
           <input type="text" className="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0" placeholder="by author"/>
           <button type="submit" className="btn btn-sm btn-danger">filter</button>
         </form>
-        <BooksList content={this.props.books} />
+        <BooksList content={this.props.books} userGroup={this.props.group} />
         {/*         <div className="row">
           { [...Array(12)].map((val, index) => (
             <div className="col-sm-6 col-md-6 col-lg-3 col-xs-12 mb-4" key={index}>
@@ -113,6 +113,7 @@ Books.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-  books: state.books
+  books: state.books,
+  group: state.auth.group
 });
 export default connect(mapStateToProps, { getBooks, addFlashMessage, setBooks })(Books);

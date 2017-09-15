@@ -14,7 +14,7 @@ import ResetPassword from '../components/homepage/resetpassword/ResetPassword';
 
 import Dashboard from '../components/dashboard/Dashboard';
 import Histories from '../components/books/Histories';
-import Categories from '../components/books/Categories';
+import Categories from '../components/books/categories/Categories';
 
 import Books from '../components/books/books/Books';
 import BooksModal from '../components/books/books/BooksModal';

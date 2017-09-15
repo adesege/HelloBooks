@@ -7,7 +7,7 @@ const BookClass = controllers.BookClass;
 const StockManagerClass = controllers.StockManagerClass;
 const BookCategoryClass = controllers.BookCategoryClass;
 const authMiddleware = middlewares.middleware;
-const userMiddleware = middlewares.userMiddleware;
+// const userMiddleware = middlewares.userMiddleware;
 const adminMiddleware = middlewares.adminMiddleware;
 const router = express.Router();
 
@@ -18,10 +18,10 @@ router.post('/users/signup', UserClass.signup);
 router.post('/users/signin', UserClass.signin);
 
 router.route('/users/:userId/books')
-  .post(authMiddleware, userMiddleware, BookClass.borrowBook)
-  .get(authMiddleware, userMiddleware, BookClass.getBorrowedBook);
+  .post(authMiddleware, BookClass.borrowBook)
+  .get(authMiddleware, BookClass.getBorrowedBook);
 router.route('/users/:userId/books/:borrowedBookId')
-  .put(authMiddleware, userMiddleware, BookClass.returnBorrowedBook);
+  .put(authMiddleware, BookClass.returnBorrowedBook);
 
 router.route('/books')
   .post(authMiddleware, BookClass.create)
@@ -51,7 +51,7 @@ router.route('/books/stocks/:stockId')
   .delete(authMiddleware, adminMiddleware, StockManagerClass.delete);
 
 
-/* // catch 404 and forward to error handler
+// catch 404 and forward to error handler
 router.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
@@ -67,5 +67,5 @@ router.use((err, req, res) => {
   res.status(err.status || 500);
   res.send({ message: res.locals.message, status: 'Not Found', code: err.status });
 });
- */
+
 export default router;
