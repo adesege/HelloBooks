@@ -19,3 +19,9 @@ export const BOOK_FETCHED = 'BOOK_FETCHED';
 export const BOOK_UPDATED = 'BOOK_UPDATED';
 
 export const BOOK_DELETED = 'BOOK_DELETED';
+
+export const BOOK_BORROWED = 'BOOK_BORROWED';
+
+export const BORROWED_BOOK = 'BORROWED_BOOK';
+
+export const BOOK_RETURNED = 'BOOK_RETURNED';

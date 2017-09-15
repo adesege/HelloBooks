@@ -162,11 +162,11 @@ class BookClass {
    * @return {object} response
    */
   static borrowBook(req, res) {
-    const bookId = req.query.book_id;
+    const bookId = req.body.bookId;
     const userId = req.params.userId;
-    let returnedDate = req.body.return_date || '';
+    // let returnedDate = req.body.return_date || '';
     const isReturned = false;
-    returnedDate = new Date(returnedDate);
+    // returnedDate = new Date(returnedDate);
 
     Book.findById(bookId)
       .then((book) => {
@@ -188,7 +188,7 @@ class BookClass {
               bookId,
               userId,
               isReturned,
-              returnedDate
+              // returnedDate
             }, {
               fields: ['bookId', 'userId', 'returnedDate', 'isReturned']
             }).then(id => res.status(201).send({
@@ -212,11 +212,12 @@ class BookClass {
   */
   static getBorrowedBook(req, res) {
     const userId = req.params.userId;
-    const isReturned = req.query.returned;
+    const bookId = req.query.bookId || null;
+    const isReturned = req.query.returned || false;
 
     borrowedBook.findAll({
-      include: [Book],
-      where: { userId, isReturned }
+      // include: [Book],
+      where: { userId, isReturned, bookId }
     }).then((books) => {
       if (books) {
         res.status(200).send({

@@ -1,62 +1,55 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { borrowBook, getBorrowedBook, returnBorrowedBook } from '../../../actions/borrowedBook';
 import DashboardLeftSidebar from '../../dashboard/sidebar/Left';
 import RelatedBooks from './RelatedBooks';
 import BookComment from './BookComment';
 import { getBook } from '../../../actions/books';
-import BorrowBookModal from './BorrowBookModal';
-
-const $ = window.$;
+import BorrowBook from './BorrowBook';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class ViewBooks extends React.Component {
   constructor(props) {
     super(props);
+    const { userId, params } = this.props;
     this.state = {
-      book: this.props.book ? this.props.book : ''
+      book: this.props.book ? this.props.book : '',
+      borrowBook: {
+        userId,
+        bookId: params.id
+      }
     };
-
-    this.showBorrowModal = this.showBorrowModal.bind(this);
   }
 
-  showBorrowModal(event) {
-    event.preventDefault();
-    $(document).ready(() => {
-      const $modal = $('#borrow-book');
-      $modal.modal('show');
-    });
-  }
   componentDidMount = () => {
-    $('#borrow-book').on('hide.bs.modal', (e) => {
-      this.context.router.push('/books');
-    });
-
-    this.props.getBook({ id: this.props.params.id });
+    const { params } = this.props;
+    this.props.getBook({ id: params.id });
+    this.props.getBorrowedBookAction(this.state.borrowBook);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.book !== this.props.book) {
       this.setState({ book: nextProps.book });
     }
-    console.log(nextProps);
   }
   render() {
     const { title, author, coverPhotoPath, description, publishedDate, ISBN } = this.state.book;
+    const { params, borrowBookAction, isBorrowedBook, borrowedBook, userId, returnBorrowedBookAction } = this.props;
     return (
       <div className="row" id="borrowBook">
-        <BorrowBookModal />
         <div className="col-sm-8">
           <div className="row" id="book-details">
             <div className="col-sm-4">
               <img className="img-thumbnails cover" src={coverPhotoPath} alt="Card cap"/>
-              <div className="btn-group btn-group-sm w-100 my-2" role="group">
-                <button id="btnGroupDrop1" type="button" className="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> I want to... </button>
-                <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                  <a className="dropdown-item" href="#top">read</a>
-                  <a className="dropdown-item" onClick={this.showBorrowModal} href={''}>borrow</a>
-                </div>
-              </div>
+
+              <BorrowBook
+                borrowBookAction={borrowBookAction}
+                bookId={params.id}
+                userId={userId}
+                isBorrowedBook={isBorrowedBook}
+                returnBorrowedBookAction={returnBorrowedBookAction}
+                borrowedBook={borrowedBook} />
             </div>
             <div className="col-sm-8 mt-3 mt-sm-0">
               <div className="details">
@@ -93,7 +86,22 @@ ViewBooks.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  book: state.book
-});
-export default connect(mapStateToProps, { getBook })(ViewBooks);
+const mapStateToProps = (state) => {
+  const userId = state.auth.user.userId;
+  const bookId = state.book.id;
+  const borrowedBook = state.borrowedBook || {};
+  return {
+    book: state.book,
+    isBorrowedBook:
+    !!((borrowedBook.userId === userId) && (borrowedBook.bookId === bookId)),
+    userId,
+    borrowedBook
+  };
+};
+
+export default connect(mapStateToProps,
+  { getBook,
+    borrowBookAction: borrowBook,
+    getBorrowedBookAction: getBorrowedBook,
+    returnBorrowedBookAction: returnBorrowedBook
+  })(ViewBooks);

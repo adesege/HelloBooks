@@ -30,7 +30,7 @@ export default function adminMiddleware(ComposedComponent) {
   }
 
   AdminMiddleware.propTypes = {
-    group: PropTypes.bool.isRequired,
+    group: PropTypes.string.isRequired,
     addFlashMessage: PropTypes.func.isRequired
   };
 
@@ -40,7 +40,7 @@ export default function adminMiddleware(ComposedComponent) {
 
   function mapStateToProps(state) {
     return {
-      group: state.auth.group
+      group: state.auth.user.group
     };
   }
 

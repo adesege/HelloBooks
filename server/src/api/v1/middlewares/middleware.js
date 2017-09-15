@@ -16,7 +16,7 @@ const router = function router(req, res, next) {
       || req.params.userId; // get userId from request object
       if (userId || userId !== undefined) {
         const tokenUserId = decoded.user;
-        if (parseInt(userId, 10) === parseInt(tokenUserId, 10)) { } else {
+        if (parseInt(userId, 10) !== parseInt(tokenUserId, 10)) {
           return res.status(400).send({ message: 'Sorry, this is not you.' });
         }
       }
