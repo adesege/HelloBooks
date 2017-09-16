@@ -114,6 +114,6 @@ Books.contextTypes = {
 
 const mapStateToProps = state => ({
   books: state.books,
-  group: state.auth.group
+  group: state.auth.user.group
 });
 export default connect(mapStateToProps, { getBooks, addFlashMessage, setBooks })(Books);

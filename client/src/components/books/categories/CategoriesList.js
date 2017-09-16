@@ -1,67 +1,46 @@
 import React from 'react';
+import TimeAgo from 'react-timeago';
+import Button from '../../form/Button';
 
-const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class CategoriesList extends React.Component {
-  componentDidMount() {
-    $('#toggleAdd').click((e) => {
-      $('#addCategory').toggleClass('hidden-xl-down');
-    });
-  }
   render() {
+    const { onEditClick, categories, onDeleteModal } = this.props;
     return (
-      <div className="table-responsive text-center">
+      <div className="table-responsive">
         <table className="table" id="stockTable">
-          <thead className="thead-default text-center">
-            <tr className="text-center">
+          <thead className="thead-default">
+            <tr>
               <th>#</th>
               <th>Category name</th>
               <th>Date added</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody><tr>
-            <td>1</td>
-            <td>Category 3</td>
-            <td>August 2, 2017</td>
-            <td>
-              <button type="button" className="btn btn-sm btn-info mb-2 mb-sm-0"><i className="fa fa-pencil-square-o"></i></button>
-              <button type="button" className="btn btn-sm btn-danger"><i className="fa fa-pencil-square-o"></i></button>
-            </td>
-          </tr><tr>
-            <td>2</td>
-            <td>Category 4</td>
-            <td>August 3, 2017</td>
-            <td>
-              <button type="button" className="btn btn-sm btn-info mb-2 mb-sm-0"><i className="fa fa-pencil-square-o"></i></button>
-              <button type="button" className="btn btn-sm btn-danger"><i className="fa fa-pencil-square-o"></i></button>
-            </td>
-          </tr><tr>
-            <td>3</td>
-            <td>Category 5</td>
-            <td>August 4, 2017</td>
-            <td>
-              <button type="button" className="btn btn-sm btn-info mb-2 mb-sm-0"><i className="fa fa-pencil-square-o"></i></button>
-              <button type="button" className="btn btn-sm btn-danger"><i className="fa fa-pencil-square-o"></i></button>
-            </td>
-          </tr><tr>
-            <td>4</td>
-            <td>Category 6</td>
-            <td>August 5, 2017</td>
-            <td>
-              <button type="button" className="btn btn-sm btn-info mb-2 mb-sm-0"><i className="fa fa-pencil-square-o"></i></button>
-              <button type="button" className="btn btn-sm btn-danger"><i className="fa fa-pencil-square-o"></i></button>
-            </td>
-          </tr><tr>
-            <td>5</td>
-            <td>Category 7</td>
-            <td>August 6, 2017</td>
-            <td>
-              <button type="button" className="btn btn-sm btn-info mb-2 mb-sm-0"><i className="fa fa-pencil-square-o"></i></button>
-              <button type="button" className="btn btn-sm btn-danger"><i className="fa fa-pencil-square-o"></i></button>
-            </td>
-          </tr>
+          <tbody>
+            {categories.map((category, index) => (
+              <tr key={index} id={category.id}>
+                <td>{index + 1}</td>
+                <td>{category.name}</td>
+                <td>
+                  <TimeAgo
+                    date={category.createdAt}
+                    minPeriod={60} />
+                </td>
+                <td>
+                  <Button
+                    className="btn-sm btn-info"
+                    onClick={onEditClick}
+                    icon="pencil-square-o"/>
+                  <Button
+                    className="btn-sm btn-danger"
+                    onClick={onDeleteModal}
+                    icon="remove" />
+                </td>
+              </tr>
+            ))
+            }
           </tbody>
         </table>
         <a href="" className="btn btn-primary bg-light btn-sm mb-3">See more</a>

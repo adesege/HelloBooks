@@ -5,22 +5,33 @@ import classnames from 'classnames';
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class InputField extends React.Component {
   render() {
-    const { icon, type, placeholder, name, onChange, label, labelClass, hide, children, ...rest } = this.props;
+    const {
+      icon,
+      type,
+      placeholder,
+      name,
+      onChange,
+      label,
+      labelClass,
+      hide,
+      children,
+      containerClass,
+      ...rest } = this.props;
     return (
       <div
-        className={classnames('md-form form-sm', { 'hide-input-container': hide })}>
+        className={classnames(`md-form form-sm ${containerClass}`, { 'hide-input-container': hide })}>
         {icon &&
         <i className={`fa fa-${icon} prefix grey-text`} ></i>
         }
         <input
           type={type}
-          className={icon ? 'form-control px-0' : 'form-control px-0'}
+          className={classnames('form-control', { 'px-0': icon })}
           id={name}
           placeholder={placeholder}
           name={name}
           onChange={onChange}
           {...rest} />
-        <label className={labelClass} htmlFor={name}>{label}</label>
+        {label && <label className={labelClass} htmlFor={name}>{label}</label> }
         {children}
       </div>
     );

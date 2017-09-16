@@ -72,7 +72,7 @@ class BooksList extends Component {
                     className="btn-sm btn-default card-link m-0 mr-2"
                     title="Add to reading list"
                     icon="bookmark" />
-                    {this.props.group === 'admin' && <span><Button
+                  {this.props.userGroup === 'admin' && <span><Button
                     to={`/books/edit/${object.id}`}
                     onClick={this.goToEditPage.bind(this)}
                     className="btn-sm btn-info card-link m-0 mr-2"
@@ -82,7 +82,7 @@ class BooksList extends Component {
                     onClick={this.confirmDelete.bind(this)}
                     className="btn-sm btn-danger card-link m-0 mr-2"
                     icon="remove" />
-                    </span>
+                  </span>
                   }
                 </div>
               </div>

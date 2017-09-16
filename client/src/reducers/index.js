@@ -6,6 +6,7 @@ import books from './books';
 import book from './book';
 import cropper from './cropper';
 import borrowedBook from './borrowedBook';
+import categories from './categories';
 
 export default combineReducers({
   flashMessages,
@@ -14,5 +15,6 @@ export default combineReducers({
   loadingBar: loadingBarReducer,
   cropper,
   book,
-  borrowedBook
+  borrowedBook,
+  categories
 });
