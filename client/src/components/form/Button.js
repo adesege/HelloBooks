@@ -23,7 +23,7 @@ class Button extends React.Component {
         name={name}
         {...rest}
       >
-        { icon && <i className={`fa fa-${icon} ${iconClass}`}></i> }
+        { icon && <i className={`fa fa-${icon} ${iconClass || ''}`}></i> }
         {label}
         {children}
       </button>

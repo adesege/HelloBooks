@@ -151,9 +151,8 @@ class BookClass {
     Book.findAll({
       where: req.params.id ? { id } : null,
       include: ['stock'] })
-      .then((books) => {
-        res.status(200).send({ message: books });
-      }).catch(error => res.status(500).send({ message: error.message }));
+      .then(books => res.status(200).send({ message: books }))
+      .catch(error => res.status(500).send({ message: error.message }));
   }
   /**
    * @method borrowBook

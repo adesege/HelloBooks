@@ -22,12 +22,12 @@ class BookCategoryClass {
             name
           }, {
             fields: ['name']
-          }).then(id =>
+          }).then(newCategory =>
             res.status(201)
-              .send({ message: 'Category added successfully', id: id.get('id') }))
+              .send({ message: 'Category added successfully', id: newCategory.get('id'), category: newCategory }))
             .catch(error => res.status(400).send({ message: error.message }));
         } else {
-          return res.status(302).send({ message: 'A category with this name already exist' });
+          return res.status(400).send({ message: 'A category with this name already exist' });
         }
       }).catch(error => res.status(500).send({ message: error.message }));
   }
@@ -62,12 +62,8 @@ class BookCategoryClass {
   */
   static get(req, res) {
     bookCategory.findAll()
-      .then((category) => {
-        if (category.length !== 0) {
-          return res.status(200).send({ message: category });
-        }
-        return res.status(204).send({ message: 'No record available' });
-      }).catch(error => res.status(400).send({ message: error.message }));
+      .then(category => res.status(200).send({ message: category }))
+      .catch(error => res.status(400).send({ message: error.message }));
   }
 
   /**
@@ -83,8 +79,18 @@ class BookCategoryClass {
     bookCategory.findById(id)
       .then((category) => {
         if (category !== null) {
-          return bookCategory.update({ name }, { where: { id } })
-            .then(() => res.status(200).send({ message: 'Category updated successfully' }))
+          return bookCategory.update(
+            { name },
+            { where: { id },
+              returning: true,
+              plain: true
+            })
+            .then(updatedCategory =>
+              res.status(200)
+                .send({
+                  message: 'Category updated successfully',
+                  data: updatedCategory[1]
+                }))
             .catch(error => res.status(400).send({ message: error.message }));
         }
         return res.status(204).send({ message: 'No record available' });
