@@ -15,22 +15,24 @@ class StockManagerClass {
    * @return {void}
    */
   static create(req, res) {
-    const quantity = req.body.quantity || '';
-    const recordDate = req.body.record_date || '';
-    const bookId = req.query.book_id || req.body.book_id || '';
-
+    const bookId = req.body.bookId || '';
     Book.findById(bookId)
       .then((book) => {
         if (book) {
-          stockManager.create({
-            quantity,
-            recordDate,
-            bookId
-          }, {
-            fields: ['quantity', 'recordDate', 'bookId']
-          }).then(id => res.status(201).send({ message: 'Stock added successfully', id: id.get('id')
-          })).catch(error => res.status(400).send({ message: error.message }))
-            .catch(error => res.status(500).send({ message: error.message }));
+          stockManager.create(req.body, {
+            fields: ['quantity', 'recordDate', 'bookId'],
+            returning: true,
+            plain: true
+          }
+          ).then(newStock =>
+            res
+              .status(201)
+              .send({
+                message: 'Stock added successfully',
+                id: newStock.get('id'),
+                data: newStock.dataValues
+              }))
+            .catch(error => res.status(400).send({ message: error.message }));
         } else {
           return res.status(404).send({ message: 'Book not found' });
         }
@@ -55,18 +57,17 @@ class StockManagerClass {
                 book.update( // update count in book table
                   { quantity: book.quantity - stock.quantity },
                   { where: { id: stock.bookId, }
-                  }).then().catch(error => res.status(400).send({ message: error.message })
-                );
+                  })
+                  .then();
               }
             });
             return res.status(200)
               .send({ message: 'Stock deleted successfully' });
-          }).catch(error => res.status(400)
-            .send({ message: error.message }));
+          });
         } else {
           return res.status(400).send({ message: 'Stock not found' });
         }
-      }).catch(error => res.status(500).send({ message: error.message }));
+      });
   }
   /**
    *
@@ -76,13 +77,13 @@ class StockManagerClass {
    * @return {object} response
    */
   static get(req, res) {
-    stockManager.findAll()
-      .then((stocks) => {
-        if (stocks) {
-          return res.status(200).send({ message: stocks });
-        }
-        return res.status(404).send({ message: 'No record available' });
-      }).catch(error => res.status(500).send({ message: error.message }));
+    const { bookId } = req.query;
+    stockManager.findAll(
+      bookId && {
+        where: { bookId }
+      }
+    )
+      .then(stocks => res.status(200).send({ message: '', data: stocks }));
   }
 }
 

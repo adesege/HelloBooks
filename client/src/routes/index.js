@@ -22,7 +22,7 @@ import DeleteModal from '../components/books/books/DeleteModal';
 import ViewBooks from '../components/books/view/ViewBooks';
 
 import StockManager from '../components/books/stockmanager/StockManager';
-import ShowStock from '../components/books/stockmanager/ShowStock';
+import ShowStock from '../components/books/stockmanager/show/ShowStock';
 
 import Notifications from '../components/notifications/';
 
@@ -62,7 +62,7 @@ export default (
 
         <Route path="stock-manager">
           <IndexRoute component={adminMiddleware(StockManager)}/>
-          <Route path="show" component={adminMiddleware(ShowStock)}/>
+          <Route path=":id" component={adminMiddleware(ShowStock)}/>
         </Route>
 
       </Route>

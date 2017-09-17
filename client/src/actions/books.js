@@ -1,8 +1,22 @@
 import axios from 'axios';
-import { SET_BOOKS, ADD_BOOK, BOOK_FETCHED, BOOK_UPDATED, BOOK_DELETED } from './types';
+import {
+  SET_BOOKS,
+  ADD_BOOK,
+  BOOK_FETCHED,
+  BOOK_UPDATED,
+  BOOK_DELETED,
+  BOOKS_SEARCHED } from './types';
 import { addFlashMessage } from './flashMessages';
 
 const API_VERSION = window.API_VERSION;
+
+export function booksSearched(result) { // eslint-disable-line require-jsdoc
+  return {
+    type: BOOKS_SEARCHED,
+    result
+  };
+}
+
 
 export function setBooks(books) { // eslint-disable-line require-jsdoc
   return {
@@ -139,6 +153,24 @@ export const deleteBook = data =>
           type: 'success',
           text: response.data
         }));
+        return response;
+      },
+      errors => errors
+    );
+
+
+/**
+ * 
+ * 
+ * @export
+ * @param {any} title 
+ * @returns {func} promise
+ */
+export const searchBooks = title =>
+  dispatch => axios.get(`/api/${API_VERSION}/search?q=${encodeURIComponent(title)}&type=books`)
+    .then(
+      (response) => {
+        dispatch(booksSearched(response.data.data));
         return response;
       },
       errors => errors

@@ -373,3 +373,7 @@ body.modal-open {
   height: 0px;
   margin: 0px;
 }
+
+.form-control:focus{
+  background-color: transparent;
+}

@@ -105,6 +105,7 @@ class Menu extends React.Component {
               placeholder="Search here"
               aria-describedby="basic-addon1"
               containerClass="mb-0"
+              name="search"
             />
             <Button
               className="btn-sm btn-default"

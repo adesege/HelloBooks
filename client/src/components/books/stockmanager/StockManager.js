@@ -1,56 +1,21 @@
 import React from 'react';
-import $ from 'jquery';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import image from '../../../assets/images/3.jpg';
+import SearchStock from './SearchStock';
 
-window.$ = $;
-window.jQuery = $;
+const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
-export default class StockManager extends React.Component {
+class StockManager extends React.Component {
   render() {
     return (
       <div>
         <h4 className="title mb-2 mr-4">Stock Manager</h4>
         <div className="mb-4"><small>Manage stock here</small></div>
-        <div className="row" id="stockManager">
-          <div className="col-sm-6 offset-sm-3">
-            <div id="stockFilterForm" className="bg-faded pt-3">
-              <form>
-                <div className="form-group">
-                  <input type="text" placeholder="Search by author" className="form-control"/>
-                </div>
-                <p className="text-center hidden-xs-down"><small>-- OR --</small></p>
-                <div className="form-group">
-                  <select className="custom-select w-100">
-                    <option>Filter by category</option>
-                    <option value="">Category 1</option>
-                    <option value="">Category 2</option>
-                    <option value="">Category 3</option>
-                    <option value="">Category 4</option>
-                    <option value="">Category 5</option>
-                    <option value="">Category 6</option>
-                  </select>
-                </div>
-                <p className="text-center hidden-xs-down"><small>-- OR --</small></p>
-                <div className="form-group">
-                  <select className="custom-select w-100">
-                    <option>Filter by date</option>
-                    <option value="">Today</option>
-                    <option value="">7 days ago</option>
-                    <option value="">2 weeks ago</option>
-                    <option value="">a month ago</option>
-                    <option value="">a while ago</option>
-                  </select>
-                </div>
-                <div className="form-group text-right">
-                  <button type="button" className="btn btn-success btn-sm">Go!</button>
-                  <button type="reset" className="btn btn-danger btn-sm">Reset</button>
-                </div>
-              </form>
-            </div>{/* Stock filter form */}
-          </div>
-        </div>{/* row */}
+
+        <SearchStock />
+
         <h6 className="title my-5"><small>Showing 8 of 10 results</small></h6>
         <div className="row">
           { [...Array(10)].map((val, index) => (
@@ -81,3 +46,5 @@ export default class StockManager extends React.Component {
     );
   }
 }
+
+export default connect(null, {})(StockManager);

@@ -7,16 +7,23 @@
   },
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
-    "coverage": "NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha server/dist/api/v1/tests/index.js",
+    "coveralls": "NODE_ENV=test nyc npm test && nyc report --reporter=lcov --reporter=text --reporter=lcovonly || coveralls",
     "webpack": "webpack",
     "babel": "babel server/src/ --watch --out-dir server/dist/",
     "watch": "nodemon --watch server/dist ./server/dist/server.js",
     "start": "NODE_ENV=production node ./server/dist/server.js",
     "build": "babel server/src/ --out-dir server/dist/",
     "heroku-postbuild": "cd client && npm install && npm run build && cd ../server && npm run build",
-    "test:dev": "SET NODE_ENV=test&& mocha server/dist/api/v1/tests/index.js --timeout 100000",
-    "test": "NODE_ENV=test mocha server/dist/api/v1/tests/index.js --timeout 100000",
-    "test:db": "sequelize db:migrate --env test"
+    "test": "NODE_ENV=test mocha --compilers js:babel-register server/src/api/v1/tests/index.js --timeout 100000",
+    "test:db": "sequelize db:migrate --env test",
+    "test:db:migrate:undo": "sequelize db:migrate:undo:all --env test"
+  },
+  "nyc": {
+    "exclude": [
+      "server/src/app/**.js",
+      "server/src/api/**/tests/**.js",
+      "src/api/**/models/index.js"
+    ]
   },
   "cacheDirectories": [
     "node_modules",
@@ -33,6 +40,7 @@
   },
   "homepage": "https://github.com/adesege/HelloBooks#readme",
   "devDependencies": {
+    "babel-register": "^6.26.0",
     "chai-http": "^3.0.0",
     "codeclimate-test-reporter": "^0.5.0",
     "coveralls": "^2.13.1",

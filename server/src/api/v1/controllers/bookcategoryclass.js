@@ -29,7 +29,7 @@ class BookCategoryClass {
         } else {
           return res.status(400).send({ message: 'A category with this name already exist' });
         }
-      }).catch(error => res.status(500).send({ message: error.message }));
+      });
   }
   /**
 *
@@ -45,13 +45,14 @@ class BookCategoryClass {
           bookCategory.destroy({ // delete record from stockManager
             where: { id }
           }).then(() =>
-            res.status(200).send({ message: 'Category deleted successfully' }))
-            .catch(error =>
-              res.status(400).send({ message: error.message }));
+            res
+              .status(200)
+              .send({ message: 'Category deleted successfully' }));
         } else {
           return res.status(404).send({ message: 'Category not found' });
         }
-      }).catch(error => res.status(500).send({ message: error.message }));
+      });
+    // .catch(error => res.status(500).send({ message: error.message }));
   }
   /**
 *
@@ -62,8 +63,7 @@ class BookCategoryClass {
   */
   static get(req, res) {
     bookCategory.findAll()
-      .then(category => res.status(200).send({ message: category }))
-      .catch(error => res.status(400).send({ message: error.message }));
+      .then(category => res.status(200).send({ message: category }));
   }
 
   /**
@@ -78,7 +78,7 @@ class BookCategoryClass {
     const name = req.body.name || '';
     bookCategory.findById(id)
       .then((category) => {
-        if (category !== null) {
+        if (category) {
           return bookCategory.update(
             { name },
             { where: { id },
@@ -90,11 +90,10 @@ class BookCategoryClass {
                 .send({
                   message: 'Category updated successfully',
                   data: updatedCategory[1]
-                }))
-            .catch(error => res.status(400).send({ message: error.message }));
+                }));
         }
-        return res.status(204).send({ message: 'No record available' });
-      }).catch(error => res.status(500).send({ message: error.message }));
+        return res.status(400).send({ message: 'Cannot process this request at the moment.' });
+      });
   }
 }
 

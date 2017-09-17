@@ -19,13 +19,13 @@ class InputField extends React.Component {
       ...rest } = this.props;
     return (
       <div
-        className={classnames(`md-form form-sm ${containerClass}`, { 'hide-input-container': hide })}>
+        className={classnames(`md-form form-sm ${containerClass || ''}`, { 'hide-input-container': hide })}>
         {icon &&
         <i className={`fa fa-${icon} prefix grey-text`} ></i>
         }
         <input
           type={type}
-          className={classnames('form-control', { 'px-0': icon })}
+          className={classnames('form-control px-0')}
           id={name}
           placeholder={placeholder}
           name={name}
