@@ -2,6 +2,7 @@ import chai from 'chai';
 import request from 'supertest';
 import faker from 'faker';
 import app from '../../../express';
+import Utils from '../utils';
 
 const expect = chai.expect;
 const email = faker.internet.email();
@@ -26,12 +27,33 @@ const book = {
   author: 'Chimamanda Adichie',
   published_date: '07-09-2017',
   isbn: faker.random.number().toString(),
-  stock_quantity: 12,
+  stock_quantity: 1,
   stock_record_date: '08-09-2017'
 };
+
+const book2 = {
+  title: `Half of a yellow sun ${faker.random.number()}`,
+  description: 'Half of a yellow sun is a book by Chimamanda Adichie',
+  author: 'Chimamanda Adichie',
+  published_date: '07-09-2017',
+  isbn: faker.random.number().toString(),
+  stock_quantity: 2,
+  stock_record_date: '08-09-2017'
+};
+
+const book3 = {
+  title: `Half of a yellow sun ${faker.random.number()}`,
+  description: 'Half of a yellow sun is a book by Chimamanda Adichie',
+  author: 'Chimamanda Adichie',
+  published_date: '07-09-2017',
+  isbn: faker.random.number().toString(),
+  stock_quantity: 2,
+  stock_record_date: '08-09-2017'
+};
+
 const stock = {
   quantity: 3,
-  record_date: '07-09-2017'
+  recordDate: '07-09-2017'
 };
 const bookCategory = {
   name: faker.random.word()
@@ -39,9 +61,35 @@ const bookCategory = {
 let setUser = '';
 let setAdmin = '';
 let stockId = '';
+let bookId3 = '';
 let requestApp = request(app);
 
 describe('API Tests', () => { // Describe the API test suite
+  describe('Index', () => { // Describe User signup and signin suite
+    /**
+     * @function Signup suite
+     */
+    describe('# Server side', () => {
+      it('should return 404 if an end point cannot be found', (done) => {
+        requestApp.get('/api/v1/login')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should return 404 if a version folder cannot be found', (done) => {
+        requestApp.get('/api/v2/login')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            if (err) return done(err);
+            done();
+          });
+      });
+    });
+  });
+
   /**
    * @function Describe User signup and signin
    */
@@ -57,6 +105,30 @@ describe('API Tests', () => { // Describe the API test suite
           if (err) return done(err);
           done();
         });
+      });
+
+      it('should not create a user using the same email address more than once', (done) => {
+        requestApp.post('/api/v1/users/signup')
+          .send(user)
+          .end((err, res) => {
+            console.log(res.body);
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not create a user if the password does not match', (done) => {
+        user.confirmPassword = 'hdvkhjdfvd';
+        requestApp.post('/api/v1/users/signup')
+          .send(user)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
       });
 
       it('should create an admin', (done) => {
@@ -141,6 +213,7 @@ describe('API Tests', () => { // Describe the API test suite
    */
   describe('Books', () => {
     let bookId = '';
+    let bookId2 = '';
     let bookCategoryId = '';
     describe('# Books Category', () => {
       it('should be able to add a book category', (done) => {
@@ -153,6 +226,34 @@ describe('API Tests', () => { // Describe the API test suite
             bookCategoryId = res.body.id;
             expect(res.statusCode).to.equal(201);
             expect(res.body.message).to.equal('Category added successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to add a book category with the same name multiple times', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .post('/api/v1/books/categories')
+          .send(bookCategory)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to add a book category if the name is not specified', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .post('/api/v1/books/categories')
+          .send({})
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -188,6 +289,21 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      it('should not update a book category with a wrong id', (done) => {
+        const token = setAdmin.token;
+        bookCategory.name = 'A new category name';
+        requestApp
+          .put('/api/v1/books/categories/99999999')
+          .send(bookCategory)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
       it('should be delete a book category', (done) => {
         const token = setAdmin.token;
         requestApp
@@ -196,6 +312,19 @@ describe('API Tests', () => { // Describe the API test suite
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body.message).to.equal('Category deleted successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not delete a book category if it can\'t find it', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .delete('/api/v1/books/categories/90909090')
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -221,6 +350,144 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      it('should be able to add a book again', (done) => {
+        const token = setAdmin.token;
+        book.book_category_id = bookCategoryId;
+        requestApp
+          .post('/api/v1/books')
+          .send(book2)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            bookId2 = res.body.id;
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.message).to.equal('Book added successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+
+      it('should be able to add a book again and again', (done) => {
+        const token = setAdmin.token;
+        book.book_category_id = bookCategoryId;
+        requestApp
+          .post('/api/v1/books')
+          .send(book3)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            bookId3 = res.body.id;
+            expect(res.statusCode).to.equal(201);
+            expect(res.body.message).to.equal('Book added successfully');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not add a book if the description is not specified', (done) => {
+        const token = setAdmin.token;
+        book3.description = '';
+        book3.title = `A new title is here again ${faker.random.number()}`;
+        requestApp
+          .post('/api/v1/books')
+          .send(book3)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not add a book if the title already exist', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .post('/api/v1/books')
+          .send(book)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not add a book if the stock quantity is not provided', (done) => {
+        const token = setAdmin.token;
+        book3.stock_quantity = undefined;
+        requestApp
+          .post('/api/v1/books')
+          .send(book3)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not add a book if the stock record date is not provided', (done) => {
+        const token = setAdmin.token;
+        book2.stock_record_date = undefined;
+        requestApp
+          .post('/api/v1/books')
+          .send(book2)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not add a book if the stock quantity is not an integer',
+        (done) => {
+          const token = setAdmin.token;
+          book.stock_quantity = 'fdjfbdhfdbgh';
+          book.title = `A new title is here ${faker.random.number()}`;
+          requestApp
+            .post('/api/v1/books')
+            .send(book)
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+      it('should be delete a book', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .delete(`/api/v1/books/${bookId2}`)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not delete a book when the id cannot be found', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .delete('/api/v1/books/12345')
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
       it('should be able to edit a book', (done) => {
         const token = setAdmin.token;
         book.title = 'Purple Hibiscus';
@@ -237,13 +504,84 @@ describe('API Tests', () => { // Describe the API test suite
             done();
           });
       });
+
+      it('should not be able to edit a book when the id cannot be found', (done) => {
+        const token = setAdmin.token;
+        requestApp
+          .put('/api/v1/books/909099880')
+          .send(book)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to edit a book when the title field is not specified', (done) => {
+        const token = setAdmin.token;
+        book.title = '';
+        requestApp
+          .put(`/api/v1/books/${bookId}`)
+          .send(book)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      describe('# Search', () => {
+        it('should return 404 when a book can\'t be found', (done) => {
+          const token = setAdmin.token;
+          requestApp
+            .get('/api/v1/search?q=jkdfbvdhfb&type=books')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body.data).to.be.an('array');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+        it('should be able to search for a book', (done) => {
+          const token = setAdmin.token;
+          requestApp
+            .get('/api/v1/search?q=half&type=books')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body.data).to.be.an('array');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+        it('should return 400 if no query type is specified', (done) => {
+          const token = setAdmin.token;
+          requestApp
+            .get('/api/v1/search?q=half')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              if (err) return done(err);
+              done();
+            });
+        });
+      });
+
+
       /**
       * @function Describe Stocks Manager Suite
       */
       describe('# Stocks', () => { // Describe Books Stocks
         it('should be able to add a stock', (done) => {
           const token = setAdmin.token;
-          stock.book_id = bookId;
+          stock.bookId = bookId;
           requestApp
             .post('/api/v1/books/stocks')
             .send(stock)
@@ -257,6 +595,39 @@ describe('API Tests', () => { // Describe the API test suite
               done();
             });
         });
+
+        it('should not be able to add a stock if the stock quantity is not provided', (done) => {
+          const token = setAdmin.token;
+          stock.bookId = bookId;
+          stock.quantity = '';
+          requestApp
+            .post('/api/v1/books/stocks')
+            .send(stock)
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+
+        it('should not be able to add a stock if the book id cannot be found', (done) => {
+          const token = setAdmin.token;
+          stock.bookId = 5432434;
+          requestApp
+            .post('/api/v1/books/stocks')
+            .send(stock)
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(404);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
 
         it('should be able to get all stocks', (done) => {
           const token = setAdmin.token;
@@ -279,6 +650,19 @@ describe('API Tests', () => { // Describe the API test suite
             .set('authenticate-token', token)
             .end((err, res) => {
               expect(res.statusCode).to.equal(200);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+        it('should not be able to delete a stock with a wrong id', (done) => {
+          const token = setAdmin.token;
+          requestApp
+            .delete('/api/v1/books/stocks/9878')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
               expect(res.body).to.be.an('object');
               if (err) return done(err);
               done();
@@ -319,6 +703,85 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      it('should be able to borrow another book', (done) => {
+        const token = setUser.token;
+        const userId = setUser.userId;
+        // book.book_id = bookId;
+        requestApp
+          .post(`/api/v1/users/${userId}/books`)
+          .send({ bookId: bookId3 })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(201);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to borrow a book if bookId cannot be found', (done) => {
+        const token = setUser.token;
+        const userId = setUser.userId;
+        requestApp
+          .post(`/api/v1/users/${userId}/books`)
+          .send({ bookId3 })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(404);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to borrow a book more than once', (done) => {
+        const token = setUser.token;
+        const userId = setUser.userId;
+        // book.book_id = bookId;
+        requestApp
+          .post(`/api/v1/users/${userId}/books`)
+          .send({ bookId: bookId3 })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(403);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to borrow a book if quantity === 0', (done) => {
+        const token = setUser.token;
+        const userId = setUser.userId;
+        // book.book_id = bookId;
+        requestApp
+          .post(`/api/v1/users/${userId}/books`)
+          .send({ bookId })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should not be able to borrow a book if one or more fields does not exist', (done) => {
+        const token = setUser.token;
+        const userId = setUser.userId;
+        // book.book_id = bookId;
+        requestApp
+          .post(`/api/v1/users/${userId}/books`)
+          .send({ bookId: 'sjkchjvfjvgyeu' })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
       it('should be able to get list of books they are yet to return', (done) => {
         const userId = setUser.userId;
         const token = setUser.token;
@@ -346,6 +809,21 @@ describe('API Tests', () => { // Describe the API test suite
             done();
           });
       });
+
+      it('should not be able to return a book when one or more parameters cannot be found',
+        (done) => {
+          const userId = setUser.userId;
+          const token = setUser.token;
+          requestApp
+            .put(`/api/v1/users/${userId}/books/10000000?bookId=9000000`)
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(404);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
     });
   });
 
@@ -362,6 +840,32 @@ describe('API Tests', () => { // Describe the API test suite
             done();
           });
       });
+
+      it('should return an error when the user making the request is not the same as logged in user',
+        (done) => {
+          const token = setUser.token;
+          request(app)
+            .get('/api/v1/users/123456/books')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+      it('should return an error when the user does not provide a token',
+        (done) => {
+          request(app)
+            .get('/api/v1/users/123456/books')
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(401);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
     });
 
     describe('# User Authenticate', () => { // Describe Authenticate middleware
@@ -420,6 +924,15 @@ describe('API Tests', () => { // Describe the API test suite
             if (err) return done(err);
             done();
           });
+      });
+    });
+  });
+
+  describe('Utils', () => { // Describe Client App
+    describe('# Random string', () => { // Describe entry point
+      it('should return a random string', (done) => {
+        expect(Utils.randomString(3)).to.be.a('string');
+        done();
       });
     });
   });

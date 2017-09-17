@@ -3,7 +3,7 @@ import app from '../../../express';
 
 const router = function router(req, res, next) {
   const token = req.body.authenticate_token || req.query.authenticate_token ||
-    req.headers['authenticate-token'];
+    req.headers['authenticate-token'] || '';
 
   if (token) {
     /* decode jwt token */

@@ -7,6 +7,7 @@ import book from './book';
 import cropper from './cropper';
 import borrowedBook from './borrowedBook';
 import categories from './categories';
+import stockManager from './stockManager';
 
 export default combineReducers({
   flashMessages,
@@ -16,5 +17,6 @@ export default combineReducers({
   cropper,
   book,
   borrowedBook,
-  categories
+  categories,
+  stocks: stockManager
 });

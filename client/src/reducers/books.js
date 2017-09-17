@@ -1,4 +1,4 @@
-import { SET_BOOKS, ADD_BOOK } from '../actions/types';
+import { SET_BOOKS, ADD_BOOK, BOOKS_SEARCHED } from '../actions/types';
 
 export default (state = [], action = {}) => {
   /* eslint-disable no-case-declarations */
@@ -11,6 +11,9 @@ export default (state = [], action = {}) => {
         ...state,
         action.books
       ];
+
+    case BOOKS_SEARCHED:
+      return action.result;
 
     default: return state;
   }

@@ -21,6 +21,7 @@ app.use((req, res, next) => {
       return res.status(404).send({ message: 'It\'s not us. Sorry, we can\'t find this endpoint' });
     }
     const routes = require(appPath); // eslint-disable-line global-require, import/no-dynamic-require, max-len
+    console.log(routes);
     routes.default(app);
   } else {
     App(app);

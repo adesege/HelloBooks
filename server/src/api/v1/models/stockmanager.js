@@ -27,7 +27,7 @@ export default (sequelize, DataTypes) => {
     tableName: 'stockManager'
   });
 
-  stockManager.afterCreate((stock, options, next) => {
+  stockManager.afterCreate((stock) => {
     Book.findById(stock.bookId).then((book) => {
       if (book.quantity >= 0) {
         book.update({
@@ -35,8 +35,8 @@ export default (sequelize, DataTypes) => {
         }, {
           where: { id: stock.bookId, }
         })
-          .then()
-          .catch(error => next(null, error.message));
+          .then();
+        // .catch(error => next(null, error.message));
       }
     });
   });

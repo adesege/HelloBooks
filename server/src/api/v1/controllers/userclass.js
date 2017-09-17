@@ -49,10 +49,7 @@ class UserClass {
         return res.status(400).send({
           message: error.errors
         });
-      })
-      .catch(error => res.status(500).send({
-        message: error.message
-      }));
+      });
   }
 
   /**
@@ -90,34 +87,7 @@ class UserClass {
             });
         }
         return res.status(404).send({ message: 'User not found' });
-      })
-      .catch(error => res.status(500).send({
-        message: error.message
-      }));
-  }
-  /**
-     * @method books
-     * @param {object} req
-     * @param {object} res
-     * @return {object} response
-  */
-  static books(req, res) {
-    const userId = req.params.userId;
-    if (userId === null || userId === '') {
-      res.status(400).send({
-        message: 'User not found' });
-    }
-    User.findAll({})
-      .then((books) => {
-        if (books) {
-          res.status(200).send({ message: books });
-        } else {
-          res.status(400).send({ message: 'No record available' });
-        }
-      })
-      .catch(error => res.status(500).send({
-        message: error.message
-      }));
+      });
   }
 }
 export default UserClass;
