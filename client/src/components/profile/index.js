@@ -1,10 +1,6 @@
 import React from 'react';
-import $ from 'jquery';
 import LeftSidebar from './sidebar/Left';
 import image from '../../assets/images/4.jpg';
-
-window.$ = $;
-window.jQuery = $;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default class Profile extends React.Component {

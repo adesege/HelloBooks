@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import $ from 'jquery';
 import 'bootstrap/js/dist/modal';
 import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
+
+const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Modal extends React.Component {
