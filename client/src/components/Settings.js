@@ -1,8 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
-
-window.$ = $;
-window.jQuery = $;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default class Settings extends React.Component {

@@ -1,10 +1,8 @@
 import React from 'react';
-import $ from 'jquery';
 import user from '../../../assets/images/user.png';
 import image from '../../../assets/images/1.jpg';
 
-window.$ = $;
-window.jQuery = $;
+const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default class LeftSidebar extends React.Component {

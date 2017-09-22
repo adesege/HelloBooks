@@ -1,8 +1,4 @@
 import React from 'react';
-import $ from 'jquery';
-
-window.$ = $;
-window.jQuery = $;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default class LeftSidebar extends React.Component {

@@ -3,10 +3,10 @@ import cloudinary from 'cloudinary';
 
 dotEnv.config();
 
-const { REACT_APP_CLOUD_NAME, REACT_APP_API_KEY, REACT_APP_API_SECRET } = process.env;
+const { APP_CLOUD_NAME, APP_API_KEY, APP_API_SECRET } = process.env;
 cloudinary.config({
-  cloud_name: REACT_APP_CLOUD_NAME,
-  api_key: REACT_APP_API_KEY,
-  api_secret: REACT_APP_API_SECRET
+  cloud_name: APP_CLOUD_NAME,
+  api_key: APP_API_KEY,
+  api_secret: APP_API_SECRET
 });
 

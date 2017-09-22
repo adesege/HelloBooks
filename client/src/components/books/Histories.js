@@ -1,9 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
 import logo3 from '../../assets/images/2.jpg';
-
-window.$ = $;
-window.jQuery = $;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default class Histories extends React.Component {

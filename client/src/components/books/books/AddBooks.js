@@ -1,9 +1,7 @@
 import React from 'react';
-import $ from 'jquery';
 import triggerUpload from '../../../assets/js/script';
 
-window.$ = $;
-window.jQuery = $;
+const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 export default class Histories extends React.Component {

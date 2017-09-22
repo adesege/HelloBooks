@@ -41,5 +41,3 @@ export const STOCK_MANAGER_FETCHED = 'STOCK_MANAGER_FETCHED';
 export const STOCK_ADDED = 'STOCK_ADDED';
 
 export const STOCK_DELETED = 'STOCK_DELETED';
-
-
