@@ -12,14 +12,15 @@ const sendSurcharge = () =>
     plain: true
   })
     .then((borrowed) => {
-      const expectedReturnDate = moment(borrowed.expectedReturnDate);
-      const today = moment();
-      const difference = expectedReturnDate.diff(today, 'days');
-      if (difference > 0 && borrowed.notificationSent !== true) {
-        Mailer.to = borrowed.User.email;
-        Mailer.from = EMAIL_FROM;
-        Mailer.subject = 'Surcharge notification on your account';
-        Mailer.html = `
+      if (borrowed) {
+        const expectedReturnDate = moment(borrowed.expectedReturnDate);
+        const today = moment();
+        const difference = expectedReturnDate.diff(today, 'days');
+        if (difference > 0 && borrowed.notificationSent !== true) {
+          Mailer.to = borrowed.User.email;
+          Mailer.from = EMAIL_FROM;
+          Mailer.subject = 'Surcharge notification on your account';
+          Mailer.html = `
         <p>Hello <strong>${borrowed.User.name}</strong>,</p>
         <p>This is to notify you that there is a surcharge on your account.</p>
         <p>Please return the book titled <strong>${borrowed.Book.title}</strong> 
@@ -29,16 +30,17 @@ const sendSurcharge = () =>
         <p>Best regards</p>
         `;
 
-        Mailer.send();
-        borrowedBook.update({
-          notificationSent: true,
-          id: borrowed.id
-        },
-        {
-          where: { id: borrowed.id }
-        });
+          Mailer.send();
+          borrowedBook.update({
+            notificationSent: true,
+            id: borrowed.id
+          },
+          {
+            where: { id: borrowed.id }
+          });
+        }
+        return true;
       }
-      return true;
     });
 
 
