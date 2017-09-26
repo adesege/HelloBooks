@@ -74,7 +74,7 @@ class BookClass {
         }).then((id) => {
           const bookId = id.get('id');
           stock.bookId = bookId;
-          stockManager.create(stock)
+          return stockManager.create(stock)
             .then(() => res.status(201).send({
               message: 'Book added successfully',
               id: bookId
