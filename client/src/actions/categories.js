@@ -1,41 +1,33 @@
 import axios from 'axios';
-import {
-  CATEGORY_ADDED,
-  CATEGORY_FETCHED,
-  CATEGORY_EDITED,
-  CATEGORY_DELETED } from './types';
+import types from './types';
 import { addFlashMessage } from './flashMessages';
 
 const API_VERSION = window.API_VERSION;
+const {
+  CATEGORY_ADDED,
+  CATEGORY_FETCHED,
+  CATEGORY_EDITED,
+  CATEGORY_DELETED } = types;
 
-export function categoryAdded(category) { // eslint-disable-line require-jsdoc
-  return {
-    type: CATEGORY_ADDED,
-    category
-  };
-}
+export const categoryAdded = category => ({
+  type: CATEGORY_ADDED,
+  category
+});
 
+export const categoryFetched = category => ({
+  type: CATEGORY_FETCHED,
+  category
+});
 
-export function categoryFetched(category) { // eslint-disable-line require-jsdoc
-  return {
-    type: CATEGORY_FETCHED,
-    category
-  };
-}
+export const categoryEdited = category => ({
+  type: CATEGORY_EDITED,
+  category
+});
 
-export function categoryEdited(category) { // eslint-disable-line require-jsdoc
-  return {
-    type: CATEGORY_EDITED,
-    category
-  };
-}
-
-export function categoryDeleted(id) { // eslint-disable-line require-jsdoc
-  return {
-    type: CATEGORY_DELETED,
-    id
-  };
-}
+export const categoryDeleted = id => ({
+  type: CATEGORY_DELETED,
+  id
+});
 
 export const addBookCategory = data =>
   dispatch =>
@@ -58,7 +50,6 @@ export const addBookCategory = data =>
           return errors;
         }
       );
-
 
 export const getBookCategories = () =>
   dispatch =>
@@ -121,4 +112,3 @@ export const deleteBookCategory = data =>
           return errors;
         }
       );
-

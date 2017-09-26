@@ -19,5 +19,4 @@ switch (NODE_ENV) {
 
   default: config = {};
 }
-
 module.exports = config;

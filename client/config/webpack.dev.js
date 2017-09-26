@@ -9,7 +9,7 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'js/[name].js',
-    publicPath: `http://localhost:${PORT}/assets/`
+    publicPath: `http://localhost:${PORT}/`
   },
   module: {
     rules: [
@@ -17,13 +17,30 @@ module.exports = merge(common, {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
-    ]
+      {
+        test: /\.(jpg|jpeg|gif|png)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader',
+        options: {
+          limit: 300000,
+          name: 'images/[name].[ext]'
+        }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader',
+        options: {
+          limit: 300000,
+          name: 'fonts/[name].[ext]'
+        }
+      }]
   },
   devServer: {
     contentBase: path.join(__dirname, '../public'),
     compress: true,
     port: PORT,
-    publicPath: `http://localhost:${PORT}/assets/`,
+    publicPath: `http://localhost:${PORT}/`,
     historyApiFallback: true,
     hot: true,
     proxy: {

@@ -1,10 +1,11 @@
 import findIndex from 'lodash/findIndex';
-import {
+import types from '../actions/types';
+
+const {
   CATEGORY_ADDED,
   CATEGORY_FETCHED,
   CATEGORY_EDITED,
-  CATEGORY_DELETED } from '../actions/types';
-
+  CATEGORY_DELETED } = types;
 export default (state = {}, action = {}) => {
   /* eslint-disable no-case-declarations */
 

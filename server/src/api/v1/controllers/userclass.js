@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-import app from '../../../express';
 import model from '../models';
 import utils from '../utils';
 
@@ -26,7 +24,9 @@ class UserClass {
     const userGroup = req.body.group || 'user';
 
     if (confirmPassword !== req.body.password) {
-      return res.status(400).send({ message: 'The password field is not the same ' });
+      return res
+        .status(400)
+        .send({ message: 'The password field is not the same ' });
     }
     User.create({
       password,
@@ -35,19 +35,24 @@ class UserClass {
       userGroup,
       key: randomString(10)
     }, {
-      fields: ['name', 'email', 'password', 'key', 'userGroup']
-    }).then(() => res.status(201).send({
-      message: 'Your account has been created successfully. Go to the login page to sign in to your account.' }))
-      .catch((error) => {
-        error.errors.map((value) => {
-          delete value.__raw;
-          delete value.path;
-          delete value.type;
-          delete value.value;
-          return value;
+      fields: ['name', 'email', 'password', 'key', 'userGroup'],
+      returning: true,
+      plain: true
+    }).then((user) => {
+      const token = utils.signToken(user);
+      return res
+        .status(201)
+        .send({
+          token,
+          userId: user.id,
+          group: user.userGroup,
+          message: 'Your account has been created successfully.'
         });
+    })
+      .catch((errors) => {
+        const errorsArray = errors.errors.map(error => error.message);
         return res.status(400).send({
-          message: error.errors
+          message: errorsArray
         });
       });
   }
@@ -59,25 +64,28 @@ class UserClass {
    * @return {object} response
    */
   static signin(req, res) {
-    const secret = app.get('secret');
     const password = req.body.password || '';
     const email = req.body.email || '';
 
-    if (email === '') return res.status(400).send({ message: 'The email field is required' });
-    if (password === '') return res.status(400).send({ message: 'The password field is required' });
+    if (email === '') {
+      return res
+        .status(400)
+        .send({ message: 'The email field is required' });
+    }
+    if (password === '') {
+      return res
+        .status(400)
+        .send({ message: 'The password field is required' });
+    }
 
     User.findOne({ where: { email } })
       .then((user) => {
         if (user) {
           if (!user.validPassword(password)) {
             return res.status(400).send({
-              message: 'You provided a wrong password' });
+              message: 'You provided a wrong email address and password' });
           }
-          const token = jwt.sign(
-            { user: user.id, group: user.userGroup },
-            secret,
-            { expiresIn: 24 * 60 * 60 }
-          );
+          const token = utils.signToken(user);
           return res.status(200).send(
             {
               token,
@@ -87,6 +95,63 @@ class UserClass {
             });
         }
         return res.status(404).send({ message: 'User not found' });
+      });
+  }
+
+  /**
+   *
+   * @method get
+   * @param {object} req
+   * @param {object} res
+   * @return {object} response
+   */
+  static getUsers(req, res) { // get user(s) in the database
+    const id = req.params.userId;
+    User.findAll({
+      where: req.params.userId ? { id } : null,
+      attributes: ['name', 'userRank', 'email', 'id', 'createdAt', 'updatedAt'],
+      order: [['updatedAt', 'DESC']]
+    })
+      .then(users => res.status(200).send({ data: users }));
+  }
+
+  /**
+   *
+   * @method get
+   * @param {object} req
+   * @param {object} res
+   * @return {object} response
+   */
+  static updateUser(req, res) { // get user(s) in the database
+    const id = req.params.userId;
+    const password = req.body.password;
+    const oldPassword = req.body.oldPassword;
+    const passwordConfirm = req.body.passwordConfirm;
+    if (password !== passwordConfirm) {
+      return res.status(400).send({
+        message: 'The password is not the same'
+      });
+    }
+    User.findById(id)
+      .then((user) => {
+        if (!user.validPassword(oldPassword)) {
+          return res.status(400).send({
+            message: 'Your old password does not match the current password'
+          });
+        }
+        User.update({ password },
+          {
+            where: { id },
+            returning: true,
+            plain: true
+          })
+          .then(updatedUser =>
+            res.status(200)
+              .send({
+                data: updatedUser,
+                message: 'User information has been successfully edited'
+              })
+          );
       });
   }
 }

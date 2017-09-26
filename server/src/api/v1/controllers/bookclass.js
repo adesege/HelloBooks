@@ -155,9 +155,9 @@ class BookClass {
     const id = req.params.id;
     Book.findAll({
       where: req.params.id ? { id } : null,
-      // include: ['stock'] 
+      order: [['updatedAt', 'DESC']]
     })
-      .then(books => res.status(200).send({ message: books }));
+      .then(books => res.status(200).send({ data: books }));
   }
   /**
    * @method borrowBook
@@ -168,36 +168,36 @@ class BookClass {
   static borrowBook(req, res) {
     const bookId = req.body.bookId;
     const userId = req.params.userId;
-    // let returnedDate = req.body.return_date || '';
     const isReturned = false;
-    // returnedDate = new Date(returnedDate);
 
     Book.findById(bookId)
       .then((book) => {
         if (!book) { // check if no book can be found
-          return res.status(404).send({ message: 'Sorry, we can\'t find this book' });
+          return res.status(404).send({
+            message: 'Sorry, we can\'t find this book'
+          });
         }
-        console.log(book.quantity);
         if (book.quantity === 0) { // check if book quantity is less than or equal to zero
-          return res.status(400).send({ message: 'There are no more copies left of this book to borrow' });
+          return res.status(400).send({
+            message: 'There are no more copies left of this book to borrow'
+          });
         }
 
         borrowedBook.findOne({ where: { bookId, userId, isReturned } })
           .then((borrowed) => {
             if (borrowed) {
               return res
-                .status(403)
+                .status(400)
                 .send({
-                  message: 'You have already borrowed this book. Please return it before you can borrow it again.'
+                  message:
+                  'You have already borrowed this book. Please return it before you can borrow it again.'
                 });
             }
             borrowedBook.create({
               bookId,
               userId,
               isReturned,
-              // returnedDate
             }, {
-              fields: ['bookId', 'userId', 'returnedDate', 'isReturned'],
               individualHooks: true
             }).then(id => res.status(201).send({
               message: 'You have successfully  borrowed this book',
@@ -216,15 +216,17 @@ class BookClass {
   */
   static getBorrowedBook(req, res) {
     const userId = req.params.userId;
-    const bookId = req.query.bookId || null;
+    const bookId = req.query.bookId;
     const isReturned = req.query.returned || false;
+    const where = bookId
+      ? { userId, isReturned, bookId } : { userId, isReturned };
 
     borrowedBook.findAll({
-      // include: [Book],
-      where: { userId, isReturned, bookId }
+      include: [Book],
+      where
     }).then((books) => {
       res.status(200).send({
-        message: books
+        data: books
       });
     });
   }
@@ -246,18 +248,22 @@ class BookClass {
       if (books) {
         borrowedBook.update({
           isReturned,
-          bookId
+          bookId,
+          userId
         }, {
-          where: { id, userId, bookId, isReturned: false }, individualHooks: true
+          where: { id, userId, bookId, isReturned: false },
+          individualHooks: true
         }).then(() => {
-          res.status(200).send({ message: 'You have successfully returned this book' });
+          res
+            .status(200)
+            .send({
+              message: 'You have successfully returned this book'
+            });
         });
-        // .catch(error => res.status(400).send({ message: error.message }));
       } else {
         return res.status(404).json({ message: 'No record available' });
       }
     });
-    // .catch(error => res.status(500).send({ message: error.message }));
   }
 
   /**
@@ -281,6 +287,26 @@ class BookClass {
           return res.status(404).send({ message: 'Book not found' });
         }
       });
+  }
+
+  /**
+    * @method getHistories
+    * @param {object} req
+    * @param {object} res
+    * @return {object} response
+  */
+  static getHistories(req, res) {
+    const userId = req.params.userId;
+
+    borrowedBook.findAll({
+      include: [Book],
+      order: [['updatedAt', 'DESC']],
+      where: { userId }
+    }).then((books) => {
+      res.status(200).send({
+        data: books
+      });
+    });
   }
 }
 

@@ -22,7 +22,9 @@
     "exclude": [
       "server/src/app/**.js",
       "server/src/api/**/tests/**.js",
-      "src/api/**/models/index.js"
+      "src/api/**/models/index.js",
+      "src/api/**/utils/mailer.js",
+      "src/api/**/cron/sendSurcharge.js"
     ]
   },
   "cacheDirectories": [
@@ -48,6 +50,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-react-app": "^2.0.0",
+    "eslint-plugin-flowtype": "^2.36.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
@@ -67,6 +70,7 @@
     "chai": "^4.1.1",
     "cloudinary": "^1.9.0",
     "connect": "^3.6.3",
+    "cron": "^1.3.0",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
@@ -74,7 +78,9 @@
     "js-yaml": "^3.10.0",
     "jsonwebtoken": "^7.4.1",
     "mocha": "^3.5.0",
+    "moment": "^2.18.1",
     "morgan": "^1.8.2",
+    "nodemailer": "^4.1.1",
     "nyc": "11.1.0",
     "pg": "^7.1.0",
     "pg-hstore": "^2.3.2",

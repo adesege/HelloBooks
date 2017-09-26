@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Document, Page } from 'react-pdf';
-import cloudinary from 'cloudinary';
 import {
-  saveBooks,
   addBook,
   updateBookCover,
   updateBook,
@@ -17,7 +15,7 @@ import InputField from '../../form/InputField';
 import Textarea from '../../form/TextareaField';
 import { addFlashMessage } from '../../../actions/flashMessages';
 import UploadBookCover from './UploadBookCover';
-import '../../../config/cloudinary';
+import { isImage, isPDF } from '../../../utils';
 
 const $ = window.$;
 
@@ -26,22 +24,25 @@ class BooksModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.book ? this.props.book.id : null,
-      title: this.props.book ? this.props.book.title : '',
-      description: this.props.book ? this.props.book.description : '',
-      book_url: this.props.book ? this.props.book.bookURL : '',
-      stock_quantity: '',
-      stock_record_date: '',
-      isbn: this.props.book ? this.props.book.ISBN : '',
-      published_date: this.props.book ? this.props.book.publishedDate : '',
-      author: this.props.book ? this.props.book.author : '',
-      book_category_id: this.props.book ? this.props.book.bookCategoryId : '',
+      done: false,
       isLoading: false,
       showCoverBook: false,
       imageSrc: '',
-      coverPhotoPath: this.props.book ? this.props.book.coverPhotoPath : '',
-      documentPath: this.props.book ? this.props.book.documentPath : '',
-      done: false
+      book: {
+        id: this.props.book ? this.props.book.id : null,
+        title: this.props.book ? this.props.book.title : '',
+        description: this.props.book ? this.props.book.description : '',
+        book_url: this.props.book ? this.props.book.bookURL : '',
+        stock_quantity: '',
+        stock_record_date: '',
+        isbn: this.props.book ? this.props.book.ISBN : '',
+        published_date: this.props.book ? this.props.book.publishedDate : '',
+        author: this.props.book ? this.props.book.author : '',
+        book_category_id: this.props.book ? this.props.book.bookCategoryId : '',
+        coverPhotoPath: this.props.book ? this.props.book.coverPhotoPath : '',
+        documentPath: this.props.book ? this.props.book.documentPath : '',
+        oldImageURL: this.props.book ? this.props.book.coverPhotoPath : ''
+      }
     };
 
     this.onChange = this.onChange.bind(this);
@@ -58,16 +59,7 @@ class BooksModal extends Component {
     this.setState({ showCoverBook: false });
   }
 
-  coverPhotoOptions = () => ({
-    crop: 'limit',
-    width: 250,
-    height: 435,
-    eager: [
-      { width: 125, height: 218, crop: 'fill', format: 'jpg' }
-    ]
-  });
-
-  closeModal = () => {
+  closeModal() {
     $('#add-books')
       .find('div button.btn[data-dismiss="modal"]')
       .trigger('click');
@@ -75,34 +67,28 @@ class BooksModal extends Component {
 
   onClickSubmit(event) {
     event.preventDefault();
-    const { coverPhotoPath } = this.state;
-    delete this.state.imageSrc;
     this.setState({ isLoading: true });
 
-    if (coverPhotoPath) {
-      if (this.props.params.id) {
-        this.props.updateBook(this.state).then(
+    if (this.props.params.id) {
+      this.props.updateBook(this.state.book)
+        .then(
+          () => {
+            this.setState({ isLoading: false });
+            this.closeModal();
+          },
+          (errors) => {
+            const errorMessage =
+            typeof errors === 'object' ? errors.response.data : errors;
+            this.setState({
+              errors: errorMessage,
+              isLoading: false
+            });
+          }
+        );
+    } else {
+      this.props.addBook(this.state.book)
+        .then(
           (response) => {
-            if (coverPhotoPath.match(/^data:image/)) {
-              cloudinary.v2.uploader.upload(
-                coverPhotoPath,
-                this.coverPhotoOptions(),
-                (error, result) => {
-                  if (error) {
-                    this.setState({ errors: 'There was an error uploading this cover photo' });
-                  } else {
-                    this.props.updateBookCover({
-                      id: this.props.params.id,
-                      coverPhotoPath: result.secure_url
-                    }).then(
-                      () => { },
-                      (errors) => {
-                        this.setState({ errors: errors.response.data });
-                        return false;
-                      });
-                  }
-                });
-            }
             this.closeModal();
             this.props.addFlashMessage({
               type: 'success',
@@ -110,86 +96,20 @@ class BooksModal extends Component {
             });
           },
           (errors) => {
-            console.log(errors);
-            this.setState({ errors: errors.response.data });
-          });
-        this.setState({ isLoading: false });
-      } else {
-        this.props.saveBooks(this.state)
-          .then(
-            (response) => {
-              const data = response.data;
-              cloudinary.v2.uploader.upload(
-                coverPhotoPath,
-                this.coverPhotoOptions(),
-                (error, result) => {
-                  if (error) {
-                    this.setState({ errors: 'There was an error uploading this cover photo' });
-                  } else {
-                    this.props.updateBookCover({
-                      id: data.id,
-                      coverPhotoPath: result.secure_url
-                    }).then(
-                      () => {
-                        this.props.addBook(data);
-                        this.props.addFlashMessage({
-                          type: 'success',
-                          text: data
-                        });
-
-                        this.closeModal();
-                      },
-                      (errors) => {
-                        this.setState({ errors: errors.response.data });
-                      });
-                  }
-                });
-
-              this.setState({
-                isLoading: false
-              });
-            },
-            (errors) => {
-              this.setState({
-                isLoading: false,
-                errors: errors.response.data
-              });
+            const errorMessage =
+            typeof errors === 'object' ? errors.response.data : errors;
+            this.setState({
+              isLoading: false,
+              errors: errorMessage
             });
-      }
-    } else {
-      this.setState({
-        isLoading: false,
-        errors: 'You must upload a book cover for this book'
-      });
+          }
+        );
     }
-  }
-
-  componentDidMount() {
-    $(document).ready(() => {
-      const $addBooks = $('#add-books');
-      $addBooks.modal('show');
-
-      $addBooks.on('hide.bs.modal', (e) => {
-        this.context.router.push('/books');
-      });
-      if (this.props.params.id) {
-        this.props.getBook({
-          id: this.props.params.id
-        }).then(
-          (data) => { },
-          (errors) => {
-            this.props.addFlashMessage({
-              type: 'error',
-              text: errors.response.data
-            });
-          });
-      }
-    });
   }
 
   onClickOpenBookCover(event) {
     event.preventDefault();
-    const $parent = $(event.target).parent().attr('target');
+    const $parent = $(event.target).parents('span').attr('target');
     const $target = $(`#${$parent}`);
     $target.click();
   }
@@ -198,7 +118,7 @@ class BooksModal extends Component {
     const files = $(event.target)[0].files;
     if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
-    if (/^image/.test(files[0].type)) { // only image file
+    if (isImage(files[0].type)) { // only image file
       const reader = new FileReader(); // instance of the FileReader
       reader.readAsDataURL(files[0]); // read the local file
       reader.onloadend = (result) => { // set image data as background of div
@@ -211,9 +131,8 @@ class BooksModal extends Component {
     const files = $(event.target)[0].files;
     if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 
-    if (/^application\/pdf/.test(files[0].type)) { // only image file
+    if (isPDF(files[0].type)) { // only image file
       this.setState({ fileData: files[0] });
-      // $preview.html(files[0].name).addClass('mt-3')
     }
   }
 
@@ -222,36 +141,63 @@ class BooksModal extends Component {
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    const { book } = this.state;
+    const newBook = {
+      ...book,
+      [e.target.name]: e.target.value
+    };
+    this.setState({ book: newBook });
+  }
+
+  componentDidMount() {
+    $(document).ready(() => {
+      const $addBooks = $('#add-books');
+      $addBooks.modal('show');
+
+      $addBooks.on('hide.bs.modal', (e) => {
+        this.context.router.push('/books');
+      });
+    });
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.params.id && this.props.book !== nextProps.book) {
       this.setState({
-        id: nextProps.book.id,
-        title: nextProps.book.title,
-        description: nextProps.book.description,
-        book_url: nextProps.book.bookURL,
-        isbn: nextProps.book.ISBN,
-        published_date: nextProps.book.publishedDate,
-        author: nextProps.book.author,
-        book_category_id: nextProps.book.bookCategoryId,
-        coverPhotoPath: nextProps.book.coverPhotoPath,
-        documentPath: nextProps.book.documentPath,
+        book: {
+          id: nextProps.book.id,
+          title: nextProps.book.title,
+          description: nextProps.book.description,
+          book_url: nextProps.book.bookURL,
+          isbn: nextProps.book.ISBN,
+          published_date: nextProps.book.publishedDate,
+          author: nextProps.book.author,
+          book_category_id: nextProps.book.bookCategoryId,
+          coverPhotoPath: nextProps.book.coverPhotoPath,
+          documentPath: nextProps.book.documentPath
+        }
       });
     }
     if (this.props.coverPhotoPath !== nextProps.coverPhotoPath) {
-      this.setState({ coverPhotoPath: nextProps.coverPhotoPath });
+      this.setState({
+        book: {
+          ...this.state.book,
+          coverPhotoPath: nextProps.coverPhotoPath
+        }
+      });
     }
   }
 
 
   render() {
-    const { showCoverBook, coverPhotoPath, fileData, id: bookId, errors } = this.state;
+    const { showCoverBook, fileData, errors } = this.state;
+    const { coverPhotoPath, id: bookId } = this.state.book;
 
     const headerOptions = [
       (
-        <span key="triggerUpload" className="d-inline-flex">
+        <span
+          key="triggerUpload"
+          target="triggerUploadInput"
+          className="d-inline-flex">
           <InputField
             type="file"
             id="triggerUploadInput"
@@ -262,7 +208,6 @@ class BooksModal extends Component {
           <Button
             className="btn-sm btn-default"
             icon="image"
-            target="triggerUploadInput"
             onClick = {this.onClickOpenBookCover}
           >
             <span className="hidden-xs-down">{coverPhotoPath ? 'Change' : 'Add'} cover</span>
@@ -319,14 +264,14 @@ class BooksModal extends Component {
                     <InputField
                       label="Title"
                       name="title"
-                      value={this.state.title}
+                      value={this.state.book.title}
                       onChange={this.onChange} />
                   </div>
                   <div className="col-sm-3 mdb-form form-sm">
                     <select
                       className="form-control"
                       name="book_category_id"
-                      value={this.state.book_category_id}
+                      value={this.state.book.book_category_id}
                       onChange={this.onChange}>
                       <option value="">Please select a category...</option>
                       <option value="1">Category 1</option>
@@ -340,7 +285,7 @@ class BooksModal extends Component {
                     <InputField
                       label="Book author"
                       name="author"
-                      value={this.state.author}
+                      value={this.state.book.author}
                       onChange={this.onChange} />
                   </div>
                   { !bookId &&
@@ -348,7 +293,7 @@ class BooksModal extends Component {
                     <InputField
                       label="Number of copies"
                       name="stock_quantity"
-                      value={this.state.stock_quantity}
+                      value={this.state.book.stock_quantity}
                       onChange={this.onChange} />
                   </div>
                   }
@@ -357,7 +302,7 @@ class BooksModal extends Component {
                     <InputField
                       label="Stock date"
                       name="stock_record_date"
-                      value={this.state.stock_record_date}
+                      value={this.state.book.stock_record_date}
                       onChange={this.onChange} />
                   </div>
                   }
@@ -365,21 +310,21 @@ class BooksModal extends Component {
                     <InputField
                       label="ISBN"
                       name="isbn"
-                      value={this.state.isbn}
+                      value={this.state.book.isbn}
                       onChange={this.onChange} />
                   </div>
                   <div className="col-sm-6">
                     <InputField
                       label="Book url"
                       name="book_url"
-                      value={this.state.book_url}
+                      value={this.state.book.book_url}
                       onChange={this.onChange} />
                   </div>
                   <div className="col-sm-6">
                     <InputField
                       label="Date published"
                       name="published_date"
-                      value={this.state.published_date}
+                      value={this.state.book.published_date}
                       onChange={this.onChange} />
                   </div>
                 </div>
@@ -391,7 +336,7 @@ class BooksModal extends Component {
                         placeholder="Description for this book"
                         rows="5"
                         style={{ minHeight: '200px' }}
-                        value={this.state.description}
+                        value={this.state.book.description}
                         onChange={this.onChange} />
                     </div>
                   </div>
@@ -407,7 +352,7 @@ class BooksModal extends Component {
                     >
                       <Page
                         pageNumber={1}
-                        width="250"
+                        width={250}
                       />
                     </Document>
                   </div>
@@ -426,9 +371,9 @@ BooksModal.contextTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-  if (props.params.id && state.books && state.books.message) {
+  if (props.params.id && state.books && state.books) {
     return {
-      book: state.books.message.find(item => item.id === parseInt(props.params.id, 10)),
+      book: state.books.find(item => item.id === parseInt(props.params.id, 10)),
       coverPhotoPath: state.cropper.coverPhotoPath
     };
   }
@@ -439,7 +384,6 @@ const mapStateToProps = (state, props) => {
 };
 
 export default connect(mapStateToProps, {
-  saveBooks,
   addFlashMessage,
   addBook,
   updateBookCover,

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import FlashMessage from '../../components/flash/FlashMessage';
-import deleteFlashMessage from '../../actions/flashMessages';
+import { deleteFlashMessage } from '../../actions/flashMessages';
 
 
 /* eslint-disable require-jsdoc, class-methods-use-this */

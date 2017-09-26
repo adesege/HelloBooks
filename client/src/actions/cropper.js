@@ -1,4 +1,6 @@
-import { SET_IMAGE_DATA, DELETE_IMAGE_DATA } from './types';
+import types from './types';
+
+const { SET_IMAGE_DATA, DELETE_IMAGE_DATA } = types;
 
 export function setImageData(imageData) { // eslint-disable-line require-jsdoc, max-len
   return {
@@ -12,7 +14,3 @@ export function deleteImageData() { // eslint-disable-line require-jsdoc, max-le
     type: DELETE_IMAGE_DATA,
   };
 }
-
-export default {
-
-};

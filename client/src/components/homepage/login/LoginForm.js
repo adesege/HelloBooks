@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import FlashMessagesList from '../../flash/FlashMessagesList';
-import setAuthorizationToken from '../../../assets/js/setAuthorizationToken';
 import InputField from '../../form/InputField';
 import Button from '../../form/Button';
 
@@ -32,19 +31,7 @@ class LoginForm extends React.Component {
         this.setState({
           isLoading: false
         });
-
-        const token = data.data.token;
-        const userPayload = {
-          group: data.data.group,
-          userId: data.data.userId
-        };
-
-        localStorage.setItem('authToken', token);
-        localStorage.setItem('userPayload', JSON.stringify(userPayload));
-
-        setAuthorizationToken(token);
-        this.props.setCurrentUser(userPayload);
-
+        this.props.logUserIn(data);
         this.context.router.push('/dashboard');
       },
       (errors) => {
@@ -98,7 +85,8 @@ class LoginForm extends React.Component {
 }
 
 LoginForm.propTypes = {
-  login: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired,
+  logUserIn: PropTypes.func.isRequired
 };
 
 LoginForm.contextTypes = {

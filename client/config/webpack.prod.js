@@ -1,15 +1,11 @@
-const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const babelMinify = require('babel-preset-minify');
 const babelCore = require('babel-core');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const common = require('./webpack.common');
-
-const { NODE_ENV } = process.env;
 
 const extractSass = new ExtractTextPlugin({
   filename: 'css/[name].[contenthash].css',
@@ -30,16 +26,29 @@ module.exports = merge(common, {
           use: 'css-loader'
         })
       },
+
+      {
+        test: /\.(jpg|jpeg|gif|png)$/,
+        exclude: /node_modules/,
+        loader: 'file-loader',
+        options: {
+          limit: 300000,
+          name: 'images/[name].[ext]'
+        }
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/,
+        loader: 'file-loader',
+        options: {
+          limit: 300000,
+          name: 'fonts/[name].[ext]'
+        }
+      }
     ]
   },
   plugins: [
     extractSass,
-    new UglifyJSPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV
-      }
-    }),
     new CompressionPlugin({
       asset: '[path].gz[query]',
       algorithm: 'gzip',

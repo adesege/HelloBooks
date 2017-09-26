@@ -1,36 +1,90 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import LeftSidebar from './sidebar/Left';
-import image from '../../assets/images/4.jpg';
+import { getBorrowedBooks, returnBorrowedBook } from '../../actions/borrowedBooks';
+import { getUsers } from '../../actions/users';
+import BorrowedBooksList from './BorrowedBooksList';
+import Info from './Info';
+
+const $ = window.$;
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
-export default class Profile extends React.Component {
+class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      borrowedBooks: [],
+      user: []
+    };
+    this.onReturnBook = this.onReturnBook.bind(this);
+  }
+
+  onReturnBook(event) {
+    event.preventDefault();
+    const userId = this.props.userId;
+    const bookId = $(event.target).parents('.actions').attr('data-bookId');
+    const borrowedBookId = $(event.target).parents('.actions').attr('data-id');
+    this.props.returnBorrowedBookAction({
+      bookId,
+      borrowedBookId,
+      userId
+    });
+  }
+  componentDidMount() {
+    const { userId } = this.props;
+    this.props.getBorrowedBooksAction({
+      userId
+    });
+    this.props.getUsersAction({
+      userId
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.borrowedBooks !== this.props.borrowedBooks) {
+      this.setState({ borrowedBooks: nextProps.borrowedBooks });
+    }
+    if (nextProps.user !== this.props.user) {
+      this.setState({ user: nextProps.user });
+    }
+  }
   render() {
     return (
-      <div className="row pr-3 pl-3" id="yetReturn">
-        <LeftSidebar />
-        <div className="col-sm-8 px-0">
-          <h6 className="title">I'm yet to return...</h6>
-          <div className="row">
-            { [...Array(12)].map((val, index) => (
-              <div className="col-sm-6 col-md-6 col-lg-4 col-xs-12 mb-4" key={index}>
-                <div className="row">
-                  <div className="col-sm-6 col-6 align-self-center">
-                    <img className="img-thumbnail" src={image} alt="Card cap"/>
-                  </div>
-                  <div className="col-sm-6 col-6 p-sm-0 align-self-center">
-                    <h6 className="mt-4 mt-sm-0 mb-0"><a href="/book/borrow/1230">Book title</a></h6>
-                    <h6 className="mb-1 text-muted"><small>Author 1</small></h6>
-                    <h6 className="mb-1 text-muted"><small>June 1st, 2017</small></h6>
-                    <a href="#top" className="card-link text-success" title="Return book">Return</a>
-                  </div>{/* col sm 8 */}
-                </div>{/* row  */}
-              </div>
-            ))}
-          </div>{/* row  */}
-          <button type="button" className="btn btn-primary bg-light btn-block mb-3">See more</button>
+      <div>
+        <Info user={this.state.user} />
+        <div className="row pr-3 pl-3" id="yetReturn">
+          <LeftSidebar />
+          <div className="col-sm-8 px-0">
+            <h6 className="title">I'm yet to return...</h6>
+            <BorrowedBooksList
+              content={this.state.borrowedBooks}
+              onReturnBook={this.onReturnBook}
+            />
+            <button
+              type="button"
+              className="btn btn-primary bg-light btn-block mb-3">
+          See more
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => {
+  const userId = state.auth.user.userId;
+  return {
+    userId,
+    userGroup: state.auth.user.group,
+    borrowedBooks: state.borrowedBooks,
+    user: state.users
+      .find(user => parseInt(user.id, 10) === parseInt(userId, 10))
+  };
+};
+
+export default connect(mapStateToProps, {
+  getBorrowedBooksAction: getBorrowedBooks,
+  returnBorrowedBookAction: returnBorrowedBook,
+  getUsersAction: getUsers
+})(Profile);

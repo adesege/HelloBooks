@@ -1,16 +1,17 @@
-import { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } from './types';
+import types from './types';
 
-export function addFlashMessage(message) { // eslint-disable-line require-jsdoc, import/prefer-default-export, max-len
-  return {
+const { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } = types;
+
+export const addFlashMessage = message =>
+  ({
     type: ADD_FLASH_MESSAGE,
     message
-  };
-}
+  });
 
-export default function deleteFlashMessage(id) { // eslint-disable-line require-jsdoc, max-len
-  return {
+export const deleteFlashMessage = id =>
+  ({
     type: DELETE_FLASH_MESSAGE,
     id
-  };
-}
+  })
+;
 

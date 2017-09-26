@@ -38,11 +38,12 @@ class SignupForm extends React.Component {
           email: ''
         });
 
+        this.props.logUserIn(data);
+        this.context.router.push('/dashboard');
         this.props.addFlashMessage({
           type: 'success',
           text: data.data
         });
-        // this.context.router.push('/');
       },
       (errors) => {
         this.setState({
@@ -79,12 +80,14 @@ class SignupForm extends React.Component {
 
         <InputField
           label="Password"
+          type="password"
           name="password"
           onChange={this.onChange}
           icon="lock"
         />
         <InputField
           label="Password again"
+          type="password"
           name="confirmPassword"
           onChange={this.onChange}
           icon="lock"
@@ -101,7 +104,13 @@ class SignupForm extends React.Component {
             />
           </div>
           <div className="col-md-6">
-            <p className="font-small grey-text mb-0 d-flex justify-content-end"><Link to="/" className="blue-text ml-1">I already have an account</Link></p>
+            <p
+              className="font-small grey-text mb-0 d-flex justify-content-end">
+              <Link
+                to="/"
+                className="blue-text ml-1">I already have an account
+              </Link>
+            </p>
           </div>
 
         </div>

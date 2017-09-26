@@ -6,11 +6,14 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
+import dotEnv from 'dotenv';
 import routes from './routes';
 import rootReducer from './reducers';
-import setAuthorizationToken from './assets/js/setAuthorizationToken';
-import { setCurrentUser } from './actions/auth';
+import setAuthorizationToken from './utils/setAuthorizationToken';
+import { setCurrentUser, logout } from './actions/auth';
 import { addFlashMessage } from './actions/flashMessages';
+
+dotEnv.config();
 
 const store = createStore(
   rootReducer,
@@ -38,7 +41,7 @@ axios.interceptors.response.use((response) => {
       type: 'error',
       text: error.response.data
     }));
-    // store.dispatch(logout());
+    store.dispatch(logout());
   }
   return Promise.reject(error);
 });

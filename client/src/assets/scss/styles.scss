@@ -1,7 +1,4 @@
 @import './_variables.scss';
-@import 'node_modules/bootstrap/scss/bootstrap.scss';
-@import './material.css';
-@import 'node_modules/font-awesome/scss/font-awesome.scss';
 @import './common.scss';
 
 body {
@@ -80,28 +77,6 @@ body {
     margin-top: 5em;
   }
 
-  @media(min-width:576px){
-    /*#bookList .sidebar ul{
-    position: fixed;
-  }
-  #bookList .sidebar{
-    display: flex;
-  }
-  #bookList .sidebar ul{
-    max-width: 115px;
-  }*/
-  }
-
-  @media(max-width:575px){
-    /*#bookList .sidebar ul{
-      padding-bottom: 120px !important;
-  }
-    #bookList .sidebar ul{
-    width: 100%;
-  }*/
-  }
-
-
   .navbar-light .navbar-toggler {
       border-color: transparent;
   }
@@ -171,20 +146,6 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
   }
-
-  /*.collapse.show.sidebar{
-    position: fixed;
-    background-color: rgb(255, 255, 255);
-    z-index: 100;
-    width: 100vw;
-    right: 0px;
-    left: 0px;
-    bottom: 0px;
-    top: 60px;
-    height: 100vh;
-    overflow: hidden;
-    overflow-y: auto;
-  }*/
 
   .overflow-hidden{
     overflow: hidden;
@@ -376,4 +337,37 @@ body.modal-open {
 
 .form-control:focus{
   background-color: transparent;
+}
+
+.loadingBar{
+  z-index: 1000000;
+  margin-left: -15px;
+}
+
+.book-list-loader{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex: 0 1 auto;
+  flex: 0 1 auto;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  -webkit-flex-basis: 25%;
+  flex-basis: 25%;
+  width: 100%;
+  height: 100%;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  background-color: #fff;
 }

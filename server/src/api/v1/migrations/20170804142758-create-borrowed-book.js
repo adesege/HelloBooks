@@ -18,8 +18,11 @@ module.exports = {
       isReturned: {
         type: Sequelize.BOOLEAN
       },
-      returnedDate: {
+      expectedReturnDate: {
         type: Sequelize.DATEONLY
+      },
+      notificationSent: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -31,7 +34,7 @@ module.exports = {
       }
     });
   },
-  down(queryInterface, Sequelize) {
+  down(queryInterface) {
     return queryInterface.dropTable('borrowedBook');
   }
 };

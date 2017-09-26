@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { STOCK_MANAGER_FETCHED, STOCK_ADDED, STOCK_DELETED } from './types';
+import types from './types';
 import { addFlashMessage } from './flashMessages';
 
 const API_VERSION = window.API_VERSION;
+const { STOCK_MANAGER_FETCHED, STOCK_ADDED, STOCK_DELETED } = types;
 
 export function stockDeleted(id) { // eslint-disable-line require-jsdoc
   return {
