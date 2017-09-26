@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotEnv = require('dotenv');
-const dotEnvWebpack = require('dotenv-webpack');
 
 dotEnv.config();
 
@@ -71,10 +70,7 @@ module.exports = {
   plugins: [
     CommonsChunkPlugin,
     HtmlWebpackPluginConfig,
-    ProvidePlugin,
-    new dotEnvWebpack({
-      path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default) 
-    })
+    ProvidePlugin
   ],
   stats: {
     colors: true
