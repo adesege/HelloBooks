@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const dotEnvWebpack = require('dotenv-webpack');
 const common = require('./webpack.common');
 
 const { PORT } = process.env;
@@ -54,7 +55,11 @@ module.exports = merge(common, {
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new dotEnvWebpack({
+      path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default) 
+    })
+
   ],
   stats: {
     colors: true
