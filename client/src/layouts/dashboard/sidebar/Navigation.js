@@ -2,17 +2,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-const $ = window.$;
+import '../../../assets/js/custom';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Navigation extends React.Component {
-  componentDidMount() {
-    $('.closeBtn').click(function (e) { // eslint-disable-line func-names
-      $(this).parents('#sidebar').removeClass('show');
-    });
-  }
-
   render() {
     const { isAuthenticated } = this.props.auth;
     const { group } = this.props.auth.user;

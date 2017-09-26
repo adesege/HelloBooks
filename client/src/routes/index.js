@@ -13,7 +13,7 @@ import Signup from '../components/homepage/signup/Signup';
 import ResetPassword from '../components/homepage/resetpassword/ResetPassword';
 
 import Dashboard from '../components/dashboard/Dashboard';
-import Histories from '../components/books/Histories';
+import Histories from '../components/books/histories/Histories';
 import Categories from '../components/books/categories/Categories';
 
 import Books from '../components/books/books/Books';

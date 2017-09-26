@@ -3,11 +3,12 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 import flashMessages from './flashMessages';
 import auth from './auth';
 import books from './books';
-import book from './book';
 import cropper from './cropper';
-import borrowedBook from './borrowedBook';
+import borrowedBooks from './borrowedBooks';
 import categories from './categories';
 import stockManager from './stockManager';
+import histories from './histories';
+import users from './users';
 
 export default combineReducers({
   flashMessages,
@@ -15,8 +16,9 @@ export default combineReducers({
   books,
   loadingBar: loadingBarReducer,
   cropper,
-  book,
-  borrowedBook,
+  borrowedBooks,
   categories,
-  stocks: stockManager
+  stocks: stockManager,
+  histories,
+  users
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import LoadingBar from 'react-redux-loading-bar';
-import '../assets/css/styles.css';
+import '../assets/scss/styles.scss';
 import '../assets/js/axios';
 import '../assets/js/material';
 
@@ -11,7 +11,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="container-fluid">
-        <LoadingBar showFastActions style={{ zIndex: 1000000, marginLeft: '-15px' }} />
+        <LoadingBar
+          showFastActions
+          className = "loadingBar"
+        />
         {this.props.children}
       </div>
     );

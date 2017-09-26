@@ -30,7 +30,7 @@ class DeleteModal extends Component {
       id: this.props.params.id
     }).then(
       () => {
-
+        // TODO
       },
       errors => errors
     );

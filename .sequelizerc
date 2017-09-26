@@ -2,8 +2,8 @@
 const path = require('path');
 const version = 'v1';
 module.exports = {
-    "config": path.resolve('./server/config', 'config.json'),
-    "models-path": path.resolve(`./server/src/api/${version}/models`),
-    "seeders-path": path.resolve(`./server/src/api/${version}/seeders`),
-    "migrations-path": path.resolve(`./server/src/api/${version}/migrations`)
+    "config": path.resolve('./server/dist/config', 'config.js'),
+    "models-path": path.resolve(`./server/dist/api/${version}/models`),
+    "seeders-path": path.resolve(`./server/dist/api/${version}/seeders`),
+    "migrations-path": path.resolve(`./server/dist/api/${version}/migrations`)
 };

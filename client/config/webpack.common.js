@@ -2,10 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotEnv = require('dotenv');
+const dotEnvWebpack = require('dotenv-webpack');
 
 dotEnv.config();
-
-const { PORT } = process.env;
 
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -66,24 +65,6 @@ module.exports = {
       {
         test: /\.html$/,
         use: ['html-loader']
-      },
-      {
-        test: /\.(jpg|jpeg|gif|png)$/,
-        exclude: /node_modules/,
-        loader: 'file-loader',
-        options: {
-          limit: 300000,
-          name: 'images/[name].[ext]'
-        }
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|svg)$/,
-        exclude: /node_modules/,
-        loader: 'file-loader',
-        options: {
-          limit: 300000,
-          name: 'fonts/[name].[ext]'
-        }
       }
     ]
   },
@@ -91,6 +72,9 @@ module.exports = {
     CommonsChunkPlugin,
     HtmlWebpackPluginConfig,
     ProvidePlugin,
+    new dotEnvWebpack({
+      path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default) 
+    })
   ],
   stats: {
     colors: true

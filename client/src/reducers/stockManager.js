@@ -1,8 +1,10 @@
 import findIndex from 'lodash/findIndex';
-import {
+import types from '../actions/types';
+
+const {
   STOCK_MANAGER_FETCHED,
   STOCK_ADDED,
-  STOCK_DELETED } from '../actions/types';
+  STOCK_DELETED } = types;
 
 export default (state = {}, action = {}) => {
   /* eslint-disable no-case-declarations */

@@ -3,6 +3,7 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../../express';
 import Utils from '../utils';
+import sendSurcharge from '../cron/sendSurcharge';
 
 const expect = chai.expect;
 const email = faker.internet.email();
@@ -111,7 +112,6 @@ describe('API Tests', () => { // Describe the API test suite
         requestApp.post('/api/v1/users/signup')
           .send(user)
           .end((err, res) => {
-            console.log(res.body);
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
             if (err) return done(err);
@@ -203,6 +203,32 @@ describe('API Tests', () => { // Describe the API test suite
           if (err) return done(err);
           done();
         });
+      });
+
+      it('should require the email field', (done) => {
+        user.password = '2345';
+        user.email = '';
+        request(app)
+          .post('/api/v1/users/signin')
+          .send(user).end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
+      it('should require the password field', (done) => {
+        user.password = '';
+        user.email = 'dfjkjf@njsf.com';
+        request(app)
+          .post('/api/v1/users/signin')
+          .send(user).end((err, res) => {
+            expect(res.statusCode).to.equal(400);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
       });
     });
   });
@@ -534,6 +560,20 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      describe('# Notifications', () => {
+        it('should get all notification in the database', (done) => {
+          const token = setAdmin.token;
+          requestApp
+            .get('/api/v1/notifications')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body.data).to.be.an('array');
+              if (err) return done(err);
+              done();
+            });
+        });
+      });
       describe('# Search', () => {
         it('should return 404 when a book can\'t be found', (done) => {
           const token = setAdmin.token;
@@ -743,7 +783,7 @@ describe('API Tests', () => { // Describe the API test suite
           .send({ bookId: bookId3 })
           .set('authenticate-token', token)
           .end((err, res) => {
-            expect(res.statusCode).to.equal(403);
+            expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
             if (err) return done(err);
             done();
@@ -824,6 +864,95 @@ describe('API Tests', () => { // Describe the API test suite
               done();
             });
         });
+
+      it('should be able to get borrowing histories',
+        (done) => {
+          const userId = setUser.userId;
+          const token = setUser.token;
+          requestApp
+            .get(`/api/v1/books/histories/${userId}`)
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+      describe('# Profile', () => { // Describe Profile
+        it('should not be able to change their password if the new password do not match the old one',
+          (done) => {
+            const userId = setUser.userId;
+            const token = setUser.token;
+            request(app)
+              .put(`/api/v1/users/${userId}`)
+              .send({
+                password: 'newPassword',
+                passwordConfirm: 'newPassword',
+                oldPassword: '123454'
+              })
+              .set('authenticate-token', token)
+              .end((err, res) => {
+                expect(res.statusCode).to.equal(400);
+                expect(res.body).to.be.an('object');
+                if (err) return done(err);
+                done();
+              });
+          });
+
+        it('should be able to change their password', (done) => {
+          const userId = setUser.userId;
+          const token = setUser.token;
+          request(app)
+            .put(`/api/v1/users/${userId}`)
+            .send({
+              password: 'newPassword',
+              passwordConfirm: 'newPassword',
+              oldPassword: '1234'
+            })
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+        it('should not be able to change their password if the passwords do not match', (done) => {
+          const userId = setUser.userId;
+          const token = setUser.token;
+          request(app)
+            .put(`/api/v1/users/${userId}`)
+            .send({
+              password: 'newPassword',
+              passwordConfirm: 'newPassword23',
+              oldPassword: '1234'
+            })
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(400);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+        it('should be able to get a particular user', (done) => {
+          const userId = setUser.userId;
+          const token = setUser.token;
+          request(app)
+            .get(`/api/v1/users/${userId}`)
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+      });
     });
   });
 
@@ -932,6 +1061,18 @@ describe('API Tests', () => { // Describe the API test suite
     describe('# Random string', () => { // Describe entry point
       it('should return a random string', (done) => {
         expect(Utils.randomString(3)).to.be.a('string');
+        done();
+      });
+    });
+
+    describe('# Return Dste', () => { // Describe entry point
+      it('should return all return date', (done) => {
+        expect(Utils.returnDate()).to.be.an('object');
+        done();
+      });
+
+      it('should return a user rank return date', (done) => {
+        expect(Utils.returnDate('beginner')).to.be.a('number');
         done();
       });
     });

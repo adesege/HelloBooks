@@ -1,7 +1,6 @@
 import React from 'react';
 import Cropper from 'react-cropperjs';
 import { connect } from 'react-redux';
-import '../../../assets/scss/crop.scss';
 import { setImageData, deleteImageData } from '../../../actions/cropper';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
@@ -15,7 +14,10 @@ class UploadBookCover extends React.Component {
 
   crop() {
     this.props.deleteImageData();
-    this.props.setImageData({ coverPhotoPath: this.refs.cropper.getCroppedCanvas().toDataURL() });
+    this.props.setImageData({
+      coverPhotoPath:
+      this.refs.cropper.getCroppedCanvas().toDataURL()
+    });
   }
 
   render() {

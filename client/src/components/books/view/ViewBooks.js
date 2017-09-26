@@ -1,12 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { borrowBook, getBorrowedBook, returnBorrowedBook } from '../../../actions/borrowedBook';
+import {
+  borrowBook,
+  getBorrowedBook,
+  returnBorrowedBook
+} from '../../../actions/borrowedBooks';
 import DashboardLeftSidebar from '../../dashboard/sidebar/Left';
 import RelatedBooks from './RelatedBooks';
 import BookComment from './BookComment';
 import { getBook } from '../../../actions/books';
 import BorrowBook from './BorrowBook';
+import { showCoverPhoto } from '../../../utils/';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class ViewBooks extends React.Component {
@@ -18,7 +23,8 @@ class ViewBooks extends React.Component {
       borrowBook: {
         userId,
         bookId: params.id
-      }
+      },
+      borrowedBook: []
     };
   }
 
@@ -32,26 +38,39 @@ class ViewBooks extends React.Component {
     if (nextProps.book !== this.props.book) {
       this.setState({ book: nextProps.book });
     }
+    if (nextProps.borrowedBook !== this.props.borrowedBook) {
+      this.setState({ borrowedBook: nextProps.borrowedBook });
+    }
   }
   render() {
-    const { title, author, coverPhotoPath, description, publishedDate, ISBN } = this.state.book;
-    const { params, borrowBookAction, isBorrowedBook, borrowedBook, userId, returnBorrowedBookAction } = this.props;
+    const { title,
+      author,
+      coverPhotoPath,
+      description,
+      publishedDate,
+      ISBN } = this.state.book;
+    const { params,
+      borrowBookAction,
+      userId,
+      returnBorrowedBookAction } = this.props;
     return (
       <div className="row" id="borrowBook">
         <div className="col-sm-8">
           <div className="row" id="book-details">
-            <div className="col-sm-4">
-              <img className="img-thumbnails cover" src={coverPhotoPath} alt="Card cap"/>
-
+            <div className="col-sm-4 col-6">
+              <img
+                className="img-thumbnails cover"
+                src={showCoverPhoto(coverPhotoPath)}
+                alt={title}/>
               <BorrowBook
                 borrowBookAction={borrowBookAction}
                 bookId={params.id}
                 userId={userId}
-                isBorrowedBook={isBorrowedBook}
+                isBorrowedBook={!!this.props.borrowedBook}
                 returnBorrowedBookAction={returnBorrowedBookAction}
-                borrowedBook={borrowedBook} />
+                borrowedBook={this.state.borrowedBook} />
             </div>
-            <div className="col-sm-8 mt-3 mt-sm-0">
+            <div className="col-sm-8 col-6 mt-3 mt-sm-0">
               <div className="details">
                 <h4 className="card-title font-weight-bold">{title}</h4>
                 <h6 className="card-subtitle">
@@ -86,16 +105,19 @@ ViewBooks.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
+  const { params } = props;
   const userId = state.auth.user.userId;
-  const bookId = state.book.id;
-  const borrowedBook = state.borrowedBook || {};
   return {
-    book: state.book,
-    isBorrowedBook:
-    !!((borrowedBook.userId === userId) && (borrowedBook.bookId === bookId)),
+    book: state.books.find(book => parseInt(book.id, 10) === parseInt(params.id, 10)),
     userId,
-    borrowedBook
+    borrowedBook: state.borrowedBooks.find(
+      borrowedBook =>
+        (
+          parseInt(borrowedBook.userId, 10) === parseInt(userId, 10))
+          && (parseInt(borrowedBook.bookId, 10) === parseInt(params.id, 10)
+          )
+    )
   };
 };
 

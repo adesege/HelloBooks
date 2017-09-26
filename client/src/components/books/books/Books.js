@@ -6,27 +6,39 @@ import BooksList from './BooksList';
 import { getBooks, setBooks } from '../../../actions/books';
 import { addFlashMessage } from '../../../actions/flashMessages';
 
+const $ = window.$;
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Books extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      books: ''
     };
     this.goToAddPage = this.goToAddPage.bind(this);
   }
 
+  goToEditPage(event) {
+    event.preventDefault();
+    const $parent = $(event.target).parent();
+    this.context.router.push($parent.attr('to'));
+  }
+
+  confirmDelete(event) {
+    event.preventDefault();
+    const $parent = $(event.target).parent();
+    this.context.router.push($parent.attr('to'));
+  }
+
   componentDidMount() {
-    this.props.getBooks().then(
-      (data) => {
-        this.props.setBooks(data.data);
-      },
-      (errors) => {
-        this.props.addFlashMessage({
-          type: 'error',
-          text: errors.response.data
-        });
-      }
-    );
+    this.props.getBooks();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.books !== nextProps.books) {
+      this.setState({
+        books: nextProps.books
+      });
+    }
   }
 
   goToAddPage(event) {
@@ -69,36 +81,22 @@ class Books extends React.Component {
             <option value="">A-Z</option>
             <option value="">Z-A</option>
           </select>
-          <input type="text" className="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0" placeholder="by author"/>
-          <button type="submit" className="btn btn-sm btn-danger">filter</button>
+          <input
+            type="text"
+            className="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0"
+            placeholder="by author"/>
+          <button
+            type="submit"
+            className="btn btn-sm btn-warning">
+          filter
+          </button>
         </form>
-        <BooksList content={this.props.books} userGroup={this.props.group} />
-        {/*         <div className="row">
-          { [...Array(12)].map((val, index) => (
-            <div className="col-sm-6 col-md-6 col-lg-3 col-xs-12 mb-4" key={index}>
-              <div className="row">
-                <div className="col-sm-6 col-6 align-self-center">
-                  <img className="img-thumbnail" src={image} alt="Card cap"/>
-                </div>
-                <div className="col-sm-6 col-6 p-sm-0 align-self-center">
-                  <h6 className="mt-4 mt-sm-0 mb-0">
-                    <a href="/books/borrow/index.html">Book title</a>
-                    </h6>
-                  <h6 className="mb-1 text-muted"><small>Author 1</small></h6>
-                  <h6 className="mb-1 text-muted"><small>June 1st, 2017</small></h6>
-                  <p className="small mb-1"><span className="text-success d-block">Active</span>
-                    <span className="text-danger d-block">Pending approval</span></p>
-                  <a href="#top" className="card-link" title="Edit book">
-                    <i className="fa fa-pencil"></i>
-                    </a>
-                  <a href="#top" className="card-link text-danger" title="Delete">
-                    <i className="fa fa-remove"></i>
-                    </a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div> */}      
+        <BooksList
+          content={this.state.books}
+          userGroup={this.props.group}
+          goToEditPage={this.goToEditPage}
+          confirmDelete={this.confirmDelete}
+        />
       </div>
     );
   }
@@ -116,4 +114,9 @@ const mapStateToProps = state => ({
   books: state.books,
   group: state.auth.user.group
 });
-export default connect(mapStateToProps, { getBooks, addFlashMessage, setBooks })(Books);
+
+export default connect(mapStateToProps,
+  { getBooks,
+    addFlashMessage,
+    setBooks
+  })(Books);

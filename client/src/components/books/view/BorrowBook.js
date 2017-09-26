@@ -73,14 +73,31 @@ class BorrowBook extends React.Component {
   render() {
     const { isBorrowedBook } = this.state;
     return (
-      <div className="btn-group btn-group-sm w-100 my-2" role="group">
-        <button id="btnGroupDrop1" type="button" className="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> I want to... </button>
+      <div
+        className="btn-group btn-group-sm w-100 my-2"
+        role="group">
+        <button
+          id="btnGroupDrop1"
+          type="button"
+          className="btn btn-primary btn-block dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"> I want to... </button>
         <div className="dropdown-menu" aria-labelledby="btnGroupDrop1">
           <a className="dropdown-item" href="#top">read</a>
-          {console.log(isBorrowedBook)}
           {!isBorrowedBook ?
-            <a className="dropdown-item" onClick={this.onSubmit} href={''}>borrow</a> :
-            <a className="dropdown-item" onClick={this.returnBorrowedBook} href={''}>return this book</a>
+            <a
+              className="dropdown-item"
+              onClick={this.onSubmit}
+              href={''}>
+            borrow
+            </a> :
+            <a
+              className="dropdown-item"
+              onClick={this.returnBorrowedBook}
+              href={''}>
+            return this book
+            </a>
           }
         </div>
       </div>
@@ -94,7 +111,6 @@ BorrowBook.propTypes = {
   userId: PropTypes.number.isRequired,
   borrowBookAction: PropTypes.func.isRequired,
   returnBorrowedBookAction: PropTypes.func.isRequired,
-  borrowedBook: PropTypes.object.isRequired
 };
 
 export default BorrowBook;

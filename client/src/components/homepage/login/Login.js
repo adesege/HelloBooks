@@ -4,17 +4,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
-import { login, setCurrentUser } from '../../../actions/auth';
+import { login, setCurrentUser, logUserIn } from '../../../actions/auth';
 import { addFlashMessage } from '../../../actions/flashMessages';
 import Button from '../../form/Button';
 
 /* eslint-disable require-jsdoc, class-methods-use-this */
 class Login extends React.Component {
-  componentWillMount() {
-    if (this.props.isAuthenticated) {
-      this.context.router.push('/dashboard');
-    }
-  }
   render() {
     return (
       <div>
@@ -23,8 +18,12 @@ class Login extends React.Component {
             login = {this.props.login}
             addFlashMessage = {this.props.addFlashMessage}
             setCurrentUser = {this.props.setCurrentUser}
+            logUserIn = {this.props.logUserIn}
           />
-          <p className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2"> or Sign in with:</p>
+          <p
+            className="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
+           or Sign in with:
+          </p>
 
           <div className="row my-3 d-flex justify-content-center">
             <Button
@@ -48,9 +47,17 @@ class Login extends React.Component {
           </div>
         </div>
 
-        <div className="modal-footer mx-sm-5 mx-3 pt-3 mb-1">
-          <p className="font-small grey-text d-flex justify-content-end">
-          Not a member? <Link to="/signup" className="blue-text ml-1"> Create an account</Link></p>
+        <div
+          className="modal-footer mx-sm-5 mx-3 pt-3 mb-1">
+          <p
+            className="font-small grey-text d-flex justify-content-end">
+          Not a member?
+            <Link
+              to="/signup"
+              className="blue-text ml-1">
+          Create an account
+            </Link>
+          </p>
         </div>
 
       </div>
@@ -62,12 +69,13 @@ Login.propTypes = {
   login: PropTypes.func.isRequired
 };
 
-Login.contextTypes = {
-  router: PropTypes.object.isRequired
-};
-
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ login, addFlashMessage, setCurrentUser }, dispatch);
+  return bindActionCreators({
+    login,
+    addFlashMessage,
+    setCurrentUser,
+    logUserIn
+  }, dispatch);
 }
 
 function mapStateToProps(state) {

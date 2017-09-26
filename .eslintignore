@@ -1,4 +1,3 @@
-node_modules/
 template/
 template/assets/**
 server/dist/**
@@ -8,4 +7,3 @@ client/src/assets/**
 client/public/**
 coverage/
 .nyc_output/
-server/src/docs/

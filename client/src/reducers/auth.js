@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
-import { SET_CURRENT_USER } from '../actions/types';
+import types from '../actions/types';
 
+const { SET_CURRENT_USER } = types;
 const initialState = {
   isAuthenticated: false,
   user: {}
