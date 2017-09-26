@@ -3,7 +3,6 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../../express';
 import Utils from '../utils';
-import sendSurcharge from '../cron/sendSurcharge';
 
 const expect = chai.expect;
 const email = faker.internet.email();
