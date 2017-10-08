@@ -1,6 +1,6 @@
 /*! tether 1.3.3 */
 
-(function(root, factory) {
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(factory);
   } else if (typeof exports === 'object') {
@@ -8,7 +8,7 @@
   } else {
     root.Tether = factory();
   }
-}(this, function(require, exports, module) {
+}(this, (require, exports, module) => {
 
 'use strict';
 
