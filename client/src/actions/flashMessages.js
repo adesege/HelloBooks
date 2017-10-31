@@ -12,6 +12,5 @@ export const deleteFlashMessage = id =>
   ({
     type: DELETE_FLASH_MESSAGE,
     id
-  })
-;
+  });
 

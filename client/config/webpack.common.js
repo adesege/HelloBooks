@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotEnv = require('dotenv');
-const dotEnvWebpack = require('dotenv-webpack');
 
 dotEnv.config();
 
@@ -22,10 +21,10 @@ const CommonsChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
 const ProvidePlugin = new webpack.ProvidePlugin({
   'window.jQuery': 'jquery',
   'window.$': 'jquery',
-  jQuery: 'jquery',
-  $: 'jquery',
+  "jQuery": 'jquery',
+  "$": 'jquery',
   'window.Tether': 'tether',
-  Tether: 'tether',
+  "Tether": 'tether',
 });
 
 
@@ -33,10 +32,13 @@ module.exports = {
   entry: {
     app: path.resolve(__dirname, '../src/index.js'),
   },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {

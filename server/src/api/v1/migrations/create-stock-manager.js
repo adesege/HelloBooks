@@ -13,9 +13,6 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
-      recordDate: {
-        type: Sequelize.DATEONLY
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -26,7 +23,7 @@ module.exports = {
       }
     });
   },
-  down(queryInterface, Sequelize) {
+  down(queryInterface) {
     return queryInterface.dropTable('stockManager');
   }
 };

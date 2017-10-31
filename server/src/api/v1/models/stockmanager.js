@@ -20,8 +20,7 @@ export default (sequelize, DataTypes) => {
           msg: 'Quantity cannot be empty'
         }
       }
-    },
-    recordDate: DataTypes.DATEONLY
+    }
   }, {
     freezeTableName: true,
     tableName: 'stockManager'
@@ -36,7 +35,6 @@ export default (sequelize, DataTypes) => {
           where: { id: stock.bookId, }
         })
           .then();
-        // .catch(error => next(null, error.message));
       }
     });
   });

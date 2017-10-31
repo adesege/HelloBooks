@@ -2,9 +2,10 @@ import axios from 'axios';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const API_VERSION = window.API_VERSION;
+const { API_VERSION } = window.API_VERSION;
 const {
-  GET_BOOKS_HISTORIES } = types;
+  GET_BOOKS_HISTORIES
+} = types;
 
 
 export const historiesFetched = histories => ({
@@ -27,4 +28,5 @@ export const getHistories = data =>
             text: errors.response.data
           }));
           return errors;
-        });
+        }
+      );

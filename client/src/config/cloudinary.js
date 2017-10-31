@@ -1,6 +1,5 @@
 import cloudinary from 'cloudinary';
 
-
 cloudinary.config({
   cloud_name: process.env.APP_CLOUD_NAME,
   api_key: process.env.APP_API_KEY,

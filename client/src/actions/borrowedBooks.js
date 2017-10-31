@@ -2,7 +2,7 @@ import axios from 'axios';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const API_VERSION = window.API_VERSION;
+const { API_VERSION } = window;
 const { BOOK_BORROWED, GET_BORROWED_BOOKS, BOOK_RETURNED } = types;
 
 export const setBorrowedBooks = book => ({
@@ -60,8 +60,10 @@ export const getBorrowedBook = data =>
 export const getBorrowedBooks = data =>
   dispatch =>
     axios
-      .get(`/api/${API_VERSION}/users/${data.userId}/books?returned=false`,
-        data)
+      .get(
+        `/api/${API_VERSION}/users/${data.userId}/books?returned=false`,
+        data
+      )
       .then(
         (response) => {
           dispatch(setBorrowedBooks(response.data.data));
@@ -73,8 +75,10 @@ export const getBorrowedBooks = data =>
 export const returnBorrowedBook = data =>
   dispatch =>
     axios
-      .put(`/api/${API_VERSION}/users/${data.userId}/books/${data.borrowedBookId}?bookId=${data.bookId}`,
-        data)
+      .put(
+        `/api/${API_VERSION}/users/${data.userId}/books/${data.borrowedBookId}?bookId=${data.bookId}`,
+        data
+      )
       .then(
         (response) => {
           dispatch(setReturnedBook(data));

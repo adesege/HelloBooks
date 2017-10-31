@@ -63,7 +63,7 @@ class BookCategoryClass {
   */
   static get(req, res) {
     bookCategory.findAll()
-      .then(category => res.status(200).send({ message: category }));
+      .then(category => res.status(200).send({ data: category }));
   }
 
   /**
@@ -81,10 +81,12 @@ class BookCategoryClass {
         if (category) {
           return bookCategory.update(
             { name },
-            { where: { id },
+            {
+ where: { id },
               returning: true,
               plain: true
-            })
+            }
+)
             .then(updatedCategory =>
               res.status(200)
                 .send({
