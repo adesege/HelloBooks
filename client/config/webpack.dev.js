@@ -57,7 +57,7 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new dotEnvWebpack({
-      path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default) 
+      path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default)
     })
 
   ],

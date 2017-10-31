@@ -3,10 +3,11 @@ import types from './types';
 import { addFlashMessage } from './flashMessages';
 import '../config/cloudinary';
 
-const API_VERSION = window.API_VERSION;
+const { API_VERSION } = window;
 const {
   GET_USERS,
-  USER_UPDATED } = types;
+  USER_UPDATED
+} = types;
 
 export const usersFetched = result => ({
   type: GET_USERS,
@@ -42,14 +43,14 @@ export const getUsers = payload =>
             text: errors.response.data
           }));
           return errors;
-        });
+        }
+      );
   };
 
 
 export const updateUser = payload =>
-  (dispatch) => {
-    console.log(payload, '=================');
-    return axios
+  (dispatch) =>
+    axios
       .put(`/api/${API_VERSION}/users/${payload.userId}`)
       .then(
         (data) => {
@@ -61,5 +62,5 @@ export const updateUser = payload =>
             text: errors.response.data
           }));
           return errors;
-        });
-  };
+        }
+      );

@@ -1,9 +1,13 @@
-const $ = window.$;
+const { $ } = window;
 
 /* FORMS */
 $(document).ready(() => {
   // Text based inputs
-  const inputSelector = `${['text', 'password', 'email', 'url', 'tel', 'number', 'search', 'search-md'].map(selector => `input[type=${selector}]`).join(', ')}, textarea`;
+  const inputSelector =
+    `${['text', 'password', 'email', 'url',
+      'tel', 'number', 'search', 'search-md']
+      .map(selector =>
+        `input[type=${selector}]`).join(', ')}, textarea`;
 
   const updateTextFields = function updateTextFields($input) {
     const $labelAndIcon = $input.siblings('label, i');
@@ -25,7 +29,13 @@ $(document).ready(() => {
         const valid = $input.is(':valid');
         const length = +$input.attr('length') || 0;
 
-        if (valid && (!length || length > value.length)) $input.removeClass('invalid').addClass('valid'); else $input.removeClass('valid').addClass('invalid');
+        if (valid && (!length || length > value.length)) {
+          $input
+            .removeClass('invalid').addClass('valid');
+        } else {
+          $input
+            .removeClass('valid').addClass('invalid');
+        }
       }
     }
   };

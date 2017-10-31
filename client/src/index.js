@@ -51,9 +51,6 @@ if (localStorage.authToken) {
   store.dispatch(setCurrentUser(JSON.parse(localStorage.userPayload)));
 }
 
-render(
-  <Provider store={store}>
-    <Router history={browserHistory} routes={routes}>
-    </Router>
-  </Provider>, document.getElementById('app')
-);
+render(<Provider store={store}>
+  <Router history={browserHistory} routes={routes} />
+</Provider>, document.getElementById('app'));

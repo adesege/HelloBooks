@@ -4,7 +4,7 @@ import MailerClass from '../utils/mailer';
 
 const EMAIL_FROM = '"Hello-Books" <hello@hellobooks.herokuapp.com>';
 
-const borrowedBook = model.borrowedBook;
+const { borrowedBook } = model;
 const Mailer = new MailerClass();
 const sendSurcharge = () =>
   borrowedBook.findAll({
@@ -31,13 +31,15 @@ const sendSurcharge = () =>
         `;
 
           Mailer.send();
-          borrowedBook.update({
-            notificationSent: true,
-            id: borrowed.id
-          },
-          {
-            where: { id: borrowed.id }
-          });
+          borrowedBook.update(
+            {
+              notificationSent: true,
+              id: borrowed.id
+            },
+            {
+              where: { id: borrowed.id }
+            }
+          );
         }
         return true;
       }

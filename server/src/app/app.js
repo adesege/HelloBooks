@@ -5,7 +5,7 @@ import ejs from 'ejs';
 import routes from './routes';
 
 export default (app) => {
-  const renderFile = ejs.renderFile;
+  const { renderFile } = ejs;
   app.use(logger('dev'));
   app.use(express.static(path.join(__dirname, '../../../client/build')));
   app.set('views', path.join(__dirname, '../../../client/build'));

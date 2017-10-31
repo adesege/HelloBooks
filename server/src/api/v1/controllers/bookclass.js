@@ -1,8 +1,6 @@
 import model from '../models';
 
-const Book = model.Book;
-const borrowedBook = model.borrowedBook;
-const stockManager = model.stockManager;
+const { Book, borrowedBook, stockManager } = model;
 
 /**
  * @class BookClass
@@ -17,28 +15,15 @@ class BookClass {
    */
   static create(req, res) {
     const title = req.body.title || '';
-    const description = req.body.description || '';
-    const author = req.body.author || '';
-    const publishedDate = req.body.published_date || '';
-    const bookURL = req.body.book_url || '';
-    const ISBN = req.body.isbn || '';
-    const bookCategoryId = req.body.book_category || 0;
-    const coverPhotoPath = req.body.coverPhotoPath || '';
-    const documentPath = req.body.document_path || '';
-    const userId = req.decoded.user;
-    if (req.body.stock_quantity || req.body.stock_record_date) {
-      req.body.stock = {
-        quantity: req.body.stock_quantity,
-        record_date: req.body.stock_record_date
-      };
-    }
-    const stock = req.body.stock || {};
-    stock.record_date = stock.recordDate || stock.record_date || '';
+    req.body.userId = req.decoded.user;
+    const stock = {
+      quantity: req.body.stockQuantity
+    };
     delete req.body.stock;
 
-    if (!stock.record_date) {
+    if (!stock.quantity) {
       return res.status(400)
-        .send({ message: 'The stock record date is required' });
+        .send({ message: 'The stock quantity is required' });
     }
 
     Book.findOne({ where: { title } })
@@ -47,18 +32,7 @@ class BookClass {
           return res.status(400)
             .send({ message: 'A book with the same title already exist' });
         }
-        Book.create({
-          title,
-          description,
-          author,
-          publishedDate,
-          bookURL,
-          ISBN,
-          bookCategoryId,
-          coverPhotoPath,
-          documentPath,
-          userId
-        }, {
+        Book.create(req.body, {
           fields: [
             'title',
             'description',
@@ -95,50 +69,39 @@ class BookClass {
      * @returns {void}
      */
   static edit(req, res) {
-    const title = req.body.title || '';
-    const description = req.body.description || '';
-    const author = req.body.author || '';
-    const publishedDate = req.body.published_date || '';
-    const bookURL = req.body.book_url || '';
-    const ISBN = req.body.isbn || '';
-    const bookCategoryId = req.body.book_category || 0;
-    const coverPhotoPath = req.body.coverPhotoPath || '';
-    const documentPath = req.body.document_path || '';
     const id = req.params.bookId;
-    const fields = req.query.fields && (req.query.fields !== '') ? [...req.query.fields] : ['title',
-      'description',
-      'author',
-      'userId',
-      'publishedDate',
-      'bookURL',
-      'ISBN',
-      'bookCategoryId',
-      'coverPhotoPath',
-      'documentPath'];
+    const fields = req.query.fields &&
+     (req.query.fields !== '') ?
+      [...req.query.fields] :
+      ['title',
+        'description',
+        'author',
+        'userId',
+        'publishedDate',
+        'bookURL',
+        'ISBN',
+        'bookCategoryId',
+        'coverPhotoPath',
+        'documentPath'];
 
     Book.findOne({ where: { id } })
       .then((book) => {
         if (book) {
-          Book.update({
-            title,
-            description,
-            author,
-            publishedDate,
-            bookURL,
-            ISBN,
-            bookCategoryId,
-            coverPhotoPath,
-            documentPath,
-          }, {
+          Book.update(req.body, {
             where: { id },
             fields,
             returning: true,
             plain: true
           }).then(updatedBook =>
             res.status(200)
-              .send({ message: 'Book successfully updated', book: updatedBook[1] })
-          ).catch(error => res.status(400)
-            .send({ message: error.message }));
+              .send({
+                message: 'Book successfully updated',
+                book: updatedBook[1]
+              }))
+            .catch(error =>
+              res
+                .status(400)
+                .send({ message: error.message }));
         } else {
           res.status(400).send({ message: 'Book not found' });
         }
@@ -152,7 +115,7 @@ class BookClass {
    * @return {object} response
    */
   static get(req, res) { // get all the books in the database
-    const id = req.params.id;
+    const { id } = req.params;
     Book.findAll({
       where: req.params.id ? { id } : null,
       order: [['updatedAt', 'DESC']]
@@ -166,8 +129,8 @@ class BookClass {
    * @return {object} response
    */
   static borrowBook(req, res) {
-    const bookId = req.body.bookId;
-    const userId = req.params.userId;
+    const { bookId } = req.body;
+    const { userId } = req.params;
     const isReturned = false;
 
     Book.findById(bookId)
@@ -215,8 +178,8 @@ class BookClass {
     * @return {object} response
   */
   static getBorrowedBook(req, res) {
-    const userId = req.params.userId;
-    const bookId = req.query.bookId;
+    const { userId } = req.params;
+    const { bookId } = req.query;
     const isReturned = req.query.returned || false;
     const where = bookId
       ? { userId, isReturned, bookId } : { userId, isReturned };
@@ -237,13 +200,15 @@ class BookClass {
    * @return {object} response
    */
   static returnBorrowedBook(req, res) {
-    const userId = req.params.userId;
+    const { userId } = req.params;
     const id = req.params.borrowedBookId;
     const isReturned = true;
-    const bookId = req.query.bookId;
+    const { bookId } = req.query;
 
     borrowedBook.findOne({
-      where: { id, userId, bookId, isReturned: false }
+      where: {
+        id, userId, bookId, isReturned: false
+      }
     }).then((books) => {
       if (books) {
         borrowedBook.update({
@@ -251,7 +216,9 @@ class BookClass {
           bookId,
           userId
         }, {
-          where: { id, userId, bookId, isReturned: false },
+          where: {
+            id, userId, bookId, isReturned: false
+          },
           individualHooks: true
         }).then(() => {
           res
@@ -296,7 +263,7 @@ class BookClass {
     * @return {object} response
   */
   static getHistories(req, res) {
-    const userId = req.params.userId;
+    const { userId } = req.params;
 
     borrowedBook.findAll({
       include: [Book],

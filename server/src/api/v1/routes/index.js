@@ -2,18 +2,26 @@ import express from 'express';
 import controllers from '../controllers';
 import middlewares from '../middlewares';
 
-const UserClass = controllers.UserClass;
-const BookClass = controllers.BookClass;
-const StockManagerClass = controllers.StockManagerClass;
-const BookCategoryClass = controllers.BookCategoryClass;
-const SearchClass = controllers.SearchClass;
-const NotificationClass = controllers.NotificationClass;
-const authMiddleware = middlewares.middleware;
-const adminMiddleware = middlewares.adminMiddleware;
+const {
+  UserClass,
+  BookClass,
+  StockManagerClass,
+  BookCategoryClass,
+  SearchClass,
+  NotificationClass
+} = controllers;
+const {
+  middleware: authMiddleware,
+  adminMiddleware
+} = middlewares;
+
 const router = express.Router();
 
 router.get('/', (req, res) =>
-  res.send({ message: 'Hello, welcome to Hello-Books Api version 1' }));
+  res
+    .send({
+      message: 'Hello, welcome to Hello-Books Api version 1'
+    }));
 
 router.post('/users/signup', UserClass.signup);
 router.post('/users/signin', UserClass.signin);
@@ -53,7 +61,6 @@ router.route('/books/:id')
 
 router.route('/books/:bookId')
   .put(authMiddleware, authMiddleware, BookClass.edit);
-
 
 router.route('/books/categories/:categoryId')
   .put(authMiddleware, adminMiddleware, BookCategoryClass.update)

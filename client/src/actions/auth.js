@@ -2,7 +2,7 @@ import axios from 'axios';
 import types from './types';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-const API_VERSION = window.API_VERSION;
+const { API_VERSION } = window;
 const { SET_CURRENT_USER } = types;
 
 export const setCurrentUser = user => ({
@@ -15,18 +15,14 @@ export const logout = () =>
     localStorage.clear();
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-  }
-;
-
+  };
 export const login = data =>
   dispatch =>
     axios
-      .post(`/api/${API_VERSION}/users/signin`, data)
-;
-
+      .post(`/api/${API_VERSION}/users/signin`, data);
 export const logUserIn = response =>
   (dispatch) => {
-    const token = response.data.token;
+    const { token } = response.data;
     const userPayload = {
       group: response.data.group,
       userId: response.data.userId
