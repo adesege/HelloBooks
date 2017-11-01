@@ -1,7 +1,6 @@
 import model from '../models';
 
-const Book = model.Book;
-const stockManager = model.stockManager;
+const { Book, stockManager } = model;
 
 /**
  * @class StockManagerClass
@@ -15,7 +14,7 @@ class StockManagerClass {
    * @return {void}
    */
   static create(req, res) {
-    const bookId = req.body.bookId || '';
+    const bookId = `${req.body.bookId}`;
     Book.findById(bookId)
       .then((book) => {
         if (book) {
@@ -23,8 +22,7 @@ class StockManagerClass {
             fields: ['quantity', 'recordDate', 'bookId'],
             returning: true,
             plain: true
-          }
-          ).then(newStock =>
+          }).then(newStock =>
             res
               .status(201)
               .send({
@@ -45,7 +43,7 @@ class StockManagerClass {
      * @returns {void}
      */
   static delete(req, res) { // delete a book
-    const id = req.params.stockId || '';
+    const id = `${req.params.stockId}`;
     stockManager.findById(id)
       .then((stock) => {
         if (stock !== null) {
@@ -56,8 +54,8 @@ class StockManagerClass {
               if (book.quantity >= 0) {
                 book.update( // update count in book table
                   { quantity: book.quantity - stock.quantity },
-                  { where: { id: stock.bookId, }
-                  })
+                  { where: { id: stock.bookId, } }
+                )
                   .then();
               }
             });
@@ -78,11 +76,9 @@ class StockManagerClass {
    */
   static get(req, res) {
     const { bookId } = req.query;
-    stockManager.findAll(
-      bookId && {
-        where: { bookId }
-      }
-    )
+    stockManager.findAll({
+      where: { bookId }
+    })
       .then(stocks => res.status(200).send({ message: '', data: stocks }));
   }
 }

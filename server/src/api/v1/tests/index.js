@@ -4,7 +4,7 @@ import faker from 'faker';
 import app from '../../../express';
 import Utils from '../utils';
 
-const expect = chai.expect;
+const { expect } = chai;
 const email = faker.internet.email();
 const adminEmail = faker.internet.email();
 const user = {
@@ -25,30 +25,30 @@ const book = {
   title: `Half of a yellow sun ${faker.random.number()}`,
   description: 'Half of a yellow sun is a book by Chimamanda Adichie',
   author: 'Chimamanda Adichie',
-  published_date: '07-09-2017',
+  publishedDate: '07-09-2017',
   isbn: faker.random.number().toString(),
-  stock_quantity: 1,
-  stock_record_date: '08-09-2017'
+  stockQuantity: 1,
+  ISBN: `${faker.random.number() * 109384}`
 };
 
 const book2 = {
   title: `Half of a yellow sun ${faker.random.number()}`,
   description: 'Half of a yellow sun is a book by Chimamanda Adichie',
   author: 'Chimamanda Adichie',
-  published_date: '07-09-2017',
+  publishedDate: '07-09-2017',
   isbn: faker.random.number().toString(),
-  stock_quantity: 2,
-  stock_record_date: '08-09-2017'
+  stockQuantity: 2,
+  ISBN: `${faker.random.number() * 109384}`
 };
 
 const book3 = {
   title: `Half of a yellow sun ${faker.random.number()}`,
   description: 'Half of a yellow sun is a book by Chimamanda Adichie',
   author: 'Chimamanda Adichie',
-  published_date: '07-09-2017',
+  publishedDate: '07-09-2017',
   isbn: faker.random.number().toString(),
-  stock_quantity: 2,
-  stock_record_date: '08-09-2017'
+  stockQuantity: 2,
+  ISBN: `${faker.random.number() * 109384}`
 };
 
 const stock = {
@@ -242,7 +242,7 @@ describe('API Tests', () => { // Describe the API test suite
     let bookCategoryId = '';
     describe('# Books Category', () => {
       it('should be able to add a book category', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .post('/api/v1/books/categories')
           .send(bookCategory)
@@ -258,7 +258,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to add a book category with the same name multiple times', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .post('/api/v1/books/categories')
           .send(bookCategory)
@@ -272,7 +272,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to add a book category if the name is not specified', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .post('/api/v1/books/categories')
           .send({})
@@ -286,7 +286,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should get all books categories', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .get('/api/v1/books/categories')
           .set('authenticate-token', token)
@@ -299,7 +299,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should update a book category', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         bookCategory.name = 'A new category name';
         requestApp
           .put(`/api/v1/books/categories/${bookCategoryId}`)
@@ -315,7 +315,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not update a book category with a wrong id', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         bookCategory.name = 'A new category name';
         requestApp
           .put('/api/v1/books/categories/99999999')
@@ -330,7 +330,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should be delete a book category', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .delete(`/api/v1/books/categories/${bookCategoryId}`)
           .set('authenticate-token', token)
@@ -344,7 +344,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not delete a book category if it can\'t find it', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .delete('/api/v1/books/categories/90909090')
           .set('authenticate-token', token)
@@ -359,8 +359,8 @@ describe('API Tests', () => { // Describe the API test suite
 
     describe('# Admin', () => {
       it('should be able to add a book', (done) => {
-        const token = setAdmin.token;
-        book.book_category_id = bookCategoryId;
+        const { token } = setAdmin;
+        book.bookCategoryId = bookCategoryId;
         requestApp
           .post('/api/v1/books')
           .send(book)
@@ -376,8 +376,8 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should be able to add a book again', (done) => {
-        const token = setAdmin.token;
-        book.book_category_id = bookCategoryId;
+        const { token } = setAdmin;
+        book.bookCategoryId = bookCategoryId;
         requestApp
           .post('/api/v1/books')
           .send(book2)
@@ -394,8 +394,8 @@ describe('API Tests', () => { // Describe the API test suite
 
 
       it('should be able to add a book again and again', (done) => {
-        const token = setAdmin.token;
-        book.book_category_id = bookCategoryId;
+        const { token } = setAdmin;
+        book.bookCategoryId = bookCategoryId;
         requestApp
           .post('/api/v1/books')
           .send(book3)
@@ -411,7 +411,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not add a book if the description is not specified', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         book3.description = '';
         book3.title = `A new title is here again ${faker.random.number()}`;
         requestApp
@@ -427,7 +427,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not add a book if the title already exist', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .post('/api/v1/books')
           .send(book)
@@ -441,8 +441,8 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not add a book if the stock quantity is not provided', (done) => {
-        const token = setAdmin.token;
-        book3.stock_quantity = undefined;
+        const { token } = setAdmin;
+        book3.stockQuantity = undefined;
         requestApp
           .post('/api/v1/books')
           .send(book3)
@@ -456,7 +456,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not add a book if the stock record date is not provided', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         book2.stock_record_date = undefined;
         requestApp
           .post('/api/v1/books')
@@ -470,10 +470,11 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
-      it('should not add a book if the stock quantity is not an integer',
+      it(
+        'should not add a book if the stock quantity is not an integer',
         (done) => {
-          const token = setAdmin.token;
-          book.stock_quantity = 'fdjfbdhfdbgh';
+          const { token } = setAdmin;
+          book.stockQuantity = 'fdjfbdhfdbgh';
           book.title = `A new title is here ${faker.random.number()}`;
           requestApp
             .post('/api/v1/books')
@@ -485,10 +486,11 @@ describe('API Tests', () => { // Describe the API test suite
               if (err) return done(err);
               done();
             });
-        });
+        }
+      );
 
       it('should be delete a book', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .delete(`/api/v1/books/${bookId2}`)
           .set('authenticate-token', token)
@@ -501,7 +503,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not delete a book when the id cannot be found', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .delete('/api/v1/books/12345')
           .set('authenticate-token', token)
@@ -514,7 +516,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should be able to edit a book', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         book.title = 'Purple Hibiscus';
         book.description = 'Purple Hibiscus was written by Chimamanda Adichie';
         requestApp
@@ -530,8 +532,25 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      it('should be able to edit a book with selected fields', (done) => {
+        const { token } = setAdmin;
+        const title = 'Purple Hibiscus is a new title';
+        const description = 'Purple Hibiscus was written by Chimamanda Adichie';
+        requestApp
+          .put(`/api/v1/books/${bookId}?fields[]=title&fields[]=description`)
+          .send({ title, description })
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body.message).to.equal('Book successfully updated');
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
       it('should not be able to edit a book when the id cannot be found', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .put('/api/v1/books/909099880')
           .send(book)
@@ -545,7 +564,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to edit a book when the title field is not specified', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         book.title = '';
         requestApp
           .put(`/api/v1/books/${bookId}`)
@@ -561,7 +580,7 @@ describe('API Tests', () => { // Describe the API test suite
 
       describe('# Notifications', () => {
         it('should get all notification in the database', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .get('/api/v1/notifications')
             .set('authenticate-token', token)
@@ -575,7 +594,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
       describe('# Search', () => {
         it('should return 404 when a book can\'t be found', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .get('/api/v1/search?q=jkdfbvdhfb&type=books')
             .set('authenticate-token', token)
@@ -588,7 +607,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it('should be able to search for a book', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .get('/api/v1/search?q=half&type=books')
             .set('authenticate-token', token)
@@ -601,7 +620,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it('should return 400 if no query type is specified', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .get('/api/v1/search?q=half')
             .set('authenticate-token', token)
@@ -619,7 +638,7 @@ describe('API Tests', () => { // Describe the API test suite
       */
       describe('# Stocks', () => { // Describe Books Stocks
         it('should be able to add a stock', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           stock.bookId = bookId;
           requestApp
             .post('/api/v1/books/stocks')
@@ -636,7 +655,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it('should not be able to add a stock if the stock quantity is not provided', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           stock.bookId = bookId;
           stock.quantity = '';
           requestApp
@@ -653,7 +672,7 @@ describe('API Tests', () => { // Describe the API test suite
 
 
         it('should not be able to add a stock if the book id cannot be found', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           stock.bookId = 5432434;
           requestApp
             .post('/api/v1/books/stocks')
@@ -669,7 +688,7 @@ describe('API Tests', () => { // Describe the API test suite
 
 
         it('should be able to get all stocks', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .get('/api/v1/books/stocks')
             .send()
@@ -683,7 +702,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it(`should delete stock with id ${stockId}`, (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .delete(`/api/v1/books/stocks/${stockId}`)
             .set('authenticate-token', token)
@@ -696,7 +715,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it('should not be able to delete a stock with a wrong id', (done) => {
-          const token = setAdmin.token;
+          const { token } = setAdmin;
           requestApp
             .delete('/api/v1/books/stocks/9878')
             .set('authenticate-token', token)
@@ -713,7 +732,7 @@ describe('API Tests', () => { // Describe the API test suite
     describe('# User', () => { // Describe Authenticate middleware
       let borrowedBookId = '';
       it('should be able to get all the books in the Library', (done) => {
-        const token = setUser.token;
+        const { token } = setUser;
         requestApp
           .get('/api/v1/books')
           .set('authenticate-token', token)
@@ -725,9 +744,21 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      it(`should be able to get the book with ID ${bookId} in the Library`, (done) => {
+        const { token } = setUser;
+        requestApp
+          .get(`/api/v1/books/${bookId}`)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
       it('should be able to borrow a book', (done) => {
-        const token = setUser.token;
-        const userId = setUser.userId;
+        const { token, userId } = setUser;
         // book.book_id = bookId;
         requestApp
           .post(`/api/v1/users/${userId}/books`)
@@ -743,8 +774,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should be able to borrow another book', (done) => {
-        const token = setUser.token;
-        const userId = setUser.userId;
+        const { token, userId } = setUser;
         // book.book_id = bookId;
         requestApp
           .post(`/api/v1/users/${userId}/books`)
@@ -759,8 +789,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to borrow a book if bookId cannot be found', (done) => {
-        const token = setUser.token;
-        const userId = setUser.userId;
+        const { token, userId } = setUser;
         requestApp
           .post(`/api/v1/users/${userId}/books`)
           .send({ bookId3 })
@@ -774,8 +803,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to borrow a book more than once', (done) => {
-        const token = setUser.token;
-        const userId = setUser.userId;
+        const { token, userId } = setUser;
         // book.book_id = bookId;
         requestApp
           .post(`/api/v1/users/${userId}/books`)
@@ -790,8 +818,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to borrow a book if quantity === 0', (done) => {
-        const token = setUser.token;
-        const userId = setUser.userId;
+        const { token, userId } = setUser;
         // book.book_id = bookId;
         requestApp
           .post(`/api/v1/users/${userId}/books`)
@@ -806,8 +833,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should not be able to borrow a book if one or more fields does not exist', (done) => {
-        const token = setUser.token;
-        const userId = setUser.userId;
+        const { token, userId } = setUser;
         // book.book_id = bookId;
         requestApp
           .post(`/api/v1/users/${userId}/books`)
@@ -822,8 +848,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('should be able to get list of books they are yet to return', (done) => {
-        const userId = setUser.userId;
-        const token = setUser.token;
+        const { token, userId } = setUser;
         requestApp
           .get(`/api/v1/users/${userId}/books?returned=false`)
           .set('authenticate-token', token)
@@ -835,9 +860,21 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
+      it('should be able to get all the list of books that are yet to be returned', (done) => {
+        const { token, userId } = setUser;
+        requestApp
+          .get(`/api/v1/users/${userId}/books?bookId=${bookId}`)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            if (err) return done(err);
+            done();
+          });
+      });
+
       it('should be able to return a book', (done) => {
-        const userId = setUser.userId;
-        const token = setUser.token;
+        const { token, userId } = setUser;
         requestApp
           .put(`/api/v1/users/${userId}/books/${borrowedBookId}?bookId=${bookId}`)
           .set('authenticate-token', token)
@@ -849,10 +886,10 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
-      it('should not be able to return a book when one or more parameters cannot be found',
+      it(
+        'should not be able to return a book when one or more parameters cannot be found',
         (done) => {
-          const userId = setUser.userId;
-          const token = setUser.token;
+          const { token, userId } = setUser;
           requestApp
             .put(`/api/v1/users/${userId}/books/10000000?bookId=9000000`)
             .set('authenticate-token', token)
@@ -862,12 +899,13 @@ describe('API Tests', () => { // Describe the API test suite
               if (err) return done(err);
               done();
             });
-        });
+        }
+      );
 
-      it('should be able to get borrowing histories',
+      it(
+        'should be able to get borrowing histories',
         (done) => {
-          const userId = setUser.userId;
-          const token = setUser.token;
+          const { userId, token } = setUser;
           requestApp
             .get(`/api/v1/books/histories/${userId}`)
             .set('authenticate-token', token)
@@ -877,13 +915,27 @@ describe('API Tests', () => { // Describe the API test suite
               if (err) return done(err);
               done();
             });
-        });
+        }
+      );
 
       describe('# Profile', () => { // Describe Profile
-        it('should not be able to change their password if the new password do not match the old one',
+        it('should be able to get all users in the database', (done) => {
+          const { token } = setUser;
+          request(app)
+            .get('/api/v1/users')
+            .set('authenticate-token', token)
+            .end((err, res) => {
+              expect(res.statusCode).to.equal(200);
+              expect(res.body).to.be.an('object');
+              if (err) return done(err);
+              done();
+            });
+        });
+
+        it(
+          'should not be able to change their password if the new password do not match the old one',
           (done) => {
-            const userId = setUser.userId;
-            const token = setUser.token;
+            const { userId, token } = setUser;
             request(app)
               .put(`/api/v1/users/${userId}`)
               .send({
@@ -898,11 +950,11 @@ describe('API Tests', () => { // Describe the API test suite
                 if (err) return done(err);
                 done();
               });
-          });
+          }
+        );
 
         it('should be able to change their password', (done) => {
-          const userId = setUser.userId;
-          const token = setUser.token;
+          const { userId, token } = setUser;
           request(app)
             .put(`/api/v1/users/${userId}`)
             .send({
@@ -920,8 +972,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it('should not be able to change their password if the passwords do not match', (done) => {
-          const userId = setUser.userId;
-          const token = setUser.token;
+          const { userId, token } = setUser;
           request(app)
             .put(`/api/v1/users/${userId}`)
             .send({
@@ -939,8 +990,7 @@ describe('API Tests', () => { // Describe the API test suite
         });
 
         it('should be able to get a particular user', (done) => {
-          const userId = setUser.userId;
-          const token = setUser.token;
+          const { userId, token } = setUser;
           request(app)
             .get(`/api/v1/users/${userId}`)
             .set('authenticate-token', token)
@@ -969,9 +1019,10 @@ describe('API Tests', () => { // Describe the API test suite
           });
       });
 
-      it('should return an error when the user making the request is not the same as logged in user',
+      it(
+        'should return an error when the user making the request is not the same as logged in user',
         (done) => {
-          const token = setUser.token;
+          const { token } = setUser;
           request(app)
             .get('/api/v1/users/123456/books')
             .set('authenticate-token', token)
@@ -981,9 +1032,11 @@ describe('API Tests', () => { // Describe the API test suite
               if (err) return done(err);
               done();
             });
-        });
+        }
+      );
 
-      it('should return an error when the user does not provide a token',
+      it(
+        'should return an error when the user does not provide a token',
         (done) => {
           request(app)
             .get('/api/v1/users/123456/books')
@@ -993,13 +1046,13 @@ describe('API Tests', () => { // Describe the API test suite
               if (err) return done(err);
               done();
             });
-        });
+        }
+      );
     });
 
     describe('# User Authenticate', () => { // Describe Authenticate middleware
       it('should return OK status', (done) => {
-        const userId = setUser.userId;
-        const token = setUser.token;
+        const { userId, token } = setUser;
         requestApp
           .get(`/api/v1/users/${userId}/books?returned=false`)
           .set('authenticate-token', token)
@@ -1014,7 +1067,7 @@ describe('API Tests', () => { // Describe the API test suite
 
     describe('# Admin Authenticate', () => { // Describe Authenticate middleware
       it('normal user should not be able to view admin page', (done) => {
-        const token = setUser.token;
+        const { token } = setUser;
         requestApp
           .get('/api/v1/books/stocks')
           .set('authenticate-token', token)
@@ -1027,7 +1080,7 @@ describe('API Tests', () => { // Describe the API test suite
       });
 
       it('admin user should be able to view admin page', (done) => {
-        const token = setAdmin.token;
+        const { token } = setAdmin;
         requestApp
           .get('/api/v1/books/stocks')
           .set('authenticate-token', token)

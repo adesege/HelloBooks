@@ -33,6 +33,9 @@ router.route('/users/:userId/books')
 router.route('/users/:userId/books/:borrowedBookId')
   .put(authMiddleware, BookClass.returnBorrowedBook);
 
+router.route('/users')
+  .get(authMiddleware, UserClass.getUsers);
+
 router.route('/users/:userId')
   .get(authMiddleware, UserClass.getUsers)
   .put(authMiddleware, UserClass.updateUser);

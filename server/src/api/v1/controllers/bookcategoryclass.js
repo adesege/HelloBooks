@@ -1,6 +1,6 @@
 import model from '../models';
 
-const bookCategory = model.bookCategory;
+const { bookCategory } = model;
 
 /**
 * @class BookCategoryClass
@@ -38,7 +38,7 @@ class BookCategoryClass {
 * @returns {void}
 */
   static delete(req, res) { // delete a book
-    const id = req.params.categoryId || '';
+    const id = `${req.params.categoryId}`;
     bookCategory.findById(id)
       .then((category) => {
         if (category !== null) {
@@ -74,19 +74,19 @@ class BookCategoryClass {
 * @return {object} response
   */
   static update(req, res) {
-    const id = req.params.categoryId || '';
-    const name = req.body.name || '';
+    const id = `${req.params.categoryId}`;
+    const name = `${req.body.name}`;
     bookCategory.findById(id)
       .then((category) => {
         if (category) {
           return bookCategory.update(
             { name },
             {
- where: { id },
+              where: { id },
               returning: true,
               plain: true
             }
-)
+          )
             .then(updatedCategory =>
               res.status(200)
                 .send({

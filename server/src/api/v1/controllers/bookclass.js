@@ -14,7 +14,7 @@ class BookClass {
    * @return {void}
    */
   static create(req, res) {
-    const title = req.body.title || '';
+    const title = `${req.body.title}`;
     req.body.userId = req.decoded.user;
     const stock = {
       quantity: req.body.stockQuantity
@@ -240,7 +240,7 @@ class BookClass {
 * @returns {void}
 */
   static delete(req, res) { // delete a book
-    const id = req.params.id || '';
+    const id = parseInt(req.params.id, 10);
     Book.findById(id)
       .then((book) => {
         if (book !== null) {

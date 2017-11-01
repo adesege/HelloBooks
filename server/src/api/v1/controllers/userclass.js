@@ -1,8 +1,8 @@
 import model from '../models';
 import utils from '../utils';
 
-const randomString = utils.randomString; // generates random strings
-const User = model.User; // get User model
+const { randomString } = utils; // generates random strings
+const { User } = model; // get User model
 
 /**
  * @class UserClass
@@ -16,8 +16,8 @@ class UserClass {
    * @return {object} response
    */
   static signup(req, res) {
-    let password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
+    let { password } = req.body;
+    const { confirmPassword } = req.body;
     const name = req.body.name || '';
     const email = req.body.email || '';
     password = User.generateHash(password) || '';
@@ -82,17 +82,15 @@ class UserClass {
       .then((user) => {
         if (user) {
           if (!user.validPassword(password)) {
-            return res.status(400).send({
-              message: 'You provided a wrong email address and password' });
+            return res.status(400).send({ message: 'You provided a wrong email address and password' });
           }
           const token = utils.signToken(user);
-          return res.status(200).send(
-            {
-              token,
-              userId: user.id,
-              group: user.userGroup,
-              message: 'Successfully validated'
-            });
+          return res.status(200).send({
+            token,
+            userId: user.id,
+            group: user.userGroup,
+            message: 'Successfully validated'
+          });
         }
         return res.status(404).send({ message: 'User not found' });
       });
@@ -108,7 +106,7 @@ class UserClass {
   static getUsers(req, res) { // get user(s) in the database
     const id = req.params.userId;
     User.findAll({
-      where: req.params.userId ? { id } : null,
+      where: id ? { id } : null,
       attributes: ['name', 'userRank', 'email', 'id', 'createdAt', 'updatedAt'],
       order: [['updatedAt', 'DESC']]
     })
@@ -124,9 +122,7 @@ class UserClass {
    */
   static updateUser(req, res) { // get user(s) in the database
     const id = req.params.userId;
-    const password = req.body.password;
-    const oldPassword = req.body.oldPassword;
-    const passwordConfirm = req.body.passwordConfirm;
+    const { password, oldPassword, passwordConfirm } = req.body;
     if (password !== passwordConfirm) {
       return res.status(400).send({
         message: 'The password is not the same'
@@ -139,19 +135,20 @@ class UserClass {
             message: 'Your old password does not match the current password'
           });
         }
-        User.update({ password },
+        User.update(
+          { password },
           {
             where: { id },
             returning: true,
             plain: true
-          })
+          }
+        )
           .then(updatedUser =>
             res.status(200)
               .send({
                 data: updatedUser,
                 message: 'User information has been successfully edited'
-              })
-          );
+              }));
       });
   }
 }
