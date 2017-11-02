@@ -6,122 +6,54 @@ import InputField from '../../form/InputField';
 import Button from '../../form/Button';
 
 
-/**
- * @class LoginForm
- * @extends {React.Component}
- */
-class LoginForm extends React.Component {
-  /**
-   * Creates an instance of LoginForm.
-   * @param {any} props
-   * @memberof LoginForm
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-      isLoading: false
-    };
+const LoginForm = (props) => (
+  <form onSubmit={props.onSubmit}>
+    <FlashMessagesList />
+    <InputField
+      type="email"
+      label="Email address"
+      name="email"
+      value={props.user.email}
+      onChange={props.onChange}
+      icon="user"
+    />
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-
-  /**
-   * @returns {void}
-   * @param {object} event
-   * @memberof LoginForm
-   */
-  onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  /**
-   * @returns {void}
-   * @param {object} event
-   * @memberof LoginForm
-   */
-  onSubmit(event) {
-    event.preventDefault();
-    this.setState({ isLoading: true });
-    this.props.login(this.state).then(
-      (data) => {
-        this.setState({
-          isLoading: false
-        });
-        this.props.logUserIn(data);
-        this.context.router.push('/dashboard');
-      },
-      (errors) => {
-        this.setState({
-          isLoading: false
-        });
-        if (errors.response) {
-          this.props.addFlashMessage({
-            type: 'error',
-            text: errors.response.data
-          });
-        }
-      }
-    );
-  }
-
-  /**
-   * @returns  {object} JSX
-   * @memberof LoginForm
-   */
-  render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <FlashMessagesList />
-        <InputField
-          type="email"
-          label="Email address"
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          icon="user"
-        />
-
-        <InputField
-          type="password"
-          label="Password"
-          name="password"
-          onChange={this.onChange}
-          icon="lock"
-        >
-          <p
-            className="font-small d-flex justify-content-end">
+    <InputField
+      type="password"
+      label="Password"
+      name="password"
+      onChange={props.onChange}
+      icon="lock"
+    >
+      <p
+        className="font-small d-flex justify-content-end">
         Forgot
-            <Link
-              to="/reset-password"
-              className="blue-text ml-1">
+        <Link
+          to="/reset-password"
+          className="blue-text ml-1">
         Password?
-            </Link>
-          </p>
-        </InputField>
+        </Link>
+      </p>
+    </InputField>
 
-        <Button
-          disabled={this.state.isLoading}
-          className="btn-success btn-block"
-          name="Login"
-          label = "Login"
-        />
-      </form>
-    );
-  }
-}
+    <Button
+      disabled={props.isLoading}
+      className="btn-success btn-block"
+      name="Login"
+      label = "Login"
+      id="login"
+    />
+  </form>
+);
 
 LoginForm.propTypes = {
   login: PropTypes.func.isRequired,
   logUserIn: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
-};
-
-LoginForm.contextTypes = {
-  router: PropTypes.object.isRequired
+  addFlashMessage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default LoginForm;
