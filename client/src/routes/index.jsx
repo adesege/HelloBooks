@@ -9,7 +9,8 @@ import Settings from '../components/Settings';
 
 import Login from '../components/homepage/login/Login';
 import Signup from '../components/homepage/signup/Signup';
-import ResetPassword from '../components/homepage/resetpassword/ResetPassword';
+import ResetPassword from '../components/homepage/ResetPassword';
+import ChangePassword from '../components/homepage/ResetPassword/ChangePassword';
 
 import Dashboard from '../components/dashboard/Dashboard';
 import Histories from '../components/books/histories/Histories';
@@ -38,6 +39,7 @@ export default (
       <IndexRoute component={Login}/>
       <Route path="signup" component={Signup} />
       <Route path="reset-password" component={ResetPassword} />
+      <Route path="reset-password/verify/:validationKey" component={ChangePassword} />
       <Route path="logout" component={Logout} />
     </Route>
 

@@ -1,4 +1,4 @@
-import URL from 'url';
+import URLPackage from 'url';
 import noCover from '../assets/images/no-cover.jpg';
 
 export const showCoverPhoto =
@@ -16,7 +16,7 @@ export const parseCloudinaryURL = (url) => {
   let newUrl = {};
   newUrl.public_id = '';
   if (url && isValidUrl(url)) {
-    newUrl = URL.parse(url);
+    newUrl = URLPackage.parse(url);
     const urlPath = newUrl.path.match(/.*\/(.*)\.+/);
     newUrl.public_id = urlPath ? urlPath[1] : '';
     return newUrl;
@@ -37,3 +37,5 @@ export const isPDF = (type) => {
   }
   return false;
 };
+
+export const extractURLQuery = (url) => new URL(url).searchParams;

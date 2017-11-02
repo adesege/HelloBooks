@@ -16,10 +16,12 @@ export const logout = () =>
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
   };
+
 export const login = data =>
   dispatch =>
     axios
       .post(`/api/${API_VERSION}/users/signin`, data);
+
 export const logUserIn = response =>
   (dispatch) => {
     const { token } = response.data;
@@ -34,3 +36,13 @@ export const logUserIn = response =>
     setAuthorizationToken(token);
     dispatch(setCurrentUser(userPayload));
   };
+
+export const sendResetPasswordMail = data =>
+  dispatch =>
+    axios
+      .post(`/api/${API_VERSION}/users/reset-password`, data);
+
+export const resetPassword = data =>
+  dispatch =>
+    axios
+      .post(`/api/${API_VERSION}/users/reset-password/verify`, data);

@@ -1,76 +1,41 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FlashMessagesList from '../../flash/FlashMessagesList';
 import InputField from '../../form/InputField';
 import Button from '../../form/Button';
 
 
-/**
- * @class ResetPasswordForm
- * @extends {React.Component}
- */
-class ResetPasswordForm extends React.Component {
-  /**
-     * Creates an instance of ResetPasswordForm.
-     * @param {any} props
-     * @memberof ResetPasswordForm
-     */
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      isLoading: false
-    };
+const ResetPasswordForm = (props) => (
+  <form onSubmit={props.onSubmit}>
+    <FlashMessagesList />
+    <InputField
+      type="email"
+      label="Email address"
+      name="email"
+      value={props.user.email}
+      onChange={props.onChange}
+      icon="envelope"
+    />
+    {props.errors.email &&
+      <p className="form-text text-danger">
+        {props.errors.email}
+      </p> }
 
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
+    <Button
+      disabled={props.isLoading}
+      className="btn-danger btn-block"
+      name="ResetPassword"
+      label = "Send me the link"
+    />
+  </form>
+);
 
-  /**
-     * @returns {void}
-     * @param {any} event
-     * @memberof ResetPasswordForm
-     */
-  onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  /**
-     * @returns {void}
-     * @param {any} e
-     * @memberof ResetPasswordForm
-     */
-  onSubmit(e) {
-    e.preventDefault();
-    this.setState({ isLoading: true });
-  }
-
-  /**
-     *
-     * @returns {object} JSX
-     * @memberof ResetPasswordForm
-     */
-  render() {
-    return (
-      <form onSubmit={this.onSubmit}>
-        <FlashMessagesList />
-        <InputField
-          type="email"
-          label="Email address"
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          icon="envelope"
-        />
-
-        <Button
-          disabled={this.state.isLoading}
-          className="btn-danger btn-block"
-          name="ResetPassword"
-          label = "Send me the link"
-        />
-      </form>
-    );
-  }
-}
+ResetPasswordForm.propTypes = {
+  user: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 
 export default ResetPasswordForm;

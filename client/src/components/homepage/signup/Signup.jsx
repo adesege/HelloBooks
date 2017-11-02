@@ -160,7 +160,6 @@ class Signup extends React.Component {
             userSignupRequest = {this.props.userSignupRequest}
             addFlashMessage = {this.props.addFlashMessage}
             logUserIn = {this.props.logUserIn}
-            googleSignup = {this.props.googleSignup}
             onSubmit = {this.onSubmit}
             user={this.state.user}
             isLoading={this.state.isLoading}
@@ -213,7 +212,6 @@ Signup.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
   addFlashMessage: PropTypes.func.isRequired,
   logUserIn: PropTypes.func.isRequired,
-  googleSignup: PropTypes.func.isRequired
 };
 
 export default connect(null, {

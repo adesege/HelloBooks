@@ -69,7 +69,6 @@ SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
   addFlashMessage: PropTypes.func.isRequired,
   logUserIn: PropTypes.func.isRequired,
-  googleSignup: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

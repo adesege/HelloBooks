@@ -26,6 +26,9 @@ router.get('/', (req, res) =>
 router.post('/users/signup', UserClass.signup);
 router.post('/users/signin', UserClass.signin);
 
+router.post('/users/reset-password', UserClass.sendResetPasswordMail);
+router.post('/users/reset-password/verify', UserClass.resetPassword);
+
 router.route('/users/:userId/books')
   .post(authMiddleware, BookClass.borrowBook)
   .get(authMiddleware, BookClass.getBorrowedBook);
