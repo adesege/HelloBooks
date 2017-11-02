@@ -193,6 +193,16 @@ describe('API Tests', () => { // Describe the API test suite
         });
       });
 
+      it('should not log a user in with a wrong oauthID', (done) => {
+        user.oauthID = '345678976543';
+        request(app).post('/api/v1/users/signin').send(user).end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          if (err) return done(err);
+          done();
+        });
+      });
+
       it('should not log a user in with a wrong password', (done) => {
         user.password = '2345';
         user.email = email;
@@ -229,6 +239,75 @@ describe('API Tests', () => { // Describe the API test suite
             done();
           });
       });
+    });
+  });
+
+  /**
+     * @function Reset Password suite
+     */
+  let validationKey = '';
+  describe('# Reset password', () => {
+    it('should not send mail if email address cannot be found', (done) => {
+      requestApp = request(app);
+      requestApp.post('/api/v1/users/reset-password').send({ email: faker.internet.email() })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          if (err) return done(err);
+          done();
+        });
+    });
+
+
+    it('should send user a reset password mail', (done) => {
+      requestApp = request(app);
+      requestApp.post('/api/v1/users/reset-password').send({ email })
+        .end((err, res) => {
+          validationKey = res.body.key;
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          if (err) return done(err);
+          done();
+        });
+    });
+
+    it('should not change password if passwords are not the same', (done) => {
+      requestApp = request(app);
+      requestApp.post('/api/v1/users/reset-password/verify').send({
+        validationKey, email, password: '1234', confirmPassword: '1235'
+      })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          if (err) return done(err);
+          done();
+        });
+    });
+
+    it('should not change password if validation key and email cannot be found', (done) => {
+      requestApp = request(app);
+      requestApp.post('/api/v1/users/reset-password/verify').send({
+        validationKey: 'wrong key', email: 'invalid email address', password: '1234', confirmPassword: '1234'
+      })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          if (err) return done(err);
+          done();
+        });
+    });
+
+    it('should send user a reset password mail', (done) => {
+      requestApp = request(app);
+      requestApp.post('/api/v1/users/reset-password/verify').send({
+        validationKey, email, password: '1234', confirmPassword: '1234'
+      })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          if (err) return done(err);
+          done();
+        });
     });
   });
 

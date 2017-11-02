@@ -22,9 +22,9 @@
     "exclude": [
       "server/src/app/**.js",
       "server/src/api/**/tests/**.js",
-      "src/api/**/models/index.js",
-      "src/api/**/utils/mailer.js",
-      "src/api/**/cron/sendSurcharge.js"
+      "server/src/api/**/models/index.js",
+      "server/src/api/**/utils/mailer.js",
+      "server/src/api/**/cron/sendSurcharge.js"
     ]
   },
   "cacheDirectories": [

@@ -2,7 +2,7 @@ import moment from 'moment';
 import model from '../models';
 import MailerClass from '../utils/mailer';
 
-const EMAIL_FROM = '"Hello-Books" <hello@hellobooks.herokuapp.com>';
+const { EMAIL_FROM } = process.env;
 
 const { borrowedBook } = model;
 const Mailer = new MailerClass();

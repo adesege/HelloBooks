@@ -21,7 +21,7 @@ export default class Mailer {
   }
 
   /**
-   * @param {any} from 
+   * @param {any} from
    * @memberof Mailer
    * @returns {void}
    */
@@ -31,7 +31,7 @@ export default class Mailer {
 
 
   /**
-   * @param {any} to 
+   * @param {any} to
    * @memberof Mailer
    * @returns {void}
    */
@@ -40,7 +40,7 @@ export default class Mailer {
   }
 
   /**
-   * @param {any} subject 
+   * @param {any} subject
    * @memberof Mailer
    * @returns {void}
    */
@@ -50,7 +50,7 @@ export default class Mailer {
 
 
   /**
-   * @param {any} text 
+   * @param {any} text
    * @memberof Mailer
    * @returns {void}
    */
@@ -59,7 +59,7 @@ export default class Mailer {
   }
 
   /**
-   * @param {any} html 
+   * @param {any} html
    * @memberof Mailer
    * @returns {void}
    */
@@ -73,7 +73,6 @@ export default class Mailer {
    */
   mailOptions() {
     return {
-    //   text: this.text || '',
       from: this.from,
       subject: this.subject,
       html: this.html,
@@ -89,6 +88,7 @@ export default class Mailer {
     return this.transporter
       .sendMail(
         this.mailOptions(),
-        () => { });
+        () => { }
+      );
   }
 }
