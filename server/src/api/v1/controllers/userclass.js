@@ -66,6 +66,7 @@ class UserClass {
   static signin(req, res) {
     const password = req.body.password || '';
     const email = req.body.email || '';
+    const oauthID = req.body.oauthID || '';
 
     if (email === '') {
       return res
@@ -78,22 +79,26 @@ class UserClass {
         .send({ message: 'The password field is required' });
     }
 
-    User.findOne({ where: { email } })
-      .then((user) => {
-        if (user) {
-          if (!user.validPassword(password)) {
-            return res.status(400).send({ message: 'You provided a wrong email address and password' });
-          }
-          const token = utils.signToken(user);
-          return res.status(200).send({
-            token,
-            userId: user.id,
-            group: user.userGroup,
-            message: 'Successfully validated'
-          });
-        }
-        return res.status(404).send({ message: 'User not found' });
-      });
+    User.findOne({ where: { oauthID } })
+      .then(oauthUser =>
+        User.findOne({ where: { email } })
+          .then((user) => {
+            if (!oauthID && (user || oauthUser)) {
+              if (!user.validPassword(password)) {
+                return res.status(400).send({ message: 'You provided a wrong email address and password' });
+              }
+            }
+            if (oauthID || user) {
+              const token = utils.signToken(user);
+              return res.status(200).send({
+                token,
+                userId: user.id,
+                group: user.userGroup,
+                message: 'Successfully validated'
+              });
+            }
+            return res.status(404).send({ message: 'User not found' });
+          }));
   }
 
   /**

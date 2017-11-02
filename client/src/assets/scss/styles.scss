@@ -425,3 +425,7 @@ body.modal-open {
 .react-date-picker__button__input input{
   width: auto !important;
 }
+
+.signup-facebook-btn[type=button] {
+  -webkit-appearance: none;
+}

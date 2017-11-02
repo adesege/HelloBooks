@@ -32,7 +32,7 @@ class FlashMessage extends React.Component {
         typeof text.message === 'object') &&
             <ul>
               { text.message.map((value, index) =>
-                <li key={index}>{value.message}</li>) }
+                <li key={index}>{value}</li>) }
             </ul>
         }
         {(Object.prototype.hasOwnProperty.call(text, 'message') &&
