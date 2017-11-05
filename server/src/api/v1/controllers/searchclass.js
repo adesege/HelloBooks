@@ -1,6 +1,6 @@
 import model from '../models';
 
-const Book = model.Book;
+const { Book } = model;
 
 /**
  * @class SearchClass
@@ -20,7 +20,9 @@ class SearchClass {
       case 'books':
         SearchClass.searchBooks(req, res);
         break;
-      default: return res.status(400).send({});
+      default: return res
+        .status(400)
+        .send({ message: 'Please specify a search type' });
     }
   }
 
@@ -40,7 +42,12 @@ class SearchClass {
         }
       }
     })
-      .then(books => response.status(200).send({ data: books }));
+      .then(books => response
+        .status(200)
+        .send({
+          message: 'Book found',
+          data: books
+        }));
   }
 }
 

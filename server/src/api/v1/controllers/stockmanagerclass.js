@@ -14,7 +14,8 @@ class StockManagerClass {
    * @return {void}
    */
   static create(req, res) {
-    const bookId = `${req.body.bookId}`;
+    /* istanbul ignore next */
+    const bookId = `${req.body.bookId}` || 0;
     Book.findById(bookId)
       .then((book) => {
         if (book) {
@@ -50,20 +51,25 @@ class StockManagerClass {
           stockManager.destroy({ // delete record from stockManager
             where: { id }
           }).then(() => {
-            Book.findById(stock.bookId).then((book) => {
-              if (book.quantity >= 0) {
-                book.update( // update count in book table
-                  { quantity: book.quantity - stock.quantity },
-                  { where: { id: stock.bookId, } }
-                )
-                  .then();
-              }
-            });
+            Book
+              .findById(stock.bookId)
+              .then((book) => {
+                /* istanbul ignore next */
+                if (book.quantity >= 0) {
+                  book.update( // update count in book table
+                    { quantity: book.quantity - stock.quantity },
+                    { where: { id: stock.bookId, } }
+                  )
+                    .then();
+                }
+              });
             return res.status(200)
               .send({ message: 'Stock deleted successfully' });
           });
         } else {
-          return res.status(400).send({ message: 'Stock not found' });
+          return res
+            .status(404)
+            .send({ message: 'Stock not found' });
         }
       });
   }
@@ -79,7 +85,9 @@ class StockManagerClass {
     stockManager.findAll({
       where: { bookId }
     })
-      .then(stocks => res.status(200).send({ message: '', data: stocks }));
+      .then(stocks => res
+        .status(200)
+        .send({ message: '', data: stocks }));
   }
 }
 

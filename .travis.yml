@@ -28,9 +28,8 @@ before_script:
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - npm run build
-  - NODE_ENV=test npm run test:db
 script:
-  - npm test
+  - NODE_ENV=test npm test
 after_success:
   - npm run coveralls
   - codeclimate-test-reporter < coverage/lcov.info

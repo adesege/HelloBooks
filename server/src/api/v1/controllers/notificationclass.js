@@ -1,10 +1,10 @@
 import model from '../models';
 
-const Notification = model.Notification; // get User model
+const { Notification } = model;
 
 /**
- * @class UserClass
- * @classdesc User Class
+ * @class NotificationClass
+ * @classdesc Notification Class
  */
 class NotificationClass {
   /**
@@ -14,11 +14,14 @@ class NotificationClass {
    * @param {object} res
    * @return {object} response
    */
-  static get(req, res) { // get user(s) in the database
-    Notification.findAll({
-      order: [['updatedAt', 'DESC']]
-    })
-      .then(notification => res.status(200).send({ data: notification }));
+  static get(req, res) {
+    Notification
+      .findAll({
+        order: [['updatedAt', 'DESC']]
+      })
+      .then(notification => res
+        .status(200)
+        .send({ data: notification }));
   }
 }
 export default NotificationClass;
