@@ -33,7 +33,10 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: { args: true, msg: 'The email field is required' },
+          notEmpty: {
+            args: true,
+            msg: 'The email field is required'
+          },
           isEmail: {
             args: true,
             msg: 'The email field is not a valid email address'

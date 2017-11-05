@@ -4,7 +4,12 @@ import path from 'path';
 import dotEnv from 'dotenv';
 import App from './app/app';
 
-dotEnv.config();
+/* istanbul ignore next */
+const env = process.env.NODE_ENV || 'development';
+/* istanbul ignore if */
+if (env === 'development') {
+  dotEnv.config();
+}
 
 const app = express();
 
@@ -14,7 +19,8 @@ app
     (req, res) =>
       res
         .status(200)
-        .send({ message: 'Welcome to Hello-Books api!' }));
+        .send({ message: 'Welcome to Hello-Books api!' })
+  );
 
 app.use((req, res, next) => {
   let version = req.url.match(/\/api\/(v[0-9]+)[a-z0-9/_+-]*/) || [];

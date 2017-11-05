@@ -37,21 +37,26 @@ export default (sequelize, DataTypes) => {
     },
     {
       hooks: {
-        afterCreate: borrowed => Book.findById(borrowed.bookId).then((book) => {
-          if (book.quantity > 0) {
-            book.update({
-              quantity: book.quantity - 1
-            }, {
-              where: { id: borrowed.bookId, }
-            }).then(() => {
-              models.Notification.create({
-                bookId: borrowed.bookId,
-                userId: borrowed.userId,
-                notificationType: 'BOOK_BORROWED'
-              });
-            });
-          }
-        }),
+        afterCreate: borrowed =>
+          Book
+            .findById(borrowed.bookId)
+            .then((book) => {
+              if (book.quantity > 0) {
+                book
+                  .update({
+                    quantity: book.quantity - 1
+                  }, {
+                    where: { id: borrowed.bookId, }
+                  })
+                  .then(() => {
+                    models.Notification.create({
+                      bookId: borrowed.bookId,
+                      userId: borrowed.userId,
+                      notificationType: 'BOOK_BORROWED'
+                    });
+                  });
+              }
+            }),
         beforeCreate: borrowed =>
           models.User.findById(borrowed.userId)
             .then((user) => {
@@ -73,30 +78,32 @@ export default (sequelize, DataTypes) => {
   borrowedBook.afterBulkUpdate((borrowed) => {
     const { bookId, userId } = borrowed.attributes;
     if (bookId) {
-      Book.findById(bookId).then((book) => {
-        if (book.quantity >= 0) {
-          book.update({
-            quantity: book.quantity + 1
-          }, {
-            where: { id: bookId, }
-          })
-            .then(() => {
-              models.Notification.update(
-                {
-                  notificationType: 'BOOK_RETURNED'
-                },
-                {
-                  where: {
-                    bookId,
-                    userId,
-                    notificationType: 'BOOK_BORROWED'
-                  }
-                }
-              );
+      Book
+        .findById(bookId)
+        .then((book) => {
+          if (book.quantity >= 0) {
+            book.update({
+              quantity: book.quantity + 1
+            }, {
+              where: { id: bookId, }
             })
-            .catch(() => {});
-        }
-      });
+              .then(() => {
+                models.Notification.update(
+                  {
+                    notificationType: 'BOOK_RETURNED'
+                  },
+                  {
+                    where: {
+                      bookId,
+                      userId,
+                      notificationType: 'BOOK_BORROWED'
+                    }
+                  }
+                );
+              })
+              .catch(() => {});
+          }
+        });
     }
   });
 

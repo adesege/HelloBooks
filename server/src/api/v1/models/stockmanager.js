@@ -27,16 +27,18 @@ export default (sequelize, DataTypes) => {
   });
 
   stockManager.afterCreate((stock) => {
-    Book.findById(stock.bookId).then((book) => {
-      if (book.quantity >= 0) {
-        book.update({
-          quantity: book.quantity + stock.quantity
-        }, {
-          where: { id: stock.bookId, }
-        })
-          .then();
-      }
-    });
+    Book
+      .findById(stock.bookId)
+      .then((book) => {
+        if (book.quantity >= 0) {
+          book.update({
+            quantity: book.quantity + stock.quantity
+          }, {
+            where: { id: stock.bookId, }
+          })
+            .then();
+        }
+      });
   });
 
   return stockManager;

@@ -20,7 +20,7 @@ class UserClass {
    */
   static signup(req, res) {
     let { password } = req.body;
-    const { confirmPassword } = req.body;
+    const { confirmPassword, oauthID } = req.body;
     const name = req.body.name || '';
     const email = req.body.email || '';
     password = User.generateHash(password) || '';
@@ -29,16 +29,17 @@ class UserClass {
     if (confirmPassword !== req.body.password) {
       return res
         .status(400)
-        .send({ message: 'The password field is not the same ' });
+        .send({ message: 'The password field is not the same' });
     }
     User.create({
       password,
       name,
       email,
       userGroup,
-      key: randomString(10)
+      key: randomString(10),
+      oauthID
     }, {
-      fields: ['name', 'email', 'password', 'key', 'userGroup'],
+      fields: ['name', 'email', 'password', 'key', 'userGroup', 'oauthID'],
       returning: true,
       plain: true
     }).then((user) => {
@@ -49,7 +50,7 @@ class UserClass {
           token,
           userId: user.id,
           group: user.userGroup,
-          message: 'Your account has been created successfully.'
+          message: 'Your account has been created successfully'
         });
     })
       .catch((errors) => {
@@ -67,20 +68,9 @@ class UserClass {
    * @return {object} response
    */
   static signin(req, res) {
-    const password = req.body.password || '';
-    const email = req.body.email || '';
-    const oauthID = req.body.oauthID || '';
-
-    if (email === '') {
-      return res
-        .status(400)
-        .send({ message: 'The email field is required' });
-    }
-    if (password === '') {
-      return res
-        .status(400)
-        .send({ message: 'The password field is required' });
-    }
+    const password = `${req.body.password}`;
+    const email = `${req.body.email}`;
+    const oauthID = `${req.body.oauthID}`;
 
     User.findOne({ where: { oauthID } })
       .then(oauthUser =>
@@ -103,7 +93,7 @@ class UserClass {
                 message: 'Successfully validated'
               });
             }
-            return res.status(404).send({ message: 'User not found' });
+            return res.status(404).send({ message: 'Sorry, we can\'t find this account' });
           }));
   }
 
@@ -116,12 +106,21 @@ class UserClass {
    */
   static getUsers(req, res) { // get user(s) in the database
     const id = req.params.userId;
-    User.findAll({
-      where: id ? { id } : null,
-      attributes: ['name', 'userRank', 'email', 'id', 'createdAt', 'updatedAt'],
-      order: [['updatedAt', 'DESC']]
-    })
-      .then(users => res.status(200).send({ data: users }));
+    User
+      .findAll({
+        where: id ? { id } : null,
+        attributes: [
+          'name',
+          'userRank',
+          'email',
+          'id',
+          'createdAt',
+          'updatedAt'],
+        order: [['updatedAt', 'DESC']]
+      })
+      .then(users => res
+        .status(200)
+        .send({ data: users }));
   }
 
   /**
@@ -136,7 +135,7 @@ class UserClass {
     const { password, oldPassword, passwordConfirm } = req.body;
     if (password !== passwordConfirm) {
       return res.status(400).send({
-        message: 'The password is not the same'
+        message: 'The passwords are not the same'
       });
     }
     User.findById(id)
@@ -175,8 +174,8 @@ class UserClass {
     return User.findOne({ where: { email } })
       .then((user) => {
         if (!user) {
-          return res.status(400).send({
-            mnessage: 'No account is associated with this email address'
+          return res.status(404).send({
+            message: 'No account is associated with this email address'
           });
         }
         const validationKey = utils.randomString(10);
@@ -206,7 +205,7 @@ class UserClass {
             const responseObject = {
               message: `A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`
             };
-
+            /* istanbul ignore next */
             responseObject.key = process.env.NODE_ENV === 'test' ? validationKey : '';
 
             return res.status(200)
@@ -228,7 +227,7 @@ class UserClass {
     } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).send({
-        message: 'The password is not the same'
+        message: 'The passwords are not the same'
       });
     }
     User.findOne({ where: { email, key: validationKey } })
