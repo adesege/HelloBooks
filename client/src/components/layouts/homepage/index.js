@@ -42,11 +42,11 @@ class HomepageLayout extends React.Component {
         >
           <div className="card">
             <div className="card-header bg-white border-bottom-0">
-              <div className="navbar-brand text-center d-block">
+              <div className="mt-3 navbar-brand text-center d-block">
                 <img src={logo} alt="" />
               </div>
               { (this.props.location.pathname !== '/reset-password') &&
-            <div className="text-desc text-center mb-0">
+            <div className="text-desc text-center mt-5 mb-0">
               <p className="mb-0">
                 HelloBooks is a simple application that helps manage a
                 library and its processes like stocking, tracking and renting books.
