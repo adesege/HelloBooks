@@ -19,42 +19,22 @@ You will need to have the following installed in your working environment before
 2. Install dependencies by running `npm install`. Ensure you are in your working directory. Run `cd /path/to/HelloBooks` to change.
 3. Start the server by running `npm run watch`.
 
-The application listens on port `8080` by default unless otherwise started in the environment port.
+The application listens on port `5000` by default unless otherwise started as an environment variable.
 
-Visit `http://localhost:8000` to access the front end or `http://localhost:8000/api` to access the `api` endpoint.
+Visit `http://localhost:3000` to access the front end or `http://localhost:5000/api` to access the `api` endpoint.
 
-## ENDPOINTS
-The endpoints are listed below.
-Where `:versionNumber` is the API version number.
-`/api/:versionNumber`
-1. `/users`
-    *    *POST* /signup - Creates a user
-    *    *POST* /signin - Logs a user in and generates a `JSON Web Token`
-    *    *POST* /:userId/books - Allow users borrow a book.
-    *    *PUT* /:userId/books - Allow users modfy a book.
-    *    *GET* /:userId/books?returned=false - Allow users get all the books they have borrowed but are yet to return
-2. `/books`
-    *    *POST* / - Allow users add a book
-    *    *PUT* /:bookId - Allow users modify a book information
-    *    *GET* / - Allow users get all the books they have borrowed but are yet to return
-    2. `/books/stocks`
-    *    *POST* / - Allow admin add a stock
-    *    *DELETE* - Allow admin delete a book
-    *    *GET* / - Allow admin get stock
-
-## JSON WEB TOKEN
-This application uses JSON web token to sign and verify user token. The default expiration time is `24 hours` but this can be modified in the application config.
+## AUTHENTICATION MECHANISM
+This application uses JSON web token to sign and verify users. The default expiration time is `24 hours` but this can be modified in the application config.
 
 ## MIDDLEWARES
-Some endpoints are restricted to logged users and admins only. E.g. Only admin can access `api/:versionNumber/books/stocks`.
+Some endpoints are restricted to logged users and admins only. E.g. Only admin can access `api/v:versionNumber/books/stocks`.
 
-There are three middlewares defined in this application.
-* Authenticate middleware - verifies a user's token and checks if the user is valid.
-* userAuthenticate middleware - verifies if the user is `user`
+There are two middlewares defined in this application.
+* middleware - verifies a user's token and checks if the user is valid.
 * adminAuthenticate middleware - checks if the user is `admin`.
 
 ## RESPONSE STATUSES
-These  are the common status codes used in the app.
+These are the common status codes used in the app.
 
 1. `400 Bad Request` - Used when there is a validation error.
 2. `500 Internal Server Error` - A generic error message, given when no more specific message is suitable.
@@ -63,6 +43,28 @@ These  are the common status codes used in the app.
 5. `401 Unauthorized` - Used when authentication failed.
 6. `403 Forbidden` - Used when a user is accessing a restricted end point.
 7. `201 Created` - Used when a new record is inserted into the database.
+1. `404 Not Found` - Used when a resource cannot be found or empty
 
-## CONTRIBUTING
-All contributions are welcome. Just create a push request, mention me and I will have a look at it.
+# AUTHOR
+
+**Temitayo Fadojutimi** is a Software Developer at Andela and he dedicates his expertise to solving practical problems in the society. He tweets at [@adesege_](http://twitter.com/adesege_)
+
+# CONTRIBUTING
+
+Thank you for your interest in contributing to this package. I currently accept contributions from everyone but I expect that standards are maintained.
+To contribute,
+1. Fork the project
+1. Create a feature branch, branch away from `master`
+1. Write tests, using `Mocha and Chai` or any other testing frameworks, and code
+1. If you have multiple commits please combine them into a few logically organized commits by [squashing them](git-squash)
+1. Push the commit(s) to your fork
+1. Submit a merge request (MR) to the `master` branch
+1. The MR title should describe the change you want to make
+1. The MR description should give a motive for your change and the method you used to achieve it.
+  1. Mention the issue(s) your merge request solves, using the `Solves #XXX` or
+    `Closes #XXX` syntax to auto-close the issue(s) once the merge request will
+    be merged.
+1. Be prepared to answer questions and incorporate feedback even if requests for this arrive weeks or months after your MR submission
+  1. If a discussion has been addressed, select the "Resolve discussion" button beneath it to mark it resolved.
+1. When writing commit messages please follow
+   [these guidelines](http://chris.beams.io/posts/git-commit).
