@@ -28,12 +28,12 @@ class ViewBooks extends React.Component {
     super(props);
     const { userId, params } = this.props;
     this.state = {
-      book: this.props.book ? this.props.book : '',
+      book: this.props.book ? this.props.book : {},
       borrowBook: {
         userId,
         bookId: params.id
       },
-      borrowedBook: []
+      borrowedBook: {}
     };
   }
 
@@ -132,9 +132,9 @@ class ViewBooks extends React.Component {
 }
 
 ViewBooks.propTypes = {
-  book: PropTypes.object.isRequired,
+  book: PropTypes.object,
   userId: PropTypes.number.isRequired,
-  borrowedBook: PropTypes.object.isRequired,
+  borrowedBook: PropTypes.object,
   borrowBookAction: PropTypes.func.isRequired,
   getBorrowedBookAction: PropTypes.func.isRequired,
   returnBorrowedBookAction: PropTypes.func.isRequired,
