@@ -41,7 +41,7 @@ class ViewBooks extends React.Component {
    * @returns {void}
    * @memberof ViewBooks
    */
-  componentDidMount = () => {
+  componentDidMount() {
     const { params } = this.props;
     this.props.getBook({ id: params.id });
     this.props.getBorrowedBookAction(this.state.borrowBook);

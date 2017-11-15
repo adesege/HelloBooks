@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const babelMinify = require('babel-preset-minify');
@@ -47,14 +48,17 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     extractSass,
     new MinifyPlugin({
       removeConsole: true,
       removeDebugger: true
     }, {
-      comments: true,
+      comments: false,
       babel: babelCore,
-      minifyPreset: babelMinify
+      minifyPreset: babelMinify,
+      booleans: true,
+      keepFnName: true
     })
   ],
 });

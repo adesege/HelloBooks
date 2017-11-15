@@ -17,7 +17,7 @@ import passportConfig from '../../../config/passport';
 class Login extends React.Component {
   /**
    * Creates an instance of LoginForm.
-   * @param {any} props
+   * @param {object} props
    * @memberof LoginForm
    */
   constructor(props) {
@@ -35,6 +35,7 @@ class Login extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onGoogleCallback = this.onGoogleCallback.bind(this);
     this.onFacebookCallback = this.onFacebookCallback.bind(this);
+    this.onGoogleFailure = this.onGoogleFailure.bind(this);
   }
 
   /**
@@ -70,14 +71,17 @@ class Login extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @memberof Signup
-   */
-  onGoogleFailure() {
-    this.props.addFlashMessage({
-      type: 'error',
-      text: 'Oh! Oh! We experienced an error validating you on google. Please try again'
-    });
+ * @returns {void}
+ * @param {object} response
+ * @memberof Login
+ */
+  onGoogleFailure(response) {
+    if (response && (response.error === 'popup_closed_by_user' || response.error === 'access_denied')) {
+      this.props.addFlashMessage({
+        type: 'error',
+        text: 'Oh! Oh! We experienced an error validating you on google. Please try again'
+      });
+    }
   }
 
   /**
@@ -131,7 +135,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <div className="card-body mx-4 mt-5">
+        <div className="card-body mx-4">
           <LoginForm
             login = {this.props.login}
             addFlashMessage = {this.props.addFlashMessage}
@@ -151,12 +155,12 @@ class Login extends React.Component {
 
           <div className="row my-3 d-flex justify-content-center">
             <GoogleLogin
+              autoLoad={false}
               clientId={passportConfig.google.clientID}
               onSuccess={this.onGoogleCallback}
               onFailure={this.onGoogleFailure}
               tag="button"
               className="btn btn-danger mr-md-3 btn-sm"
-              style={{}}
               type="button"
             >
               <i className="fa fa-google-plus text-white text-center" />
@@ -169,7 +173,6 @@ class Login extends React.Component {
               callback={this.onFacebookCallback}
               tag="button"
               cssClass="btn btn-primary mr-md-3 btn-sm"
-              style={{}}
               type="button"
               icon="fa fa-facebook text-white text-center"
             />
