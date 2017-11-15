@@ -2,7 +2,8 @@ import axios from 'axios';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const { API_VERSION } = window.API_VERSION;
+const { API_VERSION } = window;
+
 const {
   GET_BOOKS_HISTORIES
 } = types;

@@ -3,7 +3,5 @@ template/assets/**
 server/dist/**
 .idea/
 template/**
-client/src/assets/**
-client/public/**
 coverage/
 .nyc_output/

@@ -4,7 +4,8 @@ import types from '../actions/types';
 const { SET_CURRENT_USER } = types;
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  group: ''
 };
 
 export default (state = initialState, action = {}) => {

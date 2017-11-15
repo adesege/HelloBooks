@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const dotEnvWebpack = require('dotenv-webpack');
 const common = require('./webpack.common');
 
 const { PORT } = process.env;
@@ -23,16 +22,13 @@ module.exports = merge(common, {
         exclude: /node_modules/,
         loader: 'url-loader',
         options: {
-          limit: 300000,
           name: 'images/[name].[ext]'
         }
       },
       {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
-        exclude: /node_modules/,
         loader: 'url-loader',
         options: {
-          limit: 300000,
           name: 'fonts/[name].[ext]'
         }
       }]
@@ -55,11 +51,7 @@ module.exports = merge(common, {
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new dotEnvWebpack({
-      path: path.resolve(__dirname, '../.env'), // Path to .env file (this is the default)
-    })
-
+    new webpack.HotModuleReplacementPlugin()
   ],
   stats: {
     colors: true

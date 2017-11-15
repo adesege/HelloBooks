@@ -7,8 +7,8 @@ export default (state = [], action = {}) => {
   switch (action.type) {
   case BOOK_BORROWED:
     return [
-      ...state,
-      action.book
+      action.book,
+      ...state
     ];
 
   case GET_BORROWED_BOOKS:
