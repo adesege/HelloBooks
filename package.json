@@ -9,10 +9,10 @@
   "scripts": {
     "coveralls": "NODE_ENV=test nyc npm test && nyc report --reporter=lcov --reporter=text --reporter=lcovonly || coveralls",
     "webpack": "webpack",
-    "babel": "babel server/src/ --watch --out-dir server/dist/",
+    "babel": "rm -rf server/dist && babel server/src/ --watch --out-dir server/dist/",
     "watch": "NODE_ENV=development nodemon --watch server/dist ./server/dist/server.js",
     "start": "NODE_ENV=production node ./server/dist/server.js",
-    "build": "babel server/src/ --out-dir server/dist/",
+    "build": "rm -rf server/dist && babel server/src/ --out-dir server/dist/",
     "heroku-postbuild": "npm run build",
     "test": "NODE_ENV=test npm run test:db:migrate:undo && npm run test:db && mocha --compilers js:babel-register \"server/src/api/v1/tests/**/**.spec.js\" --timeout 100000",
     "test:db": "sequelize db:migrate --env test",

@@ -1,10 +1,13 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
 import PropTypes from 'prop-types';
-import Button from '../../form/Button';
 
 
-const CategoriesList = ({ onEditClick, categories, onDeleteModal }) => (
+const CategoriesList = ({
+  onEditClick,
+  categories,
+  onDeleteModal
+}) => (
   <div className="table-responsive">
     <table className="table" id="stockTable">
       <thead className="thead-default">
@@ -17,7 +20,7 @@ const CategoriesList = ({ onEditClick, categories, onDeleteModal }) => (
       </thead>
       <tbody>
         {categories.map((category, index) => (
-          <tr key={index} id={category.id}>
+          <tr key={index}>
             <td>{index + 1}</td>
             <td>{category.name}</td>
             <td>
@@ -25,25 +28,21 @@ const CategoriesList = ({ onEditClick, categories, onDeleteModal }) => (
                 date={category.createdAt}
                 minPeriod={60} />
             </td>
-            <td>
-              <Button
-                className="btn-sm btn-info"
+            <td id={category.id}>
+              <i
+                className="fa fa-pencil-square-o btn btn-info btn-sm"
                 onClick={onEditClick}
-                icon="pencil-square-o"/>
-              <Button
-                className="btn-sm btn-danger"
+              />
+              <i
+                className="fa fa-remove btn btn-danger btn-sm"
                 onClick={onDeleteModal}
-                icon="remove" />
+              />
             </td>
           </tr>
         ))
         }
       </tbody>
     </table>
-    <a href=""
-      className="btn btn-primary bg-light btn-sm mb-3">
-    See more
-    </a>
   </div>
 );
 

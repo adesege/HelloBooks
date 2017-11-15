@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Loader from 'halogen/ScaleLoader';
+import { ScaleLoader as Loader } from 'halogen';
 import PropTypes from 'prop-types';
-import Button from '../../form/Button';
-import { showCoverPhoto } from '../../../utils/';
+import Button from 'form/Button';
+import { showCoverPhoto } from 'utils';
 
 /**
  * @class BooksList

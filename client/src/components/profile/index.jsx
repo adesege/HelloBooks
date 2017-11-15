@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LeftSidebar from './sidebar/Left';
 import {
   getBorrowedBooks,
   returnBorrowedBook
-} from '../../actions/borrowedBooks';
-import { getUsers } from '../../actions/users';
+} from 'actions/borrowedBooks';
+import { getUsers } from 'actions/users';
 import BorrowedBooksList from './BorrowedBooksList';
 import Info from './Info';
 
@@ -85,18 +84,12 @@ class Profile extends React.Component {
       <div>
         <Info user={this.state.user} />
         <div className="row pr-3 pl-3" id="yetReturn">
-          <LeftSidebar />
-          <div className="col-sm-8 px-0">
+          <div className="col-sm-8  offset-sm-2 px-0">
             <h6 className="title">I'm yet to return...</h6>
             <BorrowedBooksList
               content={this.state.borrowedBooks}
               onReturnBook={this.onReturnBook}
             />
-            <button
-              type="button"
-              className="btn btn-primary bg-light btn-block mb-3">
-          See more
-            </button>
           </div>
         </div>
       </div>

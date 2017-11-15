@@ -131,7 +131,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <div className="card-body mx-4 mt-5">
+        <div className="card-body mx-4">
           <LoginForm
             login = {this.props.login}
             addFlashMessage = {this.props.addFlashMessage}

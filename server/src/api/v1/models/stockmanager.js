@@ -41,5 +41,12 @@ export default (sequelize, DataTypes) => {
       });
   });
 
+  stockManager.associate = (models) => {
+    stockManager.belongsTo(models.Book, {
+      foreignKey: 'id',
+      as: 'book'
+    });
+  };
+
   return stockManager;
 };

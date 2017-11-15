@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Autocomplete from 'react-autocomplete/dist/react-autocomplete';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
-import { searchBooks } from '../../../actions/books';
-import Button from '../../form/Button';
+import { searchBooks } from 'actions/books';
+import Button from 'form/Button';
 
 
 /**

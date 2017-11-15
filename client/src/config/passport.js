@@ -1,7 +1,3 @@
-import dotEnv from 'dotenv';
-
-dotEnv.config();
-
 export default {
   facebook: {
     clientID: process.env.AUTH_FACEBOOK_CLIENT_ID,

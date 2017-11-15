@@ -15,19 +15,31 @@ class BookCategoryClass {
     */
   static add(req, res) {
     const name = req.body.name || '';
-    bookCategory.findOne({ where: { name } })
+    if (!name) {
+      return res.status(400).send({ message: 'The category name field is required' });
+    }
+    return bookCategory
+      .findOne({ where: { name } })
       .then((category) => {
         if (!category) {
           bookCategory.create({
             name
           }, {
             fields: ['name']
-          }).then(newCategory =>
-            res.status(201)
-              .send({ message: 'Category added successfully', id: newCategory.get('id'), category: newCategory }))
-            .catch(error => res.status(400).send({ message: error.message }));
+          })
+            .then(newCategory =>
+              res.status(201)
+                .send({
+                  message: 'Category added successfully',
+                  id: newCategory.get('id'),
+                  category: newCategory
+                }));
         } else {
-          return res.status(400).send({ message: 'A category with this name already exist' });
+          return res
+            .status(400)
+            .send({
+              message: 'A category with this name already exist'
+            });
         }
       });
   }
@@ -52,7 +64,6 @@ class BookCategoryClass {
           return res.status(404).send({ message: 'Category not found' });
         }
       });
-    // .catch(error => res.status(500).send({ message: error.message }));
   }
   /**
 *
@@ -95,6 +106,10 @@ class BookCategoryClass {
                 }));
         }
         return res.status(400).send({ message: 'Cannot process this request at the moment.' });
+      })
+      .catch((errors) => {
+        const errorsArray = errors.errors.map(error => error.message);
+        return res.status(500).send({ message: errorsArray });
       });
   }
 }

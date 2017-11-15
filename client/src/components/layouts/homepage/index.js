@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import logo from '../../../assets/images/logo.png';
 
-const { $ } = window;
-
-
 const addBookBg = () => {
-  $('body').addClass('bg-books');
+  document.querySelector('body').className = 'bg-books';
 };
 
 /**
@@ -41,7 +38,7 @@ class HomepageLayout extends React.Component {
            offset-md-2 offset-lg-4 mt-sm-5 mb-sm-5 pt-sm-4 p-0"
         >
           <div className="card">
-            <div className="card-header bg-white border-bottom-0">
+            <div className="card-header bg-white border-bottom-0 mb-3">
               <div className="mt-3 navbar-brand text-center d-block">
                 <img src={logo} alt="" />
               </div>

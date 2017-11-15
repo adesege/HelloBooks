@@ -82,9 +82,12 @@ class StockManagerClass {
    */
   static get(req, res) {
     const { bookId } = req.query;
-    stockManager.findAll({
-      where: { bookId }
-    })
+    stockManager
+      .findAll({
+        include: ['book'],
+        order: [['updatedAt', 'DESC']],
+        where: { bookId }
+      })
       .then(stocks => res
         .status(200)
         .send({ message: '', data: stocks }));

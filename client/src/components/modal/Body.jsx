@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ModalBody } from 'reactstrap';
 
 const Body = ({ children }) => (
-  <div className="modal-body pt-4 border-bottom-0">
+  <ModalBody>
     {children}
-  </div>
+  </ModalBody>
 );
 
 Body.propTypes = {

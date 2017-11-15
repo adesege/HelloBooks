@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Loader from 'halogen/ScaleLoader';
+import { ScaleLoader as Loader } from 'halogen';
 import PropTypes from 'prop-types';
 import Timestamp from 'react-timestamp';
 import { Link } from 'react-router';
-import { showCoverPhoto } from '../../../utils/';
+import { showCoverPhoto } from 'utils/';
 
 /**
  * @class List

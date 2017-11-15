@@ -19,12 +19,27 @@ const CommonsChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
 });
 
 const ProvidePlugin = new webpack.ProvidePlugin({
-  'window.jQuery': 'jquery',
-  'window.$': 'jquery',
-  "jQuery": 'jquery',
-  "$": 'jquery',
   'window.Tether': 'tether',
   "Tether": 'tether',
+});
+
+const DefinePlugin = new webpack.DefinePlugin({
+  "process.env": {
+    PORT: JSON.stringify(process.env.PORT),
+    NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    APP_CLOUD_NAME: JSON.stringify(process.env.APP_CLOUD_NAME),
+    APP_API_KEY: JSON.stringify(process.env.APP_API_KEY),
+    APP_API_SECRET: JSON.stringify(process.env.APP_API_SECRET),
+    APP_CLOUDINARY_URL: JSON.stringify(process.env.APP_CLOUDINARY_URL),
+    AUTH_GOOGLE_CLIENT_ID: JSON.stringify(process.env.AUTH_GOOGLE_CLIENT_ID),
+    AUTH_GOOGLE_CLIENT_SECRET: JSON.stringify(process.env.AUTH_GOOGLE_CLIENT_SECRET),
+    AUTH_GOOGLE_CALLBACK: JSON.stringify(process.env.AUTH_GOOGLE_CALLBACK),
+    AUTH_FACEBOOK_CLIENT_ID: JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_ID),
+    AUTH_FACEBOOK_CLIENT_SECRET: JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_SECRET),
+    AUTH_FACEBOOK_CALLBACK: JSON.stringify(process.env.AUTH_FACEBOOK_CALLBACK),
+    DISQUS_SHORT_NAME: JSON.stringify(process.env.DISQUS_SHORT_NAME),
+    ROOT_URL: JSON.stringify(process.env.ROOT_URL)
+  }
 });
 
 
@@ -33,6 +48,16 @@ module.exports = {
     app: path.resolve(__dirname, '../src/index.js'),
   },
   resolve: {
+    alias: {
+      assets: path.resolve(__dirname, '../src/assets'),
+      layouts: path.resolve(__dirname, '../src/components/layouts'),
+      utils: path.resolve(__dirname, '../src/utils'),
+      actions: path.resolve(__dirname, '../src/actions'),
+      form: path.resolve(__dirname, '../src/components/form'),
+      Modal: path.resolve(__dirname, '../src/components/Modal'),
+      components: path.resolve(__dirname, '../src/components'),
+      config: path.resolve(__dirname, '../src/config')
+    },
     extensions: ['.js', '.jsx']
   },
   module: {
@@ -42,7 +67,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          presets: ['es2015', 'stage-0', 'react']
+          presets: ['env', 'stage-0', 'react']
         }
       },
       {
@@ -73,7 +98,8 @@ module.exports = {
   plugins: [
     CommonsChunkPlugin,
     HtmlWebpackPluginConfig,
-    ProvidePlugin
+    ProvidePlugin,
+    DefinePlugin
   ],
   stats: {
     colors: true

@@ -219,7 +219,7 @@ class BookClass {
     const isReturned = true;
     const { bookId } = req.query;
 
-    borrowedBook
+    return borrowedBook
       .findOne({
         where: {
           id,
@@ -241,13 +241,11 @@ class BookClass {
               },
               individualHooks: true
             })
-            .then(() => {
-              res
-                .status(200)
-                .send({
-                  message: 'You have successfully returned this book'
-                });
-            });
+            .then(() => res
+              .status(200)
+              .send({
+                message: 'You have successfully returned this book'
+              }));
         } else {
           return res
             .status(404)

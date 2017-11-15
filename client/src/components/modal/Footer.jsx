@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ModalFooter } from 'reactstrap';
 import Button from '../form/Button';
 
 const Footer = ({
@@ -11,7 +12,7 @@ const Footer = ({
   btnDisabled,
   closeOnClick
 }) => (
-  <div className="modal-footer border-top-0">
+  <ModalFooter>
     { btnClass &&
         <Button type="button"
           className={`btn-sm ${btnClass}`}
@@ -24,10 +25,10 @@ const Footer = ({
         <Button type="button"
           className={closeClass ? `btn-sm ${closeClass || ''}` : 'btn-sm btn-primary'}
           onClick={closeOnClick}
-          data-dismiss={closeOnClick ? '' : 'modal'}
-          label={closeLabel} />
+          label={closeLabel}
+        />
     }
-  </div>
+  </ModalFooter>
 );
 
 Footer.propTypes = {
@@ -36,7 +37,8 @@ Footer.propTypes = {
   btnClass: PropTypes.string,
   btnLabel: PropTypes.string,
   btnDisabled: PropTypes.bool,
-  btnOnClick: PropTypes.func
+  btnOnClick: PropTypes.func,
+  closeOnClick: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
 };
 
 Footer.defaultProps = {

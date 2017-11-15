@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Menu from './Menu';
-import Navigation from './sidebar/Navigation';
 import { logout } from '../../../actions/auth';
 
 /**
@@ -42,15 +41,11 @@ class Header extends React.Component {
       group
     } = this.props;
     return (
-      <div className="row">
+      <div className="">
         <Menu
           isAuthenticated={isAuthenticated}
           group={group}
           logout={this.logout}
-        />
-        <Navigation
-          isAuthenticated={isAuthenticated}
-          group={group}
         />
         { children }
       </div>

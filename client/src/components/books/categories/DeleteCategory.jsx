@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../modal/Modal';
+import Modal from 'Modal';
 
-const DeleteCategory = ({ onDeleteSubmit, isLoading }) => (
+const DeleteCategory = ({
+  onDeleteSubmit,
+  isLoading,
+  isOpenModal,
+  toggleOpenModal
+}) => (
 
   <Modal
-    modalId="delete-modal"
-    size="modal-lg"
+    isOpenModal={isOpenModal}
+    toggleOpenModal={toggleOpenModal}
+    size="lg"
     btnClass = "btn-danger deleteBtn"
     btnLabel= "Delete"
     btnOnClick={onDeleteSubmit}
     btnDisabled={isLoading}
     closeLabel="Cancel"
+    closeOnClick = {toggleOpenModal}
   >
     <span>
   Are you sure you want to delete this category?
@@ -21,6 +28,9 @@ const DeleteCategory = ({ onDeleteSubmit, isLoading }) => (
 
 DeleteCategory.propTypes = {
   onDeleteSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  isOpenModal: PropTypes.bool.isRequired,
+  toggleOpenModal: PropTypes.func.isRequired
 };
+
 export default DeleteCategory;

@@ -15,24 +15,26 @@ const InputField = ({
   containerClass,
   ...rest
 }) => (
-  <div
-    className=
-      {classnames(
-        `md-form form-sm ${containerClass || ''}`
-        , { 'hide-input-container': hide }
-      )}>
-    {icon &&
-        <i className={`fa fa-${icon} prefix grey-text`} />
-    }
-    <input
-      type={type}
-      className={classnames('form-control px-0')}
-      id={name}
-      placeholder={placeholder}
-      name={name}
-      onChange={onChange}
-      {...rest} />
+  <div className=
+    {classnames(
+      `form-group form-sm ${containerClass || ''}`
+      , { 'hide-input-container': hide }
+    )}>
     {label && <label className={labelClass} htmlFor={name}>{label}</label> }
+    <div className="input-group">
+      <div className="input-group-addon">
+        {icon && <i className={`fa fa-${icon}`} />}
+      </div>
+
+      <input
+        type={type}
+        className={classnames('form-control')}
+        id={name}
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+        {...rest} />
+    </div>
     {children}
   </div>
 );

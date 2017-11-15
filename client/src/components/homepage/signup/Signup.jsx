@@ -179,7 +179,7 @@ class Signup extends React.Component {
               onSuccess={this.onGoogleCallback}
               onFailure={this.onGoogleFailure}
               tag="a"
-              className="icons-sm"
+              className="icons-sm text-danger"
               style={{}}
               type=""
             >
@@ -192,7 +192,7 @@ class Signup extends React.Component {
               fields="name,email,picture"
               callback={this.onFacebookCallback}
               tag="a"
-              cssClass="icons-sm signup-facebook-btn"
+              cssClass="icons-sm text-primary signup-facebook-btn"
               style={{}}
               type=""
               icon="fa fa-facebook white-text fa-lg"
