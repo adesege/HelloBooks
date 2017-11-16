@@ -86,7 +86,7 @@ class ViewBooks extends React.Component {
       <div className="row" id="borrowBook">
         <div className="col-sm-8 offset-sm-2">
           <div className="row" id="book-details">
-            <div className="col-sm-4 col-6">
+            <div className="col-sm-4 col-lg-3 col-6">
               <img
                 className="img-thumbnails cover"
                 src={showCoverPhoto(coverPhotoPath)}

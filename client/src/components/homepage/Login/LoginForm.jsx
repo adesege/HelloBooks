@@ -17,6 +17,11 @@ const LoginForm = (props) => (
       onChange={props.onChange}
       icon="user"
     />
+    {props.validationError.email &&
+      <p className="form-text text-danger">
+        {props.validationError.email}
+      </p>
+    }
 
     <InputField
       type="password"
@@ -25,6 +30,11 @@ const LoginForm = (props) => (
       onChange={props.onChange}
       icon="lock"
     >
+      {props.validationError.password &&
+      <p className="form-text text-danger">
+        {props.validationError.password}
+      </p>
+      }
       <p
         className="font-small d-flex justify-content-end">
         Forgot
@@ -53,7 +63,8 @@ LoginForm.propTypes = {
   user: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  validationError: PropTypes.object.isRequired
 };
 
 export default LoginForm;

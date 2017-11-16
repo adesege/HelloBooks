@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { ScaleLoader as Loader } from 'halogen';
 import PropTypes from 'prop-types';
-import Button from 'form/Button';
 import { showCoverPhoto } from 'utils';
 
 /**
@@ -62,25 +61,20 @@ class BooksList extends Component {
                   style={{ position: 'unset', display: 'block' }}
                 >
                   <img
-                    className="img-thumbnail"
+                    className="img-thumbnail w-100 h-100"
                     src={showCoverPhoto(object.coverPhotoPath)}
                     alt={object.title}/>
                 </Link>
                 <div className="actions ml-3 mb-3">
-                  <Button
-                    className="btn-sm btn-default card-link m-0 mr-2"
-                    title="Add to reading list"
-                    icon="bookmark" />
-                  {this.props.userGroup === 'admin' && <span><Button
-                    to={`/books/edit/${object.id}`}
-                    onClick={this.props.goToEditPage.bind(this)}
-                    className="btn-sm btn-info card-link m-0 mr-2"
-                    icon="pencil" />
-                  <Button
-                    to={`/books/delete/${object.id}`}
-                    onClick={this.props.confirmDelete.bind(this)}
-                    className="btn-sm btn-danger card-link m-0 mr-2"
-                    icon="remove" />
+                  {this.props.userGroup === 'admin' && <span>
+                    <i className="btn btn-sm btn-info card-link m-0 mr-2 fa fa-pencil"
+                      onClick={this.props.goToEditPage.bind(this)}
+                      id={object.id}
+                    />
+                    <i className="btn btn-sm btn-danger card-link m-0 mr-2 fa fa-remove"
+                      onClick={this.props.confirmDelete.bind(this)}
+                      id={object.id}
+                    />
                   </span>
                   }
                 </div>

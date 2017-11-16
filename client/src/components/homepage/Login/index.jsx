@@ -8,6 +8,7 @@ import FacebookLogin from 'react-facebook-login';
 import { login, setCurrentUser, logUserIn } from 'actions/auth';
 import { addFlashMessage } from 'actions/flashMessages';
 import passportConfig from 'config/passport';
+import validateUser from 'utils/validators/user';
 import LoginForm from './LoginForm';
 
 /**
@@ -28,7 +29,8 @@ class Login extends React.Component {
         password: '',
         oauthID: ''
       },
-      isLoading: false
+      isLoading: false,
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -47,7 +49,7 @@ class Login extends React.Component {
     this.setState({
       user: {
         email: response.email,
-        password: Math.random(),
+        password: `${Math.random()}`,
         oauthID: response.id
       }
     });
@@ -63,7 +65,7 @@ class Login extends React.Component {
     this.setState({
       user: {
         email: response.profileObj.email,
-        password: Math.random(),
+        password: `${Math.random()}`,
         oauthID: response.profileObj.googleId
       }
     });
@@ -105,6 +107,9 @@ class Login extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
+
+    if (!this.isFormValid()) { return; }
+
     this.setState({ isLoading: true });
     this.props.login(this.state.user).then(
       (data) => {
@@ -129,13 +134,26 @@ class Login extends React.Component {
   }
 
   /**
+   * @returns {boolean} isValid
+   * @memberof Login
+   */
+  isFormValid() {
+    const { errors, isValid } = validateUser(this.state.user, 'login');
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
+
+  /**
    * @returns  {object} JSX
    * @memberof Login
    */
   render() {
     return (
       <div>
-        <div className="card-body mx-4 mt-5">
+        <div className="card-body mx-4">
           <LoginForm
             login = {this.props.login}
             addFlashMessage = {this.props.addFlashMessage}
@@ -145,6 +163,7 @@ class Login extends React.Component {
             onChange={this.onChange}
             onSubmit={this.onSubmit}
             user={this.state.user}
+            validationError={this.state.errors}
           />
           <p
             className=
