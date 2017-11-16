@@ -6,6 +6,7 @@ import { addBookCategory,
   getBookCategories,
   editBookCategory,
   deleteBookCategory } from 'actions/categories';
+import validateCategory from 'utils/validators/category';
 import CategoriesList from './CategoriesList';
 import AddCategory from './AddCategory';
 import DeleteCategory from './DeleteCategory';
@@ -24,13 +25,16 @@ class Categories extends React.Component {
     super(props);
 
     this.state = {
-      name: '',
-      id: '',
+      category: {
+        name: '',
+        id: '',
+      },
       isLoading: false,
       categories: [],
       isEdit: false,
       isOpenModal: false,
-      isOpenDeleteModal: false
+      isOpenDeleteModal: false,
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -71,10 +75,12 @@ class Categories extends React.Component {
   onDeleteSubmit(event) {
     event.preventDefault();
     const { deleteBookCategoryAction } = this.props;
-    const { id } = this.state;
+    const { id } = this.state.category;
     this.setState({ isLoading: true });
     deleteBookCategoryAction({ id });
-    this.closeDeleteModal();
+    this.setState({
+      isOpenDeleteModal: false
+    });
     this.setState({ isLoading: false });
   }
 
@@ -88,7 +94,10 @@ class Categories extends React.Component {
     event.preventDefault();
     const id = event.target.parentNode.getAttribute('id');
     this.setState({
-      id,
+      category: {
+        ...this.state.category,
+        id
+      },
       isOpenDeleteModal: true
     });
   }
@@ -109,8 +118,10 @@ class Categories extends React.Component {
         parseInt(item.id, 10) === parseInt(id, 10));
     if (category) {
       this.setState({
-        id: category.id,
-        name: category.name,
+        category: {
+          id: category.id,
+          name: category.name,
+        },
         isEdit: true
       });
       this.setState({ isOpenModal: true });
@@ -130,7 +141,9 @@ class Categories extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const { isEdit, name, id } = this.state;
+    if (!this.isFormValid()) { return; }
+    const { name, id } = this.state.category;
+    const { isEdit } = this.state;
     const {
       addBookCategoryAction,
       editBookCategoryAction
@@ -152,7 +165,10 @@ class Categories extends React.Component {
    */
   onChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      category: {
+        ...this.state.category,
+        [event.target.name]: event.target.value
+      }
     });
   }
 
@@ -175,13 +191,26 @@ class Categories extends React.Component {
       isOpenDeleteModal: !this.state.isOpenDeleteModal
     });
   }
+
+  /**
+   * @returns {boolean} isValid
+   * @memberof Categories
+   */
+  isFormValid() {
+    const { errors, isValid } = validateCategory(this.state.category);
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
   /**
    * @returns {object} JSX
    * @memberof Categories
    */
   render() {
     const {
-      categories, isLoading, name, id, isEdit, isOpenDeleteModal
+      categories, isLoading, isEdit, category, isOpenDeleteModal
     } = this.state;
     return (
       <div>
@@ -233,11 +262,11 @@ class Categories extends React.Component {
           onChange = {this.onChange}
           isLoading = {isLoading}
           onSubmit = {this.onSubmit}
-          name = {name}
-          id = {id}
+          category = {category}
           isEdit = {isEdit}
           isOpenModal = {this.state.isOpenModal}
           toggleOpenModal = {this.toggleOpenModal}
+          validationError = {this.state.errors}
         />
 
         <CategoriesList

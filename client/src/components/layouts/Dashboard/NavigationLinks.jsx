@@ -54,10 +54,11 @@ const NavigationLinks = ({
         </Link>
       </NavItem>
     </Nav>
-    <Nav className="ml-auto mt-3 mt-sm-0" navbar>
+    <Nav className="ml-auto mt-sm-0" navbar>
       <NavItem>
-        <Link className="nav-link text-danger btn" onClick={logout} to="#">
+        <Link className="nav-link text-danger" onClick={logout} to="#">
           <i className="fa fa-power-off" />
+          <span className="d-md-none"> Logout</span>
         </Link>
       </NavItem>
     </Nav>

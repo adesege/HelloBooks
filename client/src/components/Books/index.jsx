@@ -7,8 +7,6 @@ import { addFlashMessage } from 'actions/flashMessages';
 import Button from 'form/Button';
 import BooksList from './BooksList';
 
-const { $ } = window;
-
 /**
  * @class Books
  * @extends {React.Component}
@@ -55,8 +53,8 @@ class Books extends React.Component {
      */
   goToEditPage(event) {
     event.preventDefault();
-    const $parent = $(event.target).parent();
-    this.context.router.push($parent.attr('to'));
+    const { id } = event.target;
+    this.context.router.push(`/books/edit/${id}`);
   }
 
   /**
@@ -66,8 +64,8 @@ class Books extends React.Component {
      */
   confirmDelete(event) {
     event.preventDefault();
-    const $parent = $(event.target).parent();
-    this.context.router.push($parent.attr('to'));
+    const { id } = event.target;
+    this.context.router.push(`/books/delete/${id}`);
   }
 
   /**

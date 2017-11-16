@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Textarea = ({ label, ...rest }) => (
-  <div className="md-form form-sm">
+  <div className="form-group form-sm">
     <textarea {...rest}>
       {label}
     </textarea>

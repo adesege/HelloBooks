@@ -16,6 +16,11 @@ const SignupForm = (props) => (
       value={props.user.name}
       icon="user"
     />
+    {props.validationError.name &&
+      <p className="form-text text-danger">
+        {props.validationError.name}
+      </p>
+    }
 
     <InputField
       label="Email address"
@@ -24,6 +29,11 @@ const SignupForm = (props) => (
       value={props.user.email}
       icon="envelope"
     />
+    {props.validationError.email &&
+      <p className="form-text text-danger">
+        {props.validationError.email}
+      </p>
+    }
 
     <InputField
       label="Password"
@@ -32,6 +42,12 @@ const SignupForm = (props) => (
       onChange={props.onChange}
       icon="lock"
     />
+    {props.validationError.password &&
+      <p className="form-text text-danger">
+        {props.validationError.password}
+      </p>
+    }
+
     <InputField
       label="Password again"
       type="password"
@@ -39,7 +55,11 @@ const SignupForm = (props) => (
       onChange={props.onChange}
       icon="lock"
     />
-
+    {props.validationError.confirmPassword &&
+      <p className="form-text text-danger">
+        {props.validationError.confirmPassword}
+      </p>
+    }
 
     <div className="row align-items-center mb-4">
       <div className="col-md-3 col-md-6">
@@ -73,6 +93,7 @@ SignupForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
+  validationError: PropTypes.object.isRequired
 };
 
 export default SignupForm;

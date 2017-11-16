@@ -7,10 +7,11 @@ const AddCategory = ({
   onChange,
   isLoading,
   onSubmit,
-  name,
+  category,
   isEdit,
   isOpenModal,
-  toggleOpenModal
+  toggleOpenModal,
+  validationError
 }) => (
   <Modal
     isOpenModal={isOpenModal}
@@ -29,8 +30,13 @@ const AddCategory = ({
       icon="pencil"
       name="name"
       onChange={onChange}
-      value={name}
+      value={category.name}
     />
+    {validationError.name &&
+      <p className="form-text text-danger">
+        {validationError.name}
+      </p>
+    }
 
   </Modal>
 );
@@ -39,9 +45,10 @@ AddCategory.propTypes = {
   onChange: PropTypes.func,
   isLoading: PropTypes.bool,
   onSubmit: PropTypes.func,
-  name: PropTypes.string,
+  category: PropTypes.object.isRequired,
   isEdit: PropTypes.bool,
   isOpenModal: PropTypes.bool.isRequired,
-  toggleOpenModal: PropTypes.func.isRequired
+  toggleOpenModal: PropTypes.func.isRequired,
+  validationError: PropTypes.object.isRequired
 };
 export default AddCategory;

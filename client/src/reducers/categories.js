@@ -12,8 +12,8 @@ export default (state = [], action = {}) => {
   switch (action.type) {
   case CATEGORY_ADDED:
     return [
-      ...state,
-      action.category
+      action.category,
+      ...state
     ];
 
   case CATEGORY_FETCHED:

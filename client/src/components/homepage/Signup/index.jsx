@@ -8,6 +8,7 @@ import { logUserIn } from 'actions/auth';
 import { addFlashMessage } from 'actions/flashMessages';
 import 'assets/scss/common.scss';
 import passportConfig from 'config/passport';
+import validateUser from 'utils/validators/user';
 import SignupForm from './SignupForm';
 
 /**
@@ -30,7 +31,8 @@ class Signup extends React.Component {
         confirmPassword: '',
         oauthID: ''
       },
-      isLoading: false
+      isLoading: false,
+      errors: {}
     };
 
     this.onChange = this.onChange.bind(this);
@@ -108,6 +110,9 @@ class Signup extends React.Component {
      */
   onSubmit(event) {
     event.preventDefault();
+
+    if (!this.isFormValid()) { return; }
+
     this.setState({ isLoading: true });
     this.props.userSignupRequest(this.state.user).then(
       (data) => {
@@ -140,6 +145,18 @@ class Signup extends React.Component {
   }
 
   /**
+   * @returns {boolean} isValid
+   * @memberof Signup
+   */
+  isFormValid() {
+    const { errors, isValid } = validateUser(this.state.user, 'signup');
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
+  /**
    * @returns  {object} JSX
    * @memberof Signup
    */
@@ -164,6 +181,7 @@ class Signup extends React.Component {
             user={this.state.user}
             isLoading={this.state.isLoading}
             onChange={this.onChange}
+            validationError={this.state.errors}
           />
         </div>
         <div className="footer pt-3 pb-4 mdb-color lighten-3">
