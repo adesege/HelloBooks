@@ -1,36 +1,33 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from '../components/App';
-import Logout from '../components/Logout';
+import App from 'components/App';
+import Logout from 'components/Logout';
 
-import Profile from '../components/profile/';
-import Settings from '../components/Settings';
+import Profile from 'components/Profile/';
 
-import Login from '../components/homepage/login/Login';
-import Signup from '../components/homepage/signup/Signup';
-import ResetPassword from '../components/homepage/ResetPassword';
-import ChangePassword from '../components/homepage/ResetPassword/ChangePassword';
+import Login from 'components/homepage/Login';
+import Signup from 'components/homepage/Signup';
+import ResetPassword from 'components/homepage/ResetPassword';
+import ChangePassword from 'components/homepage/ResetPassword/ChangePassword';
 
-import Dashboard from '../components/dashboard/Dashboard';
-import Histories from '../components/books/histories/Histories';
-import Categories from '../components/books/categories/Categories';
+import Dashboard from 'components/Dashboard';
+import Histories from 'components/Books/Histories';
+import Categories from 'components/Books/Categories';
 
-import Books from '../components/books/books/Books';
-import BooksModal from '../components/books/books/BooksModal';
-import DeleteModal from '../components/books/books/DeleteModal';
-import ViewBooks from '../components/books/view/ViewBooks';
+import Books from 'components/Books';
+import BooksModal from 'components/Books/BooksModal';
+import DeleteModal from 'components/Books/DeleteModal';
+import ViewBooks from 'components/Books/ViewBooks';
 
-import StockManager from '../components/books/stockmanager/StockManager';
-import ShowStock from '../components/books/stockmanager/show/ShowStock';
+import StockManager from 'components/Books/StockManager';
+import ShowStock from 'components/Books/StockManager/ShowStock';
 
-import Notifications from '../components/notifications/';
+import HomepageLayout from 'components/layouts/Homepage';
+import DashboardLayout from 'components/layouts/Dashboard';
 
-import HomepageLayout from '../components/layouts/homepage';
-import DashboardLayout from '../components/layouts/dashboard';
-
-import middleware from '../components/middlewares/middleware';
-import adminMiddleware from '../components/middlewares/adminMiddleware';
+import middleware from 'components/middlewares/middleware';
+import adminMiddleware from 'components/middlewares/adminMiddleware';
 
 export default (
   <Route path="/" component={App}>
@@ -46,10 +43,6 @@ export default (
     <Route component={middleware(DashboardLayout)}>
       <Route path="dashboard" component={Dashboard} />
       <Route path="me" component={Profile} />
-      <Route path="settings" component={adminMiddleware(Settings)} />
-      <Route
-        path="notifications"
-        component={adminMiddleware(Notifications)} />
 
       <Route path="books">
         <IndexRoute component={Books} />

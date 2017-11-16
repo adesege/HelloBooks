@@ -1,3 +1,5 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~font-awesome/css/font-awesome.css';
 @import './_variables.scss';
 @import './common.scss';
 
@@ -71,10 +73,6 @@ body {
   -webkit-transition: none;
   transition: none;
   display: none;
-}
-
-#contentArea{
-  margin-top: 5em;
 }
 
 .navbar-light .navbar-toggler {
@@ -330,9 +328,7 @@ body.modal-open {
 }
 
 .hide-input-container{
-  width: 0px;
-  height: 0px;
-  margin: 0px;
+  display: none;
 }
 
 .form-control:focus{

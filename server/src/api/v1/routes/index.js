@@ -44,8 +44,8 @@ router.route('/users/:userId')
   .put(authMiddleware, UserClass.updateUser);
 
 router.route('/books')
-  .post(authMiddleware, BookClass.create)
-  .get(authMiddleware, BookClass.get);
+  .get(authMiddleware, BookClass.get)
+  .post(authMiddleware, BookClass.create);
 
 router.route('/notifications')
   .get(authMiddleware, adminMiddleware, NotificationClass.get);

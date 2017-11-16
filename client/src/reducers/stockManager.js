@@ -1,5 +1,5 @@
 import findIndex from 'lodash/findIndex';
-import types from '../actions/types';
+import types from 'actions/types';
 
 const {
   STOCK_MANAGER_FETCHED,
@@ -7,7 +7,7 @@ const {
   STOCK_DELETED
 } = types;
 
-export default (state = {}, action = {}) => {
+export default (state = [], action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case STOCK_MANAGER_FETCHED:

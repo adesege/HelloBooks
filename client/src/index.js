@@ -6,20 +6,19 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import dotEnv from 'dotenv';
 import routes from './routes';
 import rootReducer from './reducers';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser, logout } from './actions/auth';
 import { addFlashMessage } from './actions/flashMessages';
 
-dotEnv.config();
+const { NODE_ENV } = process.env;
 
 const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    NODE_ENV === 'development' && window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );
 

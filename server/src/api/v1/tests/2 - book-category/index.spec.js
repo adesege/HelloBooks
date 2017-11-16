@@ -26,6 +26,21 @@ describe('# Books Category', () => {
       });
   });
 
+  it('should not be add a book category with empty name value', (done) => {
+    const { token } = global.admin;
+    request
+      .post('/api/v1/books/categories')
+      .send({ name: '' })
+      .set('authenticate-token', token)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(400);
+        expect(res.body).to.be.a('object');
+        expect(res.body.message).to.equal('The category name field is required');
+        if (err) return done(err);
+        done();
+      });
+  });
+
   it('should not be able to add a book category with the same name multiple times', (done) => {
     const { token } = global.admin;
     request
@@ -93,6 +108,21 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
+        if (err) return done(err);
+        done();
+      });
+  });
+
+  it('should not update a book category when the category name is not specified', (done) => {
+    const { token } = global.admin;
+    request
+      .put(`/api/v1/books/categories/${global.bookCategoryId}`)
+      .send({ name: '' })
+      .set('authenticate-token', token)
+      .end((err, res) => {
+        expect(res.statusCode).to.equal(500);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.be.a('array');
         if (err) return done(err);
         done();
       });
