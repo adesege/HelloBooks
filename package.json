@@ -1,19 +1,14 @@
 {
   "name": "hello-books",
   "version": "1.0.0",
-  "engines": {
-    "node": "6.11.0",
-    "npm": "3.10.10"
-  },
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
     "coveralls": "NODE_ENV=test nyc npm test && nyc report --reporter=lcov --reporter=text --reporter=lcovonly || coveralls",
-    "webpack": "webpack",
-    "babel": "babel server/src/ --watch --out-dir server/dist/",
-    "watch": "nodemon --watch server/dist ./server/dist/server.js",
+    "babel": "rm -rf server/dist && babel server/src/ --watch --out-dir server/dist/",
+    "watch": "NODE_ENV=development nodemon --watch server/dist ./server/dist/server.js",
     "start": "NODE_ENV=production node ./server/dist/server.js",
-    "build": "babel server/src/ --out-dir server/dist/",
-    "heroku-postbuild": "npm run build",
+    "build": "rm -rf server/dist && babel server/src/ --out-dir server/dist/",
+    "heroku-postbuild": "cd client && npm i && npm run build && cd ../ && npm run build",
     "test": "NODE_ENV=test npm run test:db:migrate:undo && npm run test:db && mocha --compilers js:babel-register \"server/src/api/v1/tests/**/**.spec.js\" --timeout 100000",
     "test:db": "sequelize db:migrate --env test",
     "test:db:migrate:undo": "sequelize db:migrate:undo:all --env test"
@@ -71,6 +66,7 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
+    "express-api-versioning": "^2.0.0",
     "faker": "^4.1.0",
     "js-yaml": "^3.10.0",
     "jsonwebtoken": "^7.4.1",

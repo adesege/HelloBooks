@@ -9,6 +9,9 @@
   },
   "settings": {
     "import/resolver": {
+      "webpack": {
+        "config": "./config/webpack.dev.js"
+      },
       "node": {
         "extensions": [".js",".jsx"]
       }

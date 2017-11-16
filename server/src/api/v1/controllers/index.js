@@ -1,9 +1,9 @@
-import UserClass from './userclass';
-import BookClass from './bookclass';
-import StockManagerClass from './stockmanagerclass';
-import BookCategoryClass from './bookcategoryclass';
-import SearchClass from './searchclass';
-import NotificationClass from './notificationclass';
+import UserClass from './UserClass';
+import BookClass from './BookClass';
+import StockManagerClass from './StockManagerClass';
+import BookCategoryClass from './BookCategoryClass';
+import SearchClass from './SearchClass';
+import NotificationClass from './NotificationClass';
 
 export default { // export object so we can easily access each controller file
   UserClass,

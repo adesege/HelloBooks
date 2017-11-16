@@ -4,23 +4,6 @@ const router = express.Router();
 
 router.get('/test', (_, res) => res.send({ message: 'Test passed' }));
 
-router.get('*', (_, res) => res.render('index.html')); // pipe template/index.html to view
-
-// catch 404 and forward to error handler
-router.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-router.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  // render the error page
-  res.status(err.status || 500);
-  res.send({ message: res.locals.message, status: 'Not Found', code: err.status });
-});
+router.get(/^((?!(\/api\/v[0-9]\/)).)*$/, (req, res) => res.render('index.html')); // pipe template/index.html to view
 
 export default router;

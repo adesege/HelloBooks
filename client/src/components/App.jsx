@@ -2,8 +2,6 @@ import React from 'react';
 import LoadingBar from 'react-redux-loading-bar';
 import PropTypes from 'prop-types';
 import '../assets/scss/styles.scss';
-import '../assets/js/axios';
-import '../assets/js/material';
 
 window.API_VERSION = 'v1';
 
