@@ -65,10 +65,7 @@ module.exports = {
       {
         test: /\.(js|jsx)?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        exclude: /node_modules/
       },
       {
         test: /\.scss$/,
@@ -104,7 +101,6 @@ module.exports = {
   stats: {
     colors: true
   },
-  devtool: 'source-map',
   node: {
     fs: 'empty'
   }

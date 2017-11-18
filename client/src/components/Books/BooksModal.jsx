@@ -19,7 +19,7 @@ import validateBook from 'utils/validators/book';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Document, Page } from 'react-pdf';
+import { Document, Page } from 'react-pdf/build/entry.webpack';
 import UploadBookCover from './UploadBookCover';
 
 /**

@@ -1,4 +1,4 @@
-import keyMirror from 'keymirror-js';
+import keyMirror from 'utils/keyMirror';
 
 const actions = [
   'ADD_FLASH_MESSAGE',
