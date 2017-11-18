@@ -1,9 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const MinifyPlugin = require('babel-minify-webpack-plugin');
-const babelMinify = require('babel-preset-minify');
-const babelCore = require('babel-core');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const common = require('./webpack.common');
 
@@ -26,7 +23,12 @@ module.exports = merge(common, {
         test: /\.(css|scss)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader'
+          use: {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          }
         })
       },
 
@@ -48,17 +50,7 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
     extractSass,
-    new MinifyPlugin({
-      removeConsole: true,
-      removeDebugger: true
-    }, {
-      comments: false,
-      babel: babelCore,
-      minifyPreset: babelMinify,
-      booleans: true,
-      keepFnName: true
-    })
+    new webpack.optimize.UglifyJsPlugin()
   ],
 });
