@@ -7,7 +7,6 @@ export default (fields) => {
     id,
     title,
     coverPhotoPath,
-    documentPath,
     bookCategoryId,
     author,
     stockQuantity,
@@ -22,10 +21,6 @@ export default (fields) => {
   if (!id) {
     if (!Validator.isDataURI(coverPhotoPath)) {
       errors.coverPhotoPath = 'Please choose a cover photo to upload';
-    }
-
-    if (!Validator.isDataURI(documentPath)) {
-      errors.documentPath = 'Please choose a PDF document of this book';
     }
   }
   if (Number.isNaN(parseInt(bookCategoryId, 10))) {

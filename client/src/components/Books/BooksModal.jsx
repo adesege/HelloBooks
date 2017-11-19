@@ -183,8 +183,8 @@ class BooksModal extends Component {
           },
           (errors) => {
             const errorMessage =
-            typeof errors.message === 'string' ?
-              errors.message :
+            typeof errors === 'string' ?
+              errors :
               errors.response.data;
             this.setState({
               isLoading: false,
@@ -207,8 +207,8 @@ class BooksModal extends Component {
           },
           (errors) => {
             const errorMessage =
-            typeof errors.message === 'string' ?
-              errors.message :
+            typeof errors === 'string' ?
+              errors :
               errors.response.data;
             this.setState({
               isLoading: false,

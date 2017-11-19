@@ -7,6 +7,7 @@ body {
   font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: rgba(0,0,0,0.02);
+  position: relative;
 }
 
 *{
@@ -338,6 +339,10 @@ body.modal-open {
 .loadingBar{
   z-index: 1000000;
   margin-left: -15px;
+  background-color: red;
+  height: 5px;
+  position: absolute;
+  top: 0;
 }
 
 .book-list-loader{

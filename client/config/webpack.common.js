@@ -9,13 +9,23 @@ dotEnv.config();
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../public/index.html'),
   filename: 'index.html',
-  inject: 'body'
+  inject: 'body',
+  chunksSortMode: function (first, second) {
+    if (first.names[0] > second.names[0]) {
+      return 1;
+    }
+    if (first.names[0] < second.names[0]) {
+      return -1;
+    }
+    return 0;
+  }
 });
 
 const CommonsChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
   name: 'common',
   filename: 'js/common.js',
   minChunks: Infinity,
+  chunks: ['loader', 'main']
 });
 
 const ProvidePlugin = new webpack.ProvidePlugin({
@@ -45,7 +55,8 @@ const DefinePlugin = new webpack.DefinePlugin({
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, '../src/index.js'),
+    loader: path.resolve(__dirname, '../src/assets/js/loader/js/loader.js'),
+    main: path.resolve(__dirname, '../src/index.js'),
   },
   resolve: {
     alias: {
