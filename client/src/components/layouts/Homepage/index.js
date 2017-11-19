@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import logo from '../../../assets/images/logo.png';
 
 const addBookBg = () => {
-  document.querySelector('body').className = 'bg-books';
+  document.querySelector('body').className += ' bg-books';
 };
 
 /**

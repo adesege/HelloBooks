@@ -185,8 +185,8 @@ export const uploadBookAsset = (assetObject, publicIDs) =>
             coverPhotoPath: photo.secure_url,
             documentPath: document.secure_url
           }))
-        .catch(error => Promise.reject(error)))
-    .catch(error => Promise.reject(error));
+        .catch(error => Promise.reject(error.message)))
+    .catch(error => Promise.reject(error.message));
 
 export const addBook = data =>
   (dispatch) => {
@@ -214,9 +214,8 @@ export const addBook = data =>
               return response;
             })
             .catch(errors => Promise.reject(errors)))
-          .catch(failed =>
-            Promise
-              .reject(new Error(failed))));
+          .catch(failed => Promise
+            .reject(failed)));
   };
 
 /**
@@ -243,7 +242,7 @@ export const updateBook = data =>
         imageData: parseCloudinaryURL(oldImageURL),
         fileData: parseCloudinaryURL(oldDocumentURL)
       })
-        .then((success) => {
+        .then((success) =>
           dispatch(updateBookCoverFile({
             id: response.data.book.id,
             coverPhotoPath: success.coverPhotoPath || oldImageURL,
@@ -256,10 +255,9 @@ export const updateBook = data =>
                 text: response.data.message
               }));
             })
-            .catch(errors => errors));
-        })
+            .catch(errors => errors)))
         .catch(failed => Promise
-          .reject(new Error('There was an error uploading this cover photo'))))
+          .reject(failed)))
       .catch(errors => errors);
   };
 
