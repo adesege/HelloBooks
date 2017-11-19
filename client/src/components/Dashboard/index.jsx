@@ -55,7 +55,7 @@ class Dashboard extends Component {
           <h4 className="title mb-2 mr-4">Dashboard</h4>
           <div className="mb-4">
             <small>
-        Welcome Tayo. Here are some books you may find interesting.
+        Welcome. Here are some books you may find interesting.
         Use the form below to filter through the list.
             </small>
           </div>

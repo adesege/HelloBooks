@@ -30,19 +30,19 @@ const NavigationLinks = ({
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem header>Books</DropdownItem>
-            <DropdownItem tag="a" href="/books">
+            <Link className="dropdown-item" to="/books">
               <i className="fa fa-book" /> Books
-            </DropdownItem>
+            </Link>
             {(isAuthenticated && group === 'admin') && (
               <div>
                 <DropdownItem header>Books Categories</DropdownItem>
-                <DropdownItem tag="a" href="/books/categories">
+                <Link className="dropdown-item" to="/books/categories">
                   <i className="fa fa-th-list" /> Books Categories
-                </DropdownItem>
+                </Link>
                 <DropdownItem divider />
-                <DropdownItem tag="a" href="/books/stock-manager">
+                <Link className="dropdown-item" to="/books/stock-manager">
                   <i className="fa fa-archive" /> Stock Manager
-                </DropdownItem>
+                </Link>
               </div>)
             }
           </DropdownMenu>
