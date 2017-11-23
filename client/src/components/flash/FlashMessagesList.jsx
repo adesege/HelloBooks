@@ -1,32 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import FlashMessage from '../../components/flash/FlashMessage';
-import { deleteFlashMessage } from '../../actions/flashMessages';
+import FlashMessage from 'components/flash/FlashMessage';
+import SetTimeout from 'components/miscellaneous/SetTimeout';
+import { deleteFlashMessage } from 'actions/flashMessages';
 
 
 const FlashMessagesList = ({
-  messages,
+  message,
   deleteFlashMessageAction
 }) => (
-  <div>
-    {messages.map(message =>
-      (<FlashMessage
-        key={message.id}
-        message={message}
-        deleteFlashMessage={deleteFlashMessageAction}
-      />))
-    }
-  </div>
+  <SetTimeout interval={10000}>
+    {Object.keys(message).length !== 0 &&
+    <FlashMessage
+      message={message}
+      deleteFlashMessage={deleteFlashMessageAction}
+    />}
+  </SetTimeout>
 );
 
 FlashMessagesList.propTypes = {
-  messages: PropTypes.array.isRequired,
+  message: PropTypes.object.isRequired,
   deleteFlashMessageAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  messages: state.flashMessages
+  message: state.flashMessages
 });
 
 export default connect(

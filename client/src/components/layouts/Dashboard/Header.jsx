@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { logout } from 'actions/auth';
+import { ioJoin } from 'assets/js/socket';
 import Menu from './Menu';
-import { logout } from '../../../actions/auth';
 
 /**
  * @class Header
@@ -17,6 +18,17 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.logout = this.logout.bind(this);
+  }
+
+  /**
+   * @returns {undefined}
+   * @memberof Header
+   */
+  componentDidMount() {
+    const { user } = this.props;
+    if (user && user.group === 'admin') {
+      ioJoin();
+    }
   }
   /**
    * @returns {void}
@@ -38,13 +50,13 @@ class Header extends React.Component {
     const {
       children,
       isAuthenticated,
-      group
+      user
     } = this.props;
     return (
       <div className="">
         <Menu
           isAuthenticated={isAuthenticated}
-          group={group}
+          group={user.group}
           logout={this.logout}
         />
         { children }
@@ -56,7 +68,7 @@ class Header extends React.Component {
 Header.propTypes = {
   children: PropTypes.node,
   isAuthenticated: PropTypes.bool.isRequired,
-  group: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
   logoutAction: PropTypes.func.isRequired,
 };
 
@@ -66,7 +78,7 @@ Header.contextTypes = {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  group: state.auth.user.group
+  user: state.auth.user
 });
 
 export default connect(

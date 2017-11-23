@@ -9,5 +9,18 @@ export default (sequelize, DataTypes) => {
     freezeTableName: true,
     tableName: 'Notification'
   });
+
+  Notification.associate = (models) => {
+    Notification.belongsTo(models.Book, {
+      foreignKey: 'bookId',
+      as: 'Book'
+    });
+    Notification.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'User'
+    });
+  };
+
+
   return Notification;
 };

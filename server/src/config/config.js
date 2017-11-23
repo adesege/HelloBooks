@@ -16,7 +16,9 @@ const {
   PRODUCTION_DB_USERNAME,
   PRODUCTION_DB_PASSWORD,
   PRODUCTION_DB_NAME,
-  PRODUCTION_DB_HOST
+  PRODUCTION_DB_HOST,
+
+  TIMEZONE
 } = process.env;
 
 module.exports = {
@@ -25,7 +27,8 @@ module.exports = {
     password: DEVELOPMENT_DB_PASSWORD,
     database: DEVELOPMENT_DB_NAME,
     host: DEVELOPMENT_DB_HOST,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    timezone: TIMEZONE
   },
   test: {
     username: TEST_DB_USERNAME,
@@ -33,13 +36,15 @@ module.exports = {
     database: TEST_DB_NAME,
     host: TEST_DB_HOST,
     dialect: 'postgres',
-    logging: false
+    logging: false,
+    timezone: TIMEZONE
   },
   production: {
     username: PRODUCTION_DB_USERNAME,
     password: PRODUCTION_DB_PASSWORD,
     database: PRODUCTION_DB_NAME,
     host: PRODUCTION_DB_HOST,
-    dialect: 'postgres'
+    dialect: 'postgres',
+    timezone: TIMEZONE
   }
 };

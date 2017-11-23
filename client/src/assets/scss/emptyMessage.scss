@@ -1,0 +1,29 @@
+.empty-message{
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 100%;
+}
+
+.empty-message::after{
+  clear: both;
+}
+
+.empty-message .message{
+  font-size: 1.5em;
+}
+
+.empty-message i{
+  font-size: 10em;
+}
+
+#notifications .empty-message i{
+  font-size: 3em;
+}
+
+#notifications .empty-message p {
+  font-size: 1em;
+}

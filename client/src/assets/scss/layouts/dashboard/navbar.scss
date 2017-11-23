@@ -17,3 +17,17 @@
 .dropdown-menu{
   font-size: 14px;
 }
+
+#notifications .dropdown-menu{
+  width: 100%;
+}
+
+@media(min-width:768px){
+#notifications .dropdown-menu{
+  width: 500px;
+}
+}
+
+#notifications .notification:nth-child(odd):hover{
+  background-color: rgba(0,0,0,0.05);
+}

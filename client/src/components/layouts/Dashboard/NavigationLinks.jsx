@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { Collapse, Nav, NavItem, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import classnames from 'classnames';
+import NotificationList from './NotificationsList';
 
 const NavigationLinks = ({
   isAuthenticated,
@@ -9,7 +11,11 @@ const NavigationLinks = ({
   isOpen,
   isDropdownOpen,
   toggleDropdown,
-  logout
+  isNotificationDropdownOpen,
+  toggleNotificationDropdown,
+  logout,
+  menuNotifications,
+  isNewNotification
 }) => (
   <Collapse isOpen={isOpen} navbar>
     <Nav className="mt-3 mt-sm-0" navbar>
@@ -53,6 +59,23 @@ const NavigationLinks = ({
           <i className="fa fa-user" /> Profile
         </Link>
       </NavItem>
+      {(isAuthenticated && group === 'admin') && (
+        <NavItem>
+          <Dropdown isOpen={isNotificationDropdownOpen} toggle={toggleNotificationDropdown}
+            id="notifications"
+          >
+            <DropdownToggle className={classnames("nav-link", { "text-danger": isNewNotification })} tag="a" caret>
+              <i className="fa fa-bell" /> Notifications
+            </DropdownToggle>
+            <DropdownMenu className="pb-0">
+              <NotificationList
+                notifications={menuNotifications}
+                isPagination={false}
+              />
+            </DropdownMenu>
+          </Dropdown>
+        </NavItem>
+      )}
     </Nav>
     <Nav className="ml-auto mt-sm-0" navbar>
       <NavItem>
@@ -71,6 +94,10 @@ NavigationLinks.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   isDropdownOpen: PropTypes.bool.isRequired,
   toggleDropdown: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
+  toggleNotificationDropdown: PropTypes.func.isRequired,
+  isNotificationDropdownOpen: PropTypes.bool.isRequired,
+  isNewNotification: PropTypes.bool.isRequired,
+  menuNotifications: PropTypes.array.isRequired
 };
 export default NavigationLinks;

@@ -3,6 +3,7 @@ import logo from 'assets/images/logo.png';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Navbar, NavbarToggler, NavbarBrand } from 'reactstrap';
+import { ioNewNotifications } from 'assets/js/socket';
 import NavigationLinks from './NavigationLinks';
 
 /**
@@ -20,12 +21,28 @@ class Menu extends React.Component {
 
     this.state = {
       isOpen: false,
-      isDropdownOpen: false
+      isDropdownOpen: false,
+      isNotificationDropdownOpen: false,
+      menuNotifications: [],
+      isNewNotification: false
     };
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.toggleNotificationDropdown = this.toggleNotificationDropdown.bind(this);
+    this.onNewNotifications = this.onNewNotifications.bind(this);
   }
+
+  /**
+   * @returns {undefined}
+   * @memberof Menu
+   */
+  componentDidMount() {
+    if (this.props.group === 'admin') {
+      this.onNewNotifications();
+    }
+  }
+
   /**
    * @returns {void}
    * @memberof Menu
@@ -47,17 +64,60 @@ class Menu extends React.Component {
   }
 
   /**
+   * @returns {void}
+   * @memberof Menu
+   */
+  toggleNotificationDropdown() {
+    this.setState({
+      isNotificationDropdownOpen: !this.state.isNotificationDropdownOpen
+    }, () => {
+      if (this.state.isNotificationDropdownOpen) {
+        this.setState({
+          isNewNotification: false
+        });
+      }
+    });
+  }
+
+  /**
+   * @returns {undefined}
+   * @memberof Menu
+   */
+  onNewNotifications() {
+    ioNewNotifications((error, data) => {
+      if (!error) {
+        const { menuNotifications } = this.state;
+        const notification = data.notifications.concat(menuNotifications).slice(0, 5);
+        this.setState({
+          menuNotifications: notification,
+          isNewNotification: !!data.isNew
+        });
+      }
+    });
+  }
+
+  /**
    * @returns {object} JSX
    * @memberof Menu
    */
   render() {
-    const { isAuthenticated, group, logout } = this.props;
+    const {
+      isAuthenticated,
+      group,
+      logout
+    } = this.props;
     return (
-      <Navbar color="faded" light expand="md" className="dashboard-navbar fixed-top bg-light">
-        <NavbarBrand href="/">
-          <img src={logo} className="img img-fluid" />
+      <Navbar
+        color="faded" light
+        expand="md"
+        className="dashboard-navbar fixed-top bg-light">
+        <NavbarBrand
+          href="/">
+          <img src={logo}
+            className="img img-fluid" />
         </NavbarBrand>
-        <NavbarToggler onClick={this.toggleNavbar} />
+        <NavbarToggler
+          onClick={this.toggleNavbar} />
         <NavigationLinks
           isOpen = {this.state.isOpen}
           isAuthenticated = {isAuthenticated}
@@ -65,6 +125,10 @@ class Menu extends React.Component {
           logout = {logout}
           isDropdownOpen = {this.state.isDropdownOpen}
           toggleDropdown = {this.toggleDropdown}
+          isNotificationDropdownOpen = {this.state.isNotificationDropdownOpen}
+          toggleNotificationDropdown = {this.toggleNotificationDropdown}
+          menuNotifications={this.state.menuNotifications}
+          isNewNotification={this.state.isNewNotification}
         />
       </Navbar>
     );

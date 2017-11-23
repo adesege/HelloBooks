@@ -4,52 +4,45 @@
 [![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=development)](https://coveralls.io/github/adesege/HelloBooks?branch=development)
 [![Issue Count](https://codeclimate.com/github/adesege/HelloBooks/badges/issue_count.svg)](https://codeclimate.com/github/adesege/HelloBooks)
 
-# HELLO-BOOKS
+# Hello-Books
 A simple application that helps manage a library and its processes like stocking, tracking and renting books.
 
 Built on `Javascript` with `Postgres` as database.
 
-## HOW TO INSTALL
-### PRE-REQUISITES
+## How to install
+### Pre-requisites
 You will need to have the following installed in your working environment before this application can work.
 * Latest version of Nodejs - comes with a Node Package Manager
 * Postgresql
-### INSTALLING
+### Installing
 1. Download or clone this branch at https://github.com/adesege/HelloBooks.git
 2. Install dependencies by running `npm install`. Ensure you are in your working directory. Run `cd /path/to/HelloBooks` to change.
 3. Start the server by running `npm run watch`.
+1. To start the client, `cd client`
+1. Then `npm run start`
 
-The application listens on port `5000` by default unless otherwise started as an environment variable.
+The server and client listens on port `5000` and `3000` by default respectively unless otherwise stated as an environment variable.
 
-Visit `http://localhost:3000` to access the front end or `http://localhost:5000/api` to access the `api` endpoint.
+Visit `http://localhost:3000` to access the front end and `http://localhost:5000/api` to access the `api` endpoint.
 
-## AUTHENTICATION MECHANISM
+## Authentication Mechanism
 This application uses JSON web token to sign and verify users. The default expiration time is `24 hours` but this can be modified in the application config.
 
-## MIDDLEWARES
-Some endpoints are restricted to logged users and admins only. E.g. Only admin can access `api/v:versionNumber/books/stocks`.
+## Middlewares
+Some endpoints are restricted to logged users and admins only. E.g. Only admin can access `api/:versionNumber/books/stocks`.
 
 There are two middlewares defined in this application.
 * middleware - verifies a user's token and checks if the user is valid.
 * adminAuthenticate middleware - checks if the user is `admin`.
 
-## RESPONSE STATUSES
-These are the common status codes used in the app.
+## Documentation
+Please visit the application documentation at https://app.swaggerhub.com/apis/adesege/Hello-Books/1.0.0
 
-1. `400 Bad Request` - Used when there is a validation error.
-2. `500 Internal Server Error` - A generic error message, given when no more specific message is suitable.
-3. `404 Not Found` - Used when the application returns an empty result.
-4. `200 OK` - All is well and set.
-5. `401 Unauthorized` - Used when authentication failed.
-6. `403 Forbidden` - Used when a user is accessing a restricted end point.
-7. `201 Created` - Used when a new record is inserted into the database.
-1. `404 Not Found` - Used when a resource cannot be found or empty
-
-# AUTHOR
+# Author
 
 **Temitayo Fadojutimi** is a Software Developer at Andela and he dedicates his expertise to solving practical problems in the society. He tweets at [@adesege_](http://twitter.com/adesege_)
 
-# CONTRIBUTING
+# Contributing Guide
 
 Thank you for your interest in contributing to this package. I currently accept contributions from everyone but I expect that standards are maintained.
 To contribute,
