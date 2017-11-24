@@ -25,7 +25,8 @@ const actions = [
   'STOCK_DELETED',
   'GET_BOOKS_HISTORIES',
   'GET_USERS',
-  'USER_UPDATED'
+  'USER_UPDATED',
+  'GET_NOTIFICATIONS'
 ];
 
 export default keyMirror(actions);

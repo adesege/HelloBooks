@@ -48,15 +48,18 @@ const DefinePlugin = new webpack.DefinePlugin({
     AUTH_FACEBOOK_CLIENT_SECRET: JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_SECRET),
     AUTH_FACEBOOK_CALLBACK: JSON.stringify(process.env.AUTH_FACEBOOK_CALLBACK),
     DISQUS_SHORT_NAME: JSON.stringify(process.env.DISQUS_SHORT_NAME),
-    ROOT_URL: JSON.stringify(process.env.ROOT_URL)
+    ROOT_URL: JSON.stringify(process.env.ROOT_URL),
+    TIMEZONE: JSON.stringify(process.env.TIMEZONE),
+    SOCKET_URL: JSON.stringify(process.env.SOCKET_URL)
   }
 });
 
 
 module.exports = {
   entry: {
-    loader: path.resolve(__dirname, '../src/assets/js/loader/js/loader.js'),
-    main: path.resolve(__dirname, '../src/index.js'),
+    bsocket: path.resolve(__dirname, '../src/assets/js/socket/index.js'),
+    aloader: path.resolve(__dirname, '../src/assets/js/loader/js/loader.js'),
+    cmain: path.resolve(__dirname, '../src/index.js')
   },
   resolve: {
     alias: {

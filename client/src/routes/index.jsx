@@ -23,6 +23,8 @@ import ViewBooks from 'components/Books/ViewBooks';
 import StockManager from 'components/Books/StockManager';
 import ShowStock from 'components/Books/StockManager/ShowStock';
 
+import Notifications from 'components/Notifications';
+
 import HomepageLayout from 'components/layouts/Homepage';
 import DashboardLayout from 'components/layouts/Dashboard';
 
@@ -43,6 +45,7 @@ export default (
     <Route component={middleware(DashboardLayout)}>
       <Route path="dashboard" component={Dashboard} />
       <Route path="me" component={Profile} />
+      <Route path="notifications" component={adminMiddleware(Notifications)} />
 
       <Route path="books">
         <IndexRoute component={Books} />

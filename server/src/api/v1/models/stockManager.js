@@ -26,20 +26,17 @@ export default (sequelize, DataTypes) => {
     tableName: 'stockManager'
   });
 
-  stockManager.afterCreate((stock) => {
+  stockManager.afterCreate(stock =>
     Book
       .findById(stock.bookId)
       .then((book) => {
-        if (book.quantity >= 0) {
-          book.update({
-            quantity: book.quantity + stock.quantity
-          }, {
-            where: { id: stock.bookId, }
-          })
-            .then();
-        }
-      });
-  });
+        book.update({
+          quantity: book.quantity + stock.quantity
+        }, {
+          where: { id: stock.bookId, }
+        })
+          .then();
+      }));
 
   stockManager.associate = (models) => {
     stockManager.belongsTo(models.Book, {

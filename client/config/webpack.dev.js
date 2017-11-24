@@ -9,7 +9,7 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'js/[name].js',
-    publicPath: `http://localhost:${PORT}/`
+    publicPath: `/`
   },
   module: {
     rules: [
@@ -36,12 +36,13 @@ module.exports = merge(common, {
   devServer: {
     contentBase: path.join(__dirname, '../public'),
     compress: true,
+    host: '0.0.0.0',
     port: PORT,
-    publicPath: `http://localhost:${PORT}/`,
+    publicPath: `/`,
     historyApiFallback: true,
     hot: true,
     proxy: {
-      '/api': 'http://localhost:5000'
+      '/api': 'http://0.0.0.0:5000'
     },
     overlay: true,
     watchContentBase: true,

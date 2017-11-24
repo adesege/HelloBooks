@@ -9,14 +9,6 @@ import classnames from 'classnames';
  */
 class FlashMessage extends React.Component {
   /**
-     * @returns {void}
-     * @memberof FlashMessage
-     */
-  componentWillUnmount() {
-    this.props.deleteFlashMessage(this.props.message.id);
-  }
-
-  /**
      * @returns {object} JSX
      * @memberof FlashMessage
      */

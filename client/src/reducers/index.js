@@ -9,7 +9,11 @@ import categories from './categories';
 import stockManager from './stockManager';
 import histories from './histories';
 import users from './users';
+import notifications from './notifications';
 
+/**
+ * @param {object}
+ */
 export default combineReducers({
   flashMessages,
   auth,
@@ -20,5 +24,6 @@ export default combineReducers({
   categories,
   stocks: stockManager,
   histories,
-  users
+  users,
+  notifications
 });

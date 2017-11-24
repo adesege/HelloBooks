@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FlashMessagesList from '../../flash/FlashMessagesList';
+import FlashMessagesList from 'components/flash/FlashMessagesList';
 
 const Content = ({ children }) => (
   <div id="contentArea">

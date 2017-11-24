@@ -37,7 +37,7 @@ class BorrowBook extends React.Component {
      * @memberof BorrowBook
      */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.borrowedBook !== this.props.borrowedBook) {
+    if (Object.keys(nextProps.borrowedBook).length !== 0 && nextProps.borrowedBook !== this.props.borrowedBook) {
       const { id: borrowedBookId } = nextProps.borrowedBook;
       this.setState({
         borrowedBookId
