@@ -11,6 +11,15 @@ import CategoriesList from './CategoriesList';
 import AddCategory from './AddCategory';
 import DeleteCategory from './DeleteCategory';
 
+const propTypes = {
+  addBookCategoryAction: PropTypes.func.isRequired,
+  getBookCategoriesAction: PropTypes.func.isRequired,
+  editBookCategoryAction: PropTypes.func.isRequired,
+  deleteBookCategoryAction: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  bookCategories: PropTypes.array.isRequired
+};
+
 /**
  * @class Categories
  * @extends {React.Component}
@@ -233,30 +242,6 @@ class Categories extends React.Component {
         <div className="mb-4">
           <small>View books by category</small>
         </div>
-        <form className="form-inline mb-4">
-          <select
-            className=
-              "form-control custom-select \
-                          form-control-sm mb-2 mr-sm-2 mb-sm-0">
-            <option value="">by date...</option>
-            <option value="">Today</option>
-            <option value="">Last 7 days</option>
-            <option value="">Last 14 days</option>
-            <option value="">A month ago</option>
-          </select>
-          <select
-            className=
-              "form-control form-control-sm \
-                           custom-select mb-2 mr-sm-2 mb-sm-0">
-            <option value="">by name...</option>
-            <option value="">A-Z</option>
-            <option value="">Z-A</option>
-          </select>
-          <button
-            type="submit"
-            className="btn btn-sm btn-danger">filter
-          </button>
-        </form>
 
         <AddCategory
           onChange = {this.onChange}
@@ -279,14 +264,8 @@ class Categories extends React.Component {
   }
 }
 
-Categories.propTypes = {
-  addBookCategoryAction: PropTypes.func.isRequired,
-  getBookCategoriesAction: PropTypes.func.isRequired,
-  editBookCategoryAction: PropTypes.func.isRequired,
-  deleteBookCategoryAction: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
-  bookCategories: PropTypes.array.isRequired
-};
+Categories.propTypes = propTypes;
+
 const mapStateToProps = state => ({
   bookCategories: state.categories
 });

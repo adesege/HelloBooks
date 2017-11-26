@@ -7,11 +7,26 @@ import {
   returnBorrowedBook
 } from 'actions/borrowedBooks';
 import { showCoverPhoto } from 'utils/';
-import { getBook } from 'actions/books';
+import { getBooks } from 'actions/books';
 import disqus from 'config/disqus';
 import config from 'config';
 import BorrowBook from './BorrowBook';
 import BookComment from './BookComment';
+
+const propTypes = {
+  book: PropTypes.object,
+  userId: PropTypes.number.isRequired,
+  borrowedBook: PropTypes.object,
+  borrowBookAction: PropTypes.func.isRequired,
+  getBorrowedBookAction: PropTypes.func.isRequired,
+  returnBorrowedBookAction: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
+  getBooks: PropTypes.func.isRequired,
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 /**
  * @class ViewBooks
@@ -43,7 +58,7 @@ class ViewBooks extends React.Component {
    */
   componentDidMount() {
     const { params } = this.props;
-    this.props.getBook({ id: params.id });
+    this.props.getBooks({ id: params.id });
     this.props.getBorrowedBookAction(this.state.borrowBook);
   }
 
@@ -133,25 +148,15 @@ class ViewBooks extends React.Component {
   }
 }
 
-ViewBooks.propTypes = {
-  book: PropTypes.object,
-  userId: PropTypes.number.isRequired,
-  borrowedBook: PropTypes.object,
-  borrowBookAction: PropTypes.func.isRequired,
-  getBorrowedBookAction: PropTypes.func.isRequired,
-  returnBorrowedBookAction: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired,
-  getBook: PropTypes.func.isRequired,
-};
-ViewBooks.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+ViewBooks.propTypes = propTypes;
+
+ViewBooks.contextTypes = contextTypes;
 
 const mapStateToProps = (state, props) => {
   const { params } = props;
   const { userId } = state.auth.user;
   return {
-    book: state.books.find(book => parseInt(book.id, 10) === parseInt(params.id, 10)),
+    book: state.books.books.find(book => parseInt(book.id, 10) === parseInt(params.id, 10)),
     userId,
     borrowedBook: state.borrowedBooks.find(borrowedBook =>
       (
@@ -164,7 +169,7 @@ const mapStateToProps = (state, props) => {
 export default connect(
   mapStateToProps,
   {
-    getBook,
+    getBooks,
     borrowBookAction: borrowBook,
     getBorrowedBookAction: getBorrowedBook,
     returnBorrowedBookAction: returnBorrowedBook

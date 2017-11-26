@@ -579,9 +579,9 @@ BooksModal.propTypes = {
 };
 
 const mapStateToProps = (state, props) => {
-  if (props.params.id && state.books && state.books) {
+  if (props.params.id && state.books && state.books.books) {
     return {
-      book: state.books
+      book: state.books.books
         .find(item => item.id === parseInt(props.params.id, 10)),
       coverPhotoPath: state.cropper.coverPhotoPath,
       categories: state.categories

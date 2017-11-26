@@ -9,11 +9,19 @@ const {
   BOOK_UPDATED,
   BOOK_DELETED
 } = types;
-export default (state = [], action = {}) => {
+
+const initialState = {
+  books: [],
+  pagination: {}
+};
+
+export default (state = initialState, action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case SET_BOOKS:
-    return action.books;
+    return {
+      ...action
+    };
 
   case BOOK_ADDED:
     return [

@@ -51,16 +51,4 @@ export const getUsers = payload =>
 export const updateUser = payload =>
   (dispatch) =>
     axios
-      .put(`/api/${API_VERSION}/users/${payload.userId}`)
-      .then(
-        (data) => {
-          dispatch(userUpdated(data.data.data));
-        },
-        (errors) => {
-          dispatch(addFlashMessage({
-            type: 'error',
-            text: errors.response.data
-          }));
-          return errors;
-        }
-      );
+      .put(`/api/${API_VERSION}/users/${payload.userId}`, payload);

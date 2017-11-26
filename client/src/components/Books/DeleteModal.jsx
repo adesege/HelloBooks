@@ -127,7 +127,7 @@ DeleteModal.contextTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  book: state.books
+  book: state.books.books
     .find(book =>
       parseInt(book.id, 10) === parseInt(props.params.id, 10))
 });

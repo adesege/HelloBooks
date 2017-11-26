@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import Button from 'form/Button';
 import { showCoverPhoto } from 'utils/';
+import EmptyMessage from 'components/miscellaneous/EmptyMessage';
 
 /**
 * @class BorrowedBooksList
@@ -39,15 +40,9 @@ class BorrowedBooksList extends Component {
   * @memberof BorrowedBooksList
   */
   render() {
-    const emptyMessage = (
-      <h6 className="text-success">
-      You have not borrowed any book
-      </h6>
-    );
-
     return (
       <div>
-        {this.state.content && this.state.content.lenght > 0 ?
+        {this.state.content && this.state.content.length !== 0 ?
           <div className="row pr-3" id="bookList">
             {this.state.content.map((object, index) => (
               <div
@@ -76,7 +71,9 @@ class BorrowedBooksList extends Component {
               </div>
             ))}
           </div> :
-          emptyMessage
+          <EmptyMessage
+            text="You have not borrowed any book"
+            absolute={false} />
         }
       </div>
     );
