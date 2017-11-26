@@ -1,16 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-  getBorrowedBooks,
-  returnBorrowedBook
-} from 'actions/borrowedBooks';
-import { getUsers } from 'actions/users';
-import BorrowedBooksList from './BorrowedBooksList';
+import { getUsers, updateUser, userUpdated } from 'actions/users';
+import { addFlashMessage } from 'actions/flashMessages';
+import BorrowedBooksList from 'components/Books/Histories/List';
+import validateUser from 'utils/validators/user';
 import Info from './Info';
 
-const { $ } = window;
-
+const propTypes = {
+  getUsersAction: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  userGroup: PropTypes.string.isRequired,
+  user: PropTypes.object,
+  updateUserAction: PropTypes.func.isRequired,
+  userUpdated: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
+};
 
 /**
  * @class Profile
@@ -26,9 +31,21 @@ class Profile extends React.Component {
     super(props);
     this.state = {
       borrowedBooks: [],
-      user: {}
+      user: {},
+      passwordChange: {
+        oldPassword: '',
+        password: '',
+        confirmPassword: '',
+        userId: props.userId ? `${props.userId}` : ''
+      },
+      isOpenModal: false,
+      isLoading: false,
+      errors: '',
+      serverErrors: ''
     };
-    this.onReturnBook = this.onReturnBook.bind(this);
+    this.onChangePasswordInput = this.onChangePasswordInput.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+    this.toggleOpenModal = this.toggleOpenModal.bind(this);
   }
 
   /**
@@ -37,9 +54,6 @@ class Profile extends React.Component {
      */
   componentDidMount() {
     const { userId } = this.props;
-    this.props.getBorrowedBooksAction({
-      userId
-    });
     this.props.getUsersAction({
       userId
     });
@@ -51,44 +65,95 @@ class Profile extends React.Component {
      * @memberof Profile
      */
   componentWillReceiveProps(nextProps) {
-    if (nextProps.borrowedBooks !== this.props.borrowedBooks) {
-      this.setState({ borrowedBooks: nextProps.borrowedBooks });
-    }
     if (nextProps.user !== this.props.user) {
       this.setState({ user: nextProps.user });
     }
   }
+
   /**
-     * @returns {void}
-     * @param {any} event
-     * @memberof Profile
-     */
-  onReturnBook(event) {
-    event.preventDefault();
-    const { userId } = this.props;
-    const bookId = $(event.target).parents('.actions').attr('data-bookId');
-    const borrowedBookId = $(event.target).parents('.actions').attr('data-id');
-    this.props.returnBorrowedBookAction({
-      bookId,
-      borrowedBookId,
-      userId
+   * @returns {undefined}
+   * @memberOf Profile
+   */
+  toggleOpenModal() {
+    this.setState({
+      isOpenModal: !this.state.isOpenModal
     });
   }
 
+
   /**
-     * @returns {object} JSX
-     * @memberof Profile
-     */
+   * @returns {undefined}
+   * @param {any} event
+   * @memberOf Profile
+   */
+  onChangePassword(event) {
+    event.preventDefault();
+    if (!this.isFormValid()) { return; }
+    this.setState({ errors: '' });
+    this.props.updateUserAction(this.state.passwordChange)
+      .then(({ response }) => {
+        this.props.addFlashMessage({
+          type: 'success',
+          text: response.message
+        });
+        this.toggleOpenModal();
+      })
+      .catch((errors) => {
+        this.setState({ serverErrors: errors.response.data.message });
+      });
+  }
+
+  /**
+   * @returns {undefined}
+   * @param {any} event
+   * @memberOf Profile
+   */
+  onChangePasswordInput(event) {
+    this.setState({
+      passwordChange: {
+        ...this.state.passwordChange,
+        [event.target.name]: event.target.value
+      }
+    });
+  }
+
+
+  /**
+   * @returns {boolean} isValid
+   * @memberOf Profile
+   */
+  isFormValid() {
+    const { errors, isValid } = validateUser(this.state.passwordChange, 'change-password-user');
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
+  /**
+  * @returns {object} JSX
+  * @memberof Profile
+  */
   render() {
     return (
       <div>
-        <Info user={this.state.user} />
+        <Info
+          passwordChange={this.state.passwordChange}
+          user={this.state.user}
+          onChangePasswordInput={this.onChangePasswordInput}
+          onChangePassword={this.onChangePassword}
+          isOpenModal={this.state.isOpenModal}
+          toggleOpenModal={this.toggleOpenModal}
+          isLoading={this.state.isLoading}
+          errors={this.state.errors}
+          serverErrors={this.state.serverErrors}
+        />
         <div className="row pr-3 pl-3" id="yetReturn">
           <div className="col-sm-8  offset-sm-2 px-0">
             <h6 className="title">I'm yet to return...</h6>
             <BorrowedBooksList
-              content={this.state.borrowedBooks}
-              onReturnBook={this.onReturnBook}
+              histories={this.state.borrowedBooks}
+              isReturned={false}
             />
           </div>
         </div>
@@ -97,29 +162,21 @@ class Profile extends React.Component {
   }
 }
 
-Profile.propTypes = {
-  getBorrowedBooksAction: PropTypes.func.isRequired,
-  returnBorrowedBookAction: PropTypes.func.isRequired,
-  getUsersAction: PropTypes.func.isRequired,
-  userId: PropTypes.number.isRequired,
-  userGroup: PropTypes.string.isRequired,
-  borrowedBooks: PropTypes.array.isRequired,
-  user: PropTypes.object
-};
+Profile.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
   const { userId } = state.auth.user;
   return {
     userId,
     userGroup: state.auth.user.group,
-    borrowedBooks: state.borrowedBooks,
     user: state.users
       .find(user => parseInt(user.id, 10) === parseInt(userId, 10))
   };
 };
 
 export default connect(mapStateToProps, {
-  getBorrowedBooksAction: getBorrowedBooks,
-  returnBorrowedBookAction: returnBorrowedBook,
-  getUsersAction: getUsers
+  getUsersAction: getUsers,
+  updateUserAction: updateUser,
+  userUpdated,
+  addFlashMessage
 })(Profile);

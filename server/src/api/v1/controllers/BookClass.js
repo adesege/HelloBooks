@@ -1,6 +1,9 @@
+import moment from 'moment';
 import model from '../models';
 
-const { Book, borrowedBook, stockManager } = model;
+const {
+  Book, borrowedBook, stockManager
+} = model;
 
 /**
  * @class BookClass
@@ -121,13 +124,34 @@ class BookClass {
    */
   static get(req, res) { // get all the books in the database
     const { id } = req.params;
-    Book.findAll({
-      where: req.params.id ? { id } : null,
-      order: [['updatedAt', 'DESC']]
-    })
+    let { offset, limit } = req.query;
+    const { author, title, bookCategoryId } = req.query;
+    const where = {};
+    where.author = author ? { $iLike: `${author}%` } : { $ne: null };
+    where.title = title ? { $iLike: `${title}%` } : { $ne: null };
+    where.bookCategoryId = parseInt(bookCategoryId, 10) || { $ne: null };
+    where.id = id || { $ne: null };
+    offset = offset || 0;
+    limit = parseInt(limit, 10) || 12;
+    Book
+      .findAndCountAll({
+        where,
+        order: [['updatedAt', 'DESC']],
+        offset,
+        limit
+      })
       .then(books => res
         .status(200)
-        .send({ data: books }));
+        .send({
+          data: books.rows,
+          pagination: {
+            pageSize: books.rows.length,
+            totalCount: books.count,
+            page: Math.floor(offset / limit) + 1,
+            pageCount: Math.ceil(books.count / limit),
+            limit
+          }
+        }));
   }
   /**
    * Allows a user to borrow a book
@@ -285,15 +309,48 @@ class BookClass {
   */
   static getHistories(req, res) {
     const { userId } = req.params;
-    borrowedBook.findAll({
-      include: [Book],
-      order: [['updatedAt', 'DESC']],
-      where: { userId }
-    }).then(books => res
-      .status(200)
-      .send({
-        data: books
-      }));
+    let { offset, limit } = req.query;
+    const { updatedAt, orderBy, isReturned } = req.query;
+    offset = offset || 0;
+    limit = parseInt(limit, 10) || 12;
+    const where = {};
+    const order = [];
+    switch (orderBy) {
+      case 'DESC':
+        order[0] = ['updatedAt', 'DESC'];
+        break;
+      case 'ASC':
+        order[0] = ['updatedAt', 'ASC'];
+        break;
+      default: order[0] = ['updatedAt', 'DESC'];
+        break;
+    }
+    where.updatedAt = updatedAt ? { $between: [updatedAt, moment().format()] } : { $ne: null };
+    where.userId = userId || { $ne: null };
+    try {
+      where.isReturned = !!JSON.parse(isReturned);
+    } catch (e) {
+      where.isReturned = { $ne: null };
+    }
+    return borrowedBook
+      .findAndCountAll({
+        include: [Book],
+        order,
+        where,
+        limit,
+        offset
+      }).then(books => res
+        .status(200)
+        .send({
+          data: books.rows,
+          pagination: {
+            pageSize: books.rows.length,
+            totalCount: books.count,
+            page: Math.floor(offset / limit) + 1,
+            pageCount: Math.ceil(books.count / limit),
+            limit
+          }
+        }));
   }
 }
 

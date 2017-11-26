@@ -9,7 +9,7 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, '../public'),
     filename: 'js/[name].js',
-    publicPath: `/`
+    publicPath: `http://localhost:${PORT}/`
   },
   module: {
     rules: [
@@ -38,7 +38,7 @@ module.exports = merge(common, {
     compress: true,
     host: '0.0.0.0',
     port: PORT,
-    publicPath: `/`,
+    publicPath: `http://localhost:${PORT}/`,
     historyApiFallback: true,
     hot: true,
     proxy: {

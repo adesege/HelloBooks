@@ -31,7 +31,7 @@ describe('# Profile', () => {
         .put(`/api/v1/users/${userId}`)
         .send({
           password: 'newPassword',
-          passwordConfirm: 'newPassword',
+          confirmPassword: 'newPassword',
           oldPassword: '123454'
         })
         .set('authenticate-token', token)
@@ -51,7 +51,7 @@ describe('# Profile', () => {
       .put(`/api/v1/users/${userId}`)
       .send({
         password: 'newPassword',
-        passwordConfirm: 'newPassword',
+        confirmPassword: 'newPassword',
         oldPassword: user.password
       })
       .set('authenticate-token', token)

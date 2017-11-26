@@ -184,26 +184,6 @@ class ShowStock extends React.Component {
                     Use the filter form to view from a particular page.
           </small>
         </div>
-        <form className="form-inline mb-4">
-          <div className="form-group mr-2">
-            <select
-              className="custom-select custom-select-sm form-control-sm w-100">
-              <option>Filter by date</option>
-              <option value="">Today</option>
-              <option value="">7 days ago</option>
-              <option value="">2 weeks ago</option>
-              <option value="">a month ago</option>
-              <option value="">a while ago</option>
-            </select>
-          </div>
-          <div className="form-group text-right">
-            <button
-              type="button"
-              className="btn btn-sm btn-success">Go!
-            </button>
-          </div>
-        </form>
-
         <StockList
           stocks={stocks}
           onDeleteModal={this.onDeleteModal}

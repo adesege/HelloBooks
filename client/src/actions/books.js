@@ -24,7 +24,7 @@ export const booksSearched = result => ({
 
 export const setBooks = books => ({
   type: SET_BOOKS,
-  books
+  ...books
 });
 
 /**
@@ -67,14 +67,22 @@ export const bookUpdated = book => ({
 
 /**
  * @export
+ * @param {object} data
  * @returns {func} promise
  */
-export const getBooks = () =>
-  dispatch =>
-    axios.get(`/api/${API_VERSION}/books`)
+export const getBooks = (data) =>
+  dispatch => {
+    const searchQuery = data ? new URLSearchParams(data) : null; // converts an object to query string
+    const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
+    const id = data && data.id ? data.id : '';
+    return axios
+      .get(`/api/${API_VERSION}/books/${id}?${toQueryString}`)
       .then(
-        (data) => {
-          dispatch(setBooks(data.data.data));
+        (response) => {
+          dispatch(setBooks({
+            books: response.data.data,
+            pagination: response.data.pagination
+          }));
         },
         (errors) => {
           dispatch(addFlashMessage({
@@ -84,23 +92,7 @@ export const getBooks = () =>
           return errors;
         }
       );
-
-
-/**
- * @export
- * @param {any} data
- * @returns {func} promise
- */
-export const getBook = data =>
-  dispatch =>
-    axios
-      .get(`/api/${API_VERSION}/books/${data.id}`)
-      .then(
-        (book) => {
-          dispatch(bookFetched(book.data.data));
-        },
-        errors => errors
-      );
+  };
 
 export const uploadCoverPhoto = imageData => {
   if (!imageData.match(/^data:image/)) {

@@ -132,31 +132,32 @@ class UserClass {
    */
   static updateUser(req, res) { // get user(s) in the database
     const id = req.params.userId;
-    const { password, oldPassword, passwordConfirm } = req.body;
-    if (password !== passwordConfirm) {
+    const { password, oldPassword, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
       return res.status(400).send({
         message: 'The passwords are not the same'
       });
     }
-    User.findById(id)
+    return User
+      .findById(id)
       .then((user) => {
         if (!user.validPassword(oldPassword)) {
           return res.status(400).send({
             message: 'Your old password does not match the current password'
           });
         }
-        User.update(
-          { password },
-          {
-            where: { id },
-            returning: true,
-            plain: true
-          }
-        )
-          .then(updatedUser =>
+        return User
+          .update(
+            { password },
+            {
+              where: { id },
+              returning: true,
+              plain: true
+            }
+          )
+          .then(() =>
             res.status(200)
               .send({
-                data: updatedUser,
                 message: 'User information has been successfully edited'
               }));
       });
