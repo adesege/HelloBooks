@@ -20,7 +20,7 @@ describe('# Borrowed Book', () => {
           borrowedBookId = res.body.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('You have successfully  borrowed this book');
+          expect(res.body.message[0]).to.equal('You have successfully  borrowed this book');
           expect(res.body.id).to.be.a('number');
           if (err) return done(err);
           done();
@@ -39,7 +39,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('You have successfully  borrowed this book');
+          expect(res.body.message[0]).to.equal('You have successfully  borrowed this book');
           expect(res.body.id).to.be.a('number');
           if (err) return done(err);
           done();
@@ -58,7 +58,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('Sorry, we can\'t find this book');
+          expect(res.body.message[0]).to.equal('Sorry, we can\'t find this book');
           if (err) return done(err);
           done();
         });
@@ -76,7 +76,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('You have already borrowed this book. Please return it before you can borrow it again.');
+          expect(res.body.message[0]).to.equal('You have already borrowed this book. Please return it before you can borrow it again.');
           if (err) return done(err);
           done();
         });
@@ -94,7 +94,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('There are no more copies left of this book to borrow');
+          expect(res.body.message[0]).to.equal('There are no more copies left of this book to borrow');
           if (err) return done(err);
           done();
         });
@@ -129,7 +129,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('Success');
+          expect(res.body.message[0]).to.equal('Success');
           expect(res.body.data[0]).to.have.property('id');
           if (err) return done(err);
           done();
@@ -147,7 +147,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('Success');
+          expect(res.body.message[0]).to.equal('Success');
           expect(res.body.data[0]).to.have.property('id');
           if (err) return done(err);
           done();
@@ -165,7 +165,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('You have successfully returned this book');
+          expect(res.body.message[0]).to.equal('You have successfully returned this book');
           if (err) return done(err);
           done();
         });
@@ -182,7 +182,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('No record available');
+          expect(res.body.message[0]).to.equal('No record available');
           if (err) return done(err);
           done();
         });

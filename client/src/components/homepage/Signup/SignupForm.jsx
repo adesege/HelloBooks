@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import FlashMessagesList from '../../flash/FlashMessagesList';
+import FlashMessagesList from '../../FlashMessagesList';
 import InputField from '../../form/InputField';
 import Button from '../../form/Button';
 
+const propTypes = {
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  logUserIn: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  validationError: PropTypes.object.isRequired
+};
 
 const SignupForm = (props) => (
   <form onSubmit={props.onSubmit} id="signupForm">
@@ -85,15 +95,6 @@ const SignupForm = (props) => (
   </form>
 );
 
-SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
-  logUserIn: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  validationError: PropTypes.object.isRequired
-};
+SignupForm.propTypes = propTypes;
 
 export default SignupForm;

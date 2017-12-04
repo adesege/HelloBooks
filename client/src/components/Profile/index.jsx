@@ -40,8 +40,8 @@ class Profile extends React.Component {
       },
       isOpenModal: false,
       isLoading: false,
-      errors: '',
-      serverErrors: ''
+      errors: {},
+      serverErrors: []
     };
     this.onChangePasswordInput = this.onChangePasswordInput.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
@@ -89,7 +89,7 @@ class Profile extends React.Component {
   onChangePassword(event) {
     event.preventDefault();
     if (!this.isFormValid()) { return; }
-    this.setState({ errors: '' });
+    this.setState({ errors: {} });
     this.props.updateUserAction(this.state.passwordChange)
       .then(({ response }) => {
         this.props.addFlashMessage({

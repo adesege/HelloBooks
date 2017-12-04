@@ -132,4 +132,6 @@ const mapStateToProps = (state, props) => ({
       parseInt(book.id, 10) === parseInt(props.params.id, 10))
 });
 
+export { DeleteModal };
+
 export default connect(mapStateToProps, { deleteBook })(DeleteModal);

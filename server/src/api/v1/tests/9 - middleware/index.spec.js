@@ -14,7 +14,7 @@ describe('Middlewares', () => { // Describe Middlewares
         .end((err, res) => {
           expect(res.statusCode).to.equal(401);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('Failed to authenticate user.');
+          expect(res.body.message[0]).to.equal('Failed to authenticate user.');
           if (err) return done(err);
           done();
         });
@@ -30,7 +30,7 @@ describe('Middlewares', () => { // Describe Middlewares
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('Sorry, this is not you.');
+            expect(res.body.message[0]).to.equal('Sorry, this is not you.');
             if (err) return done(err);
             done();
           });
@@ -45,7 +45,7 @@ describe('Middlewares', () => { // Describe Middlewares
           .end((err, res) => {
             expect(res.statusCode).to.equal(401);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('Failed to authenticate user.');
+            expect(res.body.message[0]).to.equal('Failed to authenticate user.');
             if (err) return done(err);
             done();
           });
@@ -77,7 +77,7 @@ describe('Middlewares', () => { // Describe Middlewares
         .end((err, res) => {
           expect(res.statusCode).to.equal(403);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('Well, you need to be an admin to go in here');
+          expect(res.body.message[0]).to.equal('Well, you need to be an admin to go in here');
           if (err) return done(err);
           done();
         });

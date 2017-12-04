@@ -1,5 +1,5 @@
 import model from '../models';
-import utils from '../utils';
+import utils, { formatErrorMessage } from '../utils';
 import MailerClass from '../utils/mailer';
 
 const { randomString } = utils; // generates random strings
@@ -29,7 +29,7 @@ class UserClass {
     if (confirmPassword !== req.body.password) {
       return res
         .status(400)
-        .send({ message: 'The password field is not the same' });
+        .send({ message: ['The password field is not the same'] });
     }
     User.create({
       password,
@@ -47,18 +47,17 @@ class UserClass {
       return res
         .status(201)
         .send({
-          token,
-          userId: user.id,
-          group: user.userGroup,
-          message: 'Your account has been created successfully'
+          payload: {
+            token,
+            userId: user.id,
+            group: user.userGroup,
+          },
+          message: ['Your account has been created successfully']
         });
     })
-      .catch((errors) => {
-        const errorsArray = errors.errors.map(error => error.message);
-        return res.status(400).send({
-          message: errorsArray
-        });
-      });
+      .catch(errors => res.status(400).send({
+        message: formatErrorMessage(errors)
+      }));
   }
 
   /**
@@ -77,23 +76,25 @@ class UserClass {
         User.findOne({ where: { email } })
           .then((user) => {
             if (oauthID && !oauthUser) {
-              return res.status(400).send({ message: 'Sorry, we can\'t find this account' });
+              return res.status(400).send({ message: ['Sorry, we can\'t find this account'] });
             }
             if (!oauthID && user) {
               if (!user.validPassword(password)) {
-                return res.status(400).send({ message: 'You provided a wrong email address and password' });
+                return res.status(400).send({ message: ['You provided a wrong email address and password'] });
               }
             }
             if (oauthID || user) {
               const token = utils.signToken(user);
               return res.status(200).send({
-                token,
-                userId: user.id,
-                group: user.userGroup,
-                message: 'Successfully validated'
+                payload: {
+                  token,
+                  userId: user.id,
+                  group: user.userGroup,
+                },
+                message: ['Successfully validated']
               });
             }
-            return res.status(404).send({ message: 'Sorry, we can\'t find this account' });
+            return res.status(404).send({ message: ['Sorry, we can\'t find this account'] });
           }));
   }
 
@@ -120,7 +121,9 @@ class UserClass {
       })
       .then(users => res
         .status(200)
-        .send({ data: users }));
+        .send({
+          data: users
+        }));
   }
 
   /**
@@ -135,7 +138,7 @@ class UserClass {
     const { password, oldPassword, confirmPassword } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).send({
-        message: 'The passwords are not the same'
+        message: ['The passwords are not the same']
       });
     }
     return User
@@ -143,7 +146,7 @@ class UserClass {
       .then((user) => {
         if (!user.validPassword(oldPassword)) {
           return res.status(400).send({
-            message: 'Your old password does not match the current password'
+            message: ['Your old password does not match the current password']
           });
         }
         return User
@@ -158,7 +161,7 @@ class UserClass {
           .then(() =>
             res.status(200)
               .send({
-                message: 'User information has been successfully edited'
+                message: ['User information has been successfully edited']
               }));
       });
   }
@@ -176,7 +179,7 @@ class UserClass {
       .then((user) => {
         if (!user) {
           return res.status(404).send({
-            message: 'No account is associated with this email address'
+            message: ['No account is associated with this email address']
           });
         }
         const validationKey = utils.randomString(10);
@@ -204,7 +207,7 @@ class UserClass {
             Mailer.send();
 
             const responseObject = {
-              message: `A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`
+              message: [`A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`]
             };
             /* istanbul ignore next */
             responseObject.key = process.env.NODE_ENV === 'test' ? validationKey : '';
@@ -228,14 +231,14 @@ class UserClass {
     } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).send({
-        message: 'The passwords are not the same'
+        message: ['The passwords are not the same']
       });
     }
     User.findOne({ where: { email, key: validationKey } })
       .then((user) => {
         if (!user) {
           return res.status(400).send({
-            message: 'There was an error completing your request. Perhaps, you followed a broken link.'
+            message: ['There was an error completing your request. Perhaps, you followed a broken link.']
           });
         }
         User.update(
@@ -260,7 +263,7 @@ class UserClass {
             Mailer.send();
             res.status(200)
               .send({
-                message: 'Password successfully changed. Please login to your account.'
+                message: ['Password successfully changed. Please login to your account.']
               });
           });
       });

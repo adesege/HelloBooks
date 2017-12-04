@@ -41,6 +41,13 @@ const returnDate = (rank) => {
 
 export const setCron = props => new CronJob(props);
 
+export const formatErrorMessage = (errors) => {
+  if (errors.errors) {
+    return errors.errors.map(error => error.message);
+  }
+  return [errors.message];
+};
+
 export default {
   randomString,
   signToken,

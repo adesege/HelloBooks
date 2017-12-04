@@ -4,7 +4,6 @@ import { ioGetNotifications } from 'assets/js/socket';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const { API_VERSION } = window;
 const { BOOK_BORROWED, GET_BORROWED_BOOKS, BOOK_RETURNED } = types;
 
 /**
@@ -50,7 +49,7 @@ export const borrowBook = data =>
   dispatch => {
     const updatedAt = moment();
     return axios
-      .post(`/api/${API_VERSION}/users/${data.userId}/books`, data)
+      .post(`users/${data.userId}/books`, data)
       .then(
         (response) => {
           /*
@@ -66,14 +65,14 @@ export const borrowBook = data =>
           dispatch(bookBorrowed(data));
           dispatch(addFlashMessage({
             type: 'success',
-            text: response.data
+            text: response.data.message
           }));
           return response;
         },
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }
@@ -88,7 +87,7 @@ export const borrowBook = data =>
 export const getBorrowedBook = data =>
   dispatch =>
     axios
-      .get(`/api/${API_VERSION}/users/${data.userId}/books?returned=false&bookId=${data.bookId}`, data)
+      .get(`users/${data.userId}/books?returned=false&bookId=${data.bookId}`, data)
       .then(
         (response) => {
           dispatch(setBorrowedBooks(response.data.data));
@@ -106,7 +105,7 @@ export const getBorrowedBooks = data =>
   dispatch =>
     axios
       .get(
-        `/api/${API_VERSION}/users/${data.userId}/books?returned=false`,
+        `users/${data.userId}/books?returned=false`,
         data
       )
       .then(
@@ -127,7 +126,7 @@ export const returnBorrowedBook = data =>
     const updatedAt = moment();
     return axios
       .put(
-        `/api/${API_VERSION}/users/${data.userId}/books/${data.borrowedBookId}?bookId=${data.bookId}`,
+        `users/${data.userId}/books/${data.borrowedBookId}?bookId=${data.bookId}`,
         data
       )
       .then(
@@ -144,14 +143,14 @@ export const returnBorrowedBook = data =>
           dispatch(setReturnedBook(data));
           dispatch(addFlashMessage({
             type: 'success',
-            text: response.data
+            text: response.data.message
           }));
           return response;
         },
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }

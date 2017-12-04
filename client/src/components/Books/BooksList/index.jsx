@@ -235,6 +235,7 @@ const mapStateToProps = state => ({
 
 });
 
+export { BooksList };
 export default connect(mapStateToProps, {
   getBooks,
   setBooks,

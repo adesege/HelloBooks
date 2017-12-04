@@ -89,7 +89,8 @@ class ViewBooks extends React.Component {
       coverPhotoPath,
       description,
       publishedDate,
-      ISBN
+      ISBN,
+      Category
     } = this.state.book;
     const {
       params,
@@ -119,16 +120,13 @@ class ViewBooks extends React.Component {
                 <h4 className="card-title font-weight-bold">{title}</h4>
                 <h6 className="card-subtitle">
               by {author}
-                  <div className="rating d-inline">
-                    <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-                  </div>
                 </h6>
                 <p className="mt-3">{description}</p>
                 <hr/>
                 <small className="mt-1 d-block">
                   <em className="d-block">Published date: {publishedDate}</em>
                   <em className="d-block">ISSBN: {ISBN}</em>
-                  <em className="d-block">Category: Category 1</em>
+                  <em className="d-block">Category: {Category.name}</em>
                 </small>
               </div>
             </div>
@@ -166,6 +164,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
+export { ViewBooks };
 export default connect(
   mapStateToProps,
   {

@@ -5,10 +5,10 @@ const defaultProps = ({
   interval: 10000
 });
 
-const propTypes = ({
+const propTypes = {
   children: PropTypes.node.isRequired,
   interval: PropTypes.number.isRequired
-});
+};
 
 /**
  * @class SetTimeout

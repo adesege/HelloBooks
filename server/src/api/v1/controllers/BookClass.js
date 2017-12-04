@@ -1,5 +1,6 @@
 import moment from 'moment';
 import model from '../models';
+import { formatErrorMessage } from '../utils';
 
 const {
   Book, borrowedBook, stockManager
@@ -27,14 +28,14 @@ class BookClass {
 
     if (!stock.quantity) {
       return res.status(400)
-        .send({ message: 'The stock quantity is required' });
+        .send({ message: ['The stock quantity is required'] });
     }
 
     Book.findOne({ where: { title } })
       .then((book) => {
         if (book) {
           return res.status(400)
-            .send({ message: 'A book with the same title already exist' });
+            .send({ message: ['A book with the same title already exist'] });
         }
         Book.create(req.body, {
           fields: [
@@ -57,16 +58,16 @@ class BookClass {
             .then(() => res
               .status(201)
               .send({
-                message: 'Book added successfully',
+                message: ['Book added successfully'],
                 id: bookId
               }))
-            .catch(error =>
+            .catch(errors =>
               res.status(400)
-                .send({ message: error.errors })); // Stock manager create
+                .send({ message: formatErrorMessage(errors) })); // Stock manager create
         })
-          .catch(error =>
+          .catch(errors =>
             res.status(400)
-              .send({ message: error.errors })); // Book create
+              .send({ message: formatErrorMessage(errors) })); // Book create
       });
   }
   /**
@@ -103,15 +104,17 @@ class BookClass {
           }).then(updatedBook =>
             res.status(200)
               .send({
-                message: 'Book successfully updated',
+                message: ['Book successfully updated'],
                 book: updatedBook[1]
               }))
-            .catch(error =>
+            .catch(errors =>
               res
                 .status(400)
-                .send({ message: error.message }));
+                .send({ message: formatErrorMessage(errors) }));
         } else {
-          res.status(404).send({ message: 'Book not found' });
+          res
+            .status(404)
+            .send({ message: ['Book not found'] });
         }
       });
   }
@@ -135,6 +138,7 @@ class BookClass {
     limit = parseInt(limit, 10) || 12;
     Book
       .findAndCountAll({
+        include: ['Category'],
         where,
         order: [['updatedAt', 'DESC']],
         offset,
@@ -169,13 +173,15 @@ class BookClass {
       .findById(bookId)
       .then((book) => {
         if (!book) { // check if no book can be found
-          return res.status(404).send({
-            message: 'Sorry, we can\'t find this book'
-          });
+          return res
+            .status(404)
+            .send({
+              message: ['Sorry, we can\'t find this book']
+            });
         }
         if (book.quantity === 0) { // check if book quantity is less than or equal to zero
           return res.status(400).send({
-            message: 'There are no more copies left of this book to borrow'
+            message: ['There are no more copies left of this book to borrow']
           });
         }
 
@@ -187,7 +193,7 @@ class BookClass {
                 .status(400)
                 .send({
                   message:
-                  'You have already borrowed this book. Please return it before you can borrow it again.'
+                  ['You have already borrowed this book. Please return it before you can borrow it again.']
                 });
             }
             borrowedBook.create({
@@ -199,12 +205,12 @@ class BookClass {
             }).then(id => res
               .status(201)
               .send({
-                message: 'You have successfully  borrowed this book',
+                message: ['You have successfully  borrowed this book'],
                 id: id.get('id')
               }));
           });
-      }).catch(error => res.status(400).send({
-        message: error.message
+      }).catch(errors => res.status(400).send({
+        message: formatErrorMessage(errors)
       }));
   }
   /**
@@ -227,7 +233,7 @@ class BookClass {
     }).then((books) => {
       res.status(200).send({
         data: books,
-        message: 'Success'
+        message: ['Success']
       });
     });
   }
@@ -268,12 +274,12 @@ class BookClass {
             .then(() => res
               .status(200)
               .send({
-                message: 'You have successfully returned this book'
+                message: ['You have successfully returned this book']
               }));
         } else {
           return res
             .status(404)
-            .json({ message: 'No record available' });
+            .json({ message: ['No record available'] });
         }
       });
   }
@@ -293,9 +299,9 @@ class BookClass {
           Book.destroy({ // delete record
             where: { id }
           }).then(() =>
-            res.status(200).send({ message: 'Book deleted successfully' }));
+            res.status(200).send({ message: ['Book deleted successfully'] }));
         } else {
-          return res.status(404).send({ message: 'Book not found' });
+          return res.status(404).send({ message: ['Book not found'] });
         }
       });
   }

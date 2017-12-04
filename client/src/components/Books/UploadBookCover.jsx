@@ -60,9 +60,5 @@ UploadBookCover.propTypes = {
   setImageData: PropTypes.func.isRequired
 };
 
-export default connect(
-  null,
-  {
-    setImageData, deleteImageData
-  }
-)(UploadBookCover);
+export { UploadBookCover };
+export default connect(null, { setImageData, deleteImageData })(UploadBookCover);

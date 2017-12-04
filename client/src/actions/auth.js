@@ -1,8 +1,8 @@
 import axios from 'axios';
+import setAuthorizationToken from 'utils/setAuthorizationToken';
+import { addFlashMessage } from './flashMessages';
 import types from './types';
-import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-const { API_VERSION } = window;
 const { SET_CURRENT_USER } = types;
 
 export const setCurrentUser = user => ({
@@ -17,17 +17,12 @@ export const logout = () =>
     dispatch(setCurrentUser({}));
   };
 
-export const login = data =>
-  dispatch =>
-    axios
-      .post(`/api/${API_VERSION}/users/signin`, data);
-
-export const logUserIn = response =>
+export const logUserIn = userData =>
   (dispatch) => {
-    const { token } = response.data;
+    const { token, group, userId } = userData;
     const userPayload = {
-      group: response.data.group,
-      userId: response.data.userId
+      group,
+      userId
     };
 
     localStorage.setItem('authToken', token);
@@ -37,12 +32,29 @@ export const logUserIn = response =>
     dispatch(setCurrentUser(userPayload));
   };
 
+export const login = data =>
+  dispatch =>
+    axios
+      .post(`users/signin`, data)
+      .then((response) => {
+        dispatch(logUserIn(response.data.payload));
+        return response;
+      })
+      .catch(errors => {
+        dispatch(addFlashMessage({
+          type: 'error',
+          text: errors.response.data.message
+        }));
+        return errors;
+      });
+
+
 export const sendResetPasswordMail = data =>
   dispatch =>
     axios
-      .post(`/api/${API_VERSION}/users/reset-password`, data);
+      .post(`users/reset-password`, data);
 
 export const resetPassword = data =>
   dispatch =>
     axios
-      .post(`/api/${API_VERSION}/users/reset-password/verify`, data);
+      .post(`users/reset-password/verify`, data);

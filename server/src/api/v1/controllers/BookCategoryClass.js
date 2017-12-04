@@ -1,4 +1,5 @@
 import model from '../models';
+import { formatErrorMessage } from '../utils';
 
 const { bookCategory } = model;
 
@@ -16,7 +17,7 @@ class BookCategoryClass {
   static add(req, res) {
     const name = req.body.name || '';
     if (!name) {
-      return res.status(400).send({ message: 'The category name field is required' });
+      return res.status(400).send({ message: ['The category name field is required'] });
     }
     return bookCategory
       .findOne({ where: { name } })
@@ -30,7 +31,7 @@ class BookCategoryClass {
             .then(newCategory =>
               res.status(201)
                 .send({
-                  message: 'Category added successfully',
+                  message: ['Category added successfully'],
                   id: newCategory.get('id'),
                   category: newCategory
                 }));
@@ -38,7 +39,7 @@ class BookCategoryClass {
           return res
             .status(400)
             .send({
-              message: 'A category with this name already exist'
+              message: ['A category with this name already exist']
             });
         }
       });
@@ -59,9 +60,9 @@ class BookCategoryClass {
           }).then(() =>
             res
               .status(200)
-              .send({ message: 'Category deleted successfully' }));
+              .send({ message: ['Category deleted successfully'] }));
         } else {
-          return res.status(404).send({ message: 'Category not found' });
+          return res.status(404).send({ message: ['Category not found'] });
         }
       });
   }
@@ -74,7 +75,9 @@ class BookCategoryClass {
   */
   static get(req, res) {
     bookCategory.findAll()
-      .then(category => res.status(200).send({ data: category }));
+      .then(category => res
+        .status(200)
+        .send({ data: category }));
   }
 
   /**
@@ -101,16 +104,13 @@ class BookCategoryClass {
             .then(updatedCategory =>
               res.status(200)
                 .send({
-                  message: 'Category updated successfully',
+                  message: ['Category updated successfully'],
                   data: updatedCategory[1]
                 }));
         }
         return res.status(400).send({ message: 'Cannot process this request at the moment.' });
       })
-      .catch((errors) => {
-        const errorsArray = errors.errors.map(error => error.message);
-        return res.status(500).send({ message: errorsArray });
-      });
+      .catch(errors => res.status(500).send({ message: formatErrorMessage(errors) }));
   }
 }
 

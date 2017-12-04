@@ -2,10 +2,10 @@ import React from 'react';
 import LoadingBar from 'react-redux-loading-bar';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import '../assets/scss/styles.scss';
+import 'assets/scss/styles.scss';
+import 'config/axios';
 
 const { TIMEZONE } = process.env;
-window.API_VERSION = 'v1';
 moment().tz(TIMEZONE).format();
 
 const propTypes = {
