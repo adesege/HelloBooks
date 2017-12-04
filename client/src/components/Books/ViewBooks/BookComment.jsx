@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDisqusComments from 'react-disqus-comments';
 
+const propTypes = {
+  title: PropTypes.string,
+  config: PropTypes.object.isRequired
+};
+
 const BookComment = ({
   title,
   config
@@ -15,8 +20,5 @@ const BookComment = ({
   </div>
 );
 
-BookComment.propTypes = {
-  title: PropTypes.string,
-  config: PropTypes.object.isRequired
-};
+BookComment.propTypes = propTypes;
 export default BookComment;

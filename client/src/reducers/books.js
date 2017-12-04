@@ -1,21 +1,16 @@
 import findIndex from 'lodash/findIndex';
 import types from '../actions/types';
+import { initialBookState } from './initialState';
 
 const {
   SET_BOOKS,
   BOOK_ADDED,
   BOOKS_SEARCHED,
-  BOOK_FETCHED,
   BOOK_UPDATED,
   BOOK_DELETED
 } = types;
 
-const initialState = {
-  books: [],
-  pagination: {}
-};
-
-export default (state = initialState, action = {}) => {
+export default (state = initialBookState, action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case SET_BOOKS:
@@ -24,44 +19,47 @@ export default (state = initialState, action = {}) => {
     };
 
   case BOOK_ADDED:
-    return [
-      action.book,
-      ...state
-    ];
+    return {
+      books: [
+        action.book,
+        ...state.books
+      ],
+      pagination: {
+        ...state.pagination
+      }
+    };
 
   case BOOKS_SEARCHED:
     return action.result;
 
-  case BOOK_FETCHED:
-    const index = findIndex(state, item => item.id === action.book.id);
-    if (index > -1) {
-      return state.map((item) => {
-        if (item.id === action.book.id) return action.book;
-        return item;
-      });
-    }
-    return action.book;
-
   case BOOK_UPDATED:
-    const idIndex = findIndex(state, item => item.id === action.book.id);
-    if (idIndex > -1) {
-      return state.map((item) => {
-        if (item.id === action.book.id) return action.book;
-        return item;
-      });
+    const book = state.books.map((item) => {
+      if (parseInt(item.id, 10) === parseInt(action.book.id, 10)) {
+        return action.book;
+      }
+      return {};
+    });
+    if (Object.keys(book[0]).length !== 0) {
+      return {
+        books: book,
+        pagination: { ...state.pagination }
+      };
     }
-    return action.book;
+    return state;
 
   case BOOK_DELETED:
     const findBook = findIndex(
-      state,
+      state.books,
       item => parseInt(item.id, 10) === parseInt(action.bookId, 10)
     );
-    if (findBook >= 0) {
-      return [
-        ...state.slice(0, findBook),
-        ...state.slice(findBook + 1),
-      ];
+    if (findBook > -1) {
+      return {
+        books: [
+          ...state.books.slice(0, findBook),
+          ...state.books.slice(findBook + 1),
+        ],
+        pagination: { ...state.pagination }
+      };
     }
     return state;
 

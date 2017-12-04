@@ -14,7 +14,7 @@ describe('# Search', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.data).to.be.an('array');
-        expect(res.body.message).to.equal('Book found');
+        expect(res.body.message[0]).to.equal('Book found');
         expect(res.body.data[0]).to.have.property('id');
         if (err) return done(err);
         done();
@@ -28,7 +28,7 @@ describe('# Search', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
-        expect(res.body.message).to.equal('Please specify a search type');
+        expect(res.body.message[0]).to.equal('Please specify a search type');
         if (err) return done(err);
         done();
       });

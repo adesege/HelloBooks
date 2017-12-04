@@ -2,6 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
+const propTypes = {
+  bookId: PropTypes.string.isRequired,
+  isBorrowedBook: PropTypes.bool.isRequired,
+  userId: PropTypes.number.isRequired,
+  borrowBookAction: PropTypes.func.isRequired,
+  returnBorrowedBookAction: PropTypes.func.isRequired,
+  borrowedBook: PropTypes.object.isRequired
+};
 
 /**
  * @class BorrowBook
@@ -143,13 +151,6 @@ class BorrowBook extends React.Component {
   }
 }
 
-BorrowBook.propTypes = {
-  bookId: PropTypes.string.isRequired,
-  isBorrowedBook: PropTypes.bool.isRequired,
-  userId: PropTypes.number.isRequired,
-  borrowBookAction: PropTypes.func.isRequired,
-  returnBorrowedBookAction: PropTypes.func.isRequired,
-  borrowedBook: PropTypes.object.isRequired
-};
+BorrowBook.propTypes = propTypes;
 
 export default BorrowBook;

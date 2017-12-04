@@ -2,12 +2,22 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addFlashMessage } from '../../../../actions/flashMessages';
+import { addFlashMessage } from 'actions/flashMessages';
+import { resetPassword } from 'actions/auth';
+import validateUser from 'utils/validators/user';
+import { extractURLQuery } from 'utils/index';
+import FlashMessagesList from 'components/flash/FlashMessagesList';
 import ChangePasswordForm from './ChangePasswordForm';
-import { resetPassword } from '../../../../actions/auth';
-import validateUser from '../../../../utils/validators/user';
-import { extractURLQuery } from '../../../../utils/index';
-import FlashMessagesList from '../../../flash/FlashMessagesList';
+
+const propTypes = {
+  addFlashMessage: PropTypes.func.isRequired,
+  resetPasswordAction: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 /**
  * @class ChangePassword
@@ -155,16 +165,11 @@ class ChangePassword extends React.Component {
   }
 }
 
-ChangePassword.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+ChangePassword.contextTypes = contextTypes;
 
-ChangePassword.propTypes = {
-  addFlashMessage: PropTypes.func.isRequired,
-  resetPasswordAction: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired
-};
+ChangePassword.propTypes = propTypes;
 
+export { ChangePassword };
 export default connect(null, {
   addFlashMessage,
   resetPasswordAction: resetPassword

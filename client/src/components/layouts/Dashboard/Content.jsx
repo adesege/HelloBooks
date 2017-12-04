@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlashMessagesList from 'components/flash/FlashMessagesList';
 
+const propTypes = {
+  children: PropTypes.node.isRequired
+};
+
 const Content = ({ children }) => (
   <div id="contentArea">
     <FlashMessagesList />
@@ -9,7 +13,6 @@ const Content = ({ children }) => (
   </div>
 );
 
-Content.propTypes = {
-  children: PropTypes.node.isRequired
-};
+Content.propTypes = propTypes;
+
 export default Content;

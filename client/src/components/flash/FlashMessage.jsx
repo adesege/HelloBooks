@@ -9,6 +9,14 @@ import classnames from 'classnames';
  */
 class FlashMessage extends React.Component {
   /**
+   * @returns {undefined}
+   * @memberOf FlashMessage
+   */
+  componentWillUnmount() {
+    this.props.deleteFlashMessage();
+  }
+
+  /**
      * @returns {object} JSX
      * @memberof FlashMessage
      */
@@ -20,21 +28,13 @@ class FlashMessage extends React.Component {
         'alert-danger': type === 'error',
         'alert-info': type === 'info'
       })}>
-        {(Object.prototype.hasOwnProperty.call(text, 'message') &&
-        typeof text.message === 'object') &&
+        {Array.isArray(text) && text.length !== 1 &&
             <ul>
-              { text.message.map((value, index) =>
+              { text.map((value, index) =>
                 <li key={index}>{value}</li>) }
             </ul>
         }
-        {(Object.prototype.hasOwnProperty.call(text, 'message') &&
-            typeof text.message === 'string') &&
-              text.message
-        }
-
-        {typeof text === 'string' &&
-          text
-        }
+        {text.length === 1 && <span>{text}</span>}
       </div>
     );
   }

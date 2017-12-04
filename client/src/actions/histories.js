@@ -2,8 +2,6 @@ import axios from 'axios';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const { API_VERSION } = window;
-
 const {
   GET_BOOKS_HISTORIES
 } = types;
@@ -20,7 +18,7 @@ export const getHistories = data =>
     const searchQuery = data ? new URLSearchParams(data) : null; // converts an object to query string
     const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
     return axios
-      .get(`/api/${API_VERSION}/books/histories/${data.userId}?${toQueryString}`)
+      .get(`books/histories/${data.userId}?${toQueryString}`)
       .then(
         (response) => {
           dispatch(historiesFetched({
@@ -31,7 +29,7 @@ export const getHistories = data =>
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }

@@ -21,7 +21,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         global.bookId = res.body.id;
         expect(res.statusCode).to.equal(201);
-        expect(res.body.message).to.equal('Book added successfully');
+        expect(res.body.message[0]).to.equal('Book added successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -44,7 +44,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         global.bookId2 = res.body.id;
         expect(res.statusCode).to.equal(201);
-        expect(res.body.message).to.equal('Book added successfully');
+        expect(res.body.message[0]).to.equal('Book added successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -70,7 +70,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         global.bookId3 = res.body.id;
         expect(res.statusCode).to.equal(201);
-        expect(res.body.message).to.equal('Book added successfully');
+        expect(res.body.message[0]).to.equal('Book added successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -107,7 +107,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('A book with the same title already exist');
+        expect(res.body.message[0]).to.equal('A book with the same title already exist');
         if (err) return done(err);
         done();
       });
@@ -126,7 +126,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('The stock quantity is required');
+        expect(res.body.message[0]).to.equal('The stock quantity is required');
         if (err) return done(err);
         done();
       });
@@ -162,7 +162,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Book deleted successfully');
+        expect(res.body.message[0]).to.equal('Book deleted successfully');
         if (err) return done(err);
         done();
       });
@@ -176,7 +176,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Book not found');
+        expect(res.body.message[0]).to.equal('Book not found');
         if (err) return done(err);
         done();
       });
@@ -195,7 +195,7 @@ describe('# Admin Books', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.equal('Book successfully updated');
+        expect(res.body.message[0]).to.equal('Book successfully updated');
         expect(res.body.book.title).to.equal('Tarasha');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
@@ -213,7 +213,7 @@ describe('# Admin Books', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.equal('Book successfully updated');
+        expect(res.body.message[0]).to.equal('Book successfully updated');
         expect(res.body.book.description).to.equal('Purple Hibiscus was written by Chimamanda Adichie');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
@@ -230,7 +230,7 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Book not found');
+        expect(res.body.message[0]).to.equal('Book not found');
         if (err) return done(err);
         done();
       });

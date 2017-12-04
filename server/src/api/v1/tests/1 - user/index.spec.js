@@ -19,13 +19,13 @@ describe('User account', () => {
           .post('/api/v1/users/signup')
           .send(user)
           .end((err, res) => {
-            global.user = res.body; // set user object as global varibale
+            global.user = res.body.payload; // set user object as global varibale
             expect(res.statusCode).to.equal(201);
             expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('token');
-            expect(res.body).to.have.property('userId');
-            expect(res.body.group).to.equal('user');
-            expect(res.body.message).to.equal('Your account has been created successfully');
+            expect(res.body.payload).to.have.property('token');
+            expect(res.body.payload).to.have.property('userId');
+            expect(res.body.payload.group).to.equal('user');
+            expect(res.body.message[0]).to.equal('Your account has been created successfully');
             if (err) return done(err);
             done();
           });
@@ -44,13 +44,13 @@ describe('User account', () => {
           .post('/api/v1/users/signup')
           .send(newUser)
           .end((err, res) => {
-            global.admin = res.body; // set user object as global varibale
+            global.admin = res.body.payload; // set user object as global varibale
             expect(res.statusCode).to.equal(201);
             expect(res.body).to.be.an('object');
-            expect(res.body).to.have.property('token');
-            expect(res.body).to.have.property('userId');
-            expect(res.body.group).to.equal('admin');
-            expect(res.body.message).to.equal('Your account has been created successfully');
+            expect(res.body.payload).to.have.property('token');
+            expect(res.body.payload).to.have.property('userId');
+            expect(res.body.payload.group).to.equal('admin');
+            expect(res.body.message[0]).to.equal('Your account has been created successfully');
             if (err) return done(err);
             done();
           });
@@ -87,7 +87,7 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('The password field is not the same');
+            expect(res.body.message[0]).to.equal('The password field is not the same');
             if (err) return done(err);
             done();
           });
@@ -128,7 +128,7 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(404);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('Sorry, we can\'t find this account');
+            expect(res.body.message[0]).to.equal('Sorry, we can\'t find this account');
             if (err) return done(err);
             done();
           });
@@ -148,7 +148,7 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('Sorry, we can\'t find this account');
+            expect(res.body.message[0]).to.equal('Sorry, we can\'t find this account');
             if (err) return done(err);
             done();
           });
@@ -168,7 +168,7 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('You provided a wrong email address and password');
+            expect(res.body.message[0]).to.equal('You provided a wrong email address and password');
             if (err) return done(err);
             done();
           });
@@ -184,9 +184,9 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.be.an('object');
-            expect(res.body.message).to.equal('Successfully validated');
-            expect(res.body).to.have.property('token');
-            expect(res.body).to.have.property('userId');
+            expect(res.body.message[0]).to.equal('Successfully validated');
+            expect(res.body.payload).to.have.property('token');
+            expect(res.body.payload).to.have.property('userId');
             if (err) return done(err);
             done();
           });

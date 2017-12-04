@@ -38,7 +38,7 @@ describe('# Profile', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
-          expect(res.body.message).to.equal('Your old password does not match the current password');
+          expect(res.body.message[0]).to.equal('Your old password does not match the current password');
           if (err) return done(err);
           done();
         });
@@ -58,7 +58,7 @@ describe('# Profile', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('User information has been successfully edited');
+        expect(res.body.message[0]).to.equal('User information has been successfully edited');
         if (err) return done(err);
         done();
       });
@@ -77,7 +77,7 @@ describe('# Profile', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('The passwords are not the same');
+        expect(res.body.message[0]).to.equal('The passwords are not the same');
         if (err) return done(err);
         done();
       });

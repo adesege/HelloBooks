@@ -1,6 +1,19 @@
 {
   "presets": ["env", "react"],
-  "plugins": ["transform-object-rest-spread", "transform-es2015-destructuring"],
+  "plugins": [
+    "transform-object-rest-spread", 
+    "transform-es2015-destructuring",
+    [
+      "module-resolver",
+      {
+        "root": ["./src"],
+        "alias":{
+        "form": ["./src/components/form"],
+        "Modal": ["./src/components/Modal"]
+        }
+      }
+    ]
+  ],
   "env": {
     "production": {
       "plugins": [

@@ -71,4 +71,5 @@ class Books extends React.Component {
 Books.contextTypes = contextTypes;
 Books.propTypes = propTypes;
 
+export { Books };
 export default Books;

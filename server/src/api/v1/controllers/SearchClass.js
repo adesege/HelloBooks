@@ -22,7 +22,7 @@ class SearchClass {
         break;
       default: return res
         .status(400)
-        .send({ message: 'Please specify a search type' });
+        .send({ message: ['Please specify a search type'] });
     }
   }
 
@@ -45,7 +45,7 @@ class SearchClass {
       .then(books => response
         .status(200)
         .send({
-          message: 'Book found',
+          message: ['Book found'],
           data: books
         }));
   }

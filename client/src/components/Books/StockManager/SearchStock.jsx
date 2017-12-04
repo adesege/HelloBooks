@@ -6,6 +6,14 @@ import TimeAgo from 'react-timeago';
 import { searchBooks } from 'actions/books';
 import Button from 'form/Button';
 
+const propTypes = {
+  searchResult: PropTypes.array.isRequired,
+  searchBooksAction: PropTypes.func.isRequired
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 /**
  * @class SearchStock
@@ -176,18 +184,15 @@ class SearchStock extends React.Component {
   }
 }
 
-SearchStock.propTypes = {
-  searchResult: PropTypes.array.isRequired,
-  searchBooksAction: PropTypes.func.isRequired
-};
-SearchStock.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+SearchStock.propTypes = propTypes;
+
+SearchStock.contextTypes = contextTypes;
 
 const mapStateToProps = state => ({
   searchResult: state.books
 });
 
+export { SearchStock };
 export default connect(
   mapStateToProps,
   {

@@ -10,7 +10,7 @@ const router = (req, res, next) => {
       if (err) {
         return res
           .status(401)
-          .send({ message: 'Failed to authenticate user.' });
+          .send({ message: ['Failed to authenticate user.'] });
       }
 
       const userId = req.body.userId || req.query.userId
@@ -20,7 +20,7 @@ const router = (req, res, next) => {
         if (parseInt(userId, 10) !== parseInt(tokenUserId, 10)) {
           return res
             .status(400)
-            .send({ message: 'Sorry, this is not you.' });
+            .send({ message: ['Sorry, this is not you.'] });
         }
       }
       req.decoded = decoded;
@@ -29,7 +29,7 @@ const router = (req, res, next) => {
   } else {
     return res
       .status(401)
-      .send({ message: 'Failed to authenticate user.' });
+      .send({ message: ['Failed to authenticate user.'] });
   }
 };
 

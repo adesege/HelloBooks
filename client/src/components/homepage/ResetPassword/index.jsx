@@ -2,10 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addFlashMessage } from '../../../actions/flashMessages';
+import { addFlashMessage } from 'actions/flashMessages';
+import { sendResetPasswordMail } from 'actions/auth';
+import validateUser from 'utils/validators/user';
 import ResetPasswordForm from './ResetPasswordForm';
-import { sendResetPasswordMail } from '../../../actions/auth';
-import validateUser from '../../../utils/validators/user';
+
+const propTypes = {
+  addFlashMessage: PropTypes.func.isRequired,
+  resetPasswordAction: PropTypes.func.isRequired,
+};
 
 /**
  * @class ResetPassword
@@ -134,11 +139,9 @@ class ResetPassword extends React.Component {
   }
 }
 
-ResetPassword.propTypes = {
-  addFlashMessage: PropTypes.func.isRequired,
-  resetPasswordAction: PropTypes.func.isRequired,
-};
+ResetPassword.propTypes = propTypes;
 
+export { ResetPassword };
 export default connect(null, {
   addFlashMessage,
   resetPasswordAction: sendResetPasswordMail
