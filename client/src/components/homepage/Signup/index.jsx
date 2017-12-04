@@ -11,6 +11,16 @@ import passportConfig from 'config/passport';
 import validateUser from 'utils/validators/user';
 import SignupForm from './SignupForm';
 
+const propTypes = {
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  logUserIn: PropTypes.func.isRequired,
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
 /**
  * @class Signup
  * @extends {React.Component}
@@ -114,34 +124,16 @@ class Signup extends React.Component {
     if (!this.isFormValid()) { return; }
 
     this.setState({ isLoading: true });
-    this.props.userSignupRequest(this.state.user).then(
-      (data) => {
-        document.getElementById('signupForm').reset();
-
-        this.setState({
-          isLoading: false,
-          user: {}
-        });
-
-        this.props.logUserIn(data);
-        this.context.router.push('/dashboard');
-        this.props.addFlashMessage({
-          type: 'success',
-          text: data.data
-        });
-      },
-      (errors) => {
+    this.props.userSignupRequest(this.state.user).then((data) => {
+      if (data.response && data.response.status >= 400) {
         this.setState({
           isLoading: false
         });
-        if (errors.response) {
-          this.props.addFlashMessage({
-            type: 'error',
-            text: errors.response.data
-          });
-        }
+      } else {
+        document.getElementById('signupForm').reset();
+        this.context.router.push('/dashboard');
       }
-    );
+    });
   }
 
   /**
@@ -222,16 +214,11 @@ class Signup extends React.Component {
   }
 }
 
-Signup.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+Signup.contextTypes = contextTypes;
 
-Signup.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
-  logUserIn: PropTypes.func.isRequired,
-};
+Signup.propTypes = propTypes;
 
+export { Signup };
 export default connect(null, {
   userSignupRequest: userSignupRequestAction,
   addFlashMessage,

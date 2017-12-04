@@ -20,7 +20,7 @@ describe('# Reset password', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('No account is associated with this email address');
+        expect(res.body.message[0]).to.equal('No account is associated with this email address');
         if (err) return done(err);
         done();
       });
@@ -33,7 +33,7 @@ describe('# Reset password', () => {
         validationKey = res.body.key;
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal(`A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`);
+        expect(res.body.message[0]).to.equal(`A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`);
         expect(res.body).to.have.property('key');
         if (err) return done(err);
         done();
@@ -50,7 +50,7 @@ describe('# Reset password', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('The passwords are not the same');
+        expect(res.body.message[0]).to.equal('The passwords are not the same');
         if (err) return done(err);
         done();
       });
@@ -66,7 +66,7 @@ describe('# Reset password', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('There was an error completing your request. Perhaps, you followed a broken link.');
+        expect(res.body.message[0]).to.equal('There was an error completing your request. Perhaps, you followed a broken link.');
         if (err) return done(err);
         done();
       });
@@ -82,7 +82,7 @@ describe('# Reset password', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Password successfully changed. Please login to your account.');
+        expect(res.body.message[0]).to.equal('Password successfully changed. Please login to your account.');
         if (err) return done(err);
         done();
       });

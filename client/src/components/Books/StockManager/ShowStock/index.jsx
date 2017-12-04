@@ -10,6 +10,14 @@ import StockList from './StockList';
 import AddStock from './AddStock';
 import DeleteStock from './DeleteStock';
 
+const propTypes = {
+  stocks: PropTypes.array.isRequired,
+  getStockManagerByBookIdAction: PropTypes.func.isRequired,
+  addStockAction: PropTypes.func.isRequired,
+  deleteStockAction: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired
+};
+
 /**
  * @class ShowStock
  * @extends {React.Component}
@@ -24,7 +32,11 @@ class ShowStock extends React.Component {
     super(props);
     this.state = {
       bookId: 0,
-      stocks: [],
+      stocks: [{
+        book: {
+          title: ""
+        }
+      }],
       quantity: '',
       isLoading: false,
       isOpenModal: false,
@@ -176,11 +188,11 @@ class ShowStock extends React.Component {
             icon="plus"
           />
         </div>
-        <h4 className="title mb-2 mr-4">Viewing {this.state.stock && this.state.stocks[0].book.title} stock</h4>
+        <h4 className="title mb-2 mr-4">Viewing {this.state.stocks && this.state.stocks[0].book.title} stock</h4>
         <div className="mb-4">
           <small>
                     You can add or edit stock
-                    information for {this.state.stock && this.state.stocks[0].book.title} here.<br/>
+                    information for {this.state.stocks && this.state.stocks[0].book.title} here.<br/>
                     Use the filter form to view from a particular page.
           </small>
         </div>
@@ -193,18 +205,13 @@ class ShowStock extends React.Component {
   }
 }
 
-ShowStock.propTypes = {
-  stocks: PropTypes.array.isRequired,
-  getStockManagerByBookIdAction: PropTypes.func.isRequired,
-  addStockAction: PropTypes.func.isRequired,
-  deleteStockAction: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired
-};
+ShowStock.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   stocks: state.stocks,
 });
 
+export { ShowStock };
 export default connect(mapStateToProps, {
   getStockManagerByBookIdAction: getStockManagerByBookId,
   addStockAction: addStock,

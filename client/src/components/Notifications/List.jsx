@@ -28,7 +28,7 @@ const List = ({
       <div>
         <div className="row">
           {notifications.map((notification, index) => (
-            <div className="col-lg-4 mb-3 align-items-center">
+            <div key={index} className="col-lg-4 mb-3 align-items-center">
               <div key={index} className="row bordered p-2 mx-auto h-100">
                 <div className="col-sm-2 col-4 col-md-4 text-center px-0 col-lg-1">
                   <img

@@ -1,26 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
 import axios from 'axios';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
-import routes from './routes';
-import rootReducer from './reducers';
+import store from './store';
+import Routes from './Routes';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser, logout } from './actions/auth';
 import { addFlashMessage } from './actions/flashMessages';
 
-const { NODE_ENV } = process.env;
-
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    NODE_ENV === 'development' && window.devToolsExtension ? window.devToolsExtension() : f => f
-  )
-);
 
 axios.interceptors.request.use((response) => {
   store.dispatch(showLoading());
@@ -51,5 +39,5 @@ if (localStorage.authToken) {
 }
 
 render(<Provider store={store}>
-  <Router history={browserHistory} routes={routes} />
+  <Routes />
 </Provider>, document.getElementById('app'));

@@ -9,9 +9,9 @@ ratings:
   paths:
   - "**.js"
 exclude_paths:
-- "test/"
+- "server/src/api/v1/tests/"
 - "node_modules/"
-- "templates/"
+- "template/"
 - "server/dist/"
 - "client/node_modules/"
 - "server/src/docs/"

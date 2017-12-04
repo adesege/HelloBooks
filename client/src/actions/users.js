@@ -3,7 +3,6 @@ import types from './types';
 import { addFlashMessage } from './flashMessages';
 import '../config/cloudinary';
 
-const { API_VERSION } = window;
 const {
   GET_USERS,
   USER_UPDATED
@@ -32,7 +31,7 @@ export const getUsers = payload =>
       endpoint = `/${payload.userId}`;
     }
     return axios
-      .get(`/api/${API_VERSION}/users${endpoint}`)
+      .get(`users${endpoint}`)
       .then(
         (data) => {
           dispatch(usersFetched(data.data.data));
@@ -40,7 +39,7 @@ export const getUsers = payload =>
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }
@@ -51,4 +50,4 @@ export const getUsers = payload =>
 export const updateUser = payload =>
   (dispatch) =>
     axios
-      .put(`/api/${API_VERSION}/users/${payload.userId}`, payload);
+      .put(`users/${payload.userId}`, payload);

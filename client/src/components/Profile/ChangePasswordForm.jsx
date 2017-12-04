@@ -10,7 +10,7 @@ const propTypes = {
   toggleOpenModal: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   errors: PropTypes.object.isRequired,
-  serverErrors: PropTypes.string.isRequired
+  serverErrors: PropTypes.array.isRequired
 };
 
 const ChangePassword = ({
@@ -37,7 +37,7 @@ const ChangePassword = ({
     <div
       id="changePassword"
       className="mt-4">
-      {serverErrors && <div className="alert alert-danger">{serverErrors}</div>}
+      {serverErrors.length !== 0 && <div className="alert alert-danger">{serverErrors}</div>}
       <InputField
         placeholder="Current password"
         type="password"

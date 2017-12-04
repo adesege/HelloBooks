@@ -1,23 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import FlashMessage from 'components/flash/FlashMessage';
+import FlashMessage from 'components/FlashMessagesList/FlashMessage';
 import SetTimeout from 'components/miscellaneous/SetTimeout';
 import { deleteFlashMessage } from 'actions/flashMessages';
 
 
-const FlashMessagesList = ({
-  message,
-  deleteFlashMessageAction
-}) => (
-  <SetTimeout interval={10000}>
-    {Object.keys(message).length !== 0 &&
+/**
+ * @class FlashMessagesList
+ * @extends {React}
+ */
+class FlashMessagesList extends React.Component {
+  /**
+   * @returns {undefined}
+   * @memberof FlashMessagesList
+   */
+  componentWillUnmount() {
+    this.props.deleteFlashMessageAction();
+  }
+
+  /**
+   * @returns  {JSX} JSX
+   * @memberof FlashMessagesList
+   */
+  render() {
+    const {
+      message,
+    } = this.props;
+    return (
+      <SetTimeout interval={10000}>
+        {Object.keys(message).length !== 0 &&
     <FlashMessage
       message={message}
-      deleteFlashMessage={deleteFlashMessageAction}
     />}
-  </SetTimeout>
-);
+      </SetTimeout>
+    );
+  }
+}
 
 FlashMessagesList.propTypes = {
   message: PropTypes.object.isRequired,

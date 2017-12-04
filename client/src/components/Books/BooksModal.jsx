@@ -4,7 +4,6 @@ import {
 import {
   addBook,
   updateBook,
-  getBook,
   setBooks
 } from 'actions/books';
 import Modal from 'Modal';
@@ -21,6 +20,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Document, Page } from 'react-pdf/build/entry.webpack';
 import UploadBookCover from './UploadBookCover';
+
+const propTypes = {
+  book: PropTypes.object,
+  coverPhotoPath: PropTypes.string,
+  addFlashMessage: PropTypes.func.isRequired,
+  addBook: PropTypes.func.isRequired,
+  updateBook: PropTypes.func.isRequired,
+  getBook: PropTypes.func,
+  setBooks: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
+  getCategoriesAction: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
 
 /**
  * @class BooksModal
@@ -66,7 +82,6 @@ class BooksModal extends Component {
     this.onChangeUploadFile = this.onChangeUploadFile.bind(this);
     this.onClickOk = this.onClickOk.bind(this);
     this.closeOnClick = this.closeOnClick.bind(this);
-    this.onChangePublishedDate = this.onChangePublishedDate.bind(this);
     this.toggleOpenModal = this.toggleOpenModal.bind(this);
     this.goToBooksPage = this.goToBooksPage.bind(this);
   }
@@ -185,7 +200,7 @@ class BooksModal extends Component {
             const errorMessage =
             typeof errors === 'string' ?
               errors :
-              errors.response.data;
+              errors.response.data.message;
             this.setState({
               isLoading: false,
               serverErrors: errorMessage
@@ -202,14 +217,14 @@ class BooksModal extends Component {
             });
             this.props.addFlashMessage({
               type: 'success',
-              text: response.data
+              text: response.data.message
             });
           },
           (errors) => {
             const errorMessage =
             typeof errors === 'string' ?
               errors :
-              errors.response.data;
+              errors.response.data.message;
             this.setState({
               isLoading: false,
               serverErrors: errorMessage
@@ -291,20 +306,6 @@ class BooksModal extends Component {
     const newBook = {
       ...book,
       [event.target.name]: event.target.value
-    };
-    this.setState({ book: newBook });
-  }
-
-  /**
-     * @returns {void}
-     * @param {string} date
-     * @memberof BooksModal
-     */
-  onChangePublishedDate(date) {
-    const { book } = this.state;
-    const newBook = {
-      ...book,
-      publishedDate: date
     };
     this.setState({ book: newBook });
   }
@@ -561,22 +562,9 @@ class BooksModal extends Component {
   }
 }
 
-BooksModal.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+BooksModal.contextTypes = contextTypes;
 
-BooksModal.propTypes = {
-  book: PropTypes.object,
-  coverPhotoPath: PropTypes.string,
-  addFlashMessage: PropTypes.func.isRequired,
-  addBook: PropTypes.func.isRequired,
-  updateBook: PropTypes.func.isRequired,
-  getBook: PropTypes.func.isRequired,
-  setBooks: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired,
-  getCategoriesAction: PropTypes.func.isRequired,
-  categories: PropTypes.array.isRequired
-};
+BooksModal.propTypes = propTypes;
 
 const mapStateToProps = (state, props) => {
   if (props.params.id && state.books && state.books.books) {
@@ -594,11 +582,12 @@ const mapStateToProps = (state, props) => {
   };
 };
 
+export { BooksModal };
+
 export default connect(mapStateToProps, {
   addFlashMessage,
   addBook,
   updateBook,
-  getBook,
   setBooks,
   getCategoriesAction: getBookCategories
 })(BooksModal);

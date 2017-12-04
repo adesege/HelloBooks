@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FlashMessagesList from '../../flash/FlashMessagesList';
-import InputField from '../../form/InputField';
-import Button from '../../form/Button';
+import FlashMessagesList from 'components/FlashMessagesList';
+import InputField from 'form/InputField';
+import Button from 'form/Button';
 
+const propTypes = {
+  user: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+};
 
 const ResetPasswordForm = (props) => (
   <form onSubmit={props.onSubmit}>
@@ -30,12 +37,6 @@ const ResetPasswordForm = (props) => (
   </form>
 );
 
-ResetPasswordForm.propTypes = {
-  user: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-};
+ResetPasswordForm.propTypes = propTypes;
 
 export default ResetPasswordForm;

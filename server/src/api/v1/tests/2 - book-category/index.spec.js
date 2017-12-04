@@ -19,7 +19,7 @@ describe('# Books Category', () => {
       .end((err, res) => {
         global.bookCategoryId = res.body.id;
         expect(res.statusCode).to.equal(201);
-        expect(res.body.message).to.equal('Category added successfully');
+        expect(res.body.message[0]).to.equal('Category added successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -35,7 +35,7 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.a('object');
-        expect(res.body.message).to.equal('The category name field is required');
+        expect(res.body.message[0]).to.equal('The category name field is required');
         if (err) return done(err);
         done();
       });
@@ -91,7 +91,7 @@ describe('# Books Category', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.equal('Category updated successfully');
+        expect(res.body.message[0]).to.equal('Category updated successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -135,7 +135,7 @@ describe('# Books Category', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.equal('Category deleted successfully');
+        expect(res.body.message[0]).to.equal('Category deleted successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -150,7 +150,7 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Category not found');
+        expect(res.body.message[0]).to.equal('Category not found');
         if (err) return done(err);
         done();
       });

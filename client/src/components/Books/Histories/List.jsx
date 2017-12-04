@@ -14,8 +14,7 @@ const propTypes = {
   userId: PropTypes.number.isRequired,
   getHistoriesAction: PropTypes.func.isRequired,
   isReturned: PropTypes.bool,
-  pagination: PropTypes.object.isRequired,
-  limit: PropTypes.number.isRequired
+  pagination: PropTypes.object.isRequired
 };
 
 const contextTypes = {

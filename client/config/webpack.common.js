@@ -50,7 +50,8 @@ const DefinePlugin = new webpack.DefinePlugin({
     DISQUS_SHORT_NAME: JSON.stringify(process.env.DISQUS_SHORT_NAME),
     ROOT_URL: JSON.stringify(process.env.ROOT_URL),
     TIMEZONE: JSON.stringify(process.env.TIMEZONE),
-    SOCKET_URL: JSON.stringify(process.env.SOCKET_URL)
+    SOCKET_URL: JSON.stringify(process.env.SOCKET_URL),
+    API_VERSION: JSON.stringify(process.env.API_VERSION)
   }
 });
 

@@ -17,7 +17,7 @@ const propTypes = {
   isLoading: PropTypes.bool.isRequired,
   passwordChange: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  serverErrors: PropTypes.string.isRequired,
+  serverErrors: PropTypes.array.isRequired,
 };
 
 const Info = ({

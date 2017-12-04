@@ -2,7 +2,6 @@ import axios from 'axios';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const { API_VERSION } = window;
 const { STOCK_MANAGER_FETCHED, STOCK_ADDED, STOCK_DELETED } = types;
 
 
@@ -29,7 +28,7 @@ export const stockManagerFetched = (data) => ({
  */
 export const getStockManagerByBookId = data =>
   dispatch =>
-    axios.get(`/api/${API_VERSION}/books/stocks?bookId=${data.bookId}`)
+    axios.get(`books/stocks?bookId=${data.bookId}`)
       .then(
         (response) => {
           dispatch(stockManagerFetched(response.data.data));
@@ -46,7 +45,7 @@ export const getStockManagerByBookId = data =>
  */
 export const addStock = data =>
   dispatch =>
-    axios.post(`/api/${API_VERSION}/books/stocks`, data)
+    axios.post(`books/stocks`, data)
       .then(
         (response) => {
           dispatch(stockAdded(response.data.data));
@@ -59,7 +58,7 @@ export const addStock = data =>
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }
@@ -73,7 +72,7 @@ export const addStock = data =>
  */
 export const deleteStock = data =>
   dispatch =>
-    axios.delete(`/api/${API_VERSION}/books/stocks/${data.id}`)
+    axios.delete(`books/stocks/${data.id}`)
       .then(
         (response) => {
           dispatch(stockDeleted(data.id));
@@ -86,7 +85,7 @@ export const deleteStock = data =>
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }

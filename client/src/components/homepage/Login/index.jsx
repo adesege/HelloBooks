@@ -11,6 +11,18 @@ import passportConfig from 'config/passport';
 import validateUser from 'utils/validators/user';
 import LoginForm from './LoginForm';
 
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
+const propTypes = {
+  login: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
+  logUserIn: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
+};
+
 /**
  * @class Login
  * @extends {React.Component}
@@ -111,26 +123,16 @@ class Login extends React.Component {
     if (!this.isFormValid()) { return; }
 
     this.setState({ isLoading: true });
-    this.props.login(this.state.user).then(
-      (data) => {
-        this.setState({
-          isLoading: false
-        });
-        this.props.logUserIn(data);
-        this.context.router.push('/dashboard');
-      },
-      (errors) => {
-        this.setState({
-          isLoading: false
-        });
-        if (errors.response) {
-          this.props.addFlashMessage({
-            type: 'error',
-            text: errors.response.data
+    this.props.login(this.state.user)
+      .then((data) => {
+        if (data.response && data.response.status >= 400) {
+          this.setState({
+            isLoading: false
           });
+        } else {
+          this.context.router.push('/dashboard');
         }
-      }
-    );
+      });
   }
 
   /**
@@ -216,16 +218,9 @@ class Login extends React.Component {
   }
 }
 
-Login.contextTypes = {
-  router: PropTypes.object.isRequired
-};
-Login.propTypes = {
-  login: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
-  setCurrentUser: PropTypes.func.isRequired,
-  logUserIn: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
-};
+Login.contextTypes = contextTypes;
+
+Login.propTypes = propTypes;
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   login,
@@ -238,4 +233,5 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+export { Login };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

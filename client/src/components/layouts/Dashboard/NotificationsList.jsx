@@ -28,7 +28,7 @@ const defaultProps = ({
   isPagination: true
 });
 
-const List = ({
+const NotificationList = ({
   notifications,
   isPagination
 }) => (
@@ -63,15 +63,15 @@ const List = ({
             </div>
           </div>
         ))}
-        <Link className="btn btn-primary btn-sm btn-block" to="/notifications">See more</Link>
       </div> :
       <EmptyMessage
         absolute={false}
       />}
+    <Link className="btn btn-primary btn-sm btn-block" to="/notifications">See more</Link>
   </div>
 );
 
-List.propTypes = propTypes;
-List.defaultProps = defaultProps;
+NotificationList.propTypes = propTypes;
+NotificationList.defaultProps = defaultProps;
 
-export default List;
+export default NotificationList;
