@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "A simple application that helps manage a library and its processes like stocking, tracking and renting books.",
   "scripts": {
-    "coveralls": "NODE_ENV=test nyc npm test && nyc report --reporter=lcov --reporter=text --reporter=lcovonly || coveralls",
+    "coveralls": "NODE_ENV=test nyc npm test && nyc report --reporter=lcov --reporter=text --reporter=json  && cd ./client && npm i && npm run coverage || coveralls",
     "babel": "rm -rf server/dist && babel server/src/ --watch --out-dir server/dist/",
-    "watch": "NODE_ENV=development nodemon --watch server/dist ./server/dist/server.js",
+    "watch": "nodemon --watch server/dist ./server/dist/server.js",
     "start": "NODE_ENV=production node ./server/dist/server.js",
     "build": "rm -rf server/dist && babel server/src/ --out-dir server/dist/",
     "heroku-postbuild": "cd client && npm i && npm run build && cd ../ && npm run build",
-    "test": "NODE_ENV=test npm run test:db:migrate:undo && npm run test:db && mocha --compilers js:babel-register \"server/src/api/v1/tests/**/**.spec.js\" --timeout 100000",
-    "test:db": "sequelize db:migrate --env test",
-    "test:db:migrate:undo": "sequelize db:migrate:undo:all --env test"
+    "test": "NODE_ENV=test npm run test:db && mocha --compilers js:babel-register \"server/src/api/v1/tests/**/**.spec.js\" --timeout 100000",
+    "test:db": "npm run test:db:migrate:undo && sequelize db:migrate --env test",
+    "test:db:migrate:undo": "sequelize db:migrate:undo:all --env test",
+    "e2e-setup": "selenium-standalone install",
+    "e2e-server": "selenium-standalone start",
+    "test:e2e": "npm run test:db && nightwatch"
   },
   "nyc": {
     "exclude": [
@@ -74,10 +77,12 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.14",
     "morgan": "^1.8.2",
+    "nightwatch": "^0.9.16",
     "nodemailer": "^4.1.1",
     "nyc": "11.1.0",
     "pg": "^7.1.0",
     "pg-hstore": "^2.3.2",
+    "selenium-standalone": "^6.11.0",
     "sequelize": "^4.4.2",
     "sequelize-cli": "^2.8.0",
     "socket.io": "^2.0.4",

@@ -1,4 +1,5 @@
 import model from '../models';
+import { formatErrorMessage } from '../utils/index';
 
 const { Book, stockManager } = model;
 
@@ -27,13 +28,13 @@ class StockManagerClass {
             res
               .status(201)
               .send({
-                message: 'Stock added successfully',
+                message: ['Stock added successfully'],
                 id: newStock.get('id'),
                 data: newStock.dataValues
               }))
-            .catch(error => res.status(400).send({ message: error.message }));
+            .catch(errors => res.status(400).send({ message: formatErrorMessage(errors) }));
         } else {
-          return res.status(404).send({ message: 'Book not found' });
+          return res.status(404).send({ message: ['Book not found'] });
         }
       });
   }
@@ -64,12 +65,12 @@ class StockManagerClass {
                 }
               });
             return res.status(200)
-              .send({ message: 'Stock deleted successfully' });
+              .send({ message: ['Stock deleted successfully'] });
           });
         } else {
           return res
             .status(404)
-            .send({ message: 'Stock not found' });
+            .send({ message: ['Stock not found'] });
         }
       });
   }
@@ -90,7 +91,7 @@ class StockManagerClass {
       })
       .then(stocks => res
         .status(200)
-        .send({ message: '', data: stocks }));
+        .send({ message: [''], data: stocks }));
   }
 }
 

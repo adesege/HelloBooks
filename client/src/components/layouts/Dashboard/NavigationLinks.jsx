@@ -5,9 +5,22 @@ import { Collapse, Nav, NavItem, Dropdown, DropdownToggle, DropdownItem, Dropdow
 import classnames from 'classnames';
 import NotificationList from './NotificationsList';
 
+const propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  user: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  isDropdownOpen: PropTypes.bool.isRequired,
+  toggleDropdown: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  toggleNotificationDropdown: PropTypes.func.isRequired,
+  isNotificationDropdownOpen: PropTypes.bool.isRequired,
+  isNewNotification: PropTypes.bool.isRequired,
+  menuNotifications: PropTypes.array.isRequired
+};
+
 const NavigationLinks = ({
   isAuthenticated,
-  group,
+  user,
   isOpen,
   isDropdownOpen,
   toggleDropdown,
@@ -39,7 +52,7 @@ const NavigationLinks = ({
             <Link className="dropdown-item" to="/books">
               <i className="fa fa-book" /> Books
             </Link>
-            {(isAuthenticated && group === 'admin') && (
+            {(isAuthenticated && user.group === 'admin') && (
               <div>
                 <DropdownItem header>Books Categories</DropdownItem>
                 <Link className="dropdown-item" to="/books/categories">
@@ -59,7 +72,7 @@ const NavigationLinks = ({
           <i className="fa fa-user" /> Profile
         </Link>
       </NavItem>
-      {(isAuthenticated && group === 'admin') && (
+      {(isAuthenticated && user.group === 'admin') && (
         <NavItem>
           <Dropdown isOpen={isNotificationDropdownOpen} toggle={toggleNotificationDropdown}
             id="notifications"
@@ -88,16 +101,6 @@ const NavigationLinks = ({
   </Collapse>
 );
 
-NavigationLinks.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  group: PropTypes.string.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  isDropdownOpen: PropTypes.bool.isRequired,
-  toggleDropdown: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
-  toggleNotificationDropdown: PropTypes.func.isRequired,
-  isNotificationDropdownOpen: PropTypes.bool.isRequired,
-  isNewNotification: PropTypes.bool.isRequired,
-  menuNotifications: PropTypes.array.isRequired
-};
+NavigationLinks.propTypes = propTypes;
+
 export default NavigationLinks;

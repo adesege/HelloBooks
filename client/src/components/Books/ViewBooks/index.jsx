@@ -166,6 +166,7 @@ const mapStateToProps = (state, props) => {
   };
 };
 
+export { ViewBooks };
 export default connect(
   mapStateToProps,
   {

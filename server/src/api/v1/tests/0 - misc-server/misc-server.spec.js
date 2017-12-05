@@ -10,7 +10,7 @@ describe('# Server side', () => {
     request.get('/api')
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message).to.equal('Welcome to Hello-Books api!');
+        expect(res.body.message[0]).to.equal('Welcome to Hello-Books api!');
         if (err) return done(err);
         done();
       });

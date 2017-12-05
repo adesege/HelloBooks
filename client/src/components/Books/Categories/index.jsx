@@ -270,6 +270,7 @@ const mapStateToProps = state => ({
   bookCategories: state.categories
 });
 
+export { Categories };
 export default connect(
   mapStateToProps,
   {

@@ -12,10 +12,10 @@ import SearchFilter from './SearchFilter';
 const propTypes = {
   books: PropTypes.array.isRequired,
   userGroup: PropTypes.string,
-  goToEditPage: PropTypes.func,
-  confirmDelete: PropTypes.func,
-  pagination: PropTypes.object,
-  handlePageChange: PropTypes.func,
+  goToEditPage: PropTypes.func.isRequired,
+  confirmDelete: PropTypes.func.isRequired,
+  pagination: PropTypes.object.isRequired,
+  handlePageChange: PropTypes.func.isRequired,
   getBooks: PropTypes.func.isRequired,
   getBookCategories: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
@@ -235,6 +235,7 @@ const mapStateToProps = state => ({
 
 });
 
+export { BooksList };
 export default connect(mapStateToProps, {
   getBooks,
   setBooks,

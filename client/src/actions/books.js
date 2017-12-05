@@ -5,12 +5,9 @@ import { addFlashMessage } from './flashMessages';
 import '../config/cloudinary';
 import { parseCloudinaryURL } from '../utils';
 
-const { API_VERSION } = window;
-
 const {
   SET_BOOKS,
   BOOK_ADDED,
-  BOOK_FETCHED,
   BOOK_UPDATED,
   BOOK_DELETED,
   BOOKS_SEARCHED
@@ -37,15 +34,6 @@ export const bookDeleted = bookId => ({
   bookId: bookId.id
 });
 
-/**
- * @export
- * @param {any} book
- * @returns  {object} book action
- */
-export const bookFetched = book => ({
-  type: BOOK_FETCHED,
-  book
-});
 
 export const bookAdded = book =>
   ({
@@ -76,7 +64,7 @@ export const getBooks = (data) =>
     const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
     const id = data && data.id ? data.id : '';
     return axios
-      .get(`/api/${API_VERSION}/books/${id}?${toQueryString}`)
+      .get(`books/${id}?${toQueryString}`)
       .then(
         (response) => {
           dispatch(setBooks({
@@ -87,7 +75,7 @@ export const getBooks = (data) =>
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }
@@ -163,8 +151,7 @@ export const deletePhoto = publicId => {
  */
 export const updateBookCoverFile = data => axios
   .put(
-    `/api/${API_VERSION}/books/${data.id}
-        ?fields[]=coverPhotoPath&fields[]=documentPath`,
+    `books/${data.id}?fields[]=coverPhotoPath&fields[]=documentPath`,
     data
   );
 
@@ -180,6 +167,10 @@ export const uploadBookAsset = (assetObject, publicIDs) =>
         .catch(error => Promise.reject(error.message)))
     .catch(error => Promise.reject(error.message));
 
+/**
+ * @returns {Promise} response promise
+ * @param {object} data
+ */
 export const addBook = data =>
   (dispatch) => {
     const imageData = data.coverPhotoPath;
@@ -190,7 +181,7 @@ export const addBook = data =>
       documentPath: ''
     };
     return axios
-      .post(`/api/${API_VERSION}/books`, newData)
+      .post(`books`, newData)
       .then(response =>
         uploadBookAsset({
           imageData,
@@ -226,7 +217,7 @@ export const updateBook = data =>
       documentPath: ''
     };
     return axios
-      .put(`/api/${API_VERSION}/books/${data.id}`, newData)
+      .put(`books/${data.id}`, newData)
       .then((response) => uploadBookAsset({
         imageData,
         fileData
@@ -261,7 +252,7 @@ export const updateBook = data =>
 export const deleteBook = data =>
   dispatch =>
     axios
-      .delete(`/api/${API_VERSION}/books/${data.id}`, data)
+      .delete(`books/${data.id}`, data)
       .then((response) => {
         deletePhoto(parseCloudinaryURL(data.coverPhotoPath).public_id)
           .then(() =>
@@ -270,7 +261,7 @@ export const deleteBook = data =>
                 dispatch(bookDeleted(data));
                 dispatch(addFlashMessage({
                   type: 'success',
-                  text: response.data
+                  text: response.data.message
                 }));
                 return response;
               })
@@ -280,19 +271,19 @@ export const deleteBook = data =>
       .catch(errors =>
         dispatch(addFlashMessage({
           type: 'error',
-          text: errors.response.data
+          text: errors.response.data.message
         })));
 
 
 /**
  * @export
  * @param {any} title
- * @returns {func} promise
+ * @returns {Promise} Response promise
  */
 export const searchBooks = title =>
   dispatch =>
     axios
-      .get(`/api/${API_VERSION}/search?q=${encodeURIComponent(title)}&type=books`)
+      .get(`search?q=${encodeURIComponent(title)}&type=books`)
       .then(
         (response) => {
           dispatch(booksSearched(response.data.data));

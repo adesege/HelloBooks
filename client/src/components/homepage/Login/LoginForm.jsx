@@ -5,6 +5,16 @@ import FlashMessagesList from '../../flash/FlashMessagesList';
 import InputField from '../../form/InputField';
 import Button from '../../form/Button';
 
+const propTypes = {
+  login: PropTypes.func.isRequired,
+  logUserIn: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  validationError: PropTypes.object.isRequired
+};
 
 const LoginForm = (props) => (
   <form onSubmit={props.onSubmit}>
@@ -56,15 +66,6 @@ const LoginForm = (props) => (
   </form>
 );
 
-LoginForm.propTypes = {
-  login: PropTypes.func.isRequired,
-  logUserIn: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  validationError: PropTypes.object.isRequired
-};
+LoginForm.propTypes = propTypes;
 
 export default LoginForm;

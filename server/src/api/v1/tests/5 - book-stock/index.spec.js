@@ -25,7 +25,7 @@ describe('# Stocks', () => { // Describe Books Stocks
       .end((err, res) => {
         stockId = res.body.id;
         expect(res.statusCode).to.equal(201);
-        expect(res.body.message).to.equal('Stock added successfully');
+        expect(res.body.message[0]).to.equal('Stock added successfully');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -46,7 +46,7 @@ describe('# Stocks', () => { // Describe Books Stocks
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Validation error: Quantity cannot be empty');
+        expect(res.body.message[0]).to.equal('Quantity cannot be empty');
         if (err) return done(err);
         done();
       });
@@ -66,7 +66,7 @@ describe('# Stocks', () => { // Describe Books Stocks
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Book not found');
+        expect(res.body.message[0]).to.equal('Book not found');
         if (err) return done(err);
         done();
       });
@@ -97,7 +97,7 @@ describe('# Stocks', () => { // Describe Books Stocks
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Stock deleted successfully');
+        expect(res.body.message[0]).to.equal('Stock deleted successfully');
         if (err) return done(err);
         done();
       });
@@ -111,7 +111,7 @@ describe('# Stocks', () => { // Describe Books Stocks
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Stock not found');
+        expect(res.body.message[0]).to.equal('Stock not found');
         if (err) return done(err);
         done();
       });

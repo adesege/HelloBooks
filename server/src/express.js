@@ -19,7 +19,7 @@ app
     (req, res) =>
       res
         .status(200)
-        .send({ message: 'Welcome to Hello-Books api!' })
+        .send({ message: ['Welcome to Hello-Books api!'] })
   );
 
 app.use(expressApiVersioning({
@@ -32,7 +32,7 @@ app.use(expressApiVersioning({
     App(app);
   } else if (error && error.code !== 104) {
     return res.status(404).send({
-      message: 'It\'s not us. Sorry, we can\'t find this endpoint'
+      message: ['It\'s not us. Sorry, we can\'t find this endpoint']
     });
   }
   next(); // calls the next middleware

@@ -2,8 +2,6 @@ import axios from 'axios';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
 
-const { API_VERSION } = window;
-
 const {
   GET_NOTIFICATIONS
 } = types;
@@ -26,7 +24,7 @@ export const getNotifications = data =>
     const searchQuery = data ? new URLSearchParams(data) : null; // converts an object to query string
     const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
     return axios
-      .get(`/api/${API_VERSION}/notifications?${toQueryString}`)
+      .get(`notifications?${toQueryString}`)
       .then(
         (response) => {
           dispatch(notificationsFetched({
@@ -37,7 +35,7 @@ export const getNotifications = data =>
         (errors) => {
           dispatch(addFlashMessage({
             type: 'error',
-            text: errors.response.data
+            text: errors.response.data.message
           }));
           return errors;
         }
