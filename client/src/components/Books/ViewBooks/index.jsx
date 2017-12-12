@@ -42,7 +42,11 @@ class ViewBooks extends React.Component {
     super(props);
     const { userId, params } = this.props;
     this.state = {
-      book: this.props.book ? this.props.book : {},
+      book: this.props.book ? this.props.book : {
+        Category: {
+          name: ''
+        }
+      },
       borrowBook: {
         userId,
         bookId: params.id
@@ -92,6 +96,7 @@ class ViewBooks extends React.Component {
       ISBN,
       Category
     } = this.state.book;
+    console.log(Category, '-----------');
     const {
       params,
       borrowBookAction,

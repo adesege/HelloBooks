@@ -1,3 +1,4 @@
 export default {
-  name: 'Category 1'
+  name: 'Category 1',
+  id: 1
 };

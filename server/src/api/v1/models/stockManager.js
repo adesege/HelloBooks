@@ -18,6 +18,10 @@ export default (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'Quantity cannot be empty'
+        },
+        not: {
+          args: ['[a-z]', 'i'],
+          msg: 'Quantity must be integer'
         }
       }
     }

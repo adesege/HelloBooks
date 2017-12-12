@@ -1,6 +1,6 @@
 import findIndex from 'lodash/findIndex';
 import types from '../actions/types';
-import { initialBookState, initialAuthState } from './initialState';
+import { initialBookState } from './initialState';
 
 const {
   SET_BOOKS,
@@ -9,8 +9,6 @@ const {
   BOOK_UPDATED,
   BOOK_DELETED
 } = types;
-
-console.log(initialAuthState, '------------');
 
 export default (state = initialBookState, action = {}) => {
   /* eslint-disable no-case-declarations */
