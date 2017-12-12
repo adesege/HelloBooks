@@ -13,6 +13,10 @@ export default (sequelize, DataTypes) => {
           notEmpty: {
             args: true,
             msg: 'Please select a book to borrow'
+          },
+          not: {
+            args: ['[a-z]', 'i'],
+            msg: 'Book ID must be integer'
           }
         }
       },
@@ -23,6 +27,10 @@ export default (sequelize, DataTypes) => {
           notEmpty: {
             args: true,
             msg: 'Invalid user'
+          },
+          not: {
+            args: ['[a-z]', 'i'],
+            msg: 'User ID must be integer'
           }
         }
       },

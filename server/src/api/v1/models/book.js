@@ -6,10 +6,15 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false,
         validate: {
           notEmpty: {
             args: true,
             msg: 'You haven\'t selected a book to update.'
+          },
+          not: {
+            args: ['[a-z]', 'i'],
+            msg: 'Book ID must be integer'
           }
         }
       },

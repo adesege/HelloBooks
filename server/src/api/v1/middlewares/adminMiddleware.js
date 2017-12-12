@@ -1,4 +1,4 @@
-const router = (req, res, next) => {
+const adminMiddleware = (req, res, next) => {
   const { group } = req.decoded;
   if (group !== 'admin') { // check that the signed in user is an admin
     return res
@@ -8,4 +8,4 @@ const router = (req, res, next) => {
   next();
 };
 
-export default router;
+export default adminMiddleware;
