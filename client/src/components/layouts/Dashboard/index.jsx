@@ -17,14 +17,20 @@ const propTypes = {
 const contextTypes = {
   router: PropTypes.object.isRequired
 };
+
 /**
+ * Dashboard component
+ *
  * @class Dashboard
+ *
  * @extends {React.Component}
  */
 class Dashboard extends React.Component {
   /**
    * Creates an instance of Dashboard.
-   * @param {any} props
+   *
+   * @param {object} props
+   *
    * @memberof Dashboard
    */
   constructor(props) {
@@ -41,14 +47,18 @@ class Dashboard extends React.Component {
     this.logout = this.logout.bind(this);
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.toggleDropdown = this.toggleDropdown.bind(this);
-    this.toggleNotificationDropdown = this.toggleNotificationDropdown.bind(this);
+    this.toggleNotificationDropdown = this.toggleNotificationDropdown
+      .bind(this);
     this.onNewNotifications = this.onNewNotifications.bind(this);
   }
 
   /**
-   * @returns{undefined}
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
    * @memberof Dashboard
-   */
+  */
   componentDidMount() {
     removeBookBg();
     const { user } = this.props.auth;
@@ -58,10 +68,14 @@ class Dashboard extends React.Component {
     }
   }
   /**
- * @returns {undefined}
- * @param {any} event
- * @memberof Dashboard
- */
+   * Logout method
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof Dashboard
+  */
   logout(event) {
     event.preventDefault();
     this.props.logoutAction();
@@ -69,9 +83,12 @@ class Dashboard extends React.Component {
   }
 
   /**
-   * @returns {void}
+   * Toggle navbar visibility
+   *
+   * @returns {undefined}
+   *
    * @memberof Menu
-   */
+  */
   toggleNavbar() {
     this.setState({
       isOpen: !this.state.isOpen
@@ -79,8 +96,11 @@ class Dashboard extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @memberof Menu
+   * Toggle books dropdown
+   *
+   * @returns {undefined}
+   *
+   * @memberof Dashboard
    */
   toggleDropdown() {
     this.setState({
@@ -89,9 +109,12 @@ class Dashboard extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @memberof Menu
-   */
+   * Toggle notification dropdown
+   *
+   * @returns {undefined}
+   *
+   * @memberof Dashboard
+  */
   toggleNotificationDropdown() {
     this.setState({
       isNotificationDropdownOpen: !this.state.isNotificationDropdownOpen
@@ -105,14 +128,18 @@ class Dashboard extends React.Component {
   }
 
   /**
+   * Set state when there is a new notification
+   *
    * @returns {undefined}
-   * @memberof Menu
-   */
+   *
+   * @memberof Dashboard
+  */
   onNewNotifications() {
     ioNewNotifications((error, data) => {
       if (!error) {
         const { menuNotifications } = this.state;
-        const notification = data.notifications.concat(menuNotifications).slice(0, 5);
+        const notification = data.notifications
+          .concat(menuNotifications).slice(0, 5);
         this.setState({
           menuNotifications: notification,
           isNewNotification: !!data.isNew
@@ -122,9 +149,12 @@ class Dashboard extends React.Component {
   }
 
   /**
-   * @returns  {JSX} jsx
+   * Renders component
+   *
+   * @returns  {JSX} JSX
+   *
    * @memberof Dashboard
-   */
+  */
   render() {
     return (
       <div>
@@ -134,7 +164,8 @@ class Dashboard extends React.Component {
           navigationLinks={{
             ...this.state,
             toggleDropdown: this.toggleDropdown,
-            toggleNotificationDropdown: this.toggleNotificationDropdown
+            toggleNotificationDropdown: this.toggleNotificationDropdown,
+            toggleNavbar: this.toggleNavbar
           }}
         />
         <Content>
@@ -149,6 +180,13 @@ class Dashboard extends React.Component {
 Dashboard.propTypes = propTypes;
 Dashboard.contextTypes = contextTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = (state) => ({
   auth: state.auth
 });

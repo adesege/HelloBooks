@@ -1,12 +1,20 @@
 import jwt from 'jsonwebtoken';
-import app from '../../../express';
 
+/**
+ * Middleware to authenticate a user
+ *
+ * @param {object} req
+ * @param {object} res
+ * @param {func} next
+ *
+ * @returns {object} message response
+ */
 const authMiddleware = (req, res, next) => {
   const token = req.headers['authenticate-token'] || '';
 
   if (token) {
     /* decode jwt token */
-    jwt.verify(token, app.get('secret'), (err, decoded) => {
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
       if (err) {
         return res
           .status(401)
@@ -28,7 +36,7 @@ const authMiddleware = (req, res, next) => {
     });
   } else {
     return res
-      .status(401)
+      .status(403)
       .send({ message: ['Failed to authenticate user.'] });
   }
 };

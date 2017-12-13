@@ -4,17 +4,22 @@ import { sendErrors } from '../utils';
 const { Notification, Book, User } = model;
 
 /**
+ * Notification Controller
+ *
  * @class NotificationController
- * @classdesc Notification Class
- */
+*/
 class NotificationController {
   /**
-    * @method get
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @return {object} - notifications
-   */
-  static get(req, res) {
+   * Gets all notification or by id
+   *
+   * @method get
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - notifications
+  */
+  static getNotifications(req, res) {
     const {
       notificationType, name
     } = req.query;

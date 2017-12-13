@@ -10,18 +10,22 @@ const {
 
 /**
  * Handles Book CRUD and borrowed book actions
+ *
  * @class BookController
- * @classdesc Book Class
- */
+*/
 class BookController {
   /**
-   * Creates a book and returns the book id on success or error messages on failure
-   * @method create
+   * Creates a book and returns the book id on success
+   * or error messages on failure
+   *
+   * @method addBook
+   *
    * @param {object} req - express http request
    * @param {object} res - express http response
+   *
    * @return {object} new created book
    */
-  static create(req, res) {
+  static addBook(req, res) {
     const title = `${req.body.title}`;
     req.body.userId = req.decoded.user;
     const stock = {
@@ -78,12 +82,15 @@ class BookController {
 
   /**
      * Edits a book and returns the updated book on success
-     * @method edit
+     *
+     * @method editBooks
+     *
      * @param {object} req - express http request
      * @param {object} res - express http response
+     *
      * @returns {object} - updated book
      */
-  static edit(req, res) {
+  static editBooks(req, res) {
     const id = req.params.bookId;
     const fields = req.query.fields &&
      (req.query.fields !== '') ?
@@ -129,12 +136,15 @@ class BookController {
 
   /**
    * Gets all books or a particular book by id
-   * @method get
+   *
+   * @method getBooks
+   *
    * @param {object} req - express http request
    * @param {object} res - express http response
+   *
    * @return {object} - all books in the Book table
    */
-  static get(req, res) {
+  static getBooks(req, res) {
     const { id } = req.params;
     let { offset, limit } = req.query;
     const { author, title, bookCategoryId } = req.query;
@@ -177,9 +187,12 @@ class BookController {
 
   /**
    * Allows a user to borrow a book
+   *
    * @method borrowBook
+   *
    * @param {object} req - express http request
    * @param {object} res - express http response
+   *
    * @return {object} borrowed book id
    */
   static borrowBook(req, res) {
@@ -238,7 +251,7 @@ class BookController {
                 res
                   .status(201)
                   .send({
-                    message: ['You have successfully  borrowed this book'],
+                    message: ['You have successfully borrowed this book'],
                     id: id.get('id')
                   }));
           })
@@ -249,10 +262,13 @@ class BookController {
 
   /**
    * Gets all bprrowed books or by userId and bookId
-    * @method getBorrowedBook
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @return {object} - all borrowed books
+   *
+   * @method getBorrowedBook
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - all borrowed books
   */
   static getBorrowedBook(req, res) {
     const { userId } = req.params;
@@ -285,8 +301,10 @@ class BookController {
 
   /**
    * Returns a borrowed book
+   *
    * @param {object} req - express http request
    * @param {object} res - express http response
+   *
    * @return {object} borrowed book payload
    */
   static returnBorrowedBook(req, res) {
@@ -335,13 +353,16 @@ class BookController {
   }
 
   /**
-  * Deletes a book
-  * @method delete
-  * @param {object} req - express http request
-  * @param {object} res - express http response
-  * @returns {undefined} - deleted book payload
+   * Deletes a book
+   *
+   * @method delete
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @returns {undefined} - deleted book payload
   */
-  static delete(req, res) { // delete a book
+  static deleteBook(req, res) { // delete a book
     const id = parseInt(req.params.id, 10);
     return Book
       .findById(id)
@@ -366,11 +387,14 @@ class BookController {
   }
 
   /**
-    * Gets borrowed book history
-    * @method getHistories
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @return {object} borrowed book history
+   * Gets borrowed book history
+   *
+   * @method getHistories
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} borrowed book history
   */
   static getHistories(req, res) {
     const { userId } = req.params;

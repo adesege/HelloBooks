@@ -10,7 +10,15 @@ const {
   BOOK_DELETED
 } = types;
 
-export default (state = initialBookState, action = {}) => {
+/**
+ * Handles books reducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} new state
+*/
+const books = (state = initialBookState, action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case SET_BOOKS:
@@ -73,3 +81,5 @@ export default (state = initialBookState, action = {}) => {
     return state;
   }
 };
+
+export default books;

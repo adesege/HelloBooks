@@ -12,64 +12,51 @@ const propTypes = {
 };
 
 /**
- * @class Books
- * @extends {React.Component}
+ * Books component
+ *
+ * @param {object} props
+ *
+ * @param {object} context
+ *
+ * @returns {JSX} JSX
  */
-class Books extends React.Component {
+const Books = (props, context) => {
   /**
-     * Creates an instance of Books.
-     * @param {object} props
-     * @memberof Books
-     */
-  constructor(props) {
-    super(props);
-    this.goToAddPage = this.goToAddPage.bind(this);
-  }
+   * Go to add book page
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof Books
+  */
+  const goToAddPage = (event) => {
+    context.router.push('/books/add');
+  };
 
-  /**
-     * @returns {void}
-     * @memberof Books
-     */
-
-  /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof Books
-     */
-  goToAddPage(event) {
-    this.context.router.push('/books/add');
-  }
-
-  /**
-     * @returns {object} JSX
-     * @memberof Books
-     */
-  render() {
-    return (
-      <div>
-        {this.props.children}
-        <div className="toolaction">
-          <Button
-            type="button"
-            icon="plus"
-            iconClass="text-white"
-            className="btn-success p-0"
-            id="add-books-btn"
-            onClick={this.goToAddPage}
-          />
-        </div>
-        <h4 className="title mb-2 mr-4">Books</h4>
-        <div className="mb-4">
-          <small>View books</small>
-        </div>
-        <BooksList />
+  return (
+    <div>
+      {props.children}
+      <div className="toolaction">
+        <Button
+          type="button"
+          icon="plus"
+          iconClass="text-white"
+          className="btn-success p-0"
+          id="add-books-btn"
+          onClick={goToAddPage}
+        />
       </div>
-    );
-  }
-}
+      <h4 className="title mb-2 mr-4">Books</h4>
+      <div className="mb-4">
+        <small>View books</small>
+      </div>
+      <BooksList />
+    </div>
+  );
+};
 
 Books.contextTypes = contextTypes;
 Books.propTypes = propTypes;
 
-export { Books };
 export default Books;

@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const common = require('./webpack.common');
 
@@ -51,6 +52,12 @@ module.exports = merge(common, {
   },
   plugins: [
     extractSass,
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     new webpack.optimize.UglifyJsPlugin()
   ],
 });

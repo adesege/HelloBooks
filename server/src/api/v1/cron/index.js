@@ -1,6 +1,11 @@
 import sendSurcharge from './sendSurcharge';
 import { setCron } from '../utils';
 
+/**
+ * Send surcharge job
+ *
+ * @returns {func} an instance of cron job
+ */
 export const sendSurchargeJob = () =>
   setCron({
     cronTime: '* * * * * *',
@@ -12,6 +17,5 @@ export const sendSurchargeJob = () =>
 if (require.main === module) {
   sendSurchargeJob();
 }
-export default {
 
-};
+export default {};

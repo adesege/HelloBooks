@@ -11,13 +11,18 @@ const propTypes = {
 };
 
 /**
+ * Set timeout component to toggle visibility of a component
+ *
  * @class SetTimeout
+ *
  * @extends {React.Component}
  */
 class SetTimeout extends React.Component {
   /**
    * Creates an instance of SetTimeout.
+   *
    * @param {object} props
+   *
    * @memberof SetTimeout
    */
   constructor(props) {
@@ -28,7 +33,10 @@ class SetTimeout extends React.Component {
   }
 
   /**
+   * Lifecycle method invoked when component mounts
+   *
    * @returns {undefined}
+   *
    * @memberof SetTimeout
    */
   componentDidMount() {
@@ -36,8 +44,12 @@ class SetTimeout extends React.Component {
   }
 
   /**
+   * Lifecycle method invoked when component will receive props
+   *
    * @returns {undefined}
-   * @param {any} nextProps
+   *
+   * @param {object} nextProps
+   *
    * @memberof SetTimeout
    */
   componentWillReceiveProps(nextProps) {
@@ -50,7 +62,10 @@ class SetTimeout extends React.Component {
   }
 
   /**
+   * Lifecycle method invoked when component will recieve props
+   *
    * @returns {undefined}
+   *
    * @memberof SetTimeout
    */
   componentWillUnmount() {
@@ -58,11 +73,14 @@ class SetTimeout extends React.Component {
   }
 
   /**
-   * @return {undefiend} undefined
+   * Set timer
+   *
+   * @return {undefined}
+   *
    * @memberof SetTimeout
-   */
+  */
   setTimer() {
-    // clear any existing timer
+    // clear object existing timer
     if (this.timer != null) {
       clearTimeout(this.timer);
     }
@@ -76,7 +94,10 @@ class SetTimeout extends React.Component {
 
 
   /**
-   * @returns  {object} JSX
+   * Render component
+   *
+   * @returns  {JSX} JSX
+   *
    * @memberof SetTimeout
    */
   render() {

@@ -21,13 +21,18 @@ const propTypes = {
 };
 
 /**
+ * Categories component
+ *
  * @class Categories
+ *
  * @extends {React.Component}
  */
 class Categories extends React.Component {
   /**
      * Creates an instance of Categories.
-     * @param {any} props
+     *
+     * @param {object} props
+     *
      * @memberof Categories
      */
   constructor(props) {
@@ -57,7 +62,10 @@ class Categories extends React.Component {
 
 
   /**
-   * @returns {void}
+   * Lifecycle method when component did mount
+   *
+   * @returns {undefined}
+   *
    * @memberof Categories
    */
   componentDidMount() {
@@ -66,8 +74,12 @@ class Categories extends React.Component {
 
 
   /**
-   * @returns {void}
-   * @param {any} nextProps
+   * Lifecycle method invoked when component receives props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps
+   *
    * @memberof Categories
    */
   componentWillReceiveProps(nextProps) {
@@ -77,9 +89,13 @@ class Categories extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Deletes a category
+   *
+   * @param {object} event\
+   *
    * @memberof Categories
+   *
+   * @returns {undefined}
    */
   onDeleteSubmit(event) {
     event.preventDefault();
@@ -95,9 +111,13 @@ class Categories extends React.Component {
 
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Open delete modal
+   *
+   * @param {object} event
+   *
    * @memberof Categories
+   *
+   * @returns {undefined}
    */
   onDeleteModal(event) {
     event.preventDefault();
@@ -113,9 +133,13 @@ class Categories extends React.Component {
 
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Edit a category
+   *
+   * @param {object} event
+   *
    * @memberof Categories
+   *
+   * @returns {undefined}
    */
   onEditClick(event) {
     event.preventDefault();
@@ -144,10 +168,14 @@ class Categories extends React.Component {
 
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Add a book category
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
    * @memberof Categories
-   */
+  */
   onSubmit(event) {
     event.preventDefault();
     if (!this.isFormValid()) { return; }
@@ -168,9 +196,13 @@ class Categories extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Handle file input onCHange event
+   *
+   * @param {object} event
+   *
    * @memberof Categories
+   *
+   * @returns {undefined}
    */
   onChange(event) {
     this.setState({
@@ -182,8 +214,11 @@ class Categories extends React.Component {
   }
 
   /**
- * @returns {void}
- * @memberof Categories
+   * Toggle open category modal
+   *
+   * @memberof Categories
+   *
+   * @returns {undefined}
  */
   toggleOpenModal() {
     this.setState({
@@ -192,9 +227,12 @@ class Categories extends React.Component {
   }
 
   /**
- * @returns {void}
- * @memberof Categories
- */
+   * Toggle open delete modal
+   *
+   * @returns {undefined}
+   *
+   * @memberof Categories
+  */
   toggleOpenDeleteModal() {
     this.setState({
       isOpenDeleteModal: !this.state.isOpenDeleteModal
@@ -202,9 +240,12 @@ class Categories extends React.Component {
   }
 
   /**
-   * @returns {boolean} isValid
+   * Run validation on form inputs
+   *
    * @memberof Categories
-   */
+   *
+   * @returns {boolean} isValid
+  */
   isFormValid() {
     const { errors, isValid } = validateCategory(this.state.category);
     if (!isValid) {
@@ -214,8 +255,11 @@ class Categories extends React.Component {
   }
 
   /**
-   * @returns {object} JSX
+   * Render component
+   *
    * @memberof Categories
+   *
+   * @returns {object} JSX
    */
   render() {
     const {
@@ -266,6 +310,13 @@ class Categories extends React.Component {
 
 Categories.propTypes = propTypes;
 
+/**
+ * Maps state to props
+ *
+ * @param {object} state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   bookCategories: state.categories
 });

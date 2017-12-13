@@ -5,27 +5,39 @@ const dotEnv = require('dotenv');
 
 dotEnv.config();
 
-
+/**
+ * Sorts chunks in alphabetical order
+ * @returns {number} 1 or 0
+ * @param {string} first
+ * @param {string} second
+ */
+const chunksSortMode = (first, second) => {
+  if (first.names[0] > second.names[0]) {
+    return 1;
+  }
+  if (first.names[0] < second.names[0]) {
+    return -1;
+  }
+  return 0;
+};
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: path.resolve(__dirname, '../public/index.html'),
   filename: 'index.html',
   inject: 'body',
-  chunksSortMode: function (first, second) {
-    if (first.names[0] > second.names[0]) {
-      return 1;
-    }
-    if (first.names[0] < second.names[0]) {
-      return -1;
-    }
-    return 0;
-  }
+  chunksSortMode
 });
 
 const CommonsChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
-  name: 'common',
-  filename: 'js/common.js',
-  minChunks: Infinity,
-  chunks: ['loader', 'main']
+  name: 'acommon',
+  filename: 'js/acommon.js',
+  minChunks: 2,
+  chunks: [
+    'bloader',
+    'csocket',
+    'dmain',
+    'bspectralsc',
+    'bmerriweather'
+  ]
 });
 
 const ProvidePlugin = new webpack.ProvidePlugin({
@@ -42,10 +54,13 @@ const DefinePlugin = new webpack.DefinePlugin({
     APP_API_SECRET: JSON.stringify(process.env.APP_API_SECRET),
     APP_CLOUDINARY_URL: JSON.stringify(process.env.APP_CLOUDINARY_URL),
     AUTH_GOOGLE_CLIENT_ID: JSON.stringify(process.env.AUTH_GOOGLE_CLIENT_ID),
-    AUTH_GOOGLE_CLIENT_SECRET: JSON.stringify(process.env.AUTH_GOOGLE_CLIENT_SECRET),
+    AUTH_GOOGLE_CLIENT_SECRET:
+    JSON.stringify(process.env.AUTH_GOOGLE_CLIENT_SECRET),
     AUTH_GOOGLE_CALLBACK: JSON.stringify(process.env.AUTH_GOOGLE_CALLBACK),
-    AUTH_FACEBOOK_CLIENT_ID: JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_ID),
-    AUTH_FACEBOOK_CLIENT_SECRET: JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_SECRET),
+    AUTH_FACEBOOK_CLIENT_ID:
+    JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_ID),
+    AUTH_FACEBOOK_CLIENT_SECRET:
+    JSON.stringify(process.env.AUTH_FACEBOOK_CLIENT_SECRET),
     AUTH_FACEBOOK_CALLBACK: JSON.stringify(process.env.AUTH_FACEBOOK_CALLBACK),
     DISQUS_SHORT_NAME: JSON.stringify(process.env.DISQUS_SHORT_NAME),
     ROOT_URL: JSON.stringify(process.env.ROOT_URL),
@@ -58,9 +73,13 @@ const DefinePlugin = new webpack.DefinePlugin({
 
 module.exports = {
   entry: {
-    bsocket: path.resolve(__dirname, '../src/assets/js/socket/index.js'),
-    aloader: path.resolve(__dirname, '../src/assets/js/loader/js/loader.js'),
-    cmain: path.resolve(__dirname, '../src/index.js')
+    csocket: path.resolve(__dirname, '../src/assets/js/socket/index.js'),
+    bloader: path.resolve(__dirname, '../src/assets/js/loader/js/loader.js'),
+    dmain: path.resolve(__dirname, '../src/index.js'),
+    bspectralsc: path
+      .resolve(__dirname, '../src/assets/fonts/spectralsc/index.js'),
+    bmerriweather: path
+      .resolve(__dirname, '../src/assets/fonts/merriweather/index.js')
   },
   resolve: {
     alias: {

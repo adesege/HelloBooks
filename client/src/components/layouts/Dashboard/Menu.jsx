@@ -11,6 +11,13 @@ const propTypes = {
   logout: PropTypes.func.isRequired,
 };
 
+/**
+ * Menu component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const Menu = ({
   auth,
   navigationLinks,

@@ -1,6 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  label: PropTypes.string,
+};
+
+/**
+ * Textarea component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const Textarea = ({ label, ...rest }) => (
   <div className="form-group form-sm">
     <textarea {...rest}>
@@ -9,11 +20,6 @@ const Textarea = ({ label, ...rest }) => (
   </div>
 );
 
-Textarea.propTypes = {
-  label: PropTypes.string,
-};
-
-Textarea.defaultProps = {
-};
+Textarea.propTypes = propTypes;
 
 export default Textarea;

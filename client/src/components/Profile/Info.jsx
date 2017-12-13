@@ -20,6 +20,13 @@ const propTypes = {
   serverErrors: PropTypes.array.isRequired,
 };
 
+/**
+ * Profile info component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const Info = ({
   user,
   onChangePasswordInput,

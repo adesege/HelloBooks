@@ -7,16 +7,20 @@ const {
 } = model;
 
 /**
+ * Stock manager controller
+ *
  * @class StockManagerController
- * @classdesc Stock Manager Class
- */
+*/
 class StockManagerController {
   /**
-     * @param {object} req - express http request
-     * @param {object} res - express http response
-     * @return {object} - new stock
+   * Add stock
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - new stock
    */
-  static create(req, res) {
+  static addStock(req, res) {
     /* istanbul ignore next */
     const bookId = `${req.body.bookId}` || 0;
     Book.findById(bookId)
@@ -32,7 +36,10 @@ class StockManagerController {
               .send({
                 message: ['Stock added successfully'],
                 id: newStock.get('id'),
-                data: newStock.dataValues
+                data: {
+                  ...newStock.dataValues,
+                  book
+                }
               }))
             .catch(errors => sendErrors({ res, errors }));
         } else {
@@ -41,12 +48,16 @@ class StockManagerController {
       })
       .catch(errors => sendErrors({ res, errors }));
   }
+
   /**
-     * @param {object} req - express http request
-     * @param {object} res - express http response
-     * @returns {object} - response object
+   * Delete stock
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @returns {object} - response object
   */
-  static delete(req, res) { // delete a book
+  static deleteStock(req, res) { // delete a book
     const id = `${req.params.stockId}`;
     stockManager.findById(id)
       .then((stock) => {
@@ -77,14 +88,18 @@ class StockManagerController {
       })
       .catch(errors => sendErrors({ res, errors }));
   }
+
   /**
+   * Get stocks
    *
-     * @method get
-     * @param {object} req - express http request
-     * @param {object} res - express http response
-     * @return {object} stock information
+   * @method getStocks
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} stock information
    */
-  static get(req, res) {
+  static getStocks(req, res) {
     const { bookId } = req.query;
     stockManager
       .findAll({
@@ -93,14 +108,14 @@ class StockManagerController {
         where: { bookId }
       })
       .then((stocks) => {
-        if (!stocks) {
+        if (stocks.length === 0) {
           return res
             .status(404)
             .send({ message: ['No stock record found'] });
         }
         return res
           .status(200)
-          .send({ message: [''], data: stocks });
+          .send({ message: ['Success'], data: stocks });
       })
       .catch(errors => sendErrors({ res, errors }));
   }

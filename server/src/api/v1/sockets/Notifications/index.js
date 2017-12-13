@@ -2,23 +2,31 @@ import models from '../../models';
 
 const { Notification, Book, User } = models;
 /**
+ * Get notifications from the database
+ *
  * @class Notifications
- */
+*/
 class Notifications {
   /**
    * Creates an instance of Notifications.
-   * @param {any} socket
+   *
+   * @param {object} socket
+   *
    * @memberof Notifications
-   */
+  */
   constructor(socket) {
     this.socket = socket;
   }
   /**
+   * Get notifications
+   *
    * @returns {event} notifications
-   * @param {any} data
+   *
+   * @param {object} data
+   *
    * @memberof Notifications
    */
-  getNotificationById(data) {
+  getNotification(data) {
     const where = data || {};
     if (data && data.updatedAt) {
       where.updatedAt = {
@@ -50,9 +58,12 @@ class Notifications {
   }
 
   /**
+   * Emit NEW_NOTIFICATION event to the user
+   *
    * @returns {undefined}
+   *
    * @memberof Notifications
-   */
+  */
   sendNotification() {
     this.socket.emit('NEW_NOTIFICATIONS', this.notificationData);
   }

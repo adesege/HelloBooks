@@ -5,25 +5,7 @@ import Header from './Header';
 import Body from './Body';
 import Footer from './Footer';
 
-
-const Modal = (props) => (
-  <BootstrapModal
-    size={!props.size ? 'modal-sm' : `${props.size}`}
-    isOpen={props.isOpenModal}
-    toggle={props.toggleOpenModal}
-    backdrop={props.backdrop}
-    onClosed={props.onClosed}
-  >
-
-    {props.title && <Header title={props.title} headerOptions={props.headerOptions} /> }
-    <Body>
-      {props.children}
-    </Body>
-    <Footer {...props} />
-  </BootstrapModal>
-);
-
-Modal.propTypes = {
+const propTypes = {
   title: PropTypes.string,
   closeClass: PropTypes.string,
   closeLabel: PropTypes.string,
@@ -39,9 +21,42 @@ Modal.propTypes = {
   onClosed: PropTypes.func
 };
 
-Modal.defaultProps = {
+const defaultProps = {
   size: 'modal-sm',
   backdrop: 'static'
 };
+
+/**
+ * Modal component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
+const Modal = (props) => (
+  <BootstrapModal
+    size={!props.size ? 'modal-sm' : `${props.size}`}
+    isOpen={props.isOpenModal}
+    toggle={props.toggleOpenModal}
+    backdrop={props.backdrop}
+    onClosed={props.onClosed}
+  >
+
+    {props.title &&
+    <Header
+      title={props.title}
+      headerOptions={props.headerOptions}
+    />
+    }
+    <Body>
+      {props.children}
+    </Body>
+    <Footer {...props} />
+  </BootstrapModal>
+);
+
+Modal.propTypes = propTypes;
+
+Modal.defaultProps = defaultProps;
 
 export default Modal;

@@ -1,3 +1,7 @@
 .idea/
 assets/**
 public/**
+coverage
+node_modules
+.env
+__tests__

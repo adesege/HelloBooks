@@ -11,10 +11,7 @@ import histories from './histories';
 import users from './users';
 import notifications from './notifications';
 
-/**
- * @param {object}
- */
-export default combineReducers({
+const reducers = combineReducers({
   flashMessages,
   auth,
   books,
@@ -27,3 +24,5 @@ export default combineReducers({
   users,
   notifications
 });
+
+export default reducers;

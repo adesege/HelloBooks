@@ -2,8 +2,8 @@ import axios from 'axios';
 import cloudinary from 'cloudinary';
 import types from './types';
 import { addFlashMessage } from './flashMessages';
-import '../config/cloudinary';
 import { parseCloudinaryURL } from '../utils';
+import '../config/cloudinary';
 
 const {
   SET_BOOKS,
@@ -13,40 +13,72 @@ const {
   BOOKS_SEARCHED
 } = types;
 
+/**
+ * Action creator for searching books
+ *
+ * @export
+ *
+ * @param {object} result
+ *
+ * @returns {object} Search book action creator
+*/
 export const booksSearched = result => ({
   type: BOOKS_SEARCHED,
   result
 });
 
-
+/**
+ * Action creator for setting a book in the store
+ * after a network request
+ *
+ * @export
+ *
+ * @param {object} books
+ *
+ * @returns {object} action creator
+*/
 export const setBooks = books => ({
   type: SET_BOOKS,
   ...books
 });
 
 /**
+ * Action creator for deleting a book
+ *
  * @export
- * @param {any} bookId
- * @returns  {object} book action
- */
-export const bookDeleted = bookId => ({
+ *
+ * @param {object} book
+ *
+ * @returns {object} action creator
+*/
+export const bookDeleted = book => ({
   type: BOOK_DELETED,
-  bookId: bookId.id
+  bookId: book.id
+});
+
+/**
+ * Action creator for adding a book in the store
+ *
+ * @return {object} action creator
+ *
+ * @param {object} book
+*/
+export const bookAdded = book => ({
+  type: BOOK_ADDED,
+  book
 });
 
 
-export const bookAdded = book =>
-  ({
-    type: BOOK_ADDED,
-    book
-  });
-
-
 /**
+ * Action Creator for setting store
+ * when book has been editted
+ *
  * @export
- * @param {any} book
- * @returns  {object} bookUpdated Payload
- */
+ *
+ * @param {object} book
+ *
+ * @returns  {object} action creator
+*/
 export const bookUpdated = book => ({
   type: BOOK_UPDATED,
   book
@@ -54,14 +86,19 @@ export const bookUpdated = book => ({
 
 
 /**
+ * Make network request to get all book or a particular book
+ *
  * @export
+ *
  * @param {object} data
- * @returns {func} promise
- */
+ *
+ * @returns {object} Axios success response object
+ * @returns {object} Axios error response object
+*/
 export const getBooks = (data) =>
   dispatch => {
-    const searchQuery = data ? new URLSearchParams(data) : null; // converts an object to query string
-    const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
+    const searchQuery = data ? new URLSearchParams(data) : null;
+    const toQueryString = data ? searchQuery.toString() : '';
     const id = data && data.id ? data.id : '';
     return axios
       .get(`books/${id}?${toQueryString}`)
@@ -82,6 +119,16 @@ export const getBooks = (data) =>
       );
   };
 
+/**
+ * Upload cover photo to cloudinary
+ *
+ * @param {string} imageData
+ *
+ * @returns {promise} Resolve promise of imageData is not type image
+ * @returns {promise} Reject promise
+ * if there is an error uploading to cloudinary
+ * @returns {promise} Resolve promise if imageData is successfully uploaded
+*/
 export const uploadCoverPhoto = imageData => {
   if (!imageData.match(/^data:image/)) {
     return Promise.resolve({});
@@ -112,6 +159,16 @@ export const uploadCoverPhoto = imageData => {
     );
 };
 
+/**
+ * Upload book file to cloudinary
+ *
+ * @param {string} fileData
+ *
+ * @returns {promise} Resolve promise of fileData is not type pdf
+ * @returns {promise} Reject promise
+ * if there is an error uploading to cloudinary
+ * @returns {promise} Resolve promise if fileData is successfully uploaded
+*/
 export const uploadBookFile = fileData => {
   if (!fileData.match(/^data:application\/pdf/)) {
     return Promise.resolve({});
@@ -129,13 +186,25 @@ export const uploadBookFile = fileData => {
     );
 };
 
+/**
+ * Delete photo from cloudinary
+ *
+ * @param {string} publicId
+ *
+ * @returns {promise} Reject promise
+ * if there is an error deleting from cloudinary
+ * @returns {promise} Resolve promise if photo has been deleted
+*/
 export const deletePhoto = publicId => {
   if (publicId) {
     return cloudinary.v2.uploader.destroy(
       publicId,
       (error, result) => {
         if (error) {
-          return Promise.reject(new Error('An error was encountered deleting this resource.'));
+          const throwError =
+          new Error('An error was encountered deleting this resource.');
+          return Promise
+            .reject(throwError);
         }
         return Promise.resolve(result);
       }
@@ -145,17 +214,32 @@ export const deletePhoto = publicId => {
 };
 
 /**
+ * Update coverphoto and book file link
+ *
  * @export
- * @param {any} data
- * @returns {func} promise
- */
-export const updateBookCoverFile = data => axios
-  .put(
-    `books/${data.id}?fields[]=coverPhotoPath&fields[]=documentPath`,
-    data
-  );
+ *
+ * @param {object} data
+ *
+ * @returns {promise} promise
+*/
+export const updateBookCoverFile = data =>
+  axios
+    .put(
+      `books/${data.id}?fields[]=coverPhotoPath&fields[]=documentPath`,
+      data
+    );
 
-export const uploadBookAsset = (assetObject, publicIDs) =>
+/**
+ * Upload coverphoto and document file to cloudinary
+ *
+ * @param {object} assetObject
+ *
+ * @returns {promise} Resolve promise
+ * if coverphoto and document file has been uploaded
+ * @returns {promise} Reject promise
+ * if coverphoto and document file can't be uploaded
+*/
+export const uploadBookAsset = (assetObject) =>
   uploadCoverPhoto(assetObject.imageData)
     .then((photo) =>
       uploadBookFile(assetObject.fileData)
@@ -168,9 +252,13 @@ export const uploadBookAsset = (assetObject, publicIDs) =>
     .catch(error => Promise.reject(error.message));
 
 /**
- * @returns {Promise} response promise
+ * Make network request to add book
+ *
  * @param {object} data
- */
+ *
+ * @returns {object} Axios http success response object
+ * @returns {object} Axios http error response object
+*/
 export const addBook = data =>
   (dispatch) => {
     const imageData = data.coverPhotoPath;
@@ -196,16 +284,19 @@ export const addBook = data =>
               dispatch(bookAdded(updatedResponse.data.book));
               return response;
             })
-            .catch(errors => Promise.reject(errors)))
-          .catch(failed => Promise
-            .reject(failed)));
+            .catch(errors => errors))
+          .catch(failed => failed));
   };
 
 /**
+ * Make network request to edit a book
+ *
  * @export
- * @param {any} data
- * @returns {func} promise
- */
+ *
+ * @param {object} data
+ *
+ * @returns {promise} axios http promise
+*/
 export const updateBook = data =>
   (dispatch) => {
     const imageData = data.coverPhotoPath;
@@ -239,16 +330,19 @@ export const updateBook = data =>
               }));
             })
             .catch(errors => errors)))
-        .catch(failed => Promise
-          .reject(failed)))
+        .catch(failed => failed))
       .catch(errors => errors);
   };
 
 /**
+ * Make network request to delete a book
+ *
  * @export
- * @param {any} data
- * @returns {func} promise
- */
+ *
+ * @param {object} data
+ *
+ * @returns {promise} Axios http promise
+*/
 export const deleteBook = data =>
   dispatch =>
     axios
@@ -276,10 +370,14 @@ export const deleteBook = data =>
 
 
 /**
+ * Make network request to search a book
+ *
  * @export
- * @param {any} title
- * @returns {Promise} Response promise
- */
+ *
+ * @param {string} title
+ *
+ * @returns {promise} Axios http promise
+*/
 export const searchBooks = title =>
   dispatch =>
     axios

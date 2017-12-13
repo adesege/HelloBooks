@@ -1,11 +1,18 @@
 import moment from 'moment';
 import model from '../models';
-import MailerClass from '../utils/mailer';
+import MailerClass from '../utils/Mailer';
 
 const { EMAIL_FROM } = process.env;
 
 const { borrowedBook } = model;
 const Mailer = new MailerClass();
+
+/**
+ * Checks the database
+ * and sends users a surcharge mail
+ *
+ * @returns {boolean} true
+*/
 const sendSurcharge = () =>
   borrowedBook.findAll({
     include: ['User', 'Book'],

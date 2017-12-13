@@ -4,17 +4,22 @@ import { sendErrors } from '../utils';
 const { Book } = model;
 
 /**
+ * Search controller
+ *
  * @class SearchController
- * @classdesc Search Class
  */
 class SearchController {
   /**
-     * @method get
-     * @param {object} req - express http request
-     * @param {object} res - express http response
-     * @return {object} - search data
-   */
-  static get(req, res) {
+   * Get search result
+   *
+   * @method get
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - search data
+  */
+  static getResult(req, res) {
     const { type } = req.query;
     switch (type) {
       case 'books':
@@ -27,11 +32,15 @@ class SearchController {
   }
 
   /**
-     * @method searchBooks
-     * @param {object} request - express http request
-     * @param {object} response - express http response
-     * @return {object} - books
-   */
+   * Search books
+   *
+   * @method searchBooks
+   *
+   * @param {object} request - express http request
+   * @param {object} response - express http response
+   *
+   * @return {object} - books
+  */
   static searchBooks(request, response) {
     const { q } = request.query;
     Book.findAll({

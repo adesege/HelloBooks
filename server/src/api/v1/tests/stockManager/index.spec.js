@@ -34,6 +34,9 @@ describe('# Stocks', () => { // Describe Books Stocks
         stockId = res.body.id;
         expect(res.statusCode).to.equal(201);
         expect(res.body.message[0]).to.equal('Stock added successfully');
+        expect(res.body.id).to.equal(4);
+        expect(res.body.data.book.id).to.equal(1);
+        expect(res.body.data.book.title).to.equal('Purple Hibiscus is a new title');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -88,7 +91,8 @@ describe('# Stocks', () => { // Describe Books Stocks
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('message');
-        expect(res.body.data[0]).to.have.property('id');
+        expect(res.body.data[0].id).to.equal(4);
+        expect(res.body.data[0].bookId).to.equal(global.bookId);
         if (err) return done(err);
         done();
       });

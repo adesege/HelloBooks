@@ -24,10 +24,12 @@ describe('# Profile', () => {
       .get('/api/v1/users')
       .set('authenticate-token', token)
       .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.data).to.be.an('array');
-        expect(res.body.data[0].email).to.equal(user.email);
+        setTimeout(() => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.data).to.be.an('array');
+          expect(res.body.data[0].email).to.equal(user.email);
+        }, 1000);
         if (err) return done(err);
         done();
       });

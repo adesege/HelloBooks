@@ -3,6 +3,22 @@ import PropTypes from 'prop-types';
 import Modal from 'Modal';
 import InputField from 'form/InputField';
 
+const propTypes = {
+  quantity: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  isOpenModal: PropTypes.bool.isRequired,
+  toggleOpenModal: PropTypes.func.isRequired
+};
+
+/**
+ * Add or Edit stock information
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const AddStock = ({
   quantity,
   onChange,
@@ -36,13 +52,6 @@ const AddStock = ({
   </Modal>
 );
 
-AddStock.propTypes = {
-  quantity: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
-  isOpenModal: PropTypes.bool.isRequired,
-  toggleOpenModal: PropTypes.func.isRequired
-};
+AddStock.propTypes = propTypes;
 
 export default AddStock;

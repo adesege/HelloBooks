@@ -16,15 +16,18 @@ const contextTypes = {
 };
 
 /**
+ * Search stock component
+ *
  * @class SearchStock
+ *
  * @extends {React.Component}
- */
+*/
 class SearchStock extends React.Component {
   /**
-     * Creates an instance of SearchStock.
-     * @param {any} props
-     * @memberof SearchStock
-     */
+  * Creates an instance of SearchStock.
+  * @param {object} props
+  * @memberof SearchStock
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -39,10 +42,14 @@ class SearchStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @param {any} nextProps
-     * @memberof SearchStock
-     */
+   * Lifecycle method invoked when component receives props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps
+   *
+   * @memberof SearchStock
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.searchResult !== this.props.searchResult) {
       this.setState({ searchResult: nextProps.searchResult });
@@ -51,33 +58,44 @@ class SearchStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @param {any} event
-     * @memberof SearchStock
-     */
+   * Search stock
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof SearchStock
+  */
   onSubmit(event) {
     event.preventDefault();
     const { bookId } = this.state;
     this.context.router.push(`/books/stock-manager/${bookId}`);
   }
 
-
   /**
-     * @returns {void}
-     * @param {string} value
-     * @param {object} book
-     * @memberof SearchStock
-     */
+   * Autocomplete callback when a book has been selected
+   *
+   * @returns {undefined}
+   *
+   * @param {string} value
+   * @param {object} book
+   *
+   * @memberof SearchStock
+  */
   onSelect(value, book) {
     this.setState({ title: value, bookId: book.id });
   }
 
 
   /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof SearchStock
-     */
+   * Handle file input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof SearchStock
+  */
   onChange(event) {
     const { searchBooksAction } = this.props;
     this.setState({ title: event.target.value });
@@ -89,9 +107,12 @@ class SearchStock extends React.Component {
 
 
   /**
-     * @returns {object} JSX
-     * @memberof SearchStock
-     */
+   * Renders component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof SearchStock
+  */
   render() {
     const { title, searchResult, bookId } = this.state;
     return (
@@ -134,7 +155,11 @@ class SearchStock extends React.Component {
                 renderItem={(item, highlighted) =>
                   (<div
                     key={item.id}
-                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                    style={
+                      {
+                        backgroundColor: highlighted ? '#eee' : 'transparent'
+                      }
+                    }
                     className="row p-3"
                   >
                     <div className="col-sm-3">
@@ -147,12 +172,12 @@ class SearchStock extends React.Component {
                       <h6 className="d-block title">{item.title}</h6>
                       <p className="small">{item.description}</p>
                       {item.publishedDate &&
-                                            <p
-                                              className="text-right small">
-                                            Published on: {item.publishedDate}
-                                            </p>}
+                    <p
+                      className="text-right small">
+                    Published on: {item.publishedDate}
+                    </p>}
                       <p className="text-right small">
-                                                Added:
+                        Added:
                         <TimeAgo date={item.createdAt} minPeriod={60} />
                       </p>
                     </div>
@@ -177,7 +202,7 @@ class SearchStock extends React.Component {
                 </button>
               </div>
             </form>
-          </div>{/* Stock filter form */}
+          </div>
         </div>
       </div>
     );
@@ -188,6 +213,13 @@ SearchStock.propTypes = propTypes;
 
 SearchStock.contextTypes = contextTypes;
 
+/**
+    * Get state from store
+    *
+    * @param {object} state
+    *
+    * @returns {object} map state to props
+    */
 const mapStateToProps = state => ({
   searchResult: state.books.books
 });
@@ -199,3 +231,4 @@ export default connect(
     searchBooksAction: searchBooks
   }
 )(SearchStock);
+

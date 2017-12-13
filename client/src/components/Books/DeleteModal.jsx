@@ -4,16 +4,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+const propTypes = {
+  params: PropTypes.object.isRequired,
+  deleteBook: PropTypes.func.isRequired,
+  book: PropTypes.object
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
 /**
+ * Delete book modal
+ *
  * @class DeleteModal
+ *
  * @extends {Component}
  */
 class DeleteModal extends Component {
   /**
-     * Creates an instance of DeleteModal.
-     * @param {any} props
-     * @memberof DeleteModal
-     */
+   * Creates an instance of DeleteModal.
+   *
+   * @param {object} props
+   *
+   * @memberof DeleteModal
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -29,24 +44,31 @@ class DeleteModal extends Component {
 
 
   /**
-     * @returns {void}
-     * @memberof DeleteModal
-     */
+   * Lifecycle method invoked when component mounts
+   * @returns {undefined}
+   * @memberof DeleteModal
+  */
   componentDidMount() {
     this.setState({ isOpenModal: true });
   }
 
   /**
- * @returns {void}
- * @memberof BooksModal
- */
+   * Go to books page
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   goToBooksPage() {
     this.context.router.push('/books');
   }
 
   /**
- * @returns {void}
- * @memberof DeleteModal
+   * Toggle delete book modal
+   *
+   * @returns {undefined}
+   *
+   * @memberof DeleteModal
  */
   toggleOpenModal() {
     this.setState({
@@ -55,10 +77,14 @@ class DeleteModal extends Component {
   }
 
   /**
-     * @returns {void}
-     * @param {any} event
-     * @memberof DeleteModal
-     */
+   * Delete a book
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof DeleteModal
+  */
   onClickOk(event) {
     event.preventDefault();
     const {
@@ -74,11 +100,14 @@ class DeleteModal extends Component {
 
 
   /**
-     *
-     * @returns {void}
-     * @param {any} event
-     * @memberof DeleteModal
-     */
+   * Handle form input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   *  @memberof DeleteModal
+  */
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -87,9 +116,12 @@ class DeleteModal extends Component {
 
 
   /**
-     * @returns {void}
-     * @memberof DeleteModal
-     */
+   * Renders a component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof DeleteModal
+  */
   render() {
     return (
       <div>
@@ -116,16 +148,18 @@ class DeleteModal extends Component {
   }
 }
 
-DeleteModal.propTypes = {
-  params: PropTypes.object.isRequired,
-  deleteBook: PropTypes.func.isRequired,
-  book: PropTypes.object
-};
+DeleteModal.propTypes = propTypes;
 
-DeleteModal.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+DeleteModal.contextTypes = contextTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state
+ * @param {object} props
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = (state, props) => ({
   book: state.books.books
     .find(book =>

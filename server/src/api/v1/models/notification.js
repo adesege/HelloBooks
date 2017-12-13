@@ -1,7 +1,7 @@
 
 
 export default (sequelize, DataTypes) => {
-  const Notification = sequelize.define('Notification', {
+  const notification = sequelize.define('Notification', {
     bookId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     notificationType: DataTypes.STRING
@@ -10,17 +10,17 @@ export default (sequelize, DataTypes) => {
     tableName: 'Notification'
   });
 
-  Notification.associate = (models) => {
-    Notification.belongsTo(models.Book, {
+  notification.associate = (models) => {
+    notification.belongsTo(models.Book, {
       foreignKey: 'bookId',
       as: 'Book'
     });
-    Notification.belongsTo(models.User, {
+    notification.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'User'
     });
   };
 
 
-  return Notification;
+  return notification;
 };
