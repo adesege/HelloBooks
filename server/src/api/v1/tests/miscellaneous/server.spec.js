@@ -15,24 +15,5 @@ describe('# Server side', () => {
         done();
       });
   });
-
-  it('should return 404 if an end point cannot be found', (done) => {
-    request.get('/api/v1/login')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        if (err) return done(err);
-        done();
-      });
-  });
-
-  it('should return 404 if a version folder cannot be found', (done) => {
-    request.get('/api/v2/login')
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body.message[0]).to.equal('It\'s not us. Sorry, we can\'t find this endpoint');
-        if (err) return done(err);
-        done();
-      });
-  });
 });
 

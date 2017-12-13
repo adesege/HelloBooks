@@ -3,7 +3,22 @@ import PropTypes from 'prop-types';
 import Timestamp from 'react-timestamp';
 import EmptyMessage from 'components/miscellaneous/EmptyMessage';
 
-const StockList = ({ stocks, onDeleteModal }) => (
+const propTypes = {
+  stocks: PropTypes.array.isRequired,
+  onDeleteModal: PropTypes.func.isRequired
+};
+
+/**
+ * StockList component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
+const StockList = ({
+  stocks,
+  onDeleteModal
+}) => (
   <div>
     {stocks.length !== 0 ? <div className="table-responsive text-center">
       <table className="table" id="stockTable">
@@ -25,20 +40,23 @@ const StockList = ({ stocks, onDeleteModal }) => (
                   precision={1} />
               </td>
               <td>
-                <i className="btn btn-sm btn-danger fa fa-remove" id={item.id} onClick={onDeleteModal} />
+                <i
+                  className="btn btn-sm btn-danger fa fa-remove"
+                  id={item.id}
+                  onClick={onDeleteModal}
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
     </div> :
-      <EmptyMessage absolute={false} />}
+      <EmptyMessage
+        absolute={false}
+      />}
   </div>
 );
 
-StockList.propTypes = {
-  stocks: PropTypes.array.isRequired,
-  onDeleteModal: PropTypes.func.isRequired
-};
+StockList.propTypes = propTypes;
 
 export default StockList;

@@ -19,15 +19,20 @@ const propTypes = {
 };
 
 /**
+ * Show stock component
+ *
  * @class ShowStock
+ *
  * @extends {React.Component}
- */
+*/
 class ShowStock extends React.Component {
   /**
-     * Creates an instance of ShowStock.
-     * @param {object} props
-     * @memberof ShowStock
-     */
+   * Creates an instance of ShowStock.
+   *
+   * @param {object} props
+   *
+   * @memberof ShowStock
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -54,9 +59,12 @@ class ShowStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @memberof ShowStock
-     */
+   * Get stock manager by book id when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @memberof ShowStock
+  */
   componentDidMount() {
     const {
       getStockManagerByBookIdAction,
@@ -68,10 +76,14 @@ class ShowStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @param {object} nextProps
-     * @memberof ShowStock
-     */
+   * Lifecycle method invoked when component receives props
+   *
+   * @param {object} nextProps
+   *
+   * @memberof ShowStock
+   *
+   * @returns {undefined}
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.stocks !== this.props.stocks) {
       this.setState({ stocks: nextProps.stocks });
@@ -79,10 +91,14 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Delete stock info
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
    * @memberof ShowStock
-   */
+  */
   onDeleteSubmit(event) {
     event.preventDefault();
     const { deleteStockAction } = this.props;
@@ -96,10 +112,14 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Add stock information for a particular book
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
    * @memberof ShowStock
-   */
+  */
   onSubmit(event) {
     event.preventDefault();
     const { addStockAction, params } = this.props;
@@ -121,8 +141,12 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Handle file input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
    * @memberof ShowStock
    */
   onChange(event) {
@@ -130,10 +154,14 @@ class ShowStock extends React.Component {
   }
 
   /**
- * @returns {void}
- * @param {any} event
- * @memberof ShowStock
- */
+   * Delete a particular stock information
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof ShowStock
+  */
   onDeleteModal(event) {
     event.preventDefault();
     const stockId = event.target.getAttribute('id');
@@ -144,9 +172,12 @@ class ShowStock extends React.Component {
   }
 
   /**
- * @returns {void}
- * @memberof ShowStock
- */
+   * Toggle open add modal
+   *
+   * @returns {undefined}
+   *
+   * @memberof ShowStock
+  */
   toggleOpenAddModal() {
     this.setState({
       isOpenAddModal: !this.state.isOpenAddModal
@@ -154,7 +185,10 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {object} JSX
+   * Render component
+   *
+   * @returns {JSX} JSX
+   *
    * @memberof ShowStock
    */
   render() {
@@ -188,12 +222,16 @@ class ShowStock extends React.Component {
             icon="plus"
           />
         </div>
-        <h4 className="title mb-2 mr-4">Viewing {this.state.stocks && this.state.stocks[0].book.title} stock</h4>
+        <h4 className="title mb-2 mr-4">
+        Viewing {this.state.stocks && this.state.stocks[0].book.title} stock
+        </h4>
         <div className="mb-4">
           <small>
-                    You can add or edit stock
-                    information for {this.state.stocks && this.state.stocks[0].book.title} here.<br/>
-                    Use the filter form to view from a particular page.
+            You can add or edit stock
+            information for
+            {this.state.stocks && this.state.stocks[0].book.title} here.
+            <br/>
+            Use the filter form to view from a particular page.
           </small>
         </div>
         <StockList
@@ -207,6 +245,13 @@ class ShowStock extends React.Component {
 
 ShowStock.propTypes = propTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   stocks: state.stocks,
 });

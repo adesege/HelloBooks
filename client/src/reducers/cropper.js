@@ -5,7 +5,15 @@ const {
   DELETE_IMAGE_DATA
 } = types;
 
-export default (state = [], action = {}) => {
+/**
+ * Handles cropper reducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {array} new state
+ */
+const cropper = (state = [], action = {}) => {
   switch (action.type) {
   case SET_IMAGE_DATA:
     return action.imageData;
@@ -16,3 +24,6 @@ export default (state = [], action = {}) => {
   default: return state;
   }
 };
+
+
+export default cropper;

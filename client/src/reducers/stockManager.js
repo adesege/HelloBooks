@@ -7,7 +7,15 @@ const {
   STOCK_DELETED
 } = types;
 
-export default (state = [], action = {}) => {
+/**
+ * Handles stock manager reducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {array} new state
+ */
+const stockManager = (state = [], action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case STOCK_MANAGER_FETCHED:
@@ -35,3 +43,5 @@ export default (state = [], action = {}) => {
   default: return state;
   }
 };
+
+export default stockManager;

@@ -31,8 +31,9 @@ describe('# Borrowed Book', () => {
           borrowedBookId = res.body.id;
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('You have successfully  borrowed this book');
+          expect(res.body.message[0]).to.equal('You have successfully borrowed this book');
           expect(res.body.id).to.be.a('number');
+          expect(res.body.id).to.equal(1);
           if (err) return done(err);
           done();
         });
@@ -49,8 +50,9 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(201);
           expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('You have successfully  borrowed this book');
+          expect(res.body.message[0]).to.equal('You have successfully borrowed this book');
           expect(res.body.id).to.be.a('number');
+          expect(res.body.id).to.equal(2);
           if (err) return done(err);
           done();
         });

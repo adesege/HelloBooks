@@ -1,7 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalHeader } from 'reactstrap';
 
+const propTypes = {
+  title: PropTypes.string,
+  headerOptions: PropTypes.array
+};
+
+/**
+ * Modal header component
+ *
+ * @param {object} propTypes
+ *
+ * @returns {JSX} JSX
+ */
 const Header = ({ title, headerOptions }) => (
   <div className="modal-header">
     <h5 className="modal-title">{title}</h5>
@@ -13,9 +24,6 @@ const Header = ({ title, headerOptions }) => (
   </div>
 );
 
-Header.propTypes = {
-  title: PropTypes.string,
-  headerOptions: PropTypes.array
-};
+Header.propTypes = propTypes;
 
 export default Header;

@@ -17,7 +17,20 @@ export const initialBookState = {
   }
 };
 
+export const initialHistoryState = {
+  histories: [],
+  pagination: {}
+};
+
+export const initialNotificationState = {
+  pagination: {},
+  notifications: []
+};
+
 export default {
   initialAuthState,
-  initialBookState
+  initialBookState,
+  initialHistoryState,
+  initialNotificationState
 };
+

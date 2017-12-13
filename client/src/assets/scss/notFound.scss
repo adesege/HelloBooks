@@ -1,0 +1,46 @@
+.not-found-container{
+  background-color: rgba(0,0,0,0.1);
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.not-found-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  height: 200px;
+  width: 500px;
+  max-width: 100%;
+  text-align: center;
+}
+
+.not-found-wrapper h1 span:first-child{
+  font-family: 'Merriweather', serif;
+  color: #f00;
+}
+
+.not-found-wrapper h1 span:nth-child(2){
+  font-family: 'Spectral SC', serif;
+  color: #919c95;
+}
+
+@media(min-width:768px){
+  .not-found-wrapper h1{
+    font-size: 6rem;
+  }
+  .not-found-wrapper h1 span:nth-child(2){
+    font-size: 3rem;
+  }
+}
+
+@media(max-width:374px){
+  .not-found-wrapper h1{
+    font-size: 2.2rem;
+  }
+}

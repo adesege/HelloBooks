@@ -19,9 +19,12 @@ const defaultProps = ({
 });
 
 /**
- * @class Pagination
- * @extends {React.Component}
- */
+ * Pagination component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+*/
 const Pagination = ({
   pagination,
   handlePageChange,

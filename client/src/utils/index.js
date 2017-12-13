@@ -1,17 +1,38 @@
 import URLPackage from 'url';
 import noCover from '../assets/images/no-cover.jpg';
 
+/**
+ * Shows book cover photo or a default photo
+ *
+ * @param {string} coverPhoto
+ *
+ * @returns {string} coverphoto url or default photo
+ */
 export const showCoverPhoto =
     coverPhoto =>
       coverPhoto || noCover;
 
-export const isValidUrl = (str) => {
+/**
+ * Checks whether string is a valid url
+ *
+ * @param {string} string
+ *
+ * @returns {boolean} true or false
+ */
+export const isValidUrl = (string) => {
   const urlRegex =
-          '^(?:(?:http|https)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$';
+          '^(?:(?:http|https)://)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$'; // eslint-disable-line max-len
   const url = new RegExp(urlRegex, 'i');
-  return str.length < 2083 && url.test(str);
+  return string.length < 2083 && url.test(string);
 };
 
+/**
+ * Gets and set public id from cloudinary url
+ *
+ * @param {string} url
+ *
+ * @returns {object} url object with public id
+ */
 export const parseCloudinaryURL = (url) => {
   let newUrl = {};
   newUrl.public_id = '';
@@ -24,6 +45,13 @@ export const parseCloudinaryURL = (url) => {
   return newUrl;
 };
 
+/**
+ * Check whether type is an image
+ *
+ * @param {string} type
+ *
+ * @returns {boolean} true or false
+ */
 export const isImage = (type) => {
   if (/^image/.test(type)) {
     return true;
@@ -31,6 +59,13 @@ export const isImage = (type) => {
   return false;
 };
 
+/**
+ * Check whether type is a pdf
+ *
+ * @param {string} type
+ *
+ * @returns {boolean} true or false
+ */
 export const isPDF = (type) => {
   if (/^application\/pdf/.test(type)) {
     return true;
@@ -38,4 +73,11 @@ export const isPDF = (type) => {
   return false;
 };
 
+/**
+ * Extract query string from url
+ *
+ * @param {string} url
+ *
+ * @returns {object} query strings from url
+ */
 export const extractURLQuery = (url) => new URL(url).searchParams;

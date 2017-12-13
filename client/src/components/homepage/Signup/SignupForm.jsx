@@ -16,6 +16,13 @@ const propTypes = {
   validationError: PropTypes.object.isRequired
 };
 
+/**
+ * Signup form component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+*/
 const SignupForm = (props) => (
   <form onSubmit={props.onSubmit} id="signupForm">
     <FlashMessagesList />

@@ -8,6 +8,7 @@ export default createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk),
-    NODE_ENV === 'development' && window.devToolsExtension ? window.devToolsExtension() : f => f
+    NODE_ENV === 'development' &&
+     window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );

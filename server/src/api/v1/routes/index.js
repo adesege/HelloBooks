@@ -41,41 +41,41 @@ router.route('/users')
 
 router.route('/users/:userId')
   .get(authMiddleware, UserController.getUsers)
-  .put(authMiddleware, UserController.updateUser);
+  .put(authMiddleware, UserController.editUser);
 
 router.route('/books')
-  .get(authMiddleware, BookController.get)
-  .post(authMiddleware, BookController.create);
+  .get(authMiddleware, BookController.getBooks)
+  .post(authMiddleware, BookController.addBook);
 
 router.route('/notifications')
-  .get(authMiddleware, adminMiddleware, NotificationController.get);
+  .get(authMiddleware, adminMiddleware, NotificationController.getNotifications);
 
 router.route('/books/stocks')
-  .post(authMiddleware, adminMiddleware, StockManagerController.create)
-  .get(authMiddleware, adminMiddleware, StockManagerController.get);
+  .post(authMiddleware, adminMiddleware, StockManagerController.addStock)
+  .get(authMiddleware, adminMiddleware, StockManagerController.getStocks);
 
 router.route('/books/categories')
-  .post(authMiddleware, adminMiddleware, BookCategoryController.add)
-  .get(authMiddleware, BookCategoryController.get);
+  .post(authMiddleware, adminMiddleware, BookCategoryController.addCategory)
+  .get(authMiddleware, BookCategoryController.getCategories);
 
 router.route('/books/histories/:userId')
   .get(authMiddleware, BookController.getHistories);
 
 router.route('/books/:id')
-  .get(authMiddleware, authMiddleware, BookController.get)
-  .delete(authMiddleware, adminMiddleware, BookController.delete);
+  .get(authMiddleware, authMiddleware, BookController.getBooks)
+  .delete(authMiddleware, adminMiddleware, BookController.deleteBook);
 
 router.route('/books/:bookId')
-  .put(authMiddleware, authMiddleware, BookController.edit);
+  .put(authMiddleware, authMiddleware, BookController.editBooks);
 
 router.route('/books/categories/:categoryId')
-  .put(authMiddleware, adminMiddleware, BookCategoryController.update)
-  .delete(authMiddleware, adminMiddleware, BookCategoryController.delete);
+  .put(authMiddleware, adminMiddleware, BookCategoryController.editCategory)
+  .delete(authMiddleware, adminMiddleware, BookCategoryController.deleteCategory);
 
 router.route('/books/stocks/:stockId')
-  .delete(authMiddleware, adminMiddleware, StockManagerController.delete);
+  .delete(authMiddleware, adminMiddleware, StockManagerController.deleteStock);
 
 router.route('/search')
-  .get(authMiddleware, SearchController.get);
+  .get(authMiddleware, SearchController.getResult);
 
 export default router;

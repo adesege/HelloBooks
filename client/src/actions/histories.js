@@ -6,17 +6,31 @@ const {
   GET_BOOKS_HISTORIES
 } = types;
 
-
+/**
+ * Action creator when histories has been fetched
+ *
+ * @param {object} histories
+ *
+ * @returns {object} action creator
+ */
 export const historiesFetched = histories => ({
   type: GET_BOOKS_HISTORIES,
   ...histories
 });
 
-
+/**
+ * Make network request to get histories
+ *
+ * @param {object} data
+ *
+ * @returns {promise} Axios http promise
+ */
 export const getHistories = data =>
   dispatch => {
-    const searchQuery = data ? new URLSearchParams(data) : null; // converts an object to query string
-    const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
+    // converts an object to query string
+    const searchQuery = data ? new URLSearchParams(data) : null;
+    // converts it to string
+    const toQueryString = data ? searchQuery.toString() : '';
     return axios
       .get(`books/histories/${data.userId}?${toQueryString}`)
       .then(

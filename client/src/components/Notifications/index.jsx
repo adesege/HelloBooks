@@ -5,19 +5,25 @@ import { getNotifications } from 'actions/notifications';
 import LeftSidebar from './Sidebar';
 import List from './List';
 
-const propTypes = ({
+const propTypes = {
   getNotifications: PropTypes.func.isRequired,
   pagination: PropTypes.object.isRequired,
   notifications: PropTypes.array.isRequired
-});
+};
+
 /**
+ * Notifications component
+ *
  * @class Notifications
+ *
  * @extends {React.Component}
  */
 class Notifications extends React.Component {
   /**
    * Creates an instance of Notifications.
+   *
    * @param {object} props
+   *
    * @memberof Notifications
    */
   constructor(props) {
@@ -43,19 +49,26 @@ class Notifications extends React.Component {
     this.onFilterSubmit = this.onFilterSubmit.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
   }
+
   /**
+   * Lifecycle method invoked when component mounts
+   *
    * @returns {undefined}
+   *
    * @memberof Notifications
    */
   componentDidMount() {
     this.props.getNotifications();
   }
   /**
- *
- * @returns {undefined}
- * @param {object} nextProps
- * @memberof Notifications
- */
+   * Lifecycle method invoked when component will receive props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps
+   *
+   * @memberof Notifications
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.notifications !== this.props.notifications) {
       this.setState({ notifications: nextProps.notifications });
@@ -72,8 +85,12 @@ class Notifications extends React.Component {
   }
 
   /**
+   * Handle search and filter form input onChange event
+   *
    * @returns {undefined}
+   *
    * @param {object} event
+   *
    * @memberof Notifications
    */
   handleInputChange(event) {
@@ -88,8 +105,12 @@ class Notifications extends React.Component {
   }
 
   /**
+   * Search and filter notification
+   *
    * @returns {undefined}
-   * @param {any} event
+   *
+   * @param {object} event
+   *
    * @memberof Notifications
    */
   onFilterSubmit(event) {
@@ -98,8 +119,12 @@ class Notifications extends React.Component {
   }
 
   /**
+   * Handle pageination
+   *
    * @returns {undefined}
+   *
    * @param {integer} pageNumber
+   *
    * @memberof Notifications
    */
   handlePageChange(pageNumber) {
@@ -118,7 +143,10 @@ class Notifications extends React.Component {
   }
 
   /**
-   * @returns {object} JSX
+   * Render component
+   *
+   * @returns {JSX} JSX
+   *
    * @memberof Notifications
    */
   render() {
@@ -128,7 +156,10 @@ class Notifications extends React.Component {
     return (
       <div>
         <h4 className="title mb-2 mr-4">Notifications</h4>
-        <div className="mb-4"><small>You can view all your notifications here</small></div>
+        <div
+          className="mb-4">
+          <small>You can view all your notifications here</small>
+        </div>
         <div className="row">
           <LeftSidebar
             searchFilter={searchFilter}
@@ -151,9 +182,17 @@ class Notifications extends React.Component {
 
 Notifications.propTypes = propTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = (state) => ({
   notifications: state.notifications.notifications,
   pagination: state.notifications.pagination
 });
 
+export { Notifications };
 export default connect(mapStateToProps, { getNotifications })(Notifications);

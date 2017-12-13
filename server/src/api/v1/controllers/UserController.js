@@ -1,23 +1,29 @@
 import model from '../models';
-import utils, { formatErrorMessage } from '../utils';
-import MailerClass from '../utils/mailer';
+import utils, { sendErrors } from '../utils';
+import Mailer from '../utils/Mailer';
 
 const { randomString } = utils; // generates random strings
 const { User } = model; // get User model
 
 const { EMAIL_FROM } = process.env;
+const mailer = new Mailer();
 
 /**
- * @class UserController
- * @classdesc User Class
- */
+* User controller
+*
+* @class UserController
+*/
 class UserController {
   /**
-   * @method signup
-   * @param {object} req
-   * @param {object} res
-   * @return {object} response
-   */
+  * Signup
+  *
+  * @method signup
+  *
+  * @param {object} req
+  * @param {object} res
+  *
+  * @return {object} signed token and user payload
+  */
   static signup(req, res) {
     let { password } = req.body;
     const { confirmPassword, oauthID } = req.body;
@@ -55,56 +61,68 @@ class UserController {
           message: ['Your account has been created successfully']
         });
     })
-      .catch(errors => res.status(400).send({
-        message: formatErrorMessage(errors)
-      }));
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
-   * @method signin
-   * @param {object} req
-   * @param {object} res
-   * @return {object} response
-   */
+  * Signin
+  *
+  * @method signin
+  *
+  * @param {object} req
+  * @param {object} res
+  *
+  * @return {object} user token and some user payload
+  */
   static signin(req, res) {
     const password = `${req.body.password}`;
     const email = `${req.body.email}`;
     const oauthID = `${req.body.oauthID}`;
 
-    User.findOne({ where: { oauthID } })
-      .then(oauthUser =>
-        User.findOne({ where: { email } })
-          .then((user) => {
-            if (oauthID && !oauthUser) {
-              return res.status(400).send({ message: ['Sorry, we can\'t find this account'] });
-            }
-            if (!oauthID && user) {
-              if (!user.validPassword(password)) {
-                return res.status(400).send({ message: ['You provided a wrong email address and password'] });
-              }
-            }
-            if (oauthID || user) {
-              const token = utils.signToken(user);
-              return res.status(200).send({
-                payload: {
-                  token,
-                  userId: user.id,
-                  group: user.userGroup,
-                },
-                message: ['Successfully validated']
-              });
-            }
-            return res.status(404).send({ message: ['Sorry, we can\'t find this account'] });
-          }));
+    User
+      .findOne({
+        where: {
+          email
+        },
+        orWhere: {
+          oauthID
+        }
+      })
+      .then((oauthUser) => {
+        if (oauthID && !oauthUser) {
+          return res.status(400).send({ message: ['Sorry, we can\'t find this account'] });
+        }
+        if (!oauthID && oauthUser) {
+          if (!oauthUser.validPassword(password)) {
+            return res.status(400).send({ message: ['You provided a wrong email address and password'] });
+          }
+        }
+        if (oauthID || oauthUser) {
+          const token = utils.signToken(oauthUser);
+          return res.status(200).send({
+            payload: {
+              token,
+              userId: oauthUser.id,
+              group: oauthUser.userGroup,
+            },
+            message: ['Successfully validated']
+          });
+        }
+        return res.status(404).send({ message: ['Sorry, we can\'t find this account'] });
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
-   *
-   * @method get
-   * @param {object} req
-   * @param {object} res
-   * @return {object} response
-   */
+    * Get all users or a particular user
+    *
+    * @method get
+    *
+    * @param {object} req
+    * @param {object} res
+    *
+    * @return {object} An array of users or a user
+  */
   static getUsers(req, res) { // get user(s) in the database
     const id = req.params.userId;
     User
@@ -123,17 +141,21 @@ class UserController {
         .status(200)
         .send({
           data: users
-        }));
+        }))
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
+   * Edit a user
    *
    * @method get
+   *
    * @param {object} req
    * @param {object} res
-   * @return {object} response
-   */
-  static updateUser(req, res) { // get user(s) in the database
+   *
+   * @return {object} message response
+  */
+  static editUser(req, res) {
     const id = req.params.userId;
     const { password, oldPassword, confirmPassword } = req.body;
     if (password !== confirmPassword) {
@@ -151,7 +173,7 @@ class UserController {
         }
         return User
           .update(
-            { password },
+            { password: User.generateHash(password) },
             {
               where: { id },
               returning: true,
@@ -162,16 +184,22 @@ class UserController {
             res.status(200)
               .send({
                 message: ['User information has been successfully edited']
-              }));
-      });
+              }))
+          .catch(errors => sendErrors({ res, errors }));
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
-   * @returns {undefined}
+   * Send reset password mail
+   *
+   * @returns {object} message response
+   *
    * @param {object} req
    * @param {object} res
+   *
    * @memberof UserController
-   */
+  */
   static sendResetPasswordMail(req, res) {
     let { email } = req.body;
     email = `${email}`;
@@ -192,19 +220,22 @@ class UserController {
           }
         )
           .then((updatedUser) => {
-            const Mailer = new MailerClass();
-            Mailer.to = email;
-            Mailer.from = EMAIL_FROM;
-            Mailer.subject = 'Password reset request';
-            Mailer.html = `
-        <p>Dear <strong>${updatedUser[1].name}</strong>,</p>
-        <p>This is to notify you that you or someone else has requested for a password reset on Hello Books.</p>
-        <p>If this action was not performed by you, kindly ignore this mail as your account is still secure.</p>
-        <p>If not, please <a href="${req.protocol}://${req.get('host')}/reset-password/verify/${validationKey}?email=${email}">Click here to reset password</a></p>
-        <p>Best regards</p>
-        `;
+            mailer.to = email;
+            mailer.from = EMAIL_FROM;
+            mailer.subject = 'Password reset request';
+            mailer.html = `
+            <p>Dear <strong>${updatedUser[1].name}</strong>,</p>
+            <p>This is to notify you that you or someone else has requested for a password reset on Hello Books.</p>
+            <p>If this action was not performed by you, kindly ignore this mail as your account is still secure.</p>
+            <p>If not, please <a 
+            href="${req.protocol}://${req.get('host')}/reset-password/verify/${validationKey}?email=${email}">
+            Click here to reset password
+            </a>
+            </p>
+            <p>Best regards</p>
+            `;
 
-            Mailer.send();
+            mailer.send();
 
             const responseObject = {
               message: [`A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`]
@@ -214,17 +245,22 @@ class UserController {
 
             return res.status(200)
               .send(responseObject);
-          });
-      });
+          })
+          .catch(errors => sendErrors({ res, errors }));
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
+   * Change user's password
    *
    * @method get
+   *
    * @param {object} req
    * @param {object} res
-   * @return {object} response
-   */
+   *
+   * @return {object} message response
+  */
   static resetPassword(req, res) {
     const {
       password, confirmPassword, email, validationKey
@@ -248,26 +284,30 @@ class UserController {
           }
         )
           .then(() => {
-            const Mailer = new MailerClass();
-            Mailer.to = email;
-            Mailer.from = EMAIL_FROM;
-            Mailer.subject = 'Your password on Hello Books has been changed';
-            Mailer.html = `
-        <p>Hello <strong>${user.name}</strong>,</p>
-        <p>This is to notify you that you or someone else has changed your account password on Hello Books.</p>
-        <p>If this action was performed by you, please ignore this mail as no further action is required from you.</p>
-        <p>If not, please contact support at info@hellobooks.herokuapp.com</p>
-        <p>Best regards</p>
-        `;
+            mailer.to = email;
+            mailer.from = EMAIL_FROM;
+            mailer.subject = 'Your password on Hello Books has been changed';
+            mailer.html = `
+            <p>Hello <strong>${user.name}</strong>,</p>
+            <p>This is to notify you that you or someone else 
+            has changed your account password on Hello Books.</p>
+            <p>If this action was performed by you, 
+            please ignore this mail as no further action is required from you.</p>
+            <p>If not, please contact support at info@hellobooks.herokuapp.com</p>
+            <p>Best regards</p>
+            `;
 
-            Mailer.send();
+            mailer.send();
             res.status(200)
               .send({
                 message: ['Password successfully changed. Please login to your account.']
               });
-          });
-      });
+          })
+          .catch(errors => sendErrors({ res, errors }));
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 }
 
 export default UserController;
+

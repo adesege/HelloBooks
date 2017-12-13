@@ -34,13 +34,16 @@
       "requireReturn": true,
       "requireReturnType": true,
       "requireParamDescription": false,
-      "requireReturnDescription": true
+      "requireReturnDescription": true,
+      "matchDescription": ".+" 
       }],
       "require-jsdoc": ["error", {
         "require": {
           "FunctionDeclaration": true,
           "MethodDefinition": true,
-          "ClassDeclaration": true
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": true,
+          "FunctionExpression": true
         }
         }]
       }

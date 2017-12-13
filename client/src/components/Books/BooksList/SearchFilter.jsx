@@ -8,6 +8,16 @@ const propTypes = {
   searchFilter: PropTypes.object.isRequired
 };
 
+/**
+ * Renders search and filter component
+ *
+ * @param {func} onChangeInput
+ * @param {object} searchFilter
+ * @param {array} categories
+ * @param {func} onSearchFilter
+ *
+ * @returns {JSX} JSX
+*/
 const SearchFilter = ({
   onChangeInput,
   searchFilter,

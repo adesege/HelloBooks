@@ -15,6 +15,11 @@ const userData = [
   }
 ];
 
+/**
+ * Truncare user table
+ *
+ * @return {undefined}
+ */
 export const truncateUserTable = () => {
   User.destroy({
     where: {},
@@ -22,11 +27,21 @@ export const truncateUserTable = () => {
   });
 };
 
+/**
+ * Seed the user table
+ *
+ * @return {undefined}
+ */
 export const seedUserTable = () => {
   truncateUserTable();
   User.bulkCreate(userData);
 };
 
+/**
+ * Sign JWT token
+ *
+ * @returns {object} user payload
+ */
 export const generateToken = () => {
   seedUserTable();
   const adminToken = utils.signToken(admin);

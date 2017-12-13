@@ -4,16 +4,20 @@ import { sendErrors } from '../utils';
 const { bookCategory } = model;
 
 /**
-* @class BookCategoryController
-* @classdesc Book Category Class
+ * Book Category Controller
+ *
+ * @class BookCategoryController
 */
 class BookCategoryController {
   /**
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @return {object} - new added category
-    */
-  static add(req, res) {
+   * Adds a category
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - new added category
+  */
+  static addCategory(req, res) {
     const name = req.body.name || '';
     if (!name) {
       return res
@@ -48,12 +52,16 @@ class BookCategoryController {
           });
       });
   }
+
   /**
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @returns {undefined}
+   * Delete category
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @returns {object} Response message
   */
-  static delete(req, res) {
+  static deleteCategory(req, res) {
     const id = `${req.params.categoryId}`;
     bookCategory
       .findById(id)
@@ -76,12 +84,16 @@ class BookCategoryController {
   }
 
   /**
-    * @method get
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @return {object} - all book categories
+   * Get all categories
+   *
+   * @method getCategories
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - all book categories
   */
-  static get(req, res) {
+  static getCategories(req, res) {
     return bookCategory
       .findAll()
       .then((category) => {
@@ -98,12 +110,16 @@ class BookCategoryController {
   }
 
   /**
-    * @method update
-    * @param {object} req - express http request
-    * @param {object} res - express http response
-    * @return {object} - updated category object
+   * Edit a category
+   *
+   * @method update
+   *
+   * @param {object} req - express http request
+   * @param {object} res - express http response
+   *
+   * @return {object} - edited category object
   */
-  static update(req, res) {
+  static editCategory(req, res) {
     const id = `${req.params.categoryId}`;
     const name = `${req.body.name}`;
     return bookCategory

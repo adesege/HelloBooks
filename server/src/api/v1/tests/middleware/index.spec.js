@@ -56,7 +56,7 @@ describe('Middlewares', () => { // Describe Middlewares
         request
           .get('/api/v1/users/123456/books')
           .end((err, res) => {
-            expect(res.statusCode).to.equal(401);
+            expect(res.statusCode).to.equal(403);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0]).to.equal('Failed to authenticate user.');
             if (err) return done(err);
@@ -74,6 +74,8 @@ describe('Middlewares', () => { // Describe Middlewares
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
+          expect(res.body.message[0]).to.equal('Success');
+          expect(res.body.data[0].id).to.equal(2);
           if (err) return done(err);
           done();
         });
@@ -99,8 +101,9 @@ describe('Middlewares', () => { // Describe Middlewares
         .get('/api/v1/books/stocks')
         .set('authenticate-token', adminToken)
         .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
+          expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
+          expect(res.body.message[0]).to.equal('No stock record found');
           if (err) return done(err);
           done();
         });

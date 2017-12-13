@@ -2,6 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'Modal';
 
+const propTypes = {
+  onDeleteSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isOpenModal: PropTypes.bool.isRequired,
+  toggleOpenDeleteModal: PropTypes.func.isRequired
+};
+
+/**
+ * Delete stock modal component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const DeleteStock = ({
   onDeleteSubmit,
   isLoading,
@@ -24,10 +38,6 @@ const DeleteStock = ({
     </span>
   </Modal>);
 
-DeleteStock.propTypes = {
-  onDeleteSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isOpenModal: PropTypes.bool.isRequired,
-  toggleOpenDeleteModal: PropTypes.func.isRequired
-};
+DeleteStock.propTypes = propTypes;
+
 export default DeleteStock;

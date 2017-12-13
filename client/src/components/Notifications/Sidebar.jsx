@@ -3,19 +3,29 @@ import PropTypes from 'prop-types';
 import InputField from 'form/InputField';
 import Button from 'form/Button';
 
-const propTypes = ({
+const propTypes = {
   searchFilter: PropTypes.object.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   onFilterSubmit: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-});
+};
+
+/**
+ * Sidebar component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const Sidebar = ({
   searchFilter,
   handleInputChange,
   onFilterSubmit,
   errors
 }) => (
-  <div className="col-sm-4 flex-first flex-sm-first mb-5 mb-sm-0 col-md-4 col-lg-3">
+  <div
+    className="col-sm-4 flex-first flex-sm-first mb-5 mb-sm-0 col-md-4 col-lg-3"
+  >
     <div className="card mb-3">
       <div className="card-header">
         <span>Filter by</span>

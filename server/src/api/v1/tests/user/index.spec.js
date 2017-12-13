@@ -113,6 +113,8 @@ describe('User account', () => {
             expect(res.statusCode).to.equal(400);
             expect(res.body.message).to.be.an('array');
             expect(res.body.message[0]).to.be.a('string');
+            expect(res.body.message[0]).to.equal('The name field is required');
+            expect(res.body.message[1]).to.equal('Name must contain alphabet characters only');
             if (err) return done(err);
             done();
           });
@@ -200,7 +202,8 @@ describe('User account', () => {
             expect(res.body).to.be.an('object');
             expect(res.body.message[0]).to.equal('Successfully validated');
             expect(res.body.payload).to.have.property('token');
-            expect(res.body.payload).to.have.property('userId');
+            expect(res.body.payload.userId).to.equal(1);
+            expect(res.body.payload.group).to.equal('user');
             if (err) return done(err);
             done();
           });

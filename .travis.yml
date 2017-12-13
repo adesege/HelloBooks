@@ -28,7 +28,7 @@ before_script:
   - psql -c 'create database travis;' -U postgres
   - npm run build
 script:
-  - npm run coveralls
+  - npm run test:coverage
 after_success:
   - istanbul-combine -d merged-coverage -p summary -r lcov client/coverage/coverage-*.json coverage/coverage-*.json
   - codeclimate-test-reporter < merged-coverage/lcov.info

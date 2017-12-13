@@ -16,6 +16,13 @@ const propTypes = {
   validationError: PropTypes.object.isRequired
 };
 
+/**
+ * Login form component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JSX
+ */
 const LoginForm = (props) => (
   <form onSubmit={props.onSubmit}>
     <FlashMessagesList />

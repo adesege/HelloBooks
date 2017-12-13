@@ -9,6 +9,13 @@ const propTypes = {
   onDeleteModal: PropTypes.func.isRequired
 };
 
+/**
+ * Renders categories list component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} jsx
+ */
 const CategoriesList = ({
   onEditClick,
   categories,

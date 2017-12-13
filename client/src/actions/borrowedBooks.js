@@ -7,12 +7,12 @@ import { addFlashMessage } from './flashMessages';
 const { BOOK_BORROWED, GET_BORROWED_BOOKS, BOOK_RETURNED } = types;
 
 /**
- * Action creator for
- * setting borrowed books
- * in application store
- * @returns {object} action
+ * Action creator for setting borrowed books in application store
+ *
  * @param {object} book
- */
+ *
+ * @returns {object} action creator
+*/
 export const setBorrowedBooks = book => ({
   type: GET_BORROWED_BOOKS,
   book
@@ -20,9 +20,11 @@ export const setBorrowedBooks = book => ({
 
 /**
  * Action creator when book has been borrowed
- * @returns {object} action
+ *
  * @param {object} book
- */
+ *
+ * @returns {object} action creator
+*/
 export const bookBorrowed = book => ({
   type: BOOK_BORROWED,
   isReturned: false,
@@ -30,10 +32,12 @@ export const bookBorrowed = book => ({
 });
 
 /**
- * Action creator when book has been borrowed
- * @returns {object} action
+ * Action creator when book has been returned
+ *
  * @param {object} book
- */
+ *
+ * @returns {object} action creator
+*/
 export const setReturnedBook = book => ({
   type: BOOK_RETURNED,
   isReturned: true,
@@ -41,10 +45,12 @@ export const setReturnedBook = book => ({
 });
 
 /**
- * Make request to borrow a book
- * @returns {object} resource response
+ * Make network request to borrow a book
+ *
  * @param {object} data
- */
+ *
+ * @returns {promise} Axios http promise
+*/
 export const borrowBook = data =>
   dispatch => {
     const updatedAt = moment();
@@ -52,7 +58,7 @@ export const borrowBook = data =>
       .post(`users/${data.userId}/books`, data)
       .then(
         (response) => {
-          /*
+          /**
           * Wait 1 seconds before emitting event to the client
           */
           setTimeout(() => {
@@ -80,59 +86,53 @@ export const borrowBook = data =>
   };
 
 /**
-* Get borrowed book
-* @returns {object} resource response
-* @param {object} data
-*/
-export const getBorrowedBook = data =>
-  dispatch =>
-    axios
-      .get(`users/${data.userId}/books?returned=false&bookId=${data.bookId}`, data)
-      .then(
-        (response) => {
-          dispatch(setBorrowedBooks(response.data.data));
-          return response;
-        },
-        errors => errors
-      );
-
-/**
-* Get borrowed books
-* @returns {object} resource response
-* @param {object} data
+ * Make network request to get borrowed books
+ *
+ * @returns {object} resource response
+ *
+ * @param {object} data
 */
 export const getBorrowedBooks = data =>
-  dispatch =>
-    axios
+  dispatch => {
+    const searchQuery = data ? new URLSearchParams(data) : null;
+    const toQueryString = data ? searchQuery.toString() : '';
+    return axios
       .get(
-        `users/${data.userId}/books?returned=false`,
+        `users/${data.userId}/books?${toQueryString}`,
         data
       )
-      .then(
-        (response) => {
-          dispatch(setBorrowedBooks(response.data.data));
-          return response;
-        },
-        errors => errors
-      );
+      .then((response) => {
+        dispatch(setBorrowedBooks(response.data.data));
+        return response;
+      })
+      .catch((errors) => {
+        dispatch(addFlashMessage({
+          type: 'error',
+          text: errors.response.data.message
+        }));
+      });
+  };
 
 /**
-* Returns borrowed book
-* @returns {object} resource response
-* @param {object} data
+ * Make network request to return borrowed book
+ *
+ * @param {object} data
+ *
+ * @returns {object} resource response
 */
 export const returnBorrowedBook = data =>
   dispatch => {
     const updatedAt = moment();
     return axios
       .put(
-        `users/${data.userId}/books/${data.borrowedBookId}?bookId=${data.bookId}`,
+        `users/${data.userId}/books/${data.borrowedBookId}
+        ?bookId=${data.bookId}`,
         data
       )
       .then(
         (response) => {
           /*
-          * Wait 1 seconds before emitting event to the client
+           * Wait 1 seconds before emitting event to the client
           */
           setTimeout(() => {
             ioGetNotifications({

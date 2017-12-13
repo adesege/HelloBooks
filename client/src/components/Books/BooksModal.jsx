@@ -39,13 +39,18 @@ const contextTypes = {
 };
 
 /**
+ * Books modal
+ *
  * @class BooksModal
+ *
  * @extends {Component}
  */
 class BooksModal extends Component {
   /**
      * Creates an instance of BooksModal.
+     *
      * @param {object} props
+     *
      * @memberof BooksModal
      */
   constructor(props) {
@@ -88,9 +93,12 @@ class BooksModal extends Component {
 
 
   /**
-     * @returns {void}
-     * @memberof BooksModal
-     */
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   componentDidMount() {
     this.setState({ isOpenModal: true });
     this.props.getCategoriesAction();
@@ -98,10 +106,14 @@ class BooksModal extends Component {
 
 
   /**
-     * @returns {void}
-     * @param {object} nextProps
-     * @memberof BooksModal
-     */
+   * Lifecycle method invoked when component receives props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps
+   *
+   * @memberof BooksModal
+  */
   componentWillReceiveProps(nextProps) {
     if (this.props.params.id && this.props.book !== nextProps.book) {
       this.setState({
@@ -122,17 +134,23 @@ class BooksModal extends Component {
   }
 
   /**
- * @returns {void}
- * @memberof BooksModal
- */
+   * Go to books page
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   goToBooksPage() {
     this.context.router.push('/books');
   }
 
   /**
- * @returns {void}
- * @memberof BooksModal
- */
+   * Toggle open books modal
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   toggleOpenModal() {
     this.setState({
       isOpenModal: !this.state.isOpenModal
@@ -140,10 +158,14 @@ class BooksModal extends Component {
   }
 
   /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof BooksModal
-     */
+   * Close upload book cover on click
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof BooksModal
+  */
   closeOnClick(event) {
     event.preventDefault();
     this.setState({
@@ -158,7 +180,10 @@ class BooksModal extends Component {
 
 
   /**
+   * Run validation on books modal form fields
+   *
    * @returns {boolean} isFormValid
+   *
    * @memberof BooksModal
    */
   isFormValid() {
@@ -170,10 +195,14 @@ class BooksModal extends Component {
   }
 
   /**
-     * @return {void}
-     * @param {object} event
-     * @memberof BooksModal
-     */
+   * Add a book
+   *
+   * @return {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof BooksModal
+  */
   onClickSubmit(event) {
     event.preventDefault();
 
@@ -235,10 +264,14 @@ class BooksModal extends Component {
   }
 
   /**
-     * @param {object} event
-     * @returns {void}
-     * @memberof BooksModal
-     */
+   * Read uploaded image and set in state
+   *
+   * @param {object} event
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   onChangeUploadInput(event) {
     const files = event.target.files[0];
     if (!window.FileReader) return;
@@ -259,10 +292,14 @@ class BooksModal extends Component {
   }
 
   /**
-     * @param {object} event
-     * @returns {object} JSX
-     * @memberof BooksModal
-     */
+   * Read uploaded pdf document and set in state
+   *
+   * @param {object} event
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   onChangeUploadFile(event) {
     const files = event.target.files[0];
     // no file selected, or no FileReader support
@@ -288,18 +325,25 @@ class BooksModal extends Component {
 
 
   /**
-     * @returns {void}
-     * @memberof BooksModal
-     */
+   * Hide show cover book on click ok
+   *
+   * @returns {undefined}
+   *
+   * @memberof BooksModal
+  */
   onClickOk() {
     this.setState({ showCoverBook: false });
   }
 
 
   /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof BooksModal
+   * Handle file input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof BooksModal
      */
   onChange(event) {
     const { book } = this.state;
@@ -311,9 +355,12 @@ class BooksModal extends Component {
   }
 
   /**
-     * @returns {object} JSX
-     * @memberof BooksModal
-     */
+   * Renders component
+   *
+   * @returns {object} JSX
+   *
+   * @memberof BooksModal
+  */
   render() {
     const {
       showCoverBook,
@@ -343,7 +390,8 @@ class BooksModal extends Component {
           <Button
             className="btn-sm btn-light mr-sm-1"
             icon="image"
-            onClick = {(event) => onClickOpenBookCover(event, 'triggerUploadInput')}
+            onClick = {(event) =>
+              onClickOpenBookCover(event, 'triggerUploadInput')}
           >
             <span className="hidden-xs-down">
               {coverPhotoPath ? 'Change' : 'Add'} cover
@@ -387,9 +435,12 @@ class BooksModal extends Component {
         btnClass = "btn-success"
         btnLabel= {showCoverBook ? 'Ok' : 'Submit'}
         closeLabel = {showCoverBook ? 'Cancel' : 'Close'}
-        closeOnClick = {showCoverBook ? this.closeOnClick : this.toggleOpenModal}
+        closeOnClick = {showCoverBook ?
+          this.closeOnClick :
+          this.toggleOpenModal}
         onClosed = {this.goToBooksPage}
-        btnOnClick={showCoverBook ? this.onClickOk : this.onClickSubmit}
+        btnOnClick={showCoverBook ? this.onClickOk :
+          this.onClickSubmit}
         btnDisabled={this.state.isLoading}
       >
         {serverErrors &&
@@ -476,6 +527,7 @@ class BooksModal extends Component {
                       label="Number of copies"
                       name="stockQuantity"
                       icon="hashtag"
+                      type="number"
                       value={this.state.book.stockQuantity}
                       onChange={this.onChange} />
                     {clientErrors.stockQuantity &&
@@ -513,6 +565,7 @@ class BooksModal extends Component {
                     label="Published Year"
                     name="publishedDate"
                     icon="calendar"
+                    type="number"
                     value={this.state.book.publishedDate}
                     onChange={this.onChange} />
                   {clientErrors.publishedDate &&
@@ -566,6 +619,14 @@ BooksModal.contextTypes = contextTypes;
 
 BooksModal.propTypes = propTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state
+ * @param {object} props
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = (state, props) => {
   if (props.params.id && state.books && state.books.books) {
     return {

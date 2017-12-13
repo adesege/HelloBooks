@@ -7,7 +7,16 @@ const {
   CATEGORY_EDITED,
   CATEGORY_DELETED
 } = types;
-export default (state = [], action = {}) => {
+
+/**
+ * Handles categories reducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {array} new state
+ */
+const categories = (state = [], action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case CATEGORY_ADDED:
@@ -45,3 +54,5 @@ export default (state = [], action = {}) => {
   default: return state;
   }
 };
+
+export default categories;

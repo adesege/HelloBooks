@@ -13,9 +13,12 @@ const propTypes = {
 };
 
 /**
- * @returns {object} JSX
+ * App component
+ *
+ * @returns {JSX} JSX
+ *
  * @param {object} props
- */
+*/
 const App = ({ children }) => (
   <div className="container-fluid">
     <LoadingBar

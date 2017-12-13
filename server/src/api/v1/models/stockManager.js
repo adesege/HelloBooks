@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Book = sequelize.model('Book');
+  const bookModel = sequelize.model('Book');
   const stockManager = sequelize.define('stockManager', {
     bookId: {
       type: DataTypes.INTEGER,
@@ -31,11 +31,11 @@ export default (sequelize, DataTypes) => {
   });
 
   stockManager.afterCreate(stock =>
-    Book
+    bookModel
       .findById(stock.bookId)
-      .then((book) => {
-        book.update({
-          quantity: book.quantity + stock.quantity
+      .then((newBook) => {
+        newBook.update({
+          quantity: newBook.quantity + stock.quantity
         }, {
           where: { id: stock.bookId, }
         })

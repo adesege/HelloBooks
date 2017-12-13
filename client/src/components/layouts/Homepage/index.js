@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import logo from 'assets/images/logo.png';
 
+/**
+ * Add book background image to DOM body
+ *
+ * @returns {undefined}
+*/
 const addBookBg = () => {
   document.querySelector('body').className += ' bg-books';
 };
@@ -17,6 +22,14 @@ const contextTypes = {
   router: PropTypes.object.isRequired
 };
 
+/**
+ * Homepgae component
+ *
+ * @param {object} props
+ * @param {object} context
+ *
+ * @returns {JSX} JSX
+ */
 const Homepage = (props, context) => {
   const { isAuthenticated } = props;
   if (isAuthenticated) {
@@ -40,8 +53,9 @@ const Homepage = (props, context) => {
             { (props.location.pathname !== '/reset-password') &&
             <div className="text-desc text-center mt-5 mb-0">
               <p className="mb-0">
-                HelloBooks is a simple application that helps manage a
-                library and its processes like stocking, tracking and renting books.
+                HelloBooks is a simple application
+                that helps manage a library
+                and its processes like stocking, tracking and renting books.
               </p>
             </div>
             }
@@ -56,10 +70,18 @@ const Homepage = (props, context) => {
 
 Homepage.propTypes = propTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state
+ *
+ * @returns {object} map state to props
+*/
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
 Homepage.contextTypes = contextTypes;
 
+export { Homepage };
 export default connect(mapStateToProps)(Homepage);
