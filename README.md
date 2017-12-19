@@ -58,7 +58,42 @@ There are two middlewares defined in this application.
 
 Please visit the application documentation at http://hellobooks.herokuapp.com/docs/v1 or http://localhost:4567 to test locally
 
-To deploy generated files into your application, run `npm run build`
+To deploy generated files into your application, run `npm run slate:build`
+
+# Testing
+There are three different kind of testing in this application; client, server and end-to-end testing.
+
+> To start the server test. In your CMD, run
+```js
+  npm run test
+
+  # To get coverage result, run
+  npm run test:coverage
+```
+
+> To start the end-to-end test
+```js
+# For the first time you are running it, 
+# you'll need to install the selenium server and chrome driver.
+# To do that, run
+npm run test:e2e-install
+
+# then start the server with
+npm run test:e2e-server
+
+# finally, run the test with
+npm run test:e2e
+```
+
+> Finally, for the client test,
+```
+# first cd to the test folder
+# then run
+npm run test
+
+# for coverage report, run
+npm run test:coverage
+```
 
 # Author
 
