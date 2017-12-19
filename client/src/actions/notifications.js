@@ -7,8 +7,11 @@ const {
 } = types;
 
 /**
- * @returns {object} action
+ * Action creator when notifications has been fetched
+ *
  * @param {object} notifications
+ *
+ * @returns {object} action
  */
 export const notificationsFetched = notifications => ({
   type: GET_NOTIFICATIONS,
@@ -16,13 +19,19 @@ export const notificationsFetched = notifications => ({
 });
 
 /**
- * @returns {object} response result
+ * Make network request to get all notifications
+ * or by a particular notification
+ *
  * @param {object} data
+ *
+ * @returns {promise} Axios http response
  */
 export const getNotifications = data =>
   dispatch => {
-    const searchQuery = data ? new URLSearchParams(data) : null; // converts an object to query string
-    const toQueryString = data ? searchQuery.toString() : ''; // converts it to string
+    // converts an object to query string
+    const searchQuery = data ? new URLSearchParams(data) : null;
+    // converts it to string
+    const toQueryString = data ? searchQuery.toString() : '';
     return axios
       .get(`notifications?${toQueryString}`)
       .then(

@@ -1,6 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const propTypes = {
+  children: PropTypes.object,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string,
+  disabled: PropTypes.bool,
+  className: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  iconClass: PropTypes.string,
+  icon: PropTypes.string
+};
+
+const defaultProps = {
+  type: 'submit'
+};
+
+
+/**
+ * Button component
+ *
+ * @param {object} props
+ *
+ * @returns {JSX} JXX
+ */
 const Button = ({
   children,
   disabled,
@@ -27,19 +50,8 @@ const Button = ({
   </button>
 );
 
-Button.propTypes = {
-  children: PropTypes.object,
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string,
-  disabled: PropTypes.bool,
-  className: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  iconClass: PropTypes.string,
-  icon: PropTypes.string
-};
+Button.propTypes = propTypes;
 
-Button.defaultProps = {
-  type: 'submit'
-};
+Button.defaultProps = defaultProps;
 
 export default Button;

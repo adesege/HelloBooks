@@ -20,13 +20,18 @@ const contextTypes = {
 };
 
 /**
+ * Change password component
+ *
  * @class ChangePassword
+ *
  * @extends {React.Component}
  */
 class ChangePassword extends React.Component {
   /**
      * Creates an instance of ChangePassword.
+     *
      * @param {object} props
+     *
      * @memberof ChangePassword
      */
   constructor(props) {
@@ -47,9 +52,12 @@ class ChangePassword extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
   /**
- * @returns {void}
- * @memberof ChangePassword
- */
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @memberof ChangePassword
+  */
   componentDidMount() {
     const { validationKey } = this.props.params;
     const email = extractURLQuery(window.location.href).get('email');
@@ -57,7 +65,7 @@ class ChangePassword extends React.Component {
     if (!validationKey || !email) {
       return this.props.addFlashMessage({
         type: 'error',
-        text: 'There was an error completing your request. Perhaps, you followed a broken link.'
+        text: ['There was an error completing your request. Perhaps, you followed a broken link.']
       });
     }
     this.setState({
@@ -71,10 +79,14 @@ class ChangePassword extends React.Component {
   }
 
   /**
-       * @returns {void}
-       * @param {object} event
-       * @memberof ChangePassword
-       */
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof ChangePassword
+  */
   onChange(event) {
     this.setState({
       user: {
@@ -85,7 +97,10 @@ class ChangePassword extends React.Component {
   }
 
   /**
+   * Validation check
+   *
    * @returns {boolean} isFormValid
+   *
    * @memberof BooksModal
    */
   isFormValid() {
@@ -97,9 +112,13 @@ class ChangePassword extends React.Component {
   }
 
   /**
-    * @returns {void}
-    * @param {object} event
-    * @memberof ChangePassword
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof ChangePassword
   */
   onSubmit(event) {
     event.preventDefault();
@@ -111,30 +130,22 @@ class ChangePassword extends React.Component {
           isLoading: false
         });
         this.context.router.push('/');
-        this.props.addFlashMessage({
-          text: data.data.message,
-          type: 'success'
-        });
       },
       (errors) => {
         this.setState({
           isLoading: false
         });
-        if (errors.response) {
-          this.props.addFlashMessage({
-            type: 'error',
-            text: errors.response.data
-          });
-        }
       }
     );
   }
 
   /**
-       *
-       * @returns {object} JSX
-       * @memberof ResetPassword
-       */
+   * Renders component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof ResetPassword
+  */
   render() {
     return (
       <div>

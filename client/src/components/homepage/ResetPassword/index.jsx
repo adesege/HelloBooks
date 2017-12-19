@@ -13,15 +13,20 @@ const propTypes = {
 };
 
 /**
+ * Reset password component
+ *
  * @class ResetPassword
+ *
  * @extends {React.Component}
- */
+*/
 class ResetPassword extends React.Component {
   /**
-     * Creates an instance of ResetPassword.
-     * @param {object} props
-     * @memberof ResetPassword
-     */
+   * Creates an instance of ResetPassword.
+   *
+   * @param {object} props
+   *
+   * @memberof ResetPassword
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -37,10 +42,14 @@ class ResetPassword extends React.Component {
   }
 
   /**
-       * @returns {void}
-       * @param {object} event
-       * @memberof ResetPassword
-       */
+   * Handle form input onChange event
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof ResetPassword
+  */
   onChange(event) {
     this.setState({
       user: {
@@ -51,9 +60,12 @@ class ResetPassword extends React.Component {
   }
 
   /**
+   * Validation check
+   *
    * @returns {boolean} isFormValid
+   *
    * @memberof BooksModal
-   */
+  */
   isFormValid() {
     const { errors, isValid } = validateUser(this.state.user);
     if (!isValid) {
@@ -63,9 +75,13 @@ class ResetPassword extends React.Component {
   }
 
   /**
-    * @returns {void}
-    * @param {object} event
-    * @memberof ResetPassword
+   * Send reset password mail
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof ResetPassword
   */
   onSubmit(event) {
     event.preventDefault();
@@ -76,30 +92,22 @@ class ResetPassword extends React.Component {
         this.setState({
           isLoading: false
         });
-        this.props.addFlashMessage({
-          text: data.data.message,
-          type: 'success'
-        });
       },
       (errors) => {
         this.setState({
           isLoading: false
         });
-        if (errors.response) {
-          this.props.addFlashMessage({
-            type: 'error',
-            text: errors.response.data
-          });
-        }
       }
     );
   }
 
   /**
-       *
-       * @returns {object} JSX
-       * @memberof ResetPassword
-       */
+   * Renders component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof ResetPassword
+  */
   render() {
     return (
       <div>

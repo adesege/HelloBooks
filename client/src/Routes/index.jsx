@@ -31,10 +31,14 @@ import Notifications from 'components/Notifications';
 import HomepageLayout from 'components/layouts/Homepage';
 import DashboardLayout from 'components/layouts/Dashboard';
 
-import middleware from 'components/middlewares/middleware';
+import authMiddleware from 'components/middlewares/authMiddleware';
 import adminMiddleware from 'components/middlewares/adminMiddleware';
 
+import NotFound from 'components/miscellaneous/NotFound';
+
 /**
+ * Routes definition
+ *
  * @returns {JSX} JSX
  */
 const Routes = () => (
@@ -48,10 +52,13 @@ const Routes = () => (
         <Route path="reset-password/verify/:validationKey" component={ChangePassword} />
       </Route>
 
-      <Route component={middleware(DashboardLayout)}>
+      <Route component={authMiddleware(DashboardLayout)}>
         <Route path="dashboard" component={Dashboard} />
         <Route path="me" component={Profile} />
-        <Route path="notifications" component={adminMiddleware(Notifications)} />
+        <Route
+          path="notifications"
+          component={adminMiddleware(Notifications)}
+        />
 
         <Route path="books">
           <IndexRoute component={Books} />
@@ -65,16 +72,13 @@ const Routes = () => (
           <Route
             path="categories"
             component={adminMiddleware(Categories)} />
-
           <Route path="stock-manager">
             <IndexRoute component={adminMiddleware(StockManager)}/>
             <Route path=":id" component={adminMiddleware(ShowStock)}/>
           </Route>
-
         </Route>
-
       </Route>
-
+      <Route path="*" component={NotFound} />
     </Route>
   </Router>
 );

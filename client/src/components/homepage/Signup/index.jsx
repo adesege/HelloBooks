@@ -22,15 +22,20 @@ const contextTypes = {
 };
 
 /**
+ * Signup component
+ *
  * @class Signup
+ *
  * @extends {React.Component}
- */
+*/
 class Signup extends React.Component {
   /**
-     * Creates an instance of SignupForm.
-     * @param {any} props
-     * @memberof SignupForm
-     */
+   * Creates an instance of Signup.
+   *
+   * @param {object} props
+   *
+   * @memberof Signup
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -52,10 +57,14 @@ class Signup extends React.Component {
   }
 
   /**
-   * @returns {void}
+   * Facebook login success callback to log a user in
+   *
+   * @returns {undefined}
+   *
    * @param {object} response
+   *
    * @memberof Signup
-   */
+  */
   onFacebookCallback(response) {
     this.setState({
       user: {
@@ -70,10 +79,14 @@ class Signup extends React.Component {
   }
 
   /**
-   * @returns {void}
+   * Google login success callback to log a user in
+   *
+   * @returns {undefined}
+   *
    * @param {object} response
+   *
    * @memberof Signup
-   */
+  */
   onGoogleCallback(response) {
     this.setState({
       user: {
@@ -88,21 +101,30 @@ class Signup extends React.Component {
   }
 
   /**
-   * @returns {void}
+   * Google login failure callback
+   *
+   * @returns {undefined}
+   *
    * @memberof Signup
-   */
+  */
   onGoogleFailure() {
     this.props.addFlashMessage({
       type: 'error',
-      text: 'Oh! Oh! We experienced an error validating you on google. Please try again'
+      text: [
+        'Oh! Oh! We experienced an error validating you on google. Please try again'
+      ]
     });
   }
 
   /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof SignupForm
-     */
+   * Handle form input onChange event
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof Signup
+  */
   onChange(event) {
     this.setState({
       user: {
@@ -114,10 +136,14 @@ class Signup extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @param {any} event
-     * @memberof SignupForm
-     */
+   * Creates a user
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event
+   *
+   * @memberof Signup
+  */
   onSubmit(event) {
     event.preventDefault();
 
@@ -130,16 +156,18 @@ class Signup extends React.Component {
           isLoading: false
         });
       } else {
-        document.getElementById('signupForm').reset();
         this.context.router.push('/dashboard');
       }
     });
   }
 
   /**
+   * Validation check
+   *
    * @returns {boolean} isValid
+   *
    * @memberof Signup
-   */
+  */
   isFormValid() {
     const { errors, isValid } = validateUser(this.state.user, 'signup');
     if (!isValid) {
@@ -149,7 +177,10 @@ class Signup extends React.Component {
   }
 
   /**
-   * @returns  {object} JSX
+   * Renders component
+   *
+   * @returns  {JSX} JSX
+   *
    * @memberof Signup
    */
   render() {

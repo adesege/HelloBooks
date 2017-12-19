@@ -1,6 +1,11 @@
 import React from 'react';
 import BooksList from 'components/Books/BooksList';
 
+/**
+ * Dashboard component
+ *
+ * @returns {JSX} JSX
+*/
 const Dashboard = () => (
   <div className="row">
     <div

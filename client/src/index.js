@@ -9,7 +9,9 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser, logout } from './actions/auth';
 import { addFlashMessage } from './actions/flashMessages';
 
-
+/**
+ * Add a request interceptor
+*/
 axios.interceptors.request.use((response) => {
   store.dispatch(showLoading());
   return response;
@@ -17,7 +19,9 @@ axios.interceptors.request.use((response) => {
   store.dispatch(showLoading());
 });
 
-// Add a response interceptor
+/**
+ * Add a response interceptor
+*/
 axios.interceptors.response.use((response) => {
   store.dispatch(hideLoading());
   return response;
@@ -38,6 +42,9 @@ if (localStorage.authToken) {
   store.dispatch(setCurrentUser(JSON.parse(localStorage.userPayload)));
 }
 
-render(<Provider store={store}>
-  <Routes />
-</Provider>, document.getElementById('app'));
+render(
+  <Provider store={store}>
+    <Routes />
+  </Provider>,
+  document.getElementById('app')
+);

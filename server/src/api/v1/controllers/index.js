@@ -1,15 +1,10 @@
-import UserClass from './UserClass';
-import BookClass from './BookClass';
-import StockManagerClass from './StockManagerClass';
-import BookCategoryClass from './BookCategoryClass';
-import SearchClass from './SearchClass';
-import NotificationClass from './NotificationClass';
+import path from 'path';
+import { eagerLoadFiles } from '../utils';
 
-export default { // export object so we can easily access each controller file
-  UserClass,
-  BookClass,
-  StockManagerClass,
-  BookCategoryClass,
-  SearchClass,
-  NotificationClass
+const config = {
+  basename: path.basename(module.filename),
+  dirname: __dirname
 };
+
+const controllers = eagerLoadFiles(config);
+export default controllers;

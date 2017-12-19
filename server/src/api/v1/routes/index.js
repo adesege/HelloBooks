@@ -3,15 +3,15 @@ import controllers from '../controllers';
 import middlewares from '../middlewares';
 
 const {
-  UserClass,
-  BookClass,
-  StockManagerClass,
-  BookCategoryClass,
-  SearchClass,
-  NotificationClass
+  UserController,
+  BookController,
+  StockManagerController,
+  BookCategoryController,
+  SearchController,
+  NotificationController
 } = controllers;
 const {
-  middleware: authMiddleware,
+  authMiddleware,
   adminMiddleware
 } = middlewares;
 
@@ -23,59 +23,59 @@ router.get('/', (req, res) =>
       message: 'Hello, welcome to Hello-Books Api version 1'
     }));
 
-router.post('/users/signup', UserClass.signup);
-router.post('/users/signin', UserClass.signin);
+router.post('/users/signup', UserController.signup);
+router.post('/users/signin', UserController.signin);
 
-router.post('/users/reset-password', UserClass.sendResetPasswordMail);
-router.post('/users/reset-password/verify', UserClass.resetPassword);
+router.post('/users/reset-password', UserController.sendResetPasswordMail);
+router.post('/users/reset-password/verify', UserController.resetPassword);
 
 router.route('/users/:userId/books')
-  .post(authMiddleware, BookClass.borrowBook)
-  .get(authMiddleware, BookClass.getBorrowedBook);
+  .post(authMiddleware, BookController.borrowBook)
+  .get(authMiddleware, BookController.getBorrowedBook);
 
 router.route('/users/:userId/books/:borrowedBookId')
-  .put(authMiddleware, BookClass.returnBorrowedBook);
+  .put(authMiddleware, BookController.returnBorrowedBook);
 
 router.route('/users')
-  .get(authMiddleware, UserClass.getUsers);
+  .get(authMiddleware, UserController.getUsers);
 
 router.route('/users/:userId')
-  .get(authMiddleware, UserClass.getUsers)
-  .put(authMiddleware, UserClass.updateUser);
+  .get(authMiddleware, UserController.getUsers)
+  .put(authMiddleware, UserController.editUser);
 
 router.route('/books')
-  .get(authMiddleware, BookClass.get)
-  .post(authMiddleware, BookClass.create);
+  .get(authMiddleware, BookController.getBooks)
+  .post(authMiddleware, BookController.addBook);
 
 router.route('/notifications')
-  .get(authMiddleware, adminMiddleware, NotificationClass.get);
+  .get(authMiddleware, adminMiddleware, NotificationController.getNotifications);
 
 router.route('/books/stocks')
-  .post(authMiddleware, adminMiddleware, StockManagerClass.create)
-  .get(authMiddleware, adminMiddleware, StockManagerClass.get);
+  .post(authMiddleware, adminMiddleware, StockManagerController.addStock)
+  .get(authMiddleware, adminMiddleware, StockManagerController.getStocks);
 
 router.route('/books/categories')
-  .post(authMiddleware, adminMiddleware, BookCategoryClass.add)
-  .get(authMiddleware, BookCategoryClass.get);
+  .post(authMiddleware, adminMiddleware, BookCategoryController.addCategory)
+  .get(authMiddleware, BookCategoryController.getCategories);
 
 router.route('/books/histories/:userId')
-  .get(authMiddleware, BookClass.getHistories);
+  .get(authMiddleware, BookController.getHistories);
 
 router.route('/books/:id')
-  .get(authMiddleware, authMiddleware, BookClass.get)
-  .delete(authMiddleware, adminMiddleware, BookClass.delete);
+  .get(authMiddleware, authMiddleware, BookController.getBooks)
+  .delete(authMiddleware, adminMiddleware, BookController.deleteBook);
 
 router.route('/books/:bookId')
-  .put(authMiddleware, authMiddleware, BookClass.edit);
+  .put(authMiddleware, authMiddleware, BookController.editBooks);
 
 router.route('/books/categories/:categoryId')
-  .put(authMiddleware, adminMiddleware, BookCategoryClass.update)
-  .delete(authMiddleware, adminMiddleware, BookCategoryClass.delete);
+  .put(authMiddleware, adminMiddleware, BookCategoryController.editCategory)
+  .delete(authMiddleware, adminMiddleware, BookCategoryController.deleteCategory);
 
 router.route('/books/stocks/:stockId')
-  .delete(authMiddleware, adminMiddleware, StockManagerClass.delete);
+  .delete(authMiddleware, adminMiddleware, StockManagerController.deleteStock);
 
 router.route('/search')
-  .get(authMiddleware, SearchClass.get);
+  .get(authMiddleware, SearchController.getResult);
 
 export default router;

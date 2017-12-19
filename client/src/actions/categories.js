@@ -9,26 +9,61 @@ const {
   CATEGORY_DELETED
 } = types;
 
+/**
+ * Action creator for adding a category
+ *
+ * @param {object} category
+ *
+ * @return {object} action creator
+*/
 export const categoryAdded = category => ({
   type: CATEGORY_ADDED,
   category
 });
 
+/**
+ * Action creator for setting fetched book to the store
+ *
+ * @param {object} category
+ *
+ * @returns {object} action creator
+*/
 export const categoryFetched = category => ({
   type: CATEGORY_FETCHED,
   category
 });
 
+/**
+ * Action creator for setting editted book in the store
+ *
+ * @param {object} category
+ *
+ * @returns {object} action creator
+*/
 export const categoryEdited = category => ({
   type: CATEGORY_EDITED,
   category
 });
 
+/**
+ * Action creator when category is deleted
+ *
+ * @param {number} id
+ *
+ * @returns {object} action creator
+*/
 export const categoryDeleted = id => ({
   type: CATEGORY_DELETED,
   id
 });
 
+/**
+ * Make nerwork request to add a book category
+ *
+ * @param {object} data
+ *
+ * @returns {promise} axios http promise
+*/
 export const addBookCategory = data =>
   dispatch =>
     axios
@@ -51,6 +86,11 @@ export const addBookCategory = data =>
         }
       );
 
+/**
+ * Make network request to get book categories
+ *
+ * @returns {promise} Axios http promise
+ */
 export const getBookCategories = () =>
   dispatch =>
     axios
@@ -69,6 +109,13 @@ export const getBookCategories = () =>
         }
       );
 
+/**
+ * Make network request to edit a book category
+ *
+ * @param {object} data
+ *
+ * @returns {promise} Axios http promise
+ */
 export const editBookCategory = data =>
   dispatch =>
     axios
@@ -91,6 +138,13 @@ export const editBookCategory = data =>
         }
       );
 
+/**
+ * Make network request to delete a book category
+ *
+ * @param {object} data
+ *
+ * @returns {promise} Axios http promise
+ */
 export const deleteBookCategory = data =>
   dispatch =>
     axios

@@ -1,17 +1,17 @@
 import types from '../actions/types';
+import { initialHistoryState } from './initialState';
 
 const { GET_BOOKS_HISTORIES } = types;
 
-const initialState = {
-  histories: [],
-  pagination: {}
-};
 /**
- * @returns {undefined}
+ * Handles histories reducer
+ *
+ * @returns {object} new state
+ *
  * @param {object} state
  * @param {object} action
  */
-export default (state = initialState, action = {}) => {
+const histories = (state = initialHistoryState, action = {}) => {
   switch (action.type) {
   case GET_BOOKS_HISTORIES:
     return { ...action };
@@ -19,3 +19,5 @@ export default (state = initialState, action = {}) => {
   default: return state;
   }
 };
+
+export default histories;

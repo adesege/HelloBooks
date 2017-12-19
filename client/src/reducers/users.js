@@ -3,7 +3,16 @@ import types from '../actions/types';
 const {
   GET_USERS
 } = types;
-export default (state = [], action = {}) => {
+
+/**
+ * Handles users reducer
+ *
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {array} new state
+ */
+const users = (state = [], action = {}) => {
   switch (action.type) {
   case GET_USERS:
     return action.result;
@@ -11,3 +20,6 @@ export default (state = [], action = {}) => {
   default: return state;
   }
 };
+
+export default users;
+

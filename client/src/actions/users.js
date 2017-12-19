@@ -8,11 +8,25 @@ const {
   USER_UPDATED
 } = types;
 
+/**
+ * Action creator when users has been fetched
+ *
+ * @param {object} result
+ *
+ * @returns {object} action creator
+ */
 export const usersFetched = result => ({
   type: GET_USERS,
   result
 });
 
+/**
+ * Action creator when user has been updated
+ *
+ * @param {object} data
+ *
+ * @returns {object} action creator
+ */
 export const userUpdated = data => ({
   type: USER_UPDATED,
   data
@@ -20,16 +34,15 @@ export const userUpdated = data => ({
 
 
 /**
- * @export
- * @returns {func} promise
+ * Make network request to get all users or a particular user
+ *
+ * @param {object} payload
+ *
+ * @returns {promise} Axios http promise
  */
-
 export const getUsers = payload =>
   (dispatch) => {
-    let endpoint = '';
-    if (payload) {
-      endpoint = `/${payload.userId}`;
-    }
+    const endpoint = payload ? `/${payload.userId}` : '';
     return axios
       .get(`users${endpoint}`)
       .then(
@@ -46,8 +59,16 @@ export const getUsers = payload =>
       );
   };
 
-
+/**
+ * Make network request to edit a user
+ *
+ * @param {object} payload
+ *
+ * @returns {promise} Axios http promise
+ */
 export const updateUser = payload =>
   (dispatch) =>
     axios
-      .put(`users/${payload.userId}`, payload);
+      .put(`users/${payload.userId}`, payload)
+      .then((response) => response)
+      .catch((errors) => errors);

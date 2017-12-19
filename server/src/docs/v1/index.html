@@ -1,0 +1,1397 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#login" class="toc-h2 toc-link" data-title="Login">Login</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#users" class="toc-h1 toc-link" data-title="Users">Users</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-user" class="toc-h2 toc-link" data-title="Create a user">Create a user</a>
+                  </li>
+                  <li>
+                    <a href="#send-reset-password" class="toc-h2 toc-link" data-title="Send reset password">Send reset password</a>
+                  </li>
+                  <li>
+                    <a href="#change-password-on-reset" class="toc-h2 toc-link" data-title="Change password on reset">Change password on reset</a>
+                  </li>
+                  <li>
+                    <a href="#change-password-in-profile" class="toc-h2 toc-link" data-title="Change password in profile">Change password in profile</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-users" class="toc-h2 toc-link" data-title="Get all users">Get all users</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#categories" class="toc-h1 toc-link" data-title="Categories">Categories</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-category" class="toc-h2 toc-link" data-title="Create a category">Create a category</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-category" class="toc-h2 toc-link" data-title="Update a category">Update a category</a>
+                  </li>
+                  <li>
+                    <a href="#get-categories" class="toc-h2 toc-link" data-title="Get categories">Get categories</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-category" class="toc-h2 toc-link" data-title="Delete a category">Delete a category</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#books" class="toc-h1 toc-link" data-title="Books">Books</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-book" class="toc-h2 toc-link" data-title="Create a book">Create a book</a>
+                  </li>
+                  <li>
+                    <a href="#update-a-book" class="toc-h2 toc-link" data-title="Update a book">Update a book</a>
+                  </li>
+                  <li>
+                    <a href="#get-books" class="toc-h2 toc-link" data-title="Get books">Get books</a>
+                  </li>
+                  <li>
+                    <a href="#search-for-books" class="toc-h2 toc-link" data-title="Search for books">Search for books</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-book" class="toc-h2 toc-link" data-title="Delete a book">Delete a book</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#borrowed-books" class="toc-h1 toc-link" data-title="Borrowed Books">Borrowed Books</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#borrow-a-book" class="toc-h2 toc-link" data-title="Borrow a book">Borrow a book</a>
+                  </li>
+                  <li>
+                    <a href="#return-a-borrowed-book" class="toc-h2 toc-link" data-title="Return a borrowed book">Return a borrowed book</a>
+                  </li>
+                  <li>
+                    <a href="#get-borrowed-books" class="toc-h2 toc-link" data-title="Get borrowed books">Get borrowed books</a>
+                  </li>
+                  <li>
+                    <a href="#get-borrowed-books-history" class="toc-h2 toc-link" data-title="Get borrowed books history">Get borrowed books history</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-book" class="toc-h2 toc-link" data-title="Delete a book">Delete a book</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#stocks" class="toc-h1 toc-link" data-title="Stocks">Stocks</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-a-stock" class="toc-h2 toc-link" data-title="Create a stock">Create a stock</a>
+                  </li>
+                  <li>
+                    <a href="#get-stocks" class="toc-h2 toc-link" data-title="Get stocks">Get stocks</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-stock" class="toc-h2 toc-link" data-title="Delete a stock">Delete a stock</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#notifications" class="toc-h1 toc-link" data-title="Notifications">Notifications</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-notifications" class="toc-h2 toc-link" data-title="Get notifications">Get notifications</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#handling-errors" class="toc-h1 toc-link" data-title="Handling Errors">Handling Errors</a>
+          </li>
+          <li>
+            <a href="#status-code-references" class="toc-h1 toc-link" data-title="Status Code References">Status Code References</a>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='/docs/v1'>HelloBooks Documentation v1.0.0</a></li>
+            <li><a href='/'>Visit main site</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the HelloBooks API! You can use our API to access HelloBooks API endpoints, which can get information on various books and users in our database.</p>
+
+<p>You can view code examples in the dark area to the right.</p>
+
+<p>HTTP Request url must be prepended with the base url</p>
+
+<p><code>BASE URL = http://hellobooks.herokuapp.com/api/v1</code></p>
+<h1 id='authentication'>Authentication</h1>
+<blockquote>
+<p>To authorize, </p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>  <span class="nx">add</span> <span class="s2">`authenticate-token`</span> <span class="nx">to</span> <span class="nx">your</span> <span class="nx">request</span> <span class="nx">header</span><span class="p">.</span> 
+  <span class="nx">Its</span> <span class="nx">value</span> <span class="nx">must</span> <span class="nx">be</span> <span class="nx">a</span> <span class="nx">valid</span> <span class="nx">signed</span> <span class="nx">JWT</span> <span class="nx">token</span><span class="p">.</span>
+</code></pre>
+<p>HelloBooks uses JWT to authenticate a user. The JWT token must be signed by the application and it has an expiry time of 24hours.</p>
+
+<p>HelloBooks expects that the token is included in every request like:</p>
+
+<p><code>authenticate-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></p>
+
+<aside class="notice">
+You must replace <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code> with the signed token.
+</aside>
+<h2 id='login'>Login</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"johndoe@email.com"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"password"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Successfully validated"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span><span class="p">,</span>
+    <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="s2">"user"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint logs a user into the application. The token should be included in subsequent request header.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /users/signin</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h1 id='users'>Users</h1><h2 id='create-a-user'>Create a user</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"johndoe@email.com"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"password"</span><span class="p">,</span>
+  <span class="s2">"confirmPassword"</span><span class="p">:</span> <span class="s2">"password"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"name"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Your account has been created successfully"</span><span class="p">,</span>
+  <span class="s2">"payload"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"token"</span><span class="p">:</span> <span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span><span class="p">,</span>
+    <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"group"</span><span class="p">:</span> <span class="s2">"user"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint creates a user record.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /users/signup</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>201 Created</code></p>
+<h2 id='send-reset-password'>Send reset password</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"johndoe@email.com"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"A password reset link has been sent to johndoe@email.com. It may take upto 5 mins for the mail to arrive."</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint sends a reset password link to the user associated with the provided email address</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST /users/reset-password</code></p>
+<h3 id='http-response-2'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h2 id='change-password-on-reset'>Change password on reset</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"johndoe@email.com"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"new password"</span><span class="p">,</span>
+  <span class="s2">"confirmPassword"</span><span class="p">:</span> <span class="s2">"new password"</span><span class="p">,</span>
+  <span class="s2">"validationKey"</span><span class="p">:</span> <span class="s2">"dfghjkhg32ft4678u9dihbrfvbi3r"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Password successfully changed. Please login to your account."</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint changes a user&#39;s password after the user has click on the reset password link</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST /users/reset-password/verify</code></p>
+<h3 id='http-response-3'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h2 id='change-password-in-profile'>Change password in profile</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"oldPassword"</span><span class="p">:</span> <span class="s2">"old password"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"new password"</span><span class="p">,</span>
+  <span class="s2">"confirmPassword"</span><span class="p">:</span> <span class="s2">"new password"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"User information has been successfully edited"</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint for authenticated users to changes their password</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>PUT /users/:userId</code></p>
+<h3 id='http-response-4'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h2 id='get-all-users'>Get all users</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-11T16:27:39.497Z"</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"johndoe@email.com"</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"John Doe"</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-11T16:27:39.497Z"</span>
+      <span class="s2">"userRank"</span><span class="p">:</span> <span class="s2">"beginner"</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint gets all users or a particular user by id</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST /users/[,:userId]</code></p>
+<h3 id='http-response-5'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>The ID of the user</td>
+</tr>
+</tbody></table>
+<h1 id='categories'>Categories</h1><h2 id='create-a-category'>Create a category</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"African Fiction"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Category added successfully"</span><span class="p">],</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"category"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"African Fiction"</span><span class="p">,</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint creates a category.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /books/categories</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>201 Created</code></p>
+<h2 id='update-a-category'>Update a category</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"African Fiction &amp; tales"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Category updated successfully"</span><span class="p">],</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"African Fiction &amp; tales"</span><span class="p">,</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint updates a category.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PUT /books/:categoryId</code></p>
+<h3 id='http-response-2'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryId</td>
+<td>The ID of the book</td>
+</tr>
+</tbody></table>
+<h2 id='get-categories'>Get categories</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"African Fiction and tales"</span><span class="p">,</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint get all categiories or by category id.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /books/categiories/[,:categoryId]</code></p>
+<h3 id='http-response-3'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryId</td>
+<td>The ID of the category</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-category'>Delete a category</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Category deleted successfully"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint deletes a category by id</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>DELETE /books/categories/[,:categoryId]</code></p>
+<h3 id='http-response-4'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryId</td>
+<td>The ID of the category</td>
+</tr>
+</tbody></table>
+<h1 id='books'>Books</h1><h2 id='create-a-book'>Create a book</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+  <span class="s2">"bookCategoryId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"ISBN"</span><span class="p">:</span> <span class="s2">"1234567890"</span><span class="p">,</span>
+  <span class="s2">"stockQuantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"publishedYear"</span><span class="p">:</span> <span class="mi">2015</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="p">:</span> <span class="s2">"Chimanmanda Adichie"</span><span class="p">,</span>
+  <span class="s2">"bookURL"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"coverPhotoPath"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"documentPath"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Book added successfully"</span><span class="p">],</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"book"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+      <span class="s2">"bookCategoryId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"ISBN"</span><span class="p">:</span> <span class="s2">"1234567890"</span><span class="p">,</span>
+      <span class="s2">"stockQuantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"publishedYear"</span><span class="p">:</span> <span class="mi">2015</span><span class="p">,</span>
+      <span class="s2">"author"</span><span class="p">:</span> <span class="s2">"Chimanmanda Adichie"</span><span class="p">,</span>
+      <span class="s2">"bookURL"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"coverPhotoPath"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"documentPath"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint creates a book.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /books</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>201 Created</code></p>
+<h2 id='update-a-book'>Update a book</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+  <span class="s2">"bookCategoryId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"ISBN"</span><span class="p">:</span> <span class="s2">"1234567890"</span><span class="p">,</span>
+  <span class="s2">"publishedYear"</span><span class="p">:</span> <span class="mi">2015</span><span class="p">,</span>
+  <span class="s2">"author"</span><span class="p">:</span> <span class="s2">"Chimanmanda Adichie"</span><span class="p">,</span>
+  <span class="s2">"bookURL"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"coverPhotoPath"</span><span class="p">:</span> <span class="s2">"http://res.cloudinary.com/johndoe/image/upload/v1512654679/qclzzr...mwf8ktc.png"</span><span class="p">,</span>
+  <span class="s2">"documentPath"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Book successfully updated"</span><span class="p">],</span>
+  <span class="s2">"book"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+      <span class="s2">"bookCategoryId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"ISBN"</span><span class="p">:</span> <span class="s2">"1234567890"</span><span class="p">,</span>
+      <span class="s2">"stockQuantity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"publishedYear"</span><span class="p">:</span> <span class="mi">2015</span><span class="p">,</span>
+      <span class="s2">"author"</span><span class="p">:</span> <span class="s2">"Chimanmanda Adichie"</span><span class="p">,</span>
+      <span class="s2">"bookURL"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"coverPhotoPath"</span><span class="p">:</span> <span class="s2">"http://res.cloudinary.com/johndoe/image/upload/v1512654679/qclzzr...mwf8ktc.png"</span><span class="p">,</span>
+      <span class="s2">"documentPath"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint updates a book.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PUT /books/:bookId</code></p>
+<h3 id='http-response-2'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>The ID of the book</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fields</td>
+<td>undefined</td>
+<td>If defined, it will set the columns to update to the ones specified in the query parameter. It&#39;s an array of fields</td>
+</tr>
+</tbody></table>
+<h2 id='get-books'>Get books</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+      <span class="p">...</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"pagination"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"pageSize"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"totalCount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"page"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"pageCount"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">12</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint get all books or by book id.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /books/[,:bookId]</code></p>
+<h3 id='http-response-3'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>The ID of the book</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>Sets the offset for pagination</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>12</td>
+<td>The number of books to display per page</td>
+</tr>
+<tr>
+<td>author</td>
+<td>undefined</td>
+<td>Filter by author name</td>
+</tr>
+<tr>
+<td>title</td>
+<td>undefined</td>
+<td>Filter by book title</td>
+</tr>
+<tr>
+<td>bookCategoryId</td>
+<td>undefined</td>
+<td>Filter by book category</td>
+</tr>
+</tbody></table>
+<h2 id='search-for-books'>Search for books</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Book found"</span><span class="p">],</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+      <span class="p">...</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint search books</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET /search</code></p>
+<h3 id='http-response-4'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>undefined</td>
+<td>Sets the type of searching that is being done. <code>Possible parameters is &#39;books&#39;</code></td>
+</tr>
+<tr>
+<td>q</td>
+<td>undefined</td>
+<td>The search query string</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-book'>Delete a book</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Book deleted successfully"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint get all books or by book id.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE /books/{,:bookId}</code></p>
+<h3 id='http-response-5'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>The ID of the book</td>
+</tr>
+</tbody></table>
+<h1 id='borrowed-books'>Borrowed Books</h1><h2 id='borrow-a-book'>Borrow a book</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"bookId"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"You have successfully  borrowed this book"</span><span class="p">],</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint allows a user to borrow a book</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /users/:userId/books</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>201 Created</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>The ID of the user</td>
+</tr>
+</tbody></table>
+<h2 id='return-a-borrowed-book'>Return a borrowed book</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"You have successfully returned this book"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint returns a borrowed book</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>PUT /users/:userId/books/:borrowedBookId</code></p>
+<h3 id='http-response-2'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>The ID of the user</td>
+</tr>
+<tr>
+<td>borrowedBookId</td>
+<td>The ID of the borrowed book</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>undefined</td>
+<td>If defined, it will set the bookId of the book that is being returned.</td>
+</tr>
+</tbody></table>
+<h2 id='get-borrowed-books'>Get borrowed books</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+      <span class="p">...</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Success"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint gets all the books that have been borrowed but are yet to be returned</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /users/:userId/books</code></p>
+<h3 id='http-response-3'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>The ID of the user</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>0</td>
+<td>Sets the id of the book that has been borrowed</td>
+</tr>
+<tr>
+<td>returned</td>
+<td>false</td>
+<td>The return status of the book</td>
+</tr>
+</tbody></table>
+<h2 id='get-borrowed-books-history'>Get borrowed books history</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Half of a yellow sun"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A sweet book from Chimamanda Adichie"</span><span class="p">,</span>
+      <span class="p">...</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">},</span>
+  <span class="s2">"pagination"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"pageSize"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"totalCount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"page"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"pageCount"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">12</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint gets borrowed book histories based on some criteria</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET /books/histories/:userId</code></p>
+<h3 id='http-response-4'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userId</td>
+<td>The ID of the user</td>
+</tr>
+</tbody></table>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>Sets the offset for pagination</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>12</td>
+<td>The number of histories to display per page</td>
+</tr>
+<tr>
+<td>isReturned</td>
+<td>undefined</td>
+<td>Sets the returned status of the borrowed book</td>
+</tr>
+<tr>
+<td>updatedAt</td>
+<td>undefined</td>
+<td>Filter by updatedAt</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-book'>Delete a book</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Book deleted successfully"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint get all books or by book id.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE /books/[,:bookId]</code></p>
+<h3 id='http-response-5'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>The ID of the book</td>
+</tr>
+</tbody></table>
+<h1 id='stocks'>Stocks</h1><h2 id='create-a-stock'>Create a stock</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"bookId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Stock added successfully"</span><span class="p">],</span>
+  <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"bookId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">8</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint creates a stock.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /books/stocks</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>201 Created</code></p>
+<h2 id='get-stocks'>Get stocks</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"bookId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">8</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint get all stocks or by book id.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET /books/stocks/[,:bookId]</code></p>
+<h3 id='http-response-2'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>undefined</td>
+<td>If defined, gets stock by book Id</td>
+</tr>
+</tbody></table>
+<h2 id='delete-a-stock'>Delete a stock</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Stock deleted successfully"</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint delete stock by stock id</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE /stocks/[,:stockId]</code></p>
+<h3 id='http-response-3'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>stockId</td>
+<td>The ID of the stock</td>
+</tr>
+</tbody></table>
+<h1 id='notifications'>Notifications</h1><h2 id='get-notifications'>Get notifications</h2>
+<blockquote>
+<p>Request body</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span> <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response body (application/json)</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> 
+    <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"bookId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"userId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"notificationType"</span><span class="p">:</span> <span class="s2">"BOOK_RETURNED"</span><span class="p">,</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2017-12-12T16:27:39.497Z"</span><span class="p">,</span>
+      <span class="s2">"Book"</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="s2">"User"</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint get all notifications and can filter the result</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /notifications</code></p>
+<h3 id='http-response'>HTTP Response</h3>
+<p><code>200 OK</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>Sets the offset for pagination</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>12</td>
+<td>The number of books to display per page</td>
+</tr>
+<tr>
+<td>notificationType</td>
+<td>undefined</td>
+<td>Filter by the type of notification; <code>BOOK_RETURNED</code> or <code>BOOK_BORROWED</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td>undefined</td>
+<td>Filter by user&#39;s name</td>
+</tr>
+</tbody></table>
+<h1 id='handling-errors'>Handling Errors</h1>
+<p>All response messages are returned as an array with a <code>message</code> key in the response body.</p>
+
+<blockquote>
+<p>Sample validation error</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>  <span class="nx">Status</span> <span class="nx">code</span> <span class="o">=</span> <span class="mi">400</span> <span class="nx">Bad</span> <span class="nx">Request</span>
+  <span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"The name field is required"</span><span class="p">,</span>
+      <span class="s2">"The email field is required"</span><span class="p">,</span>
+      <span class="s2">"The password and confirm password fields is required"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Sample server error</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code>  <span class="nx">Status</span> <span class="nx">code</span> <span class="o">=</span> <span class="mi">500</span> <span class="nx">Internal</span> <span class="nx">Server</span> <span class="nb">Error</span>
+  <span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"There was an error processing your request. \
+      You don't need to do anything else. \
+      Our engineers are on it. "</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+</code></pre><h1 id='status-code-references'>Status Code References</h1>
+<p>The HelloBooks API uses the following status codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Validation errors.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- Either the resource requested is meant for authenticated user or administrator only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified resource could not be found.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict -- The resource you are updating, creating or requesting already exist.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

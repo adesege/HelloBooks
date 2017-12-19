@@ -4,17 +4,37 @@ import { addFlashMessage } from './flashMessages';
 
 const { STOCK_MANAGER_FETCHED, STOCK_ADDED, STOCK_DELETED } = types;
 
-
+/**
+ * Action creator when stock has been deleted
+ *
+ * @param {number} id
+ *
+ * @returns {object} action creator
+ */
 export const stockDeleted = (id) => ({
   type: STOCK_DELETED,
   id
 });
 
+/**
+ * Action creator when stock has been added
+ *
+ * @param {number} data
+ *
+ * @returns {object} action creator
+ */
 export const stockAdded = (data) => ({
   type: STOCK_ADDED,
   data
 });
 
+/**
+ * Action creator when stock has been fetched
+ *
+ * @param {object} data
+ *
+ * @returns {object} action creator
+ */
 export const stockManagerFetched = (data) => ({
   type: STOCK_MANAGER_FETCHED,
   data
@@ -22,9 +42,14 @@ export const stockManagerFetched = (data) => ({
 
 
 /**
+ * Make network request to get stock
+ * by book id
+ *
  * @export
+ *
+ * @returns {promise} Axios http promise
+ *
  * @param {object} data
- * @returns {func} promise
  */
 export const getStockManagerByBookId = data =>
   dispatch =>
@@ -39,9 +64,13 @@ export const getStockManagerByBookId = data =>
 
 
 /**
+ * Make network request to add stock
+ *
  * @export
+ *
  * @param {object} data
- * @returns {func} promise
+ *
+ * @returns {promise} Axios http promise
  */
 export const addStock = data =>
   dispatch =>
@@ -66,13 +95,18 @@ export const addStock = data =>
 
 
 /**
+ * Make network request to delete a stock
+ *
  * @export
+ *
  * @param {object} data
- * @returns {func} promise
+ *
+ * @returns {promise} Axios http promise
  */
 export const deleteStock = data =>
   dispatch =>
-    axios.delete(`books/stocks/${data.id}`)
+    axios
+      .delete(`books/stocks/${data.id}`)
       .then(
         (response) => {
           dispatch(stockDeleted(data.id));

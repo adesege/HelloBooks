@@ -2,13 +2,24 @@ import React from 'react';
 import Cropper from 'react-cropperjs';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setImageData, deleteImageData } from 'actions/cropper';
+import {
+  setImageData,
+  deleteImageData
+} from 'actions/cropper';
 
+const propTypes = {
+  imageSrc: PropTypes.string,
+  deleteImageData: PropTypes.func.isRequired,
+  setImageData: PropTypes.func.isRequired
+};
 
 /**
+ * Upload book cover component
+ *
  * @class UploadBookCover
+ *
  * @extends {React.Component}
- */
+*/
 class UploadBookCover extends React.Component {
   /**
      * Creates an instance of UploadBookCover.
@@ -24,9 +35,12 @@ class UploadBookCover extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @memberof UploadBookCover
-     */
+   * Set the image data
+   *
+   * @returns {undefined}
+   *
+   * @memberof UploadBookCover
+  */
   crop() {
     this.props.deleteImageData();
     this.props.setImageData({
@@ -37,9 +51,12 @@ class UploadBookCover extends React.Component {
 
 
   /**
-     * @returns {object} JSX
-     * @memberof UploadBookCover
-     */
+   * Renders component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof UploadBookCover
+  */
   render() {
     const { imageSrc } = this.props;
     return (
@@ -54,11 +71,10 @@ class UploadBookCover extends React.Component {
   }
 }
 
-UploadBookCover.propTypes = {
-  imageSrc: PropTypes.string,
-  deleteImageData: PropTypes.func.isRequired,
-  setImageData: PropTypes.func.isRequired
-};
+UploadBookCover.propTypes = propTypes;
 
 export { UploadBookCover };
-export default connect(null, { setImageData, deleteImageData })(UploadBookCover);
+export default connect(null, {
+  setImageData,
+  deleteImageData
+})(UploadBookCover);

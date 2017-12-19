@@ -1,7 +1,15 @@
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
 import { CronJob } from 'cron';
-import app from '../../../express';
 
+/**
+ * Generate random characters
+ *
+ * @returns {string} random string
+ *
+ * @param {number} limit
+ */
 const randomString = (limit = 5) => {
   let randArray = '';
   limit = [...Array(parseInt(limit, 10)).keys()];
@@ -13,8 +21,15 @@ const randomString = (limit = 5) => {
   return randomStrings.join('');
 };
 
+/**
+ * Signs JWT token for authenticating a user
+ *
+ * @returns {string} JWT signed token
+ *
+ * @param {object} user
+ */
 const signToken = (user) => {
-  const secret = app.get('secret');
+  const secret = process.env.TOKEN_SECRET;
   return jwt.sign(
     { user: user.id, group: user.userGroup },
     secret,
@@ -22,6 +37,15 @@ const signToken = (user) => {
   );
 };
 
+/**
+ * Gets the number of days until return date
+ * or returns all the number of days until return datee
+ *
+ * @returns {number} - The number of days
+ * @returns {object} - ranks
+ *
+ * @param {number} rank
+ */
 const returnDate = (rank) => {
   const ranks = {
     beginner: 3,
@@ -39,8 +63,22 @@ const returnDate = (rank) => {
   return ranks;
 };
 
+/**
+ * Sets cron job options
+ *
+ * @returns {constructor} Cron job constructor
+ *
+ * @param {object} props
+ */
 export const setCron = props => new CronJob(props);
 
+/**
+ * Format error messages
+ *
+ * @returns {array} an array of errors
+ *
+ * @param {objects} errors
+ */
 export const formatErrorMessage = (errors) => {
   if (errors.errors) {
     return errors.errors.map(error => error.message);
@@ -48,9 +86,57 @@ export const formatErrorMessage = (errors) => {
   return [errors.message];
 };
 
+/**
+ * Formats and sends error messages
+ *
+ * @returns {object} express http response
+ *
+ * @param {object} errors
+ * @param {object} res
+ */
+export const sendErrors = ({ errors, res }) => {
+  if (errors.name === 'SequelizeValidationError') {
+    return res
+      .status(400)
+      .send({
+        message: formatErrorMessage(errors)
+      });
+  }
+  return res
+    .status(500)
+    .send({
+      message: formatErrorMessage(errors)
+    });
+};
+
+/**
+ * Eagerly load files in a given directory
+ *
+ * @returns {object} files
+ *
+ * @param {object} config
+ */
+export const eagerLoadFiles = (config) => {
+  const { basename, dirname } = config;
+  const files = {};
+  fs
+    .readdirSync(dirname)
+    .filter(file =>
+      (file.indexOf('.') !== 0) &&
+    (file !== basename) &&
+    (file.slice(-3) === '.js'))
+    .forEach((file) => {
+      /* eslint-disable global-require, import/no-dynamic-require */
+      const requireFile = require(path.join(dirname, file)).default;
+      files[requireFile.name] = requireFile;
+    });
+  return files;
+};
+
 export default {
   randomString,
   signToken,
   returnDate,
-  setCron
+  setCron,
+  eagerLoadFiles
 };
