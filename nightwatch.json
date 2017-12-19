@@ -1,0 +1,26 @@
+{
+  "src_folders" : "./e2e-tests",
+  "output_folder" : "reports",
+
+  "selenium" : {
+    "start_process" : true,
+    "log_path" : "",
+    "port" : 4444,
+    "cli_args" : {
+      "webdriver.chrome.driver" : "./bin/chromedriver"
+    }
+  },
+
+  "test_settings" : {
+    "default" : {
+      "launch_url" : "http://localhost:3000",
+      "selenium_port"  : 4444,
+      "selenium_host"  : "localhost",
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
+      }
+    }
+  }
+}
