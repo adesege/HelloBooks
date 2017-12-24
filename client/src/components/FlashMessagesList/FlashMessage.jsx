@@ -11,7 +11,7 @@ const propTypes = {
  *
  * @returns {JSX} JSX
  *
- * @param {object} props - Proptypes
+ * @param {object} props - component props
  */
 const FlashMessage = (props) => {
   const { type, text } = props.message;

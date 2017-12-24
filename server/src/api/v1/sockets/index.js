@@ -5,13 +5,13 @@ import Notifications from './Notifications';
  *
  * @returns {undefined}
  *
- * @param {object} io
+ * @param {object} io - instance of socket.io
  */
 export default (io) => {
   io.on('connect', (socket) => {
     const notifications = new Notifications(io);
-    socket.on('GET_NOTIFICATIONS', (data) => {
-      notifications.getNotification(data);
+    socket.on('GET_NOTIFICATIONS', (options) => {
+      notifications.getNotification(options);
     });
 
     socket.on('JOIN', () => {

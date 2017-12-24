@@ -4,8 +4,8 @@ import isEmpty from 'lodash/isEmpty';
 /**
 * Handles user validation
 *
-* @param {object} fields
-* @param {object} type
+* @param {object} fields - fields to validate
+* @param {object} type - type of action that is being performed
 *
 * @returns {object} error messages
 */

@@ -27,7 +27,7 @@ class Profile extends React.Component {
   /**
    * Creates an instance of Profile.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof Profile
   */
@@ -71,7 +71,7 @@ class Profile extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof Profile
   */
@@ -86,7 +86,7 @@ class Profile extends React.Component {
    *
    * @returns {undefined}
    *
-   * @memberOf Profile
+   * @memberof Profile
    */
   toggleOpenModal() {
     this.setState({
@@ -100,7 +100,7 @@ class Profile extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Profile
   */
@@ -127,7 +127,7 @@ class Profile extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Profile
    */
@@ -149,7 +149,13 @@ class Profile extends React.Component {
    * @memberof Profile
    */
   isFormValid() {
-    const { errors, isValid } = validateUser(this.state.passwordChange, 'change-password-user');
+    const {
+      errors,
+      isValid
+    } = validateUser(
+      this.state.passwordChange,
+      'change-password-user'
+    );
     if (!isValid) {
       this.setState({ errors });
     }
@@ -196,7 +202,7 @@ Profile.propTypes = propTypes;
 /**
   * Get state from store
   *
-  * @param {object} state
+  * @param {object} state - redux store state
   *
   * @returns {object} map state to props
  */

@@ -5,7 +5,7 @@ import { addFlashMessage } from './flashMessages';
 /**
  * Make network request to create an account for a user
  *
- * @param {object} userData
+ * @param {object} userData - user data for creating a user
  *
  * @returns {promise} Axios http response
  */
@@ -18,7 +18,7 @@ export const userSignupRequestAction = userData =>
           type: 'success',
           text: response.data.message
         }));
-        dispatch(logUserIn(response.data.payload));
+        dispatch(logUserIn(response.data.user));
         return response;
       })
       .catch((errors) => {

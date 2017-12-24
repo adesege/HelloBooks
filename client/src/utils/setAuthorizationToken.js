@@ -3,7 +3,7 @@ import axios from 'axios';
 /**
  * Set authorization token in axios header
  *
- * @param {string} token
+ * @param {string} token - jwt token to set in headers
  *
  * @returns {undefined}
  */

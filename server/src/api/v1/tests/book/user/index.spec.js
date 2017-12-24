@@ -51,11 +51,12 @@ describe('# User Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data[0]).to.have.property('id');
-          expect(res.body.data[0].title).to.equal('Purple Hibiscus is a new title');
-          expect(res.body.data[0].author).to.equal('Chimamanda Adichie');
-          expect(res.body.data[0].userId).to.equal(2);
-          expect(res.body.data[0].id).to.equal(1);
+          expect(res.body.books[0]).to.have.property('id');
+          expect(res.body.books[0].title)
+            .to.equal('Purple Hibiscus is a new title');
+          expect(res.body.books[0].author).to.equal('Chimamanda Adichie');
+          expect(res.body.books[0].userId).to.equal(2);
+          expect(res.body.books[0].id).to.equal(1);
           if (err) return done(err);
           done();
         });
@@ -71,11 +72,12 @@ describe('# User Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
-          expect(res.body.data[0]).to.have.property('id');
-          expect(res.body.data[0].id).to.equal(1);
-          expect(res.body.data[0].title).to.equal('Purple Hibiscus is a new title');
-          expect(res.body.data[0].userId).to.equal(2);
-          expect(res.body.data[0].author).to.equal('Chimamanda Adichie');
+          expect(res.body.books[0]).to.have.property('id');
+          expect(res.body.books[0].id).to.equal(1);
+          expect(res.body.books[0].title)
+            .to.equal('Purple Hibiscus is a new title');
+          expect(res.body.books[0].userId).to.equal(2);
+          expect(res.body.books[0].author).to.equal('Chimamanda Adichie');
           if (err) return done(err);
           done();
         });
@@ -91,11 +93,13 @@ describe('# User Book', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.pagination).to.have.property('page');
-          expect(res.body.data[0].id).to.equal(books.books[0].id);
-          expect(res.body.data[0].userId).to.equal(books.books[0].userId);
-          expect(res.body.data[0].isReturned).to.equal(books.books[0].isReturned);
+          expect(res.body.books[0].id).to.equal(books.books[0].id);
+          expect(res.body.books[0].userId).to.equal(books.books[0].userId);
+          expect(res.body.books[0].isReturned)
+            .to.equal(books.books[0].isReturned);
           expect(res.body.pagination.page).to.equal(books.pagination.page);
-          expect(res.body.pagination.totalCount).to.equal(books.pagination.totalCount);
+          expect(res.body.pagination.totalCount)
+            .to.equal(books.pagination.totalCount);
           if (err) return done(err);
           done();
         });
@@ -111,9 +115,11 @@ describe('# User Book', () => {
           expect(res.statusCode).to.equal(200);
           expect(res.body).to.be.an('object');
           expect(res.body.pagination).to.have.property('page');
-          expect(res.body.data[1].id).to.equal(books.books[0].id);
-          expect(res.body.data[1].userId).to.equal(books.books[0].userId);
-          expect(res.body.data[1].isReturned).to.equal(books.books[0].isReturned);
+          expect(res.body.books[1].id).to.equal(books.books[0].id);
+          expect(res.body.books[1].userId)
+            .to.equal(books.books[0].userId);
+          expect(res.body.books[1].isReturned)
+            .to.equal(books.books[0].isReturned);
           if (err) return done(err);
           done();
         });

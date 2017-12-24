@@ -6,7 +6,7 @@ import Menu from './Menu';
  *
  * @returns {JSX} jsx
  *
- * @param {object} props
+ * @param {object} props - component props
 */
 const Header = (props) => (
   <div>

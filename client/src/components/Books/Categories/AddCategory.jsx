@@ -17,7 +17,7 @@ const propTypes = {
 /**
  * Renders add category component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} jsx
  */

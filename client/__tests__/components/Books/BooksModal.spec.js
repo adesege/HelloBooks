@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedBooksModal, { BooksModal } from 'components/Books/BooksModal';
+import ConnectedBooksModal, { 
+  BooksModal
+ } from 'components/Books/BooksModal';
 import Modal from 'Modal';
 
 const book = {
@@ -62,7 +64,8 @@ describe('# BooksModal', () => {
   });
 
   it('should call the componentWillReceiveProps method', () => {
-    const componentWillReceivePropsSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+    const componentWillReceivePropsSpy = jest
+      .spyOn(wrapper.instance(), 'componentWillReceiveProps');
     const nextProps = {
       params: { id: 2 },
       book,
@@ -72,12 +75,14 @@ describe('# BooksModal', () => {
     expect(componentWillReceivePropsSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the goToBooksPage method', () => {
-    const goToBooksPageOnSpy = jest.spyOn(wrapper.instance(), 'goToBooksPage');
+    const goToBooksPageOnSpy = jest
+      .spyOn(wrapper.instance(), 'goToBooksPage');
     wrapper.instance().goToBooksPage();
     expect(goToBooksPageOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the toggleOpenModal method', () => {
-    const toggleOpenModalOnSpy = jest.spyOn(wrapper.instance(), 'toggleOpenModal');
+    const toggleOpenModalOnSpy = jest
+      .spyOn(wrapper.instance(), 'toggleOpenModal');
     wrapper.instance().toggleOpenModal();
     expect(toggleOpenModalOnSpy).toHaveBeenCalledTimes(1);
   });
@@ -93,7 +98,9 @@ describe('# BooksModal', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedBooksModal {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedBooksModal
+       {...props}
+       store={store} />);
     expect(connectedComponent.length).toBe(1);
   });
 
@@ -118,13 +125,15 @@ describe('# BooksModal', () => {
 
   describe('onChangeUploadInput', () => {
     it('should call the onChangeUploadInput method', () => {
-      const onChangeUploadInputOnSpy = jest.spyOn(wrapper.instance(), 'onChangeUploadInput');
+      const onChangeUploadInputOnSpy = jest
+        .spyOn(wrapper.instance(), 'onChangeUploadInput');
       wrapper.instance().onChangeUploadInput(global.event);
       expect(onChangeUploadInputOnSpy).toHaveBeenCalledTimes(1);
     });
     it('should return false if window.FileReader cannot be found', () => {
       window.FileReader = false;
-      const onChangeUploadInputOnSpy = jest.spyOn(wrapper.instance(), 'onChangeUploadInput');
+      const onChangeUploadInputOnSpy = jest
+        .spyOn(wrapper.instance(), 'onChangeUploadInput');
       wrapper.instance().onChangeUploadInput(global.event);
       expect(onChangeUploadInputOnSpy).toHaveBeenCalledTimes(2);
     });

@@ -62,39 +62,48 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.a('object');
-        expect(res.body.message[0]).to.equal('The category name field is required');
+        expect(res.body.message[0])
+          .to.equal('Please enter a category name');
         if (err) return done(err);
         done();
       });
   });
 
-  it('should not add a book category with the same name multiple times', (done) => {
-    request
-      .post('/api/v1/books/categories')
-      .send(bookCategory)
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(409);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('A category with this name already exist');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not add a book category with the same name multiple times',
+    (done) => {
+      request
+        .post('/api/v1/books/categories')
+        .send(bookCategory)
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(409);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0])
+            .to.equal('A category with this name already exist');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
-  it('should not be able to add a book category if the name is not specified', (done) => {
-    request
-      .post('/api/v1/books/categories')
-      .send({})
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('The category name field is required');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not be able to add a book category if the name is not specified',
+    (done) => {
+      request
+        .post('/api/v1/books/categories')
+        .send({})
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0])
+            .to.equal('Please enter a category name');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
   it('should get all books categories', (done) => {
     request
@@ -103,8 +112,8 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.data[0].name).to.equal(bookCategory.name);
-        expect(res.body.data[0].id).to.equal(bookCategory.id);
+        expect(res.body.categories[0].name).to.equal(bookCategory.name);
+        expect(res.body.categories[0].id).to.equal(bookCategory.id);
         if (err) return done(err);
         done();
       });
@@ -119,7 +128,7 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
         expect(res.body.message[0]).to.equal('Category updated successfully');
-        expect(res.body.data.name).to.equal(bookCategory.name);
+        expect(res.body.category.name).to.equal(bookCategory.name);
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
@@ -141,20 +150,23 @@ describe('# Books Category', () => {
       });
   });
 
-  it('should not update a book category when the category name is not specified', (done) => {
-    request
-      .put(`/api/v1/books/categories/${bookCategoryId}`)
-      .send({ name: '' })
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message).to.be.a('array');
-        expect(res.body.message[0]).to.equal('Please enter a category name');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not update a book category when the category name is not specified',
+    (done) => {
+      request
+        .put(`/api/v1/books/categories/${bookCategoryId}`)
+        .send({ name: '' })
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message).to.be.a('array');
+          expect(res.body.message[0]).to.equal('Please enter a category name');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
   it('should delete a book category', (done) => {
     request

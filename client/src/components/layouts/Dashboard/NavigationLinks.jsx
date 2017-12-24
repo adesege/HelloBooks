@@ -29,7 +29,7 @@ const propTypes = {
 /**
  * Navigation links component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */

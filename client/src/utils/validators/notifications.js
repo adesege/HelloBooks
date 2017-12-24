@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
  *
  * @returns {object} error messages
  *
- * @param {object} fields
+ * @param {object} fields - fields to validate
  */
 const notifications = (fields) => {
   let errors = {};

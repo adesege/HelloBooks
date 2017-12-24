@@ -32,7 +32,7 @@ class Signup extends React.Component {
   /**
    * Creates an instance of Signup.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof Signup
   */
@@ -61,7 +61,7 @@ class Signup extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} response
+   * @param {object} response - facebook response object
    *
    * @memberof Signup
   */
@@ -83,7 +83,7 @@ class Signup extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} response
+   * @param {object} response - google response object
    *
    * @memberof Signup
   */
@@ -111,7 +111,8 @@ class Signup extends React.Component {
     this.props.addFlashMessage({
       type: 'error',
       text: [
-        'Oh! Oh! We experienced an error validating you on google. Please try again'
+        'Oh! Oh! We experienced an error ' +
+        'validating you on google. Please try again'
       ]
     });
   }
@@ -121,7 +122,7 @@ class Signup extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Signup
   */
@@ -140,7 +141,7 @@ class Signup extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Signup
   */

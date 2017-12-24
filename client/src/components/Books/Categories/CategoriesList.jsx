@@ -12,7 +12,7 @@ const propTypes = {
 /**
  * Renders categories list component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} jsx
  */

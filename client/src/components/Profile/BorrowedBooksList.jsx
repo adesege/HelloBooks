@@ -25,7 +25,7 @@ class BorrowedBooksList extends Component {
   /**
    * Creates an instance of BorrowedBooksList.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof BorrowedBooksList
   */
@@ -41,7 +41,7 @@ class BorrowedBooksList extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof BorrowedBooksList
   */

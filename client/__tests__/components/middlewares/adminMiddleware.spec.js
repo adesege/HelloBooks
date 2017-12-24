@@ -29,7 +29,8 @@ describe('# AdminMiddleware', () => {
   });
 
   it('should call the componentWillUpdate method', () => {
-    const componentWillUpdateSpy = jest.spyOn(wrapper.instance(), 'componentWillUpdate');
+    const componentWillUpdateSpy = jest
+    .spyOn(wrapper.instance(), 'componentWillUpdate');
     const nextProps = {
       isAuthenticated: false
     };
@@ -38,7 +39,8 @@ describe('# AdminMiddleware', () => {
   });
   it('should call the componentDidMount method', () => {
     wrapper.setProps({ isAuthenticated: false });
-    const componentDidMountSpy = jest.spyOn(wrapper.instance(), 'componentDidMount');
+    const componentDidMountSpy = jest
+    .spyOn(wrapper.instance(), 'componentDidMount');
     const nextProps = {
       isAuthenticated: false
     };

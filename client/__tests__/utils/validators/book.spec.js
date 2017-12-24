@@ -25,7 +25,8 @@ describe('# Book Utils', () => {
     };
     const { errors, isValid } = bookValidator(newFields);
     expect(errors).toBeDefined();
-    expect(errors.coverPhotoPath).toBe('Please choose a cover photo to upload');
+    expect(errors.coverPhotoPath)
+    .toBe('Please choose a cover photo to upload');
     expect(isValid).toBe(false);
   });
 });

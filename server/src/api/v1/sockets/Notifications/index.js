@@ -10,7 +10,7 @@ class Notifications {
   /**
    * Creates an instance of Notifications.
    *
-   * @param {object} socket
+   * @param {object} socket - instance of socket.io
    *
    * @memberof Notifications
   */
@@ -22,15 +22,15 @@ class Notifications {
    *
    * @returns {event} notifications
    *
-   * @param {object} data
+   * @param {object} options
    *
    * @memberof Notifications
    */
-  getNotification(data) {
-    const where = data || {};
-    if (data && data.updatedAt) {
+  getNotification(options) {
+    const where = options || {};
+    if (options && options.updatedAt) {
       where.updatedAt = {
-        $gte: data.updatedAt
+        $gte: options.updatedAt
       };
     }
     return Notification
@@ -41,7 +41,7 @@ class Notifications {
         }, {
           model: User,
           as: 'User',
-          attributes: ['name']
+          attributes: ['name', 'email']
         }],
         limit: 5,
         attributes: {},
@@ -50,7 +50,7 @@ class Notifications {
       }).then((notifications) => {
         if (notifications.length !== 0) {
           this.notificationData = { notifications };
-          this.notificationData.isNew = !!data;
+          this.notificationData.isNew = !!options;
           this.sendNotification();
         }
         return false;

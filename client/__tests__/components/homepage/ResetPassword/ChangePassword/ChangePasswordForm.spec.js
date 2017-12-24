@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ChangePasswordForm from 'components/homepage/ResetPassword/ChangePassword/ChangePasswordForm';
+import ChangePasswordForm from 
+'components/homepage/ResetPassword/ChangePassword/ChangePasswordForm';
 
 const props = {
   user: {},
@@ -12,7 +13,7 @@ const props = {
 
 describe('# Change Password Form', () => {
   const wrapper = shallow(<ChangePasswordForm {...props}/>);
-
+  
   it('should render ChangePasswordForm component', () => {
     expect(wrapper).toBeDefined();
     expect(wrapper.getElement().type).toBe('form');

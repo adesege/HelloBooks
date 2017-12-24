@@ -48,7 +48,7 @@ describe('# Auth', () => {
               type: 'success'
             }
           },
-          { type: 'SET_CURRENT_USER', user: response.payload }
+          { type: 'SET_CURRENT_USER', user: response.user }
         ];
 
         const store = mockStore({ });
@@ -101,7 +101,7 @@ describe('# Auth', () => {
         });
 
         const expectedActions = [
-          { type: 'SET_CURRENT_USER', user: response.payload }
+          { type: 'SET_CURRENT_USER', user: response.user }
         ];
 
         const store = mockStore({ });
@@ -168,10 +168,12 @@ describe('# Auth', () => {
 
   describe('Send Reset password mail', () => {
     it(
-      'should dispatch success flash message action when password reset mail has been sent',
+      'should dispatch success flash message '+
+      'action when password reset mail has been sent',
       (done) => {
         const message = [
-          'A password reset link has been sent to test@hellobooks.com. It may take upto 5 mins for the mail to arrive.'
+          'A password reset link has been sent to test@hellobooks.com. ' +
+          'It may take upto 5 mins for the mail to arrive.'
         ];
         moxios.stubRequest('users/reset-password', {
           status: 200,
@@ -202,7 +204,8 @@ describe('# Auth', () => {
     );
 
     it(
-      'should dispatch error flash message action when password reset mail  cannot be sent',
+      'should dispatch error flash message ' +
+      'action when password reset mail  cannot be sent',
       (done) => {
         const message = [
           'There was an error processing your request'
@@ -237,7 +240,8 @@ describe('# Auth', () => {
   });
   describe('Reset password', () => {
     it(
-      'should dispatch success flash message action when password has been changed',
+      'should dispatch success flash message'+
+      ' action when password has been changed',
       (done) => {
         const message = [
           'Password successfully changed. Please login to your account.'
@@ -271,7 +275,8 @@ describe('# Auth', () => {
     );
 
     it(
-      'should dispatch error flash message action when password cannot be changed',
+      'should dispatch error flash message ' +
+      'action when password cannot be changed',
       (done) => {
         const message = [
           'There was an error processing your request'

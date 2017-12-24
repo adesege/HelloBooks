@@ -9,7 +9,12 @@ const configg = config[env];
 const db = {};
 
 
-const sequelize = new Sequelize(configg.database, configg.username, configg.password, configg);
+const sequelize = new Sequelize(
+  configg.database,
+  configg.username,
+  configg.password,
+  configg
+);
 
 fs
   .readdirSync(__dirname)

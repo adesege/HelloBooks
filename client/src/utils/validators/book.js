@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 /**
  * Handles book validation
  *
- * @param {object} fields
+ * @param {object} fields - fields to validate
  *
  * @returns {object} error messages
  */

@@ -8,12 +8,13 @@ import { CronJob } from 'cron';
  *
  * @returns {string} random string
  *
- * @param {number} limit
+ * @param {number} limit - random string limit
  */
 const randomString = (limit = 5) => {
   let randArray = '';
   limit = [...Array(parseInt(limit, 10)).keys()];
-  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabc' +
+  'defghijklmnopqrstuvwxyz0123456789';
   const randomStrings = limit.map(() => {
     randArray += possible.charAt(Math.floor(Math.random() * possible.length));
     return randArray;
@@ -26,7 +27,7 @@ const randomString = (limit = 5) => {
  *
  * @returns {string} JWT signed token
  *
- * @param {object} user
+ * @param {object} user - user object to sign token with
  */
 const signToken = (user) => {
   const secret = process.env.TOKEN_SECRET;
@@ -44,7 +45,7 @@ const signToken = (user) => {
  * @returns {number} - The number of days
  * @returns {object} - ranks
  *
- * @param {number} rank
+ * @param {number} rank - user rank
  */
 const returnDate = (rank) => {
   const ranks = {
@@ -68,16 +69,16 @@ const returnDate = (rank) => {
  *
  * @returns {constructor} Cron job constructor
  *
- * @param {object} props
+ * @param {object} options - cron job options
  */
-export const setCron = props => new CronJob(props);
+export const setCron = options => new CronJob(options);
 
 /**
  * Format error messages
  *
  * @returns {array} an array of errors
  *
- * @param {objects} errors
+ * @param {objects} errors - sequelize errors object
  */
 export const formatErrorMessage = (errors) => {
   if (errors.errors) {
@@ -91,8 +92,8 @@ export const formatErrorMessage = (errors) => {
  *
  * @returns {object} express http response
  *
- * @param {object} errors
- * @param {object} res
+ * @param {object} errors - sequelize errors object
+ * @param {object} res - express http response object
  */
 export const sendErrors = ({ errors, res }) => {
   if (errors.name === 'SequelizeValidationError') {
@@ -114,7 +115,7 @@ export const sendErrors = ({ errors, res }) => {
  *
  * @returns {object} files
  *
- * @param {object} config
+ * @param {object} config - configuration object to eagerly load files
  */
 export const eagerLoadFiles = (config) => {
   const { basename, dirname } = config;

@@ -8,8 +8,8 @@ const { GET_BOOKS_HISTORIES } = types;
  *
  * @returns {object} new state
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  */
 const histories = (state = initialHistoryState, action = {}) => {
   switch (action.type) {

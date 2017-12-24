@@ -36,7 +36,7 @@ class StockManagerController {
               .send({
                 message: ['Stock added successfully'],
                 id: newStock.get('id'),
-                data: {
+                stock: {
                   ...newStock.dataValues,
                   book
                 }
@@ -57,29 +57,31 @@ class StockManagerController {
    *
    * @returns {object} - response object
   */
-  static deleteStock(req, res) { // delete a book
+  static deleteStock(req, res) {
     const id = `${req.params.stockId}`;
     stockManager.findById(id)
       .then((stock) => {
-        if (stock !== null) {
-          stockManager.destroy({ // delete record from stockManager
-            where: { id }
-          }).then(() => {
-            Book
-              .findById(stock.bookId)
-              .then((book) => {
+        if (stock) {
+          stockManager
+            .destroy({ // delete record from stockManager
+              where: { id }
+            })
+            .then(() => {
+              Book
+                .findById(stock.bookId)
+                .then((book) => {
                 /* istanbul ignore next */
-                if (book.quantity >= 0) {
-                  book.update( // update count in book table
-                    { quantity: book.quantity - stock.quantity },
-                    { where: { id: stock.bookId, } }
-                  );
-                }
-              })
-              .catch(errors => sendErrors({ res, errors }));
-            return res.status(200)
-              .send({ message: ['Stock deleted successfully'] });
-          });
+                  if (book.quantity >= 0) {
+                    book.update( // update count in book table
+                      { quantity: book.quantity - stock.quantity },
+                      { where: { id: stock.bookId } }
+                    );
+                  }
+                  return res.status(200)
+                    .send({ message: ['Stock deleted successfully'] });
+                });
+            })
+            .catch(errors => sendErrors({ res, errors }));
         } else {
           return res
             .status(404)
@@ -115,7 +117,7 @@ class StockManagerController {
         }
         return res
           .status(200)
-          .send({ message: ['Success'], data: stocks });
+          .send({ message: ['Success'], stocks });
       })
       .catch(errors => sendErrors({ res, errors }));
   }

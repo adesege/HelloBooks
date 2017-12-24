@@ -18,7 +18,7 @@ const {
  *
  * @export
  *
- * @param {object} result
+ * @param {array} result - search result array
  *
  * @returns {object} Search book action creator
 */
@@ -33,7 +33,7 @@ export const booksSearched = result => ({
  *
  * @export
  *
- * @param {object} books
+ * @param {array} books - books array
  *
  * @returns {object} action creator
 */
@@ -47,7 +47,7 @@ export const setBooks = books => ({
  *
  * @export
  *
- * @param {object} book
+ * @param {object} book - deleted book object
  *
  * @returns {object} action creator
 */
@@ -61,7 +61,7 @@ export const bookDeleted = book => ({
  *
  * @return {object} action creator
  *
- * @param {object} book
+ * @param {object} book - new book object
 */
 export const bookAdded = book => ({
   type: BOOK_ADDED,
@@ -75,7 +75,7 @@ export const bookAdded = book => ({
  *
  * @export
  *
- * @param {object} book
+ * @param {object} book - updated book object
  *
  * @returns  {object} action creator
 */
@@ -90,22 +90,22 @@ export const bookUpdated = book => ({
  *
  * @export
  *
- * @param {object} data
+ * @param {object} options - options to get all books
  *
  * @returns {object} Axios success response object
  * @returns {object} Axios error response object
 */
-export const getBooks = (data) =>
+export const getBooks = (options) =>
   dispatch => {
-    const searchQuery = data ? new URLSearchParams(data) : null;
-    const toQueryString = data ? searchQuery.toString() : '';
-    const id = data && data.id ? data.id : '';
+    const searchQuery = options ? new URLSearchParams(options) : null;
+    const toQueryString = options ? searchQuery.toString() : '';
+    const id = options && options.id ? options.id : '';
     return axios
       .get(`books/${id}?${toQueryString}`)
       .then(
         (response) => {
           dispatch(setBooks({
-            books: response.data.data,
+            books: response.data.books,
             pagination: response.data.pagination
           }));
         },
@@ -122,7 +122,7 @@ export const getBooks = (data) =>
 /**
  * Upload cover photo to cloudinary
  *
- * @param {string} imageData
+ * @param {string} imageData - image data uri
  *
  * @returns {promise} Resolve promise of imageData is not type image
  * @returns {promise} Reject promise
@@ -162,7 +162,7 @@ export const uploadCoverPhoto = imageData => {
 /**
  * Upload book file to cloudinary
  *
- * @param {string} fileData
+ * @param {string} fileData - file data uri
  *
  * @returns {promise} Resolve promise of fileData is not type pdf
  * @returns {promise} Reject promise
@@ -189,7 +189,7 @@ export const uploadBookFile = fileData => {
 /**
  * Delete photo from cloudinary
  *
- * @param {string} publicId
+ * @param {string} publicId - cloudinary public id
  *
  * @returns {promise} Reject promise
  * if there is an error deleting from cloudinary
@@ -218,21 +218,21 @@ export const deletePhoto = publicId => {
  *
  * @export
  *
- * @param {object} data
+ * @param {object} options - options for updating book cover and file
  *
  * @returns {promise} promise
 */
-export const updateBookCoverFile = data =>
+export const updateBookCoverFile = options =>
   axios
     .put(
-      `books/${data.id}?fields[]=coverPhotoPath&fields[]=documentPath`,
-      data
+      `books/${options.id}?fields[]=coverPhotoPath&fields[]=documentPath`,
+      options
     );
 
 /**
  * Upload coverphoto and document file to cloudinary
  *
- * @param {object} assetObject
+ * @param {object} assetObject - image and file data
  *
  * @returns {promise} Resolve promise
  * if coverphoto and document file has been uploaded
@@ -254,22 +254,22 @@ export const uploadBookAsset = (assetObject) =>
 /**
  * Make network request to add book
  *
- * @param {object} data
+ * @param {object} options - options for adding book
  *
  * @returns {object} Axios http success response object
  * @returns {object} Axios http error response object
 */
-export const addBook = data =>
+export const addBook = options =>
   (dispatch) => {
-    const imageData = data.coverPhotoPath;
-    const fileData = data.documentPath;
-    const newData = {
-      ...data,
+    const imageData = options.coverPhotoPath;
+    const fileData = options.documentPath;
+    const newOptions = {
+      ...options,
       coverPhotoPath: '',
       documentPath: ''
     };
     return axios
-      .post(`books`, newData)
+      .post(`books`, newOptions)
       .then(response =>
         uploadBookAsset({
           imageData,
@@ -293,22 +293,22 @@ export const addBook = data =>
  *
  * @export
  *
- * @param {object} data
+ * @param {object} options - options for editing book
  *
  * @returns {promise} axios http promise
 */
-export const updateBook = data =>
+export const updateBook = options =>
   (dispatch) => {
-    const imageData = data.coverPhotoPath;
-    const fileData = data.documentPath;
-    const { oldDocumentURL, oldImageURL } = data;
-    const newData = {
-      ...data,
+    const imageData = options.coverPhotoPath;
+    const fileData = options.documentPath;
+    const { oldDocumentURL, oldImageURL } = options;
+    const newOptions = {
+      ...options,
       coverPhotoPath: '',
       documentPath: ''
     };
     return axios
-      .put(`books/${data.id}`, newData)
+      .put(`books/${options.id}`, newOptions)
       .then((response) => uploadBookAsset({
         imageData,
         fileData
@@ -339,20 +339,20 @@ export const updateBook = data =>
  *
  * @export
  *
- * @param {object} data
+ * @param {object} options - options for deleting book
  *
  * @returns {promise} Axios http promise
 */
-export const deleteBook = data =>
+export const deleteBook = options =>
   dispatch =>
     axios
-      .delete(`books/${data.id}`, data)
+      .delete(`books/${options.id}`, options)
       .then((response) => {
-        deletePhoto(parseCloudinaryURL(data.coverPhotoPath).public_id)
+        deletePhoto(parseCloudinaryURL(options.coverPhotoPath).public_id)
           .then(() =>
-            deletePhoto(parseCloudinaryURL(data.documentPath).public_id)
+            deletePhoto(parseCloudinaryURL(options.documentPath).public_id)
               .then(() => {
-                dispatch(bookDeleted(data));
+                dispatch(bookDeleted(options));
                 dispatch(addFlashMessage({
                   type: 'success',
                   text: response.data.message
@@ -374,7 +374,7 @@ export const deleteBook = data =>
  *
  * @export
  *
- * @param {string} title
+ * @param {string} title - title of the book to search for
  *
  * @returns {promise} Axios http promise
 */
@@ -384,8 +384,11 @@ export const searchBooks = title =>
       .get(`search?q=${encodeURIComponent(title)}&type=books`)
       .then(
         (response) => {
-          dispatch(booksSearched(response.data.data));
+          dispatch(booksSearched(response.data.books));
           return response;
         },
-        errors => errors
+        errors => dispatch(addFlashMessage({
+          type: 'error',
+          text: errors.response.data.message
+        }))
       );

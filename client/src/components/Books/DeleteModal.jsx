@@ -3,10 +3,12 @@ import Modal from 'Modal';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { addFlashMessage } from 'actions/flashMessages';
 
 const propTypes = {
   params: PropTypes.object.isRequired,
   deleteBook: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired,
   book: PropTypes.object
 };
 
@@ -25,7 +27,7 @@ class DeleteModal extends Component {
   /**
    * Creates an instance of DeleteModal.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof DeleteModal
   */
@@ -81,7 +83,7 @@ class DeleteModal extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof DeleteModal
   */
@@ -91,11 +93,20 @@ class DeleteModal extends Component {
       book,
       params
     } = this.props;
-    this.props.deleteBook({
-      id: params.id,
-      documentPath: book.documentPath,
-      coverPhotoPath: book.coverPhotoPath
-    }).then(() => this.setState({ isOpenModal: false }));
+    if (book) {
+      this.props.deleteBook({
+        id: params.id,
+        documentPath: book.documentPath,
+        coverPhotoPath: book.coverPhotoPath
+      })
+        .then(() => this.setState({ isOpenModal: false }));
+    } else {
+      this.toggleOpenModal();
+      this.props.addFlashMessage({
+        text: ['We couldn\'t find this book'],
+        type: 'error'
+      });
+    }
   }
 
 
@@ -104,7 +115,7 @@ class DeleteModal extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    *  @memberof DeleteModal
   */
@@ -155,8 +166,8 @@ DeleteModal.contextTypes = contextTypes;
 /**
  * Get state from store
  *
- * @param {object} state
- * @param {object} props
+ * @param {object} state - redux store state
+ * @param {object} props - component props
  *
  * @returns {object} map state to props
  */
@@ -168,4 +179,10 @@ const mapStateToProps = (state, props) => ({
 
 export { DeleteModal };
 
-export default connect(mapStateToProps, { deleteBook })(DeleteModal);
+export default connect(
+  mapStateToProps,
+  {
+    deleteBook,
+    addFlashMessage
+  }
+)(DeleteModal);

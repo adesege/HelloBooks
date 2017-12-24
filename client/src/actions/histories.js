@@ -9,7 +9,7 @@ const {
 /**
  * Action creator when histories has been fetched
  *
- * @param {object} histories
+ * @param {object} histories - borrowed book history
  *
  * @returns {object} action creator
  */
@@ -21,22 +21,22 @@ export const historiesFetched = histories => ({
 /**
  * Make network request to get histories
  *
- * @param {object} data
+ * @param {object} options - options for getting borrowed book history
  *
  * @returns {promise} Axios http promise
  */
-export const getHistories = data =>
+export const getHistories = options =>
   dispatch => {
     // converts an object to query string
-    const searchQuery = data ? new URLSearchParams(data) : null;
+    const searchQuery = options ? new URLSearchParams(options) : null;
     // converts it to string
-    const toQueryString = data ? searchQuery.toString() : '';
+    const toQueryString = options ? searchQuery.toString() : '';
     return axios
-      .get(`books/histories/${data.userId}?${toQueryString}`)
+      .get(`books/histories/${options.userId}?${toQueryString}`)
       .then(
         (response) => {
           dispatch(historiesFetched({
-            histories: response.data.data,
+            histories: response.data.books,
             pagination: response.data.pagination
           }));
         },

@@ -21,7 +21,7 @@ class SetTimeout extends React.Component {
   /**
    * Creates an instance of SetTimeout.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof SetTimeout
    */
@@ -48,7 +48,7 @@ class SetTimeout extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof SetTimeout
    */

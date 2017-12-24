@@ -10,7 +10,7 @@ const { TOKEN_SECRET } = process.env;
  *
  * @returns {undefined}
  *
- * @param {object} app
+ * @param {object} app - instance of express
 */
 export default (app) => {
   app.use(logger('dev'));

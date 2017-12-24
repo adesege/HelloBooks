@@ -49,7 +49,7 @@ class BooksModal extends Component {
   /**
      * Creates an instance of BooksModal.
      *
-     * @param {object} props
+     * @param {object} props - component props
      *
      * @memberof BooksModal
      */
@@ -110,7 +110,7 @@ class BooksModal extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle props
    *
    * @memberof BooksModal
   */
@@ -162,7 +162,7 @@ class BooksModal extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof BooksModal
   */
@@ -199,7 +199,7 @@ class BooksModal extends Component {
    *
    * @return {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof BooksModal
   */
@@ -266,7 +266,7 @@ class BooksModal extends Component {
   /**
    * Read uploaded image and set in state
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @returns {undefined}
    *
@@ -294,7 +294,7 @@ class BooksModal extends Component {
   /**
    * Read uploaded pdf document and set in state
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @returns {undefined}
    *
@@ -341,7 +341,7 @@ class BooksModal extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof BooksModal
      */
@@ -622,8 +622,8 @@ BooksModal.propTypes = propTypes;
 /**
  * Get state from store
  *
- * @param {object} state
- * @param {object} props
+ * @param {object} state - redux store state
+ * @param {object} props - component props
  *
  * @returns {object} map state to props
  */

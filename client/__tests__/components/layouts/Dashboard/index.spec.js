@@ -35,7 +35,7 @@ const props = {
   toggleDropdown: jest.fn(),
   toggleNotificationDropdown: jest.fn(),
   menuNotifications: []
-
+  
 };
 
 describe('# Dashboard Layout', () => {
@@ -45,64 +45,83 @@ describe('# Dashboard Layout', () => {
     expect(contentWrapper.find(FlashMessagesList).length).toBe(1);
     expect(contentWrapper.find('#contentArea').length).toBe(1);
   });
-
+  
   it('should render Footer component', () => {
     const footerWrapper = shallow(<Footer {...props} />);
     expect(footerWrapper).toBeDefined();
     expect(footerWrapper.find('div').length).toBe(1);
   });
-
-  it('should render Header component when notificationType is BOOK_BORROWED', () => {
-    const headerWrapper = shallow(<Header {...props} />);
-    expect(headerWrapper).toBeDefined();
-    expect(headerWrapper.shallow(Menu).setProps(props).length).toBe(1);
-  });
-  describe('NotificationList', () => {
-    it('should render NotificationList component', () => {
-      const notificationListWrapper = shallow(<NotificationsList {...props} />);
-      expect(notificationListWrapper).toBeDefined();
-      expect(notificationListWrapper.shallow(Menu).setProps(props).length).toBe(1);
+  
+  it(
+    'should render Header component when notificationType is BOOK_BORROWED', 
+    () => {
+      const headerWrapper = shallow(<Header {...props} />);
+      expect(headerWrapper).toBeDefined();
+      expect(headerWrapper.shallow(Menu).setProps(props).length).toBe(1);
     });
-
-    it('should render NotificationList component when notificationType is BOOK_RETURNED', () => {
-      const newNotificationListProps = {
-        ...props,
-        notifications: [{
-          ...props.notifications[0],
-          notificationType: 'BOOK_RETURNED'
-        }]
-      };
-      const notificationListWrapper = shallow(<NotificationsList {...newNotificationListProps} />);
-      expect(notificationListWrapper).toBeDefined();
-      expect(notificationListWrapper.shallow(Menu).setProps(props).length).toBe(1);
-    });
-
-    it('should render NotificationList component when notificationType is not set', () => {
-      const newNotificationListProps = {
-        ...props,
-        notifications: [{
-          ...props.notifications[0],
-          notificationType: ''
-        }]
-      };
-      const notificationListWrapper = shallow(<NotificationsList {...newNotificationListProps} />);
-      expect(notificationListWrapper).toBeDefined();
-      expect(notificationListWrapper.shallow(Menu).setProps(props).length).toBe(1);
-    });
-
-    it('should render EmptyMessage component if no notification can be found', () => {
-      const newNotificationListProps = {
-        ...props,
-        notifications: []
-      };
-      const notificationListWrapper = shallow(<NotificationsList {...newNotificationListProps} />);
-      expect(notificationListWrapper).toBeDefined();
-      expect(notificationListWrapper.find(EmptyMessage).length).toBe(1);
-    });
-  });
-  it('should render NavigationLinks component', () => {
-    const navigationLinksWrapper = shallow(<NavigationLinks {...props} />);
-    expect(navigationLinksWrapper).toBeDefined();
-    expect(navigationLinksWrapper.find('Collapse').length).toBe(1);
-  });
-});
+    describe('NotificationList', () => {
+      it('should render NotificationList component', () => {
+        const notificationListWrapper = shallow(<NotificationsList
+          {...props} />);
+          expect(notificationListWrapper).toBeDefined();
+          expect(notificationListWrapper.shallow(Menu)
+          .setProps(props).length).toBe(1);
+        });
+        
+        it('should render NotificationList component' +
+        ' when notificationType is BOOK_RETURNED', () => {
+          const newNotificationListProps = {
+            ...props,
+            notifications: [{
+              ...props.notifications[0],
+              notificationType: 'BOOK_RETURNED'
+            }]
+          };
+          const notificationListWrapper = shallow(<NotificationsList 
+            {...newNotificationListProps} 
+            />);
+            expect(notificationListWrapper).toBeDefined();
+            expect(notificationListWrapper.shallow(Menu)
+            .setProps(props).length).toBe(1);
+          });
+          
+          it('should render NotificationList component'+
+          ' when notificationType is not set', () => {
+            const newNotificationListProps = {
+              ...props,
+              notifications: [{
+                ...props.notifications[0],
+                notificationType: ''
+              }]
+            };
+            const notificationListWrapper = shallow(<NotificationsList 
+              {...newNotificationListProps} 
+              />);
+              expect(notificationListWrapper).toBeDefined();
+              expect(notificationListWrapper.shallow(Menu)
+              .setProps(props).length).toBe(1);
+            });
+            
+            it('should render EmptyMessage component'+
+            ' if no notification can be found',
+            () => {
+              const newNotificationListProps = {
+                ...props,
+                notifications: []
+              };
+              const notificationListWrapper = shallow(<NotificationsList
+                {...newNotificationListProps} />);
+                expect(notificationListWrapper).toBeDefined();
+                expect(notificationListWrapper
+                  .find(EmptyMessage).length).toBe(1);
+                });
+              });
+              it('should render NavigationLinks component', () => {
+                const navigationLinksWrapper = shallow(<NavigationLinks 
+                  {...props} />);
+                  expect(navigationLinksWrapper).toBeDefined();
+                  expect(navigationLinksWrapper
+                    .find('Collapse').length).toBe(1);
+                });
+              });
+              

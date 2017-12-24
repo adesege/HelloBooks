@@ -30,7 +30,8 @@ const sendSurcharge = () =>
           Mailer.html = `
         <p>Hello <strong>${borrowed.User.name}</strong>,</p>
         <p>This is to notify you that there is a surcharge on your account.</p>
-        <p>Please return the book titled <strong>${borrowed.Book.title}</strong> 
+        <p>Please return the book titled 
+        <strong>${borrowed.Book.title}</strong> 
         which in your possession within the next 3 days 
         or you will be asked to pay a fine for defaulting.</p>
         <p>Thank you for the understanding</p><br/>

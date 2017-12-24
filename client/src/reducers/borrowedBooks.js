@@ -6,8 +6,8 @@ const { BOOK_BORROWED, GET_BORROWED_BOOKS, BOOK_RETURNED } = types;
 /**
  * Handles Borrowed books reducer
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  *
  * @returns {array} new state
  */

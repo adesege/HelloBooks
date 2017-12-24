@@ -28,10 +28,11 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(res.body).to.be.an('object');
-            expect(res.body.payload).to.have.property('token');
-            expect(res.body.payload).to.have.property('userId');
-            expect(res.body.payload.group).to.equal('user');
-            expect(res.body.message[0]).to.equal('Your account has been created successfully');
+            expect(res.body.user).to.have.property('token');
+            expect(res.body.user).to.have.property('userId');
+            expect(res.body.user.group).to.equal('user');
+            expect(res.body.message[0])
+              .to.equal('Your account has been created successfully');
             if (err) return done(err);
             done();
           });
@@ -52,10 +53,11 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(201);
             expect(res.body).to.be.an('object');
-            expect(res.body.payload).to.have.property('token');
-            expect(res.body.payload).to.have.property('userId');
-            expect(res.body.payload.group).to.equal('admin');
-            expect(res.body.message[0]).to.equal('Your account has been created successfully');
+            expect(res.body.user).to.have.property('token');
+            expect(res.body.user).to.have.property('userId');
+            expect(res.body.user.group).to.equal('admin');
+            expect(res.body.message[0])
+              .to.equal('Your account has been created successfully');
             if (err) return done(err);
             done();
           });
@@ -75,7 +77,8 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('This email address already belongs to a user');
+            expect(res.body.message[0])
+              .to.equal('This email address already belongs to a user');
             if (err) return done(err);
             done();
           });
@@ -96,7 +99,8 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(400);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('The password field is not the same');
+            expect(res.body.message[0])
+              .to.equal('The password field is not the same');
             if (err) return done(err);
             done();
           });
@@ -114,7 +118,8 @@ describe('User account', () => {
             expect(res.body.message).to.be.an('array');
             expect(res.body.message[0]).to.be.a('string');
             expect(res.body.message[0]).to.equal('The name field is required');
-            expect(res.body.message[1]).to.equal('Name must contain alphabet characters only');
+            expect(res.body.message[1])
+              .to.equal('Name must contain alphabet characters only');
             if (err) return done(err);
             done();
           });
@@ -139,7 +144,8 @@ describe('User account', () => {
           .end((err, res) => {
             expect(res.statusCode).to.equal(404);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('Sorry, we can\'t find this account');
+            expect(res.body.message[0])
+              .to.equal('Sorry, we can\'t find this account');
             if (err) return done(err);
             done();
           });
@@ -157,9 +163,10 @@ describe('User account', () => {
           .post('/api/v1/users/signin')
           .send(newUser)
           .end((err, res) => {
-            expect(res.statusCode).to.equal(400);
+            expect(res.statusCode).to.equal(404);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('Sorry, we can\'t find this account');
+            expect(res.body.message[0])
+              .to.equal('Sorry, we can\'t find this account');
             if (err) return done(err);
             done();
           });
@@ -178,9 +185,10 @@ describe('User account', () => {
           .post('/api/v1/users/signin')
           .send(newUser)
           .end((err, res) => {
-            expect(res.statusCode).to.equal(400);
+            expect(res.statusCode).to.equal(401);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('You provided a wrong email address and password');
+            expect(res.body.message[0])
+              .to.equal('You provided a wrong email address and password');
             if (err) return done(err);
             done();
           });
@@ -201,9 +209,9 @@ describe('User account', () => {
             expect(res.statusCode).to.equal(200);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0]).to.equal('Successfully validated');
-            expect(res.body.payload).to.have.property('token');
-            expect(res.body.payload.userId).to.equal(1);
-            expect(res.body.payload.group).to.equal('user');
+            expect(res.body.user).to.have.property('token');
+            expect(res.body.user.userId).to.equal(1);
+            expect(res.body.user.group).to.equal('user');
             if (err) return done(err);
             done();
           });

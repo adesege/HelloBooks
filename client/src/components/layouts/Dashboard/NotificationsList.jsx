@@ -2,13 +2,13 @@ import React from 'react';
 import Timestamp from 'react-timestamp';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import user from 'assets/images/user.png';
 import EmptyMessage from 'components/miscellaneous/EmptyMessage';
+import { userAvatar } from 'utils';
 
 /**
  * notification type function
  *
- * @param {string} type
+ * @param {string} type - notification type
  *
  * @returns {string} returned or borrowed status
 */
@@ -38,7 +38,7 @@ const defaultProps = {
 /**
  * Notification list component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -57,7 +57,7 @@ const NotificationList = ({
               <img
                 className="rounded-circle img-thumbnail w-100"
                 alt=""
-                src={user}
+                src={userAvatar(notification.User.email)}
                 style={{ borderRadius: '50px' }}/>
             </div>
             <div className="col-sm-11 col-11 col-md-11 col-lg-11 pr-0">

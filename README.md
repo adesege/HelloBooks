@@ -106,7 +106,7 @@ To contribute,
 1. Fork the project
 1. Create a feature branch, branch away from `master`
 1. Write tests, using `Mocha and Chai` or any other testing frameworks, and code
-1. If you have multiple commits please combine them into a few logically organized commits by [squashing them](git-squash)
+1. If you have multiple commits please combine them into a few logically organized commits by squashing them.
 1. Push the commit(s) to your fork
 1. Submit a merge request (MR) to the `master` branch
 1. The MR title should describe the change you want to make
@@ -120,4 +120,4 @@ To contribute,
    [these guidelines](http://chris.beams.io/posts/git-commit).
 
 # License
-This project is licensed under the MIT license. Click **[here](blob/master/LICENSE.md)** to read the license in full
+This project is licensed under the MIT license. Click **[here](./LICENSE.md)** to read the license in full

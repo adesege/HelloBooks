@@ -14,9 +14,9 @@ const propTypes = {
 /**
  * Books component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
- * @param {object} context
+ * @param {object} context - component context
  *
  * @returns {JSX} JSX
  */
@@ -26,7 +26,7 @@ const Books = (props, context) => {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Books
   */

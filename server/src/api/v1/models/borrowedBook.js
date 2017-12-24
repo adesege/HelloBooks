@@ -69,8 +69,10 @@ export default (sequelize, DataTypes) => {
           models.User.findById(borrowed.userId)
             .then((user) => {
               if (user) {
-                const expectedReturnDate = parseInt(Utils.returnDate(user.userRank), 10);
-                borrowed.expectedReturnDate = moment().add(expectedReturnDate, 'days');
+                const expectedReturnDate = parseInt(Utils
+                  .returnDate(user.userRank), 10);
+                borrowed.expectedReturnDate = moment()
+                  .add(expectedReturnDate, 'days');
               }
             })
       },

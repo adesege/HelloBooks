@@ -23,7 +23,9 @@ const propTypes = {
 class UploadBookCover extends React.Component {
   /**
      * Creates an instance of UploadBookCover.
-     * @param {any} props
+     *
+     * @param {object} props - event handler
+     *
      * @memberof UploadBookCover
      */
   constructor(props) {

@@ -80,7 +80,8 @@ describe('# Notifications', () => {
         value: 'value'
       }
     };
-    const handleInputChangeOnSpy = jest.spyOn(wrapper.instance(), 'handleInputChange');
+    const handleInputChangeOnSpy = jest
+    .spyOn(wrapper.instance(), 'handleInputChange');
     wrapper.instance().handleInputChange(newEvent);
     expect(handleInputChangeOnSpy).toHaveBeenCalledTimes(1);
   });

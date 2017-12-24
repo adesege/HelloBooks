@@ -11,43 +11,43 @@ const {
 /**
  * Action creator when users has been fetched
  *
- * @param {object} result
+ * @param {object} users - users object
  *
  * @returns {object} action creator
  */
-export const usersFetched = result => ({
+export const usersFetched = users => ({
   type: GET_USERS,
-  result
+  users
 });
 
 /**
  * Action creator when user has been updated
  *
- * @param {object} data
+ * @param {object} users - updated user object
  *
  * @returns {object} action creator
  */
-export const userUpdated = data => ({
+export const userUpdated = users => ({
   type: USER_UPDATED,
-  data
+  users
 });
 
 
 /**
  * Make network request to get all users or a particular user
  *
- * @param {object} payload
+ * @param {object} options - options for getting users
  *
  * @returns {promise} Axios http promise
  */
-export const getUsers = payload =>
+export const getUsers = options =>
   (dispatch) => {
-    const endpoint = payload ? `/${payload.userId}` : '';
+    const endpoint = options ? `/${options.userId}` : '';
     return axios
       .get(`users${endpoint}`)
       .then(
-        (data) => {
-          dispatch(usersFetched(data.data.data));
+        (response) => {
+          dispatch(usersFetched(response.data.users));
         },
         (errors) => {
           dispatch(addFlashMessage({
@@ -62,13 +62,13 @@ export const getUsers = payload =>
 /**
  * Make network request to edit a user
  *
- * @param {object} payload
+ * @param {object} options - options for editing a user
  *
  * @returns {promise} Axios http promise
  */
-export const updateUser = payload =>
+export const updateUser = options =>
   (dispatch) =>
     axios
-      .put(`users/${payload.userId}`, payload)
+      .put(`users/${options.userId}`, options)
       .then((response) => response)
       .catch((errors) => errors);

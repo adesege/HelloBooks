@@ -1,11 +1,11 @@
 /**
  * Admin middleware to aunthenticate an admin
  *
- * @param {object} req
- * @param {object} res
- * @param {func} next
+ * @param {object} req - express http request
+ * @param {object} res - express http response
+ * @param {func} next - move to the next middleware
  *
- * @returns {object} messagr response
+ * @returns {object} message response
  */
 const adminMiddleware = (req, res, next) => {
   const { group } = req.decoded;

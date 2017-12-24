@@ -19,13 +19,6 @@ class BookCategoryController {
   */
   static addCategory(req, res) {
     const name = req.body.name || '';
-    if (!name) {
-      return res
-        .status(400)
-        .send({
-          message: ['The category name field is required']
-        });
-    }
     return bookCategory
       .findOne({ where: { name } })
       .then((category) => {
@@ -96,11 +89,11 @@ class BookCategoryController {
   static getCategories(req, res) {
     return bookCategory
       .findAll()
-      .then((category) => {
-        if (category) {
+      .then((categories) => {
+        if (categories.length !== 0) {
           return res
             .status(200)
-            .send({ data: category });
+            .send({ categories });
         }
         return res
           .status(404)
@@ -112,7 +105,7 @@ class BookCategoryController {
   /**
    * Edit a category
    *
-   * @method update
+   * @method editCategory
    *
    * @param {object} req - express http request
    * @param {object} res - express http response
@@ -140,8 +133,9 @@ class BookCategoryController {
                 .status(200)
                 .send({
                   message: ['Category updated successfully'],
-                  data: updatedCategory[1]
-                }));
+                  category: updatedCategory[1]
+                }))
+            .catch(errors => sendErrors({ res, errors }));
         }
         return res
           .status(404)

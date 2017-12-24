@@ -20,7 +20,8 @@ describe('# Reset password', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('No account is associated with this email address');
+        expect(res.body.message[0])
+          .to.equal('No account is associated with this email address');
         if (err) return done(err);
         done();
       });
@@ -33,7 +34,9 @@ describe('# Reset password', () => {
         validationKey = res.body.key;
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal(`A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`);
+        expect(res.body.message[0])
+          .to.equal(`A password reset link has been sent to ${email}.` +
+        ' It may take upto 5 mins for the mail to arrive.');
         expect(res.body).to.have.property('key');
         if (err) return done(err);
         done();
@@ -56,37 +59,46 @@ describe('# Reset password', () => {
       });
   });
 
-  it('should not change password if validation key and email cannot be found', (done) => {
-    request.post('/api/v1/users/reset-password/verify')
-      .send({
-        validationKey: 'wrong key',
-        email: 'invalid email address',
-        password: '1234',
-        confirmPassword: '1234'
-      })
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('There was an error completing your request. Perhaps, you followed a broken link.');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not change password if validation key and email cannot be found',
+    (done) => {
+      request.post('/api/v1/users/reset-password/verify')
+        .send({
+          validationKey: 'wrong key',
+          email: 'invalid email address',
+          password: '1234',
+          confirmPassword: '1234'
+        })
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0]).to.equal('There was an error' +
+          ' completing your request. Perhaps, you followed a broken link.');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
-  it('should update password and send user a reset password successful mail', (done) => {
-    newUser = {
-      ...user,
-      email: 'usertest2@hellobooks.com',
-      validationKey
-    };
-    request
-      .post('/api/v1/users/reset-password/verify').send(newUser)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Password successfully changed. Please login to your account.');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should update password and send user a reset password successful mail',
+    (done) => {
+      newUser = {
+        ...user,
+        email: 'usertest2@hellobooks.com',
+        validationKey
+      };
+      request
+        .post('/api/v1/users/reset-password/verify').send(newUser)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(200);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0])
+            .to.equal('Password successfully changed. ' +
+            'Please login to your account.');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 });

@@ -9,7 +9,8 @@ module.exports = {
       .assert.containsText('.form-text', 'This field is required')
       .end();
   },
-  'User should be able to signup when the email address does not exist': (browser) => {
+  'User should be able to signup when the email address does not exist':
+  (browser) => {
     browser
       .url(`${browser.launchUrl}/signup`)
       .waitForElementVisible('body', 1000)
@@ -23,7 +24,8 @@ module.exports = {
       .assert.urlEquals(`${browser.launchUrl}/dashboard`)
       .end();
   },
-  'User should not be able to signup with an already existing email address': (browser) => {
+  'User should not be able to signup with an already existing email address':
+  (browser) => {
     browser
       .url(`${browser.launchUrl}/signup`)
       .waitForElementVisible('body', 1000)
@@ -33,7 +35,9 @@ module.exports = {
       .setValue('#confirmPassword', 'helloworld@us.com')
       .click('#signup')
       .pause(1000)
-      .assert.containsText('.alert-danger', 'This email address already belongs to a user')
+      .assert
+      .containsText('.alert-danger', 'This email address ' +
+      'already belongs to a user')
       .end();
   },
 };

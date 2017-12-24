@@ -2,7 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedShowStock, { ShowStock } from 'components/Books/StockManager/ShowStock';
+import ConnectedShowStock, 
+{ 
+  ShowStock
+} from 'components/Books/StockManager/ShowStock';
 
 const props = {
   params: {
@@ -13,7 +16,7 @@ const props = {
       title: 'title'
     }
   }],
-  getStockManagerByBookIdAction: jest.fn(),
+  getStockByBookIdAction: jest.fn(),
   addStockAction: jest.fn(() => Promise.resolve()),
   deleteStockAction: jest.fn(() => Promise.resolve()),
 };
@@ -40,7 +43,8 @@ describe('# ShowStock', () => {
   });
 
   it('should call the componentWillReceiveProps method', () => {
-    const componentWillReceivePropsSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+    const componentWillReceivePropsSpy = jest
+      .spyOn(wrapper.instance(), 'componentWillReceiveProps');
     const nextProps = {
       stocks: [{
         book: {
@@ -52,12 +56,14 @@ describe('# ShowStock', () => {
     expect(componentWillReceivePropsSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the toggleOpenAddModal method', () => {
-    const toggleOpenAddModalOnSpy = jest.spyOn(wrapper.instance(), 'toggleOpenAddModal');
+    const toggleOpenAddModalOnSpy = jest
+      .spyOn(wrapper.instance(), 'toggleOpenAddModal');
     wrapper.instance().toggleOpenAddModal();
     expect(toggleOpenAddModalOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the onDeleteModal method', () => {
-    const onDeleteModalOnSpy = jest.spyOn(wrapper.instance(), 'onDeleteModal');
+    const onDeleteModalOnSpy = jest
+      .spyOn(wrapper.instance(), 'onDeleteModal');
     wrapper.instance().onDeleteModal(global.event);
     expect(onDeleteModalOnSpy).toHaveBeenCalledTimes(1);
   });
@@ -67,12 +73,15 @@ describe('# ShowStock', () => {
     expect(onSubmitOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the onDeleteSubmit method', () => {
-    const onDeleteSubmitOnSpy = jest.spyOn(wrapper.instance(), 'onDeleteSubmit');
+    const onDeleteSubmitOnSpy = jest
+      .spyOn(wrapper.instance(), 'onDeleteSubmit');
     wrapper.instance().onDeleteSubmit(global.event);
     expect(onDeleteSubmitOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedShowStock {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedShowStock 
+      {...props} 
+      store={store} />);
     expect(connectedComponent.length).toBe(1);
   });
 

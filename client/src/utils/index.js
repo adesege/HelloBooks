@@ -1,10 +1,12 @@
 import URLPackage from 'url';
-import noCover from '../assets/images/no-cover.jpg';
+import md5 from 'md5';
+import noCover from 'assets/images/no-cover.jpg';
+import defaultAvatar from 'assets/images/user.png';
 
 /**
  * Shows book cover photo or a default photo
  *
- * @param {string} coverPhoto
+ * @param {string} coverPhoto - coverphoto url
  *
  * @returns {string} coverphoto url or default photo
  */
@@ -15,7 +17,7 @@ export const showCoverPhoto =
 /**
  * Checks whether string is a valid url
  *
- * @param {string} string
+ * @param {string} string - url
  *
  * @returns {boolean} true or false
  */
@@ -29,7 +31,7 @@ export const isValidUrl = (string) => {
 /**
  * Gets and set public id from cloudinary url
  *
- * @param {string} url
+ * @param {string} url - url to get cloudinary url
  *
  * @returns {object} url object with public id
  */
@@ -48,7 +50,7 @@ export const parseCloudinaryURL = (url) => {
 /**
  * Check whether type is an image
  *
- * @param {string} type
+ * @param {string} type - image type
  *
  * @returns {boolean} true or false
  */
@@ -62,7 +64,7 @@ export const isImage = (type) => {
 /**
  * Check whether type is a pdf
  *
- * @param {string} type
+ * @param {string} type - pdf type
  *
  * @returns {boolean} true or false
  */
@@ -76,8 +78,20 @@ export const isPDF = (type) => {
 /**
  * Extract query string from url
  *
- * @param {string} url
+ * @param {string} url - url to extract query string from
  *
  * @returns {object} query strings from url
  */
 export const extractURLQuery = (url) => new URL(url).searchParams;
+
+/**
+ * Get user avatar from gravatar
+ *
+ * @param {string} email - user email
+ *
+ * @returns {string} user avatar
+ */
+export const userAvatar = (email) => {
+  const hash = email ? md5(email) : '';
+  return `https://www.gravatar.com/avatar/${hash}?s=100&d=identicon`;
+};

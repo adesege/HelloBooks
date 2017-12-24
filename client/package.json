@@ -33,6 +33,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^21.2.1",
     "lodash": "4.17.4",
+    "md5": "^2.2.1",
     "moment": "^2.19.1",
     "moment-timezone": "^0.5.14",
     "moxios": "^0.4.0",
@@ -72,7 +73,7 @@
     "build": "NODE_ENV=production rm -rf ./build && webpack",
     "start": "webpack-dev-server",
     "lint": "./node_modules/.bin/eslint . --fix",
-    "test": "jest ./",
+    "test": "jest ./__tests__",
     "coverage": "npm run test -- --coverage"
   },
   "devDependencies": {

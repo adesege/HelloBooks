@@ -21,7 +21,10 @@ describe('# Utils', () => {
 
   describe('Parse Cloudinary Url', () => {
     it('should return cloudinary public id', () => {
-      const url = parseCloudinaryURL('https://res.cloudinary.com/adesege/image/upload/v1510497013/sibhkjqkvjruptnrakr6.png');
+      const url = parseCloudinaryURL(
+        'https://res.cloudinary.com/adesege/image'+
+        '/upload/v1510497013/sibhkjqkvjruptnrakr6.png'
+      );
       expect(url.public_id).toBeDefined();
       expect(url.public_id).toBe('sibhkjqkvjruptnrakr6');
     });
@@ -57,7 +60,9 @@ describe('# Utils', () => {
   });
   describe('extractURLQuery', () => {
     it('should extract query strings from url', () => {
-      const queryStrings = extractURLQuery('http://localhost/?query=hello-world');
+      const queryStrings = extractURLQuery(
+        'http://localhost/?query=hello-world'
+      );
       expect(queryStrings).toBeDefined();
     });
   });

@@ -4,11 +4,13 @@ import Autocomplete from 'react-autocomplete/dist/react-autocomplete';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
 import { searchBooks } from 'actions/books';
+import { addFlashMessage } from 'actions/flashMessages';
 import Button from 'form/Button';
 
 const propTypes = {
   searchResult: PropTypes.array.isRequired,
-  searchBooksAction: PropTypes.func.isRequired
+  searchBooksAction: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 };
 
 const contextTypes = {
@@ -24,9 +26,11 @@ const contextTypes = {
 */
 class SearchStock extends React.Component {
   /**
-  * Creates an instance of SearchStock.
-  * @param {object} props
-  * @memberof SearchStock
+   * Creates an instance of SearchStock.
+   *
+   * @param {object} props - component props
+   *
+   * @memberof SearchStock
   */
   constructor(props) {
     super(props);
@@ -46,7 +50,7 @@ class SearchStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecyle next props
    *
    * @memberof SearchStock
   */
@@ -62,14 +66,21 @@ class SearchStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof SearchStock
   */
   onSubmit(event) {
     event.preventDefault();
     const { bookId } = this.state;
-    this.context.router.push(`/books/stock-manager/${bookId}`);
+    if (bookId) {
+      this.context.router.push(`/books/stock-manager/${bookId}`);
+    } else {
+      this.props.addFlashMessage({
+        text: ['Book not found'],
+        type: 'error'
+      });
+    }
   }
 
   /**
@@ -77,8 +88,8 @@ class SearchStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {string} value
-   * @param {object} book
+   * @param {string} value - search value
+   * @param {object} book - book object
    *
    * @memberof SearchStock
   */
@@ -92,7 +103,7 @@ class SearchStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof SearchStock
   */
@@ -195,11 +206,6 @@ class SearchStock extends React.Component {
                   type="submit"
                   className="btn btn-success btn-sm"
                   label="Go!" />
-                <button
-                  name="reset"
-                  type="reset"
-                  className="btn btn-danger btn-sm">Reset
-                </button>
               </div>
             </form>
           </div>
@@ -216,7 +222,7 @@ SearchStock.contextTypes = contextTypes;
 /**
     * Get state from store
     *
-    * @param {object} state
+    * @param {object} state - redux store state
     *
     * @returns {object} map state to props
     */
@@ -228,7 +234,8 @@ export { SearchStock };
 export default connect(
   mapStateToProps,
   {
-    searchBooksAction: searchBooks
+    searchBooksAction: searchBooks,
+    addFlashMessage
   }
 )(SearchStock);
 

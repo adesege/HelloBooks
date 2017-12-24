@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  getStockManagerByBookId,
+  getStockByBookId,
   addStock,
   deleteStock } from 'actions/stockManager';
 import Button from 'form/Button';
@@ -12,7 +12,7 @@ import DeleteStock from './DeleteStock';
 
 const propTypes = {
   stocks: PropTypes.array.isRequired,
-  getStockManagerByBookIdAction: PropTypes.func.isRequired,
+  getStockByBookIdAction: PropTypes.func.isRequired,
   addStockAction: PropTypes.func.isRequired,
   deleteStockAction: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired
@@ -29,7 +29,7 @@ class ShowStock extends React.Component {
   /**
    * Creates an instance of ShowStock.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof ShowStock
   */
@@ -37,11 +37,7 @@ class ShowStock extends React.Component {
     super(props);
     this.state = {
       bookId: 0,
-      stocks: [{
-        book: {
-          title: ""
-        }
-      }],
+      stocks: [],
       quantity: '',
       isLoading: false,
       isOpenModal: false,
@@ -67,18 +63,18 @@ class ShowStock extends React.Component {
   */
   componentDidMount() {
     const {
-      getStockManagerByBookIdAction,
+      getStockByBookIdAction,
       params,
     } = this.props;
     const bookId = params.id;
-    getStockManagerByBookIdAction({ bookId });
+    getStockByBookIdAction({ bookId });
   }
 
 
   /**
    * Lifecycle method invoked when component receives props
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof ShowStock
    *
@@ -95,7 +91,7 @@ class ShowStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ShowStock
   */
@@ -116,7 +112,7 @@ class ShowStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ShowStock
   */
@@ -145,7 +141,7 @@ class ShowStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ShowStock
    */
@@ -158,7 +154,7 @@ class ShowStock extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ShowStock
   */
@@ -214,6 +210,7 @@ class ShowStock extends React.Component {
           isOpenModal = {this.state.isOpenAddModal}
           toggleOpenModal = {this.toggleOpenAddModal}
         />
+        {this.state.stocks[0] &&
         <div className="toolaction">
           <Button
             type="button"
@@ -222,16 +219,15 @@ class ShowStock extends React.Component {
             icon="plus"
           />
         </div>
+        }
         <h4 className="title mb-2 mr-4">
-        Viewing {this.state.stocks && this.state.stocks[0].book.title} stock
+        Viewing {this.state.stocks[0] && this.state.stocks[0].book.title} stock
         </h4>
         <div className="mb-4">
           <small>
             You can add or edit stock
-            information for
-            {this.state.stocks && this.state.stocks[0].book.title} here.
-            <br/>
-            Use the filter form to view from a particular page.
+            information for &nbsp;
+            {this.state.stocks[0] && this.state.stocks[0].book.title} here.
           </small>
         </div>
         <StockList
@@ -248,7 +244,7 @@ ShowStock.propTypes = propTypes;
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */
@@ -258,7 +254,7 @@ const mapStateToProps = state => ({
 
 export { ShowStock };
 export default connect(mapStateToProps, {
-  getStockManagerByBookIdAction: getStockManagerByBookId,
+  getStockByBookIdAction: getStockByBookId,
   addStockAction: addStock,
   deleteStockAction: deleteStock,
 })(ShowStock);

@@ -18,7 +18,7 @@ const defaultProps = {
 /**
  * Empty message component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -29,7 +29,8 @@ const EmptyMessage = ({
 }) => (
   <div
     className={classnames(
-      "empty-message text-center d-sm-flex align-items-center justify-content-center flex-column",
+      "empty-message text-center d-sm-flex" +
+      " align-items-center justify-content-center flex-column",
       {
         "position-absolute": absolute
       }

@@ -25,8 +25,8 @@ const contextTypes = {
 /**
  * Homepgae component
  *
- * @param {object} props
- * @param {object} context
+ * @param {object} props - component props
+ * @param {object} context - component context
  *
  * @returns {JSX} JSX
  */
@@ -73,7 +73,7 @@ Homepage.propTypes = propTypes;
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
 */

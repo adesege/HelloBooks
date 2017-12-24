@@ -44,7 +44,7 @@ export class AuthMiddleware extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof AuthMiddleware
   */
@@ -77,7 +77,8 @@ AuthMiddleware.contextTypes = contextTypes;
  * Higher order component to
  * render composed comonent for user
  *
- * @param {object} ComposedComponent
+ * @param {object} ComposedComponent - composed component to render
+ * if authenticated
  *
  * @returns {func} JSX
 */
@@ -85,7 +86,7 @@ const authMiddleware = (ComposedComponent) => {
   /**
    * Get state from store
    *
-   * @param {object} state
+   * @param {object} state - redux store state
    *
    * @returns {object} map state to props
   */

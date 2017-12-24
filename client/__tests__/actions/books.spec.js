@@ -61,7 +61,8 @@ describe('# Books', () => {
   });
 
   describe('# Edit a book', () => {
-    it('should create BOOK_UPDATED action when a book has been edited', () => {
+    it('should create BOOK_UPDATED action when a book has been edited', 
+      () => {
       const newResponse = {
         ...response,
         message: ['Book updated successfully']
@@ -76,10 +77,12 @@ describe('# Books', () => {
       });
 
       moxios
-        .stubRequest('books/1?fields[]=coverPhotoPath&fields[]=documentPath', {
-          status: 200,
-          response: newResponse
-        });
+        .stubRequest('books/1?fields[]=coverPhotoPath&fields[]=documentPath', 
+          {
+            status: 200,
+            response: newResponse
+          }
+        );
 
       const expectedActions = [
         {
@@ -104,7 +107,8 @@ describe('# Books', () => {
   });
 
   describe('# Delete a book', () => {
-    it('should create BOOK_DELETED action when a book has been deleted', () => {
+    it('should create BOOK_DELETED action when a book has been deleted', 
+      () => {
       const bookId = 1;
       const newResponse = {
         ...response,
@@ -212,7 +216,7 @@ describe('# Books', () => {
         request.respondWith({
           status: 200,
           response: {
-            data: getBookResponse.books,
+            books: getBookResponse.books,
             pagination: getBookResponse.pagination
           },
         });

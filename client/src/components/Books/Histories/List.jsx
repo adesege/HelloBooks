@@ -28,7 +28,7 @@ class List extends Component {
   /**
      * Creates an instance of List.
      *
-     * @param {object} props
+     * @param {object} props - component props
      *
      * @memberof List
      */
@@ -80,7 +80,7 @@ class List extends Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof List
   */
@@ -105,7 +105,7 @@ class List extends Component {
    *
    * @returns {undefined}
    *
-   * @param {number} pageNumber
+   * @param {number} pageNumber - current page number
    *
    * @memberof List
    */
@@ -134,7 +134,7 @@ class List extends Component {
   /**
    * Handle onChange event for form input
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof List
    *
@@ -155,7 +155,7 @@ class List extends Component {
   /**
    * Search and filter histories
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberOo List
    *
@@ -193,7 +193,7 @@ class List extends Component {
               <div className="row pr-3" id="bookList">
                 {this.state.histories.map((history, index) => (
                   <div
-                    className="col-sm-4 col-md-4 col-lg-3 col-12 mb-4"
+                    className="col-sm-6 col-md-4 col-lg-3 col-12 mb-4"
                     key={index}>
                     <div className="row">
                       <div className="col-sm-6 col-6 align-self-center">
@@ -245,7 +245,7 @@ List.propTypes = propTypes;
 /**
  * Map state to props
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

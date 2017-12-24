@@ -20,28 +20,33 @@ describe('Middlewares', () => { // Describe Middlewares
     adminToken = aToken;
     userId = id;
   });
-  describe('# Authenticate', () => { // Describe Authenticate middleware
-    it('should return Unauthorized status when invalid token is provided', (done) => {
-      request
-        .get('/api/v1/books')
-        .set('authenticate-token', 'invalidToken')
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(401);
-          expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('Failed to authenticate user.');
-          if (err) return done(err);
-          done();
-        });
-    });
+  describe('# Authenticate', () => {
+    it(
+      'should return Unauthorized status when invalid token is provided',
+      (done) => {
+        request
+          .get('/api/v1/books')
+          .set('authenticate-token', 'invalidToken')
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(401);
+            expect(res.body).to.be.an('object');
+            expect(res.body.message[0])
+              .to.equal('Failed to authenticate user.');
+            if (err) return done(err);
+            done();
+          });
+      }
+    );
 
     it(
-      'should return an error when the user making the request is not the same as logged in user',
+      'should return an error when the user making ' +
+      'the request is not the same as logged in user',
       (done) => {
         request
           .get('/api/v1/users/123456/books')
           .set('authenticate-token', token)
           .end((err, res) => {
-            expect(res.statusCode).to.equal(400);
+            expect(res.statusCode).to.equal(403);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0]).to.equal('Sorry, this is not you.');
             if (err) return done(err);
@@ -58,7 +63,8 @@ describe('Middlewares', () => { // Describe Middlewares
           .end((err, res) => {
             expect(res.statusCode).to.equal(403);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('Failed to authenticate user.');
+            expect(res.body.message[0])
+              .to.equal('Failed to authenticate user.');
             if (err) return done(err);
             done();
           });
@@ -66,35 +72,43 @@ describe('Middlewares', () => { // Describe Middlewares
     );
   });
 
-  describe('# User Authenticate', () => { // Describe Authenticate middleware
-    it('should return OK status when a user has been authenticated successfully', (done) => {
-      request
-        .get(`/api/v1/users/${userId}/books?returned=false`)
-        .set('authenticate-token', token)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(200);
-          expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('Success');
-          expect(res.body.data[0].id).to.equal(2);
-          if (err) return done(err);
-          done();
-        });
-    });
+  describe('# User Authenticate', () => {
+    it(
+      'should return OK status when a ' +
+    'user has been authenticated successfully',
+      (done) => {
+        request
+          .get(`/api/v1/users/${userId}/books?returned=false`)
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(200);
+            expect(res.body).to.be.an('object');
+            expect(res.body.message[0]).to.equal('Success');
+            expect(res.body.books[0].id).to.equal(2);
+            if (err) return done(err);
+            done();
+          });
+      }
+    );
   });
 
-  describe('# Admin Authenticate', () => { // Describe Authenticate middleware
-    it('normal user should not be able to view admin protected route', (done) => {
-      request
-        .get('/api/v1/books/stocks')
-        .set('authenticate-token', token)
-        .end((err, res) => {
-          expect(res.statusCode).to.equal(403);
-          expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('Well, you need to be an admin to go in here');
-          if (err) return done(err);
-          done();
-        });
-    });
+  describe('# Admin Authenticate', () => {
+    it(
+      'normal user should not be able to view admin protected route',
+      (done) => {
+        request
+          .get('/api/v1/books/stocks')
+          .set('authenticate-token', token)
+          .end((err, res) => {
+            expect(res.statusCode).to.equal(403);
+            expect(res.body).to.be.an('object');
+            expect(res.body.message[0])
+              .to.equal('Well, you need to be an admin to go in here');
+            if (err) return done(err);
+            done();
+          });
+      }
+    );
 
     it('admin user should be able to view admin page', (done) => {
       request

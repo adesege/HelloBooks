@@ -9,7 +9,7 @@ const {
 /**
  * Action creator when notifications has been fetched
  *
- * @param {object} notifications
+ * @param {array} notifications - all notifications object
  *
  * @returns {object} action
  */
@@ -22,22 +22,22 @@ export const notificationsFetched = notifications => ({
  * Make network request to get all notifications
  * or by a particular notification
  *
- * @param {object} data
+ * @param {object} options - options for getting notifications
  *
  * @returns {promise} Axios http response
  */
-export const getNotifications = data =>
+export const getNotifications = options =>
   dispatch => {
     // converts an object to query string
-    const searchQuery = data ? new URLSearchParams(data) : null;
+    const searchQuery = options ? new URLSearchParams(options) : null;
     // converts it to string
-    const toQueryString = data ? searchQuery.toString() : '';
+    const toQueryString = options ? searchQuery.toString() : '';
     return axios
       .get(`notifications?${toQueryString}`)
       .then(
         (response) => {
           dispatch(notificationsFetched({
-            notifications: response.data.data,
+            notifications: response.data.notifications,
             pagination: response.data.pagination
           }));
         },

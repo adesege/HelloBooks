@@ -10,72 +10,104 @@ const {
   SearchController,
   NotificationController
 } = controllers;
+
 const {
   authMiddleware,
   adminMiddleware
 } = middlewares;
 
-const router = express.Router();
+const routes = express.Router();
 
-router.get('/', (req, res) =>
-  res
-    .send({
-      message: 'Hello, welcome to Hello-Books Api version 1'
-    }));
+routes
+  .get('/', (req, res) =>
+    res
+      .send({
+        message: 'Hello, welcome to Hello-Books Api version 1'
+      }));
 
-router.post('/users/signup', UserController.signup);
-router.post('/users/signin', UserController.signin);
+routes
+  .post('/users/signup', UserController.signup);
+routes
+  .post('/users/signin', UserController.signin);
 
-router.post('/users/reset-password', UserController.sendResetPasswordMail);
-router.post('/users/reset-password/verify', UserController.resetPassword);
+routes
+  .post('/users/reset-password', UserController.sendResetPasswordMail);
+routes
+  .post('/users/reset-password/verify', UserController.resetPassword);
 
-router.route('/users/:userId/books')
+routes
+  .route('/users/:userId/books')
   .post(authMiddleware, BookController.borrowBook)
   .get(authMiddleware, BookController.getBorrowedBook);
 
-router.route('/users/:userId/books/:borrowedBookId')
+routes
+  .route('/users/:userId/books/:borrowedBookId')
   .put(authMiddleware, BookController.returnBorrowedBook);
 
-router.route('/users')
+routes
+  .route('/users')
   .get(authMiddleware, UserController.getUsers);
 
-router.route('/users/:userId')
+routes
+  .route('/users/:userId')
   .get(authMiddleware, UserController.getUsers)
   .put(authMiddleware, UserController.editUser);
 
-router.route('/books')
+routes
+  .route('/books')
   .get(authMiddleware, BookController.getBooks)
   .post(authMiddleware, BookController.addBook);
 
-router.route('/notifications')
-  .get(authMiddleware, adminMiddleware, NotificationController.getNotifications);
+routes
+  .route('/notifications')
+  .get(
+    authMiddleware,
+    adminMiddleware,
+    NotificationController.getNotifications
+  );
 
-router.route('/books/stocks')
+routes
+  .route('/books/stocks')
   .post(authMiddleware, adminMiddleware, StockManagerController.addStock)
   .get(authMiddleware, adminMiddleware, StockManagerController.getStocks);
 
-router.route('/books/categories')
+routes
+  .route('/books/categories')
   .post(authMiddleware, adminMiddleware, BookCategoryController.addCategory)
   .get(authMiddleware, BookCategoryController.getCategories);
 
-router.route('/books/histories/:userId')
+routes
+  .route('/books/histories/:userId')
   .get(authMiddleware, BookController.getHistories);
 
-router.route('/books/:id')
+routes
+  .route('/books/:id')
   .get(authMiddleware, authMiddleware, BookController.getBooks)
   .delete(authMiddleware, adminMiddleware, BookController.deleteBook);
 
-router.route('/books/:bookId')
+routes
+  .route('/books/:bookId')
   .put(authMiddleware, authMiddleware, BookController.editBooks);
 
-router.route('/books/categories/:categoryId')
+routes
+  .route('/books/categories/:categoryId')
   .put(authMiddleware, adminMiddleware, BookCategoryController.editCategory)
-  .delete(authMiddleware, adminMiddleware, BookCategoryController.deleteCategory);
+  .delete(
+    authMiddleware,
+    adminMiddleware,
+    BookCategoryController.deleteCategory
+  );
 
-router.route('/books/stocks/:stockId')
-  .delete(authMiddleware, adminMiddleware, StockManagerController.deleteStock);
+routes
+  .route('/books/stocks/:stockId')
+  .delete(
+    authMiddleware,
+    adminMiddleware,
+    StockManagerController.deleteStock
+  );
 
-router.route('/search')
+routes
+  .route('/search')
   .get(authMiddleware, SearchController.getResult);
 
-export default router;
+export default routes;

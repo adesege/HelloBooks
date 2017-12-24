@@ -13,7 +13,7 @@
         "config": "./config/webpack.dev.js"
       },
       "node": {
-        "extensions": [".js",".jsx"]
+        "extensions": [".js",".jsx", ".spec.js", ".spec.jsx"]
       }
     }
   },

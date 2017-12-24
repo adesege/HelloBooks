@@ -11,10 +11,10 @@ const propTypes = {
 /**
  * Renders search and filter component
  *
- * @param {func} onChangeInput
- * @param {object} searchFilter
- * @param {array} categories
- * @param {func} onSearchFilter
+ * @param {func} onChangeInput - method for setting state when input change
+ * @param {object} searchFilter - search and filter object
+ * @param {array} categories - all categories
+ * @param {func} onSearchFilter - submit method for search and filter
  *
  * @returns {JSX} JSX
 */
