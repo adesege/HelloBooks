@@ -12,7 +12,7 @@ class SearchController {
   /**
    * Get search result
    *
-   * @method get
+   * @method getResult
    *
    * @param {object} req - express http request
    * @param {object} res - express http response
@@ -51,17 +51,17 @@ class SearchController {
       }
     })
       .then((books) => {
-        if (books) {
+        if (books.length !== 0) {
           return response
             .status(200)
             .send({
               message: ['Book found'],
-              data: books
+              books
             });
         }
         return response
-          .send({ message: ['Book not found'] })
-          .status(404);
+          .status(404)
+          .send({ message: ['Book not found'] });
       })
       .catch(errors => sendErrors({ res: response, errors }));
   }

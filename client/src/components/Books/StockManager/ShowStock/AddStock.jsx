@@ -15,7 +15,7 @@ const propTypes = {
 /**
  * Add or Edit stock information
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */

@@ -35,7 +35,7 @@ class Login extends React.Component {
    *
    * Creates an instance of LoginForm.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof Login
    */
@@ -63,7 +63,7 @@ class Login extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} response
+   * @param {object} response - facebook response object
    *
    * @memberof Login
    */
@@ -92,7 +92,7 @@ class Login extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} response
+   * @param {object} response - google response object
    *
    * @memberof Login
    */
@@ -112,7 +112,7 @@ class Login extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} response
+   * @param {object} response - google response object
    *
    * @memberof Login
   */
@@ -134,7 +134,7 @@ class Login extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Login
    */
@@ -152,7 +152,7 @@ class Login extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Login
   */
@@ -284,7 +284,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

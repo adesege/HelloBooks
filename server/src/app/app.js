@@ -10,7 +10,7 @@ import routes from './routes';
  *
  * @returns {undefined}
  *
- * @param {object} app
+ * @param {object} app - instance of express
 */
 export default (app) => {
   const { renderFile } = ejs;

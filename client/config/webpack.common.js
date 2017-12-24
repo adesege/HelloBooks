@@ -7,9 +7,11 @@ dotEnv.config();
 
 /**
  * Sorts chunks in alphabetical order
+ *
  * @returns {number} 1 or 0
- * @param {string} first
- * @param {string} second
+ *
+ * @param {string} first - first file name
+ * @param {string} second - second file name
  */
 const chunksSortMode = (first, second) => {
   if (first.names[0] > second.names[0]) {

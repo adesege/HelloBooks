@@ -1,6 +1,6 @@
-import authReducer from '../../src/reducers/auth';
-import { initialAuthState } from '../../src/reducers/initialState';
-import { setCurrentUser } from '../../src/actions/auth';
+import authReducer from 'reducers/auth';
+import { initialAuthState } from 'reducers/initialState';
+import { setCurrentUser } from 'actions/auth';
 
 
 describe('# Auth Reducer', () => {

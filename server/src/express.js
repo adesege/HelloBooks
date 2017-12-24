@@ -1,7 +1,6 @@
 import express from 'express';
 import dotEnv from 'dotenv';
 import path from 'path';
-import ejs from 'ejs';
 import clientRoutes from './app/app';
 import apiRoutes from './api/v1/app';
 
@@ -13,11 +12,8 @@ if (env === 'development') {
 }
 
 const app = express();
-const { renderFile } = ejs;
 
 app.use('/docs/v1', express.static(path.join(__dirname, './docs/v1')));
-app.set('views', path.join(__dirname, './docs/v1'));
-app.engine('.html', renderFile);
 
 app
   .get(

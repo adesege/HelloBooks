@@ -20,7 +20,7 @@ const defaultProps = {
 /**
  * Button component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JXX
  */

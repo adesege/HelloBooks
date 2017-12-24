@@ -3,12 +3,12 @@ import socket from './config';
 /**
  * Emit a particular notification
  *
- * @param {object} payload
+ * @param {object} options - options for getting new notifications
  *
  * @returns {undefined}
  */
-const ioGetNotifications = (payload) => {
-  socket.emit('GET_NOTIFICATIONS', payload);
+const ioGetNotifications = (options) => {
+  socket.emit('GET_NOTIFICATIONS', options);
 };
 
 /**
@@ -30,7 +30,7 @@ socket.on('GET_ALL_NOTIFICATIONS', () => {
 /**
  * Get new notification from server
  *
- * @param {func} callback
+ * @param {func} callback - callback function to resolve new notifications
  *
  * @returns {undefined}
  */

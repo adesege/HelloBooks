@@ -23,7 +23,7 @@ class ResetPassword extends React.Component {
   /**
    * Creates an instance of ResetPassword.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof ResetPassword
   */
@@ -46,7 +46,7 @@ class ResetPassword extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ResetPassword
   */
@@ -79,7 +79,7 @@ class ResetPassword extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ResetPassword
   */

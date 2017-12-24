@@ -1,5 +1,6 @@
 module.exports = {
-  'User should not be able to signin if no email address is provided': (browser) => {
+  'User should not be able to signin if no email address is provided':
+  (browser) => {
     browser
       .url(browser.launchUrl)
       .waitForElementVisible('body', 1000)
@@ -10,7 +11,8 @@ module.exports = {
       .assert.containsText('.form-text', 'This field is required')
       .end();
   },
-  'User should not be able to signin when the email address does not exist': (browser) => {
+  'User should not be able to signin when the email address does not exist':
+  (browser) => {
     browser
       .url(browser.launchUrl)
       .waitForElementVisible('body', 1000)
@@ -18,7 +20,8 @@ module.exports = {
       .setValue('#password', 'hello world')
       .click('#login')
       .pause(1000)
-      .assert.containsText('.alert-danger', 'You provided a wrong email address and password')
+      .assert.containsText('.alert-danger', 'You provided a wrong' +
+      ' email address and password')
       .end();
   },
   'User should be able to signin with a valid credentials': (browser) => {
@@ -33,7 +36,8 @@ module.exports = {
       .assert.urlEquals(`${browser.launchUrl}/dashboard`)
       .end();
   },
-  'User should be able to logout after successfully sigining in ': (browser) => {
+  'User should be able to logout after successfully sigining in ':
+  (browser) => {
     browser
       .url(browser.launchUrl)
       .waitForElementVisible('body', 1000)

@@ -18,7 +18,7 @@ const propTypes = {
  *
  * @returns {JSX} JSX
  *
- * @param {object} props
+ * @param {object} props - component props
  */
 const ChangePassword = ({
   onChangePasswordInput,

@@ -9,8 +9,8 @@ const { GET_NOTIFICATIONS } = types;
  *
  * @returns {object} new state
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
 */
 const notifications = (state = initialNotificationState, action = {}) => {
   switch (action.type) {

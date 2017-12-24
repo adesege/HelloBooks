@@ -2,7 +2,7 @@ import findIndex from 'lodash/findIndex';
 import types from 'actions/types';
 
 const {
-  STOCK_MANAGER_FETCHED,
+  STOCK_FETCHED,
   STOCK_ADDED,
   STOCK_DELETED
 } = types;
@@ -10,20 +10,20 @@ const {
 /**
  * Handles stock manager reducer
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  *
  * @returns {array} new state
  */
 const stockManager = (state = [], action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
-  case STOCK_MANAGER_FETCHED:
-    return action.data;
+  case STOCK_FETCHED:
+    return action.stocks;
 
   case STOCK_ADDED:
     return [
-      action.data,
+      action.stocks,
       ...state
     ];
 

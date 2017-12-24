@@ -8,7 +8,7 @@ const propTypes = {
 /**
  * Notification type component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -40,7 +40,7 @@ const NotificationType = ({ type }) => {
     break;
   }
   return (
-    <div className="col-sm-3 p-2 text-right">
+    <div className="col-sm-3 col p-2 text-right">
       {buttonType}
     </div>
   );

@@ -1,7 +1,7 @@
 /**
  * Mirrors array keys and returns an object
  *
- * @param {array} array
+ * @param {array} array - array to mirror
  *
  * @returns {object} mirrored keys and values
  */

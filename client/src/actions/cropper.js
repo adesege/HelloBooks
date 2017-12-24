@@ -5,7 +5,7 @@ const { SET_IMAGE_DATA, DELETE_IMAGE_DATA } = types;
 /**
  * Action creator for setting image data
  *
- * @param {string} imageData
+ * @param {string} imageData - image data uri
  *
  * @returns {object} action creator
  */

@@ -2,10 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedSearchStock, { SearchStock } from 'components/Books/StockManager/SearchStock';
+import ConnectedSearchStock, { 
+  SearchStock
+} from 'components/Books/StockManager/SearchStock';
 
 const props = {
   searchBooksAction: jest.fn(),
+  addFlashMessage: jest.fn(),
   searchResult: []
 };
 
@@ -63,7 +66,8 @@ describe('# SearchStock', () => {
   });
 
   it('should call the componentWillReceiveProps method', () => {
-    const componentWillReceivePropsSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+    const componentWillReceivePropsSpy = jest
+      .spyOn(wrapper.instance(), 'componentWillReceiveProps');
     const nextProps = {
       searchResult,
     };
@@ -72,7 +76,9 @@ describe('# SearchStock', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedSearchStock {...props} store={store} />, context);
+    const connectedComponent = shallow(<ConnectedSearchStock 
+      {...props} 
+      store={store} />, context);
     expect(connectedComponent.length).toBe(1);
   });
 });

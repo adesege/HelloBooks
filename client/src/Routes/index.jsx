@@ -34,7 +34,7 @@ import DashboardLayout from 'components/layouts/Dashboard';
 import authMiddleware from 'components/middlewares/authMiddleware';
 import adminMiddleware from 'components/middlewares/adminMiddleware';
 
-import NotFound from 'components/miscellaneous/NotFound';
+import Error from 'components/miscellaneous/Error';
 
 /**
  * Routes definition
@@ -49,7 +49,9 @@ const Routes = () => (
         <IndexRoute component={Login}/>
         <Route path="signup" component={Signup} />
         <Route path="reset-password" component={ResetPassword} />
-        <Route path="reset-password/verify/:validationKey" component={ChangePassword} />
+        <Route
+          path="reset-password/verify/:validationKey"
+          component={ChangePassword} />
       </Route>
 
       <Route component={authMiddleware(DashboardLayout)}>
@@ -78,7 +80,7 @@ const Routes = () => (
           </Route>
         </Route>
       </Route>
-      <Route path="*" component={NotFound} />
+      <Route path="*" component={Error} />
     </Route>
   </Router>
 );

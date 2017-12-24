@@ -36,7 +36,7 @@ class BooksList extends Component {
   /**
      * Creates an instance of BooksList.
      *
-     * @param {object} props
+     * @param {object} props - component props
      *
      * @memberof BooksList
      */
@@ -81,7 +81,7 @@ class BooksList extends Component {
   /**
    * Lifecycle method invoked when component receives props
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof BooksList
    *
@@ -112,7 +112,7 @@ class BooksList extends Component {
   /**
    * Go to edit book page
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof BooksList
    *
@@ -127,7 +127,7 @@ class BooksList extends Component {
   /**
    * Go to confirm delete book page
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof BooksList
    *
@@ -142,7 +142,7 @@ class BooksList extends Component {
   /**
    * Get new record based on search, filter and pagination
    *
-   * @param {number} pageNumber
+   * @param {number} pageNumber - current page number
    *
    * @memberof BooksList
    *
@@ -166,7 +166,7 @@ class BooksList extends Component {
   /**
    * Handle form input onChange event and set state according
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Notifications
    *
@@ -186,7 +186,7 @@ class BooksList extends Component {
   /**
    * Search and filter books
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Notifications
    *
@@ -220,7 +220,7 @@ class BooksList extends Component {
                 {this.state.books.map((object, index) => (
                   <div
                     className=
-                      "col-sm-4 col-md-3 col-lg-4 \
+                      "col-sm-3 col-md-3 col-6 col-lg-3 \
                      col-xl-2 pr-0 col-6 mb-4 book"
                     key={index}>
                     <Link
@@ -272,7 +272,7 @@ BooksList.contextTypes = contextTypes;
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

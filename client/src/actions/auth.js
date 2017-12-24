@@ -10,7 +10,7 @@ const { SET_CURRENT_USER } = types;
  *
  * @returns {object} action creator
  *
- * @param {object} user
+ * @param {object} user - user object
 */
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
@@ -32,7 +32,7 @@ export const logout = () =>
 /**
  * Action for logging a user in
  *
- * @param {object} userData
+ * @param {object} userData - user data to set in localstorage
  *
  * @returns {undefined}
 */
@@ -56,17 +56,17 @@ export const logUserIn = userData =>
 /**
  * Make network request to server to log a user in
  *
- * @param {object} data
+ * @param {object} options - payload to log a user in
  *
  * @returns {object} Axios success response object
  * @returns {object} Axios error response object
  */
-export const login = data =>
+export const login = options =>
   dispatch =>
     axios
-      .post(`users/signin`, data)
+      .post(`users/signin`, options)
       .then((response) => {
-        dispatch(logUserIn(response.data.payload));
+        dispatch(logUserIn(response.data.user));
         return response;
       })
       .catch(errors => {
@@ -80,13 +80,13 @@ export const login = data =>
 /**
  * Sends reset password mail
  *
- * @param {object} data
+ * @param {object} options - options to send reset password mail
  *
  * @returns {promise} Axios promise
 */
-export const sendResetPasswordMail = data =>
+export const sendResetPasswordMail = options =>
   dispatch => axios
-    .post('users/reset-password', data)
+    .post('users/reset-password', options)
     .then((response) => {
       dispatch(addFlashMessage({
         text: response.data.message,
@@ -103,25 +103,21 @@ export const sendResetPasswordMail = data =>
 /**
  * Resets user's password
  *
- * @param {object} data
+ * @param {object} options - options to reset password
  *
  * @returns {promise} Axios promise
 */
-export const resetPassword = data =>
+export const resetPassword = options =>
   dispatch =>
     axios
-      .post('users/reset-password/verify', data)
-      .then((response) => {
+      .post('users/reset-password/verify', options)
+      .then((response) =>
         dispatch(addFlashMessage({
           text: response.data.message,
           type: 'success'
-        }));
-      })
-      .catch((errors) => {
-        if (errors.response) {
-          dispatch(addFlashMessage({
-            type: 'error',
-            text: errors.response.data.message
-          }));
-        }
-      });
+        })))
+      .catch((errors) =>
+        dispatch(addFlashMessage({
+          type: 'error',
+          text: errors.response.data.message
+        })));

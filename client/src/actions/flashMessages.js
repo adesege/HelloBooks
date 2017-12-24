@@ -5,7 +5,7 @@ const { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } = types;
 /**
  * Action creator for adding flash message
  *
- * @param {object} message
+ * @param {object} message - flash message object
  *
  * @returns {object} action creator
  */

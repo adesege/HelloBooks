@@ -1,15 +1,15 @@
-const data = {
+const book = {
   userId: 1,
   bookId: 1
 };
 
 export default {
+  book,
   response: {
     message: 'You have successfully borrowed this book',
     id: 1,
-    ...data
+    ...book
   },
-  book: data,
   error: {
     message: ['There are no more copies left of this book to borrow']
   },
@@ -17,9 +17,8 @@ export default {
     userId: 1
   },
   getResponseData: {
-    data: {
-      bookId: 1,
-      userId: 1,
+    books: {
+      ...book,
       createdAt: '2017-01-01'
     }
   },

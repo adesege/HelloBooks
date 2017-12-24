@@ -1,7 +1,11 @@
 import model from '../models';
 import { sendErrors } from '../utils';
 
-const { Notification, Book, User } = model;
+const {
+  Notification,
+  Book,
+  User
+} = model;
 
 /**
  * Notification Controller
@@ -12,7 +16,7 @@ class NotificationController {
   /**
    * Gets all notification or by id
    *
-   * @method get
+   * @method getNotifications
    *
    * @param {object} req - express http request
    * @param {object} res - express http response
@@ -37,7 +41,7 @@ class NotificationController {
         }, {
           model: User,
           as: 'User',
-          attributes: ['name']
+          attributes: ['name', 'email']
         }],
         attributes: {},
         order: [['updatedAt', 'DESC']],
@@ -48,7 +52,7 @@ class NotificationController {
       .then(notification => res
         .status(200)
         .send({
-          data: notification.rows,
+          notifications: notification.rows,
           pagination: {
             pageSize: notification.rows.length,
             totalCount: notification.count,

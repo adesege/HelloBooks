@@ -56,7 +56,7 @@ FlashMessagesList.propTypes = propTypes;
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

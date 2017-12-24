@@ -1,13 +1,13 @@
 import express from 'express';
 
-const router = express.Router();
+const routes = express.Router();
 
-router
+routes
   .get('/test', (_, res) =>
     res.send({ message: 'Test passed' }));
 
-router
+routes
   .get(/^((?!(\/api\/v[0-9]\/)).)*$/, (req, res) =>
     res.render('index.html'));
 
-export default router;
+export default routes;

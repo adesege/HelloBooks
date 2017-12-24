@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedResetPassword, { ResetPassword } from 'components/homepage/ResetPassword';
+import ConnectedResetPassword, { 
+  ResetPassword
+ } from 'components/homepage/ResetPassword';
 
 const props = {
   addFlashMessage: jest.fn(),
@@ -61,7 +63,9 @@ describe('# ResetPassword', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedResetPassword {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedResetPassword 
+      {...props} 
+      store={store} />);
     expect(connectedComponent.length).toBe(1);
   });
 });

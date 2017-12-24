@@ -8,8 +8,8 @@ const {
 /**
  * Handles cropper reducer
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  *
  * @returns {array} new state
  */

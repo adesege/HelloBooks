@@ -65,7 +65,10 @@ class ChangePassword extends React.Component {
     if (!validationKey || !email) {
       return this.props.addFlashMessage({
         type: 'error',
-        text: ['There was an error completing your request. Perhaps, you followed a broken link.']
+        text: [
+          'There was an error completing your request.' +
+          'Perhaps, you followed a broken link.'
+        ]
       });
     }
     this.setState({
@@ -83,7 +86,7 @@ class ChangePassword extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ChangePassword
   */
@@ -104,7 +107,13 @@ class ChangePassword extends React.Component {
    * @memberof BooksModal
    */
   isFormValid() {
-    const { errors, isValid } = validateUser(this.state.user, 'change-password');
+    const {
+      errors,
+      isValid
+    } = validateUser(
+      this.state.user,
+      'change-password'
+    );
     if (!isValid) {
       this.setState({ errors });
     }
@@ -116,7 +125,7 @@ class ChangePassword extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ChangePassword
   */
@@ -177,7 +186,6 @@ class ChangePassword extends React.Component {
 }
 
 ChangePassword.contextTypes = contextTypes;
-
 ChangePassword.propTypes = propTypes;
 
 export { ChangePassword };

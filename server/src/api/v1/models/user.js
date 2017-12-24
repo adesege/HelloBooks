@@ -42,7 +42,7 @@ export default (sequelize, DataTypes) => {
             msg: 'The email field is not a valid email address'
           },
           isUnique(email, next) {
-            User.find({
+            return User.find({
               where: { email },
               attributes: ['id']
             }).done((error) => {

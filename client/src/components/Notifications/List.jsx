@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Pagination from 'components/miscellaneous/Pagination';
 import user from 'assets/images/user.png';
 import EmptyMessage from 'components/miscellaneous/EmptyMessage';
+import { userAvatar } from 'utils';
 import NotificationType from './NotificationType';
 
 const propTypes = ({
@@ -20,7 +21,7 @@ const defaultProps = ({
 /**
  * Notification list component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -38,7 +39,8 @@ const List = ({
           {notifications.map((notification, index) => (
             <div
               key={index}
-              className="col-lg-4 mb-3 align-items-center"
+              className={"col-lg-4 col-sm-6 col-md-6" +
+              " col-12 mb-3 align-items-center"}
             >
               <div
                 key={index}
@@ -50,7 +52,7 @@ const List = ({
                   <img
                     className="rounded-circle img-thumbnail w-100"
                     alt=""
-                    src={user}
+                    src={userAvatar(notification.User.email)}
                   />
                 </div>
                 <div

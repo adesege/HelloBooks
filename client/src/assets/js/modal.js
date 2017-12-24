@@ -1,8 +1,8 @@
 /**
  * Trigger an element on click
  *
- * @param {object} event
- * @param {string} target
+ * @param {object} event - event handler
+ * @param {string} target - target to hidden input file element
  *
  * @returns {undefined}
  */

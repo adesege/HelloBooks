@@ -12,7 +12,7 @@ const {
 /**
  * Action creator for adding a category
  *
- * @param {object} category
+ * @param {object} category - new added category
  *
  * @return {object} action creator
 */
@@ -24,19 +24,19 @@ export const categoryAdded = category => ({
 /**
  * Action creator for setting fetched book to the store
  *
- * @param {object} category
+ * @param {array} categories - categories
  *
  * @returns {object} action creator
 */
-export const categoryFetched = category => ({
+export const categoryFetched = categories => ({
   type: CATEGORY_FETCHED,
-  category
+  categories
 });
 
 /**
  * Action creator for setting editted book in the store
  *
- * @param {object} category
+ * @param {object} category - edited category
  *
  * @returns {object} action creator
 */
@@ -48,7 +48,7 @@ export const categoryEdited = category => ({
 /**
  * Action creator when category is deleted
  *
- * @param {number} id
+ * @param {number} id - deleted category id
  *
  * @returns {object} action creator
 */
@@ -60,14 +60,14 @@ export const categoryDeleted = id => ({
 /**
  * Make nerwork request to add a book category
  *
- * @param {object} data
+ * @param {object} options - options for adding book category
  *
  * @returns {promise} axios http promise
 */
-export const addBookCategory = data =>
+export const addBookCategory = options =>
   dispatch =>
     axios
-      .post(`books/categories`, data)
+      .post(`books/categories`, options)
       .then(
         (response) => {
           dispatch(categoryAdded(response.data.category));
@@ -94,10 +94,10 @@ export const addBookCategory = data =>
 export const getBookCategories = () =>
   dispatch =>
     axios
-      .get(`books/categories`)
+      .get('books/categories')
       .then(
         (response) => {
-          dispatch(categoryFetched(response.data.data));
+          dispatch(categoryFetched(response.data.categories));
           return response;
         },
         (errors) => {
@@ -112,17 +112,17 @@ export const getBookCategories = () =>
 /**
  * Make network request to edit a book category
  *
- * @param {object} data
+ * @param {object} options - options for editing book category
  *
  * @returns {promise} Axios http promise
  */
-export const editBookCategory = data =>
+export const editBookCategory = options =>
   dispatch =>
     axios
-      .put(`books/categories/${data.id}`, data)
+      .put(`books/categories/${options.id}`, options)
       .then(
         (response) => {
-          dispatch(categoryEdited(response.data.data));
+          dispatch(categoryEdited(response.data.category));
           dispatch(addFlashMessage({
             type: 'success',
             text: response.data.message
@@ -141,17 +141,17 @@ export const editBookCategory = data =>
 /**
  * Make network request to delete a book category
  *
- * @param {object} data
+ * @param {object} options - options for deleting a book category
  *
  * @returns {promise} Axios http promise
  */
-export const deleteBookCategory = data =>
+export const deleteBookCategory = options =>
   dispatch =>
     axios
-      .delete(`books/categories/${data.id}`, data)
+      .delete(`books/categories/${options.id}`, options)
       .then(
         (response) => {
-          dispatch(categoryDeleted(data.id));
+          dispatch(categoryDeleted(options.id));
           dispatch(addFlashMessage({
             type: 'success',
             text: response.data.message

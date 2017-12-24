@@ -31,7 +31,7 @@ class Categories extends React.Component {
   /**
      * Creates an instance of Categories.
      *
-     * @param {object} props
+     * @param {object} props - component props
      *
      * @memberof Categories
      */
@@ -78,7 +78,7 @@ class Categories extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof Categories
    */
@@ -91,7 +91,7 @@ class Categories extends React.Component {
   /**
    * Deletes a category
    *
-   * @param {object} event\
+   * @param {object} event - event handler
    *
    * @memberof Categories
    *
@@ -113,7 +113,7 @@ class Categories extends React.Component {
   /**
    * Open delete modal
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Categories
    *
@@ -135,7 +135,7 @@ class Categories extends React.Component {
   /**
    * Edit a category
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Categories
    *
@@ -172,7 +172,7 @@ class Categories extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Categories
   */
@@ -198,7 +198,7 @@ class Categories extends React.Component {
   /**
    * Handle file input onCHange event
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Categories
    *
@@ -313,7 +313,7 @@ Categories.propTypes = propTypes;
 /**
  * Maps state to props
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

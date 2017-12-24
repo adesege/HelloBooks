@@ -9,7 +9,7 @@ const { BOOK_BORROWED, GET_BORROWED_BOOKS, BOOK_RETURNED } = types;
 /**
  * Action creator for setting borrowed books in application store
  *
- * @param {object} book
+ * @param {object} book - borrowed book object
  *
  * @returns {object} action creator
 */
@@ -21,7 +21,7 @@ export const setBorrowedBooks = book => ({
 /**
  * Action creator when book has been borrowed
  *
- * @param {object} book
+ * @param {object} book - book object when it has been borrowed
  *
  * @returns {object} action creator
 */
@@ -34,7 +34,7 @@ export const bookBorrowed = book => ({
 /**
  * Action creator when book has been returned
  *
- * @param {object} book
+ * @param {object} book - returned book object
  *
  * @returns {object} action creator
 */
@@ -47,15 +47,15 @@ export const setReturnedBook = book => ({
 /**
  * Make network request to borrow a book
  *
- * @param {object} data
+ * @param {object} options - options for borrowing a book
  *
  * @returns {promise} Axios http promise
 */
-export const borrowBook = data =>
+export const borrowBook = options =>
   dispatch => {
     const updatedAt = moment();
     return axios
-      .post(`users/${data.userId}/books`, data)
+      .post(`users/${options.userId}/books`, options)
       .then(
         (response) => {
           /**
@@ -67,8 +67,8 @@ export const borrowBook = data =>
               notificationType: 'BOOK_BORROWED'
             });
           }, 1000);
-          data.borrowedBookId = response.data.id; // set the borrowedBook Id
-          dispatch(bookBorrowed(data));
+          options.borrowedBookId = response.data.id; // set the borrowedBook Id
+          dispatch(bookBorrowed(options));
           dispatch(addFlashMessage({
             type: 'success',
             text: response.data.message
@@ -90,19 +90,19 @@ export const borrowBook = data =>
  *
  * @returns {object} resource response
  *
- * @param {object} data
+ * @param {object} options - options for getting borrowed books
 */
-export const getBorrowedBooks = data =>
+export const getBorrowedBooks = options =>
   dispatch => {
-    const searchQuery = data ? new URLSearchParams(data) : null;
-    const toQueryString = data ? searchQuery.toString() : '';
+    const searchQuery = options ? new URLSearchParams(options) : null;
+    const toQueryString = options ? searchQuery.toString() : '';
     return axios
       .get(
-        `users/${data.userId}/books?${toQueryString}`,
-        data
+        `users/${options.userId}/books?${toQueryString}`,
+        options
       )
       .then((response) => {
-        dispatch(setBorrowedBooks(response.data.data));
+        dispatch(setBorrowedBooks(response.data.books));
         return response;
       })
       .catch((errors) => {
@@ -116,18 +116,18 @@ export const getBorrowedBooks = data =>
 /**
  * Make network request to return borrowed book
  *
- * @param {object} data
+ * @param {object} options - options for returning borrowed book
  *
  * @returns {object} resource response
 */
-export const returnBorrowedBook = data =>
+export const returnBorrowedBook = options =>
   dispatch => {
     const updatedAt = moment();
     return axios
       .put(
-        `users/${data.userId}/books/${data.borrowedBookId}
-        ?bookId=${data.bookId}`,
-        data
+        `users/${options.userId}/books/${options.borrowedBookId}
+        ?bookId=${options.bookId}`,
+        options
       )
       .then(
         (response) => {
@@ -140,7 +140,7 @@ export const returnBorrowedBook = data =>
               notificationType: 'BOOK_RETURNED'
             });
           }, 1000);
-          dispatch(setReturnedBook(data));
+          dispatch(setReturnedBook(options));
           dispatch(addFlashMessage({
             type: 'success',
             text: response.data.message

@@ -12,7 +12,7 @@ const propTypes = {
 /**
  * Delete stock modal component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -34,7 +34,8 @@ const DeleteStock = ({
     closeLabel="Cancel"
   >
     <span>
-    Are you sure you want to delete this stock? This action cannot be undone
+    Are you sure you want to delete this stock?
+    This action cannot be undone
     </span>
   </Modal>);
 

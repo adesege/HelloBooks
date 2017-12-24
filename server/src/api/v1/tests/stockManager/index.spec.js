@@ -13,7 +13,7 @@ let token;
 /**
   * @function Describe Stocks Manager Suite
 */
-describe('# Stocks', () => { // Describe Books Stocks
+describe('# Stocks', () => {
   before(() => {
     const {
       adminToken,
@@ -35,51 +35,58 @@ describe('# Stocks', () => { // Describe Books Stocks
         expect(res.statusCode).to.equal(201);
         expect(res.body.message[0]).to.equal('Stock added successfully');
         expect(res.body.id).to.equal(4);
-        expect(res.body.data.book.id).to.equal(1);
-        expect(res.body.data.book.title).to.equal('Purple Hibiscus is a new title');
+        expect(res.body.stock.book.id).to.equal(1);
+        expect(res.body.stock.book.title)
+          .to.equal('Purple Hibiscus is a new title');
         expect(res.body).to.be.an('object');
         if (err) return done(err);
         done();
       });
   });
 
-  it('should not be able to add a stock if the stock quantity is not provided', (done) => {
-    newStock = {
-      ...stock,
-      bookId: global.bookId,
-      quantity: ''
-    };
-    request
-      .post('/api/v1/books/stocks')
-      .send(newStock)
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Quantity cannot be empty');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not be able to add a stock if the stock quantity is not provided',
+    (done) => {
+      newStock = {
+        ...stock,
+        bookId: global.bookId,
+        quantity: ''
+      };
+      request
+        .post('/api/v1/books/stocks')
+        .send(newStock)
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0]).to.equal('Quantity cannot be empty');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
 
-  it('should not be able to add a stock if the book id cannot be found', (done) => {
-    newStock = {
-      ...stock,
-      bookId: 123456765
-    };
-    request
-      .post('/api/v1/books/stocks')
-      .send(newStock)
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Book not found');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not be able to add a stock if the book id cannot be found',
+    (done) => {
+      newStock = {
+        ...stock,
+        bookId: 123456765
+      };
+      request
+        .post('/api/v1/books/stocks')
+        .send(newStock)
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0]).to.equal('Book not found');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
 
   it('should be able to get all stocks', (done) => {
@@ -91,8 +98,8 @@ describe('# Stocks', () => { // Describe Books Stocks
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('message');
-        expect(res.body.data[0].id).to.equal(4);
-        expect(res.body.data[0].bookId).to.equal(global.bookId);
+        expect(res.body.stocks[0].id).to.equal(4);
+        expect(res.body.stocks[0].bookId).to.equal(global.bookId);
         if (err) return done(err);
         done();
       });

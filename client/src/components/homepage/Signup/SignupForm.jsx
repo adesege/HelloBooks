@@ -19,7 +19,7 @@ const propTypes = {
 /**
  * Signup form component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
 */

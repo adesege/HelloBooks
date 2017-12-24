@@ -11,8 +11,8 @@ const {
 /**
  * Handles categories reducer
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  *
  * @returns {array} new state
  */
@@ -26,7 +26,7 @@ const categories = (state = [], action = {}) => {
     ];
 
   case CATEGORY_FETCHED:
-    return action.category;
+    return action.categories;
 
   case CATEGORY_EDITED:
     return state.map((item) => {

@@ -21,11 +21,13 @@ describe('# Search', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.data).to.be.an('array');
+        expect(res.body.books).to.be.an('array');
         expect(res.body.message[0]).to.equal('Book found');
-        expect(res.body.data[0]).to.have.property('id');
-        expect(res.body.data[0].title).to.equal('Purple Hibiscus is a new title');
-        expect(res.body.data[0].description).to.equal('Purple Hibiscus was written by Chimamanda Adichie');
+        expect(res.body.books[0]).to.have.property('id');
+        expect(res.body.books[0].title)
+          .to.equal('Purple Hibiscus is a new title');
+        expect(res.body.books[0].description)
+          .to.equal('Purple Hibiscus was written by Chimamanda Adichie');
         if (err) return done(err);
         done();
       });

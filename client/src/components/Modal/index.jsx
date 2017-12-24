@@ -29,7 +29,7 @@ const defaultProps = {
 /**
  * Modal component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -56,7 +56,6 @@ const Modal = (props) => (
 );
 
 Modal.propTypes = propTypes;
-
 Modal.defaultProps = defaultProps;
 
 export default Modal;

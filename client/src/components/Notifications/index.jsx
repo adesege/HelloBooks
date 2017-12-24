@@ -22,7 +22,7 @@ class Notifications extends React.Component {
   /**
    * Creates an instance of Notifications.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof Notifications
    */
@@ -65,7 +65,7 @@ class Notifications extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof Notifications
   */
@@ -89,7 +89,7 @@ class Notifications extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Notifications
    */
@@ -109,7 +109,7 @@ class Notifications extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Notifications
    */
@@ -123,7 +123,7 @@ class Notifications extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {integer} pageNumber
+   * @param {integer} pageNumber - current page number
    *
    * @memberof Notifications
    */
@@ -185,7 +185,7 @@ Notifications.propTypes = propTypes;
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

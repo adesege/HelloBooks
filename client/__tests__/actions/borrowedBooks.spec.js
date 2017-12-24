@@ -22,7 +22,8 @@ describe('# Borrowed Books', () => {
 
   describe('Borrow a book', () => {
     it(
-      'should create BOOK_BORROWED and ADD_FLASH_MESSAGE when a book has been borrowed',
+      'should create BOOK_BORROWED and '+
+      'ADD_FLASH_MESSAGE when a book has been borrowed',
       () => {
         moxios.stubRequest('users/1/books', {
           status: 200,
@@ -90,12 +91,13 @@ describe('# Borrowed Books', () => {
         const expectedActions = [
           {
             type: 'GET_BORROWED_BOOKS',
-            book: borrowedBookMock.getResponseData.data
+            book: borrowedBookMock.getResponseData.books
           }
         ];
 
         const store = mockStore({ });
-        return store.dispatch(getBorrowedBooks(borrowedBookMock.getRequestData))
+        return store
+        .dispatch(getBorrowedBooks(borrowedBookMock.getRequestData))
           .then(() => {
             expect(store.getActions()).toEqual(expectedActions);
           });
@@ -127,7 +129,8 @@ describe('# Borrowed Books', () => {
         ];
 
         const store = mockStore({ });
-        return store.dispatch(getBorrowedBooks(borrowedBookMock.getRequestData))
+        return store
+        .dispatch(getBorrowedBooks(borrowedBookMock.getRequestData))
           .then(() => {
             expect(store.getActions()).toEqual(expectedActions);
           });
@@ -163,7 +166,8 @@ describe('# Borrowed Books', () => {
         ];
 
         const store = mockStore({ });
-        return store.dispatch(returnBorrowedBook(borrowedBookMock.returnRequestData))
+        return store
+        .dispatch(returnBorrowedBook(borrowedBookMock.returnRequestData))
           .then(() => {
             expect(store.getActions()).toEqual(expectedActions);
           });
@@ -195,7 +199,8 @@ describe('# Borrowed Books', () => {
         ];
 
         const store = mockStore({ });
-        return store.dispatch(returnBorrowedBook(borrowedBookMock.returnRequestData))
+        return store
+        .dispatch(returnBorrowedBook(borrowedBookMock.returnRequestData))
           .then(() => {
             expect(store.getActions()).toEqual(expectedActions);
           });

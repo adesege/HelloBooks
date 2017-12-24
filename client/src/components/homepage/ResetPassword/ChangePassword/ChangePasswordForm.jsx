@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputField from '../../../form/InputField';
-import Button from '../../../form/Button';
+import InputField from 'form/InputField';
+import Button from 'form/Button';
 
 const propTypes = {
   user: PropTypes.object.isRequired,
@@ -14,7 +14,7 @@ const propTypes = {
 /**
  * Change password form component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */

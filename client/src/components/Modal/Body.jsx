@@ -9,7 +9,7 @@ const propTypes = {
 /**
  * Modal body component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */

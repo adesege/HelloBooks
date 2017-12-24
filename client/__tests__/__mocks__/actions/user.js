@@ -1,7 +1,7 @@
 
 export const response = {
   message: ['Your account has been created successfully'],
-  payload: {
+  user: {
     group: 'user',
     userId: 1,
   }

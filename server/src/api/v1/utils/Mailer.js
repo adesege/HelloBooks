@@ -26,7 +26,7 @@ class Mailer {
   /**
    * Set where the email is from
    *
-   * @param {string} from
+   * @param {string} from - sets where the email is from
    *
    * @memberof Mailer
    *
@@ -40,7 +40,7 @@ class Mailer {
   /**
    * Set the recipient of the mail
    *
-   * @param {string} to
+   * @param {string} to - sets the email recipient
    *
    * @memberof Mailer
    *
@@ -53,7 +53,7 @@ class Mailer {
   /**
    * Set the subject of the mail
    *
-   * @param {string} subject
+   * @param {string} subject - sets the subject of the mail
    *
    * @memberof Mailer
    *
@@ -67,7 +67,7 @@ class Mailer {
   /**
    * Set the mail text without HTML syntax
    *
-   * @param {string} text
+   * @param {string} text - sets the text version of the mail
    *
    * @memberof Mailer
    *
@@ -80,7 +80,7 @@ class Mailer {
   /**
    * Set the html format of the mail
    *
-   * @param {string} html
+   * @param {string} html - sets the html version of the mail
    *
    * @memberof Mailer
    *

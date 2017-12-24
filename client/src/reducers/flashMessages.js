@@ -7,8 +7,8 @@ const { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } = types;
  *
  * @returns {object} new state
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  */
 const flashMessages = (state = {}, action = {}) => {
   switch (action.type) {

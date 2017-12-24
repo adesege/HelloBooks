@@ -13,8 +13,8 @@ const {
 /**
  * Handles books reducer
  *
- * @param {object} state
- * @param {object} action
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  *
  * @returns {object} new state
 */

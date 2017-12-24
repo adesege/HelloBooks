@@ -41,13 +41,15 @@ describe('# Homepage Layout', () => {
     expect(wrapper.find('section').length).toBe(1);
   });
 
-  it('should render Homepage component with background image when user is not authenticated', () => {
+  it('should render Homepage component with background'+
+  ' image when user is not authenticated', () => {
     wrapper.setProps({ isAuthenticated: false })
     expect(wrapper).toBeDefined();
     expect(wrapper.find('section').length).toBe(1);
   });
 
-  it('should render ConnectedHomepage component with background image when user is not authenticated', () => {
+  it('should render ConnectedHomepage component with'+
+  ' background image when user is not authenticated', () => {
     wrapper = shallow(
       <ConnectedHomepage 
       {...props} 

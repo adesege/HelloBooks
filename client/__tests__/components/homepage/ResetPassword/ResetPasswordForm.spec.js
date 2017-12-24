@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ResetPasswordForm from 'components/homepage/ResetPassword/ResetPasswordForm';
+import ResetPasswordForm from 
+ 'components/homepage/ResetPassword/ResetPasswordForm';
 
 const props = {
   user: {},

@@ -11,7 +11,7 @@ const propTypes = {
 /**
  * Filter component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -28,8 +28,10 @@ const Filter = ({
       value={searchFilter.isReturned}
     >
       <option value="">by status...</option>
-      {searchFilter.isReturned !== false && <option value="true">Returned</option>}
-      {searchFilter.isReturned !== true && <option value="false">Yet to Returned</option>}
+      {searchFilter.isReturned !== false &&
+         <option value="true">Returned</option>}
+      {searchFilter.isReturned !== true &&
+      <option value="false">Yet to Returned</option>}
     </select>
     <select
       className="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0"
@@ -39,8 +41,14 @@ const Filter = ({
       <option value="">by date...</option>
       <option value={moment().format()}>Today</option>
       <option value={moment().subtract(7, 'days').format()}>Last 7 days</option>
-      <option value={moment().subtract(14, 'days').format()}>Last 14 days</option>
-      <option value={moment().subtract(1, 'months').format()}>A month ago</option>
+      <option
+        value={moment().subtract(14, 'days').format()}>
+      Last 14 days
+      </option>
+      <option
+        value={moment().subtract(1, 'months').format()}>
+      A month ago
+      </option>
     </select>
     <select
       className="form-control form-control-sm mb-2 mr-sm-2 mb-sm-0"

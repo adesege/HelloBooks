@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import userImage from 'assets/images/user.png';
 import 'assets/scss/profileInfo.scss';
+import { userAvatar } from 'utils/index';
 import ChangePasswordForm from './ChangePasswordForm';
 
 const contextTypes = {
@@ -23,7 +23,7 @@ const propTypes = {
 /**
  * Profile info component
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
  */
@@ -47,7 +47,7 @@ const Info = ({
               "col-sm-4 text-center align-self-center">
             <img
               className="card-img-top avatar mt-3"
-              src={userImage}
+              src={userAvatar(user.email)}
               alt={user.name} />
           </div>
           <div className="col-sm-8">
@@ -91,7 +91,6 @@ const Info = ({
 );
 
 Info.contextTypes = contextTypes;
-
 Info.propTypes = propTypes;
 
 export default Info;

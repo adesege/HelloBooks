@@ -33,18 +33,20 @@ class BookController {
     };
     delete req.body.stock;
 
-    if (!stock.quantity) {
-      return res.status(400)
-        .send({ message: ['The stock quantity is required'] });
-    }
-
     return Book
       .findOne({ where: { title } })
       .then((book) => {
+        if (!stock.quantity) {
+          return res.status(400)
+            .send({ message: ['The stock quantity is required'] });
+        }
+
         if (book) {
           return res.status(409)
             .send({ message: ['A book with the same title already exist'] });
         }
+
+
         Book.create(req.body, {
           fields: [
             'title',
@@ -73,7 +75,8 @@ class BookController {
                     id: bookId,
                     book: newBook
                   }))
-              .catch(errors => sendErrors({ res, errors })); // Stock manager create
+              .catch(errors =>
+                sendErrors({ res, errors })); // Stock manager create
           })
           .catch(errors => sendErrors({ res, errors }));
       })
@@ -172,7 +175,7 @@ class BookController {
         return res
           .status(200)
           .send({
-            data: books.rows,
+            books: books.rows,
             pagination: {
               pageSize: books.rows.length,
               totalCount: books.count,
@@ -218,7 +221,8 @@ class BookController {
               message: ['Sorry, we can\'t find this book']
             });
         }
-        if (book.quantity === 0) { // check if book quantity is less than or equal to zero
+        // check if book quantity is less than or equal to zero
+        if (book.quantity === 0) {
           return res
             .status(422)
             .send({
@@ -236,7 +240,8 @@ class BookController {
                 .status(409)
                 .send({
                   message:
-                  ['You have already borrowed this book. Please return it before you can borrow it again.']
+                  ['You have already borrowed this book.' +
+                  ' Please return it before you can borrow it again.']
                 });
             }
             return borrowedBook
@@ -274,9 +279,9 @@ class BookController {
     const { userId } = req.params;
     const { bookId } = req.query;
     const isReturned = req.query.returned || false;
-    const where = bookId
-      ? { userId, isReturned, bookId }
-      : { userId, isReturned };
+    const where = bookId ?
+      { userId, isReturned, bookId } :
+      { userId, isReturned };
 
     return borrowedBook
       .findAll({
@@ -292,7 +297,7 @@ class BookController {
         return res
           .status(200)
           .send({
-            data: books,
+            books,
             message: ['Success']
           });
       })
@@ -355,7 +360,7 @@ class BookController {
   /**
    * Deletes a book
    *
-   * @method delete
+   * @method deleteBook
    *
    * @param {object} req - express http request
    * @param {object} res - express http response
@@ -414,11 +419,13 @@ class BookController {
       default: order[0] = ['updatedAt', 'DESC'];
         break;
     }
-    where.updatedAt = updatedAt ? { $between: [updatedAt, moment().format()] } : { $ne: null };
+    where.updatedAt = updatedAt ?
+      { $between: [updatedAt, moment().format()] } :
+      { $ne: null };
     where.userId = userId || { $ne: null };
     try {
       where.isReturned = !!JSON.parse(isReturned);
-    } catch (e) {
+    } catch (error) {
       where.isReturned = { $ne: null };
     }
     return borrowedBook
@@ -438,7 +445,7 @@ class BookController {
         return res
           .status(200)
           .send({
-            data: books.rows,
+            books: books.rows,
             pagination: {
               pageSize: books.rows.length,
               totalCount: books.count,

@@ -39,7 +39,7 @@ class ViewBooks extends React.Component {
   /**
    * Creates an instance of ViewBooks.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof ViewBooks
   */
@@ -88,7 +88,7 @@ class ViewBooks extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} nextProps
+   * @param {object} nextProps - lifecycle next props
    *
    * @memberof ViewBooks
    */
@@ -114,7 +114,7 @@ class ViewBooks extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ViewBooks
   */
@@ -139,7 +139,7 @@ class ViewBooks extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ViewBooks
   */
@@ -164,7 +164,7 @@ class ViewBooks extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof ViewBooks
   */
@@ -188,7 +188,7 @@ class ViewBooks extends React.Component {
   /**
    * Renders component
    *
-   * @returns  {JSX} JSX
+   * @returns {JSX} JSX
    *
    * @memberof ViewBooks
    */
@@ -258,8 +258,8 @@ ViewBooks.contextTypes = contextTypes;
 /**
  * Get state from store
  *
- * @param {object} state
- * @param {object} props
+ * @param {object} state - redux store state
+ * @param {object} props - component props
  *
  * @returns {object} map state to props
  */

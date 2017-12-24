@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
   /**
    * Creates an instance of Dashboard.
    *
-   * @param {object} props
+   * @param {object} props - component props
    *
    * @memberof Dashboard
    */
@@ -72,7 +72,7 @@ class Dashboard extends React.Component {
    *
    * @returns {undefined}
    *
-   * @param {object} event
+   * @param {object} event - event handler
    *
    * @memberof Dashboard
   */
@@ -183,7 +183,7 @@ Dashboard.contextTypes = contextTypes;
 /**
  * Get state from store
  *
- * @param {object} state
+ * @param {object} state - redux store state
  *
  * @returns {object} map state to props
  */

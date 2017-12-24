@@ -45,6 +45,7 @@ module.exports = {
     database: PRODUCTION_DB_NAME,
     host: PRODUCTION_DB_HOST,
     dialect: 'postgres',
-    timezone: TIMEZONE
+    timezone: TIMEZONE,
+    logging: false
   }
 };

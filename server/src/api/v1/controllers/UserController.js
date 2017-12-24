@@ -15,12 +15,12 @@ const mailer = new Mailer();
 */
 class UserController {
   /**
-  * Signup
+  * Creates a user
   *
   * @method signup
   *
-  * @param {object} req
-  * @param {object} res
+  * @param {object} req - express http request
+  * @param {object} res - express http response
   *
   * @return {object} signed token and user payload
   */
@@ -45,7 +45,14 @@ class UserController {
       key: randomString(10),
       oauthID
     }, {
-      fields: ['name', 'email', 'password', 'key', 'userGroup', 'oauthID'],
+      fields: [
+        'name',
+        'email',
+        'password',
+        'key',
+        'userGroup',
+        'oauthID'
+      ],
       returning: true,
       plain: true
     }).then((user) => {
@@ -53,7 +60,7 @@ class UserController {
       return res
         .status(201)
         .send({
-          payload: {
+          user: {
             token,
             userId: user.id,
             group: user.userGroup,
@@ -65,12 +72,12 @@ class UserController {
   }
 
   /**
-  * Signin
+  * Logs a user into the application
   *
   * @method signin
   *
-  * @param {object} req
-  * @param {object} res
+  * @param {object} req - express http request
+  * @param {object} res - express http response
   *
   * @return {object} user token and some user payload
   */
@@ -90,25 +97,35 @@ class UserController {
       })
       .then((oauthUser) => {
         if (oauthID && !oauthUser) {
-          return res.status(400).send({ message: ['Sorry, we can\'t find this account'] });
+          return res
+            .status(404)
+            .send({ message: ['Sorry, we can\'t find this account'] });
         }
         if (!oauthID && oauthUser) {
           if (!oauthUser.validPassword(password)) {
-            return res.status(400).send({ message: ['You provided a wrong email address and password'] });
+            return res
+              .status(401)
+              .send({
+                message: ['You provided a wrong email address and password']
+              });
           }
         }
         if (oauthID || oauthUser) {
           const token = utils.signToken(oauthUser);
-          return res.status(200).send({
-            payload: {
-              token,
-              userId: oauthUser.id,
-              group: oauthUser.userGroup,
-            },
-            message: ['Successfully validated']
-          });
+          return res
+            .status(200)
+            .send({
+              user: {
+                token,
+                userId: oauthUser.id,
+                group: oauthUser.userGroup,
+              },
+              message: ['Successfully validated']
+            });
         }
-        return res.status(404).send({ message: ['Sorry, we can\'t find this account'] });
+        return res
+          .status(404)
+          .send({ message: ['Sorry, we can\'t find this account'] });
       })
       .catch(errors => sendErrors({ res, errors }));
   }
@@ -116,10 +133,10 @@ class UserController {
   /**
     * Get all users or a particular user
     *
-    * @method get
+    * @method getUsers
     *
-    * @param {object} req
-    * @param {object} res
+    * @param {object} req - express http request
+    * @param {object} res - express http response
     *
     * @return {object} An array of users or a user
   */
@@ -140,7 +157,7 @@ class UserController {
       .then(users => res
         .status(200)
         .send({
-          data: users
+          users
         }))
       .catch(errors => sendErrors({ res, errors }));
   }
@@ -148,10 +165,10 @@ class UserController {
   /**
    * Edit a user
    *
-   * @method get
+   * @method editUser
    *
-   * @param {object} req
-   * @param {object} res
+   * @param {object} req - express http request
+   * @param {object} res - express http response
    *
    * @return {object} message response
   */
@@ -195,15 +212,16 @@ class UserController {
    *
    * @returns {object} message response
    *
-   * @param {object} req
-   * @param {object} res
+   * @param {object} req - express http request
+   * @param {object} res - express http response
    *
    * @memberof UserController
   */
   static sendResetPasswordMail(req, res) {
     let { email } = req.body;
     email = `${email}`;
-    return User.findOne({ where: { email } })
+    return User
+      .findOne({ where: { email } })
       .then((user) => {
         if (!user) {
           return res.status(404).send({
@@ -225,10 +243,13 @@ class UserController {
             mailer.subject = 'Password reset request';
             mailer.html = `
             <p>Dear <strong>${updatedUser[1].name}</strong>,</p>
-            <p>This is to notify you that you or someone else has requested for a password reset on Hello Books.</p>
-            <p>If this action was not performed by you, kindly ignore this mail as your account is still secure.</p>
+            <p>This is to notify you that you or someone 
+            else has requested for a password reset on Hello Books.</p>
+            <p>If this action was not performed by you, 
+            kindly ignore this mail as your account is still secure.</p>
             <p>If not, please <a 
-            href="${req.protocol}://${req.get('host')}/reset-password/verify/${validationKey}?email=${email}">
+            href="${req.protocol}://${req.get('host')}/reset-password
+            /verify/${validationKey}?email=${email}">
             Click here to reset password
             </a>
             </p>
@@ -238,10 +259,15 @@ class UserController {
             mailer.send();
 
             const responseObject = {
-              message: [`A password reset link has been sent to ${email}. It may take upto 5 mins for the mail to arrive.`]
+              message: [
+                `A password reset link has been sent to ${email}.` +
+                 ' It may take upto 5 mins for the mail to arrive.'
+              ]
             };
             /* istanbul ignore next */
-            responseObject.key = process.env.NODE_ENV === 'test' ? validationKey : '';
+            responseObject.key = process.env.NODE_ENV === 'test' ?
+              validationKey :
+              '';
 
             return res.status(200)
               .send(responseObject);
@@ -254,31 +280,46 @@ class UserController {
   /**
    * Change user's password
    *
-   * @method get
+   * @method resetPassword
    *
-   * @param {object} req
-   * @param {object} res
+   * @param {object} req - express http request
+   * @param {object} res - express http response
    *
    * @return {object} message response
   */
   static resetPassword(req, res) {
     const {
-      password, confirmPassword, email, validationKey
+      password,
+      confirmPassword,
+      email,
+      validationKey
     } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).send({
         message: ['The passwords are not the same']
       });
     }
-    User.findOne({ where: { email, key: validationKey } })
+    User
+      .findOne({
+        where: {
+          email,
+          key: validationKey
+        }
+      })
       .then((user) => {
         if (!user) {
-          return res.status(400).send({
-            message: ['There was an error completing your request. Perhaps, you followed a broken link.']
+          return res.status(404).send({
+            message: [
+              'There was an error completing your request.' +
+               ' Perhaps, you followed a broken link.'
+            ]
           });
         }
         User.update(
-          { password: User.generateHash(password), key: '' },
+          {
+            password: User.generateHash(password),
+            key: ''
+          },
           {
             where: { email, key: validationKey }
           }
@@ -292,15 +333,19 @@ class UserController {
             <p>This is to notify you that you or someone else 
             has changed your account password on Hello Books.</p>
             <p>If this action was performed by you, 
-            please ignore this mail as no further action is required from you.</p>
-            <p>If not, please contact support at info@hellobooks.herokuapp.com</p>
+            please ignore this mail as no 
+            further action is required from you.</p>
+            <p>If not, please contact 
+            support at info@hellobooks.herokuapp.com</p>
             <p>Best regards</p>
             `;
 
             mailer.send();
-            res.status(200)
+            return res.status(200)
               .send({
-                message: ['Password successfully changed. Please login to your account.']
+                message: [
+                  'Password successfully changed. Please login to your account.'
+                ]
               });
           })
           .catch(errors => sendErrors({ res, errors }));

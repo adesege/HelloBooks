@@ -13,10 +13,14 @@ const propTypes = {
   closeOnClick: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
 };
 
+const defaultProps = {
+  closeLabel: 'Close'
+};
+
 /**
 * Modal footer component
 *
-* @param {object} propTypes
+* @param {object} props - component props
 *
 * @returns {JSX} JSX
 */
@@ -52,8 +56,6 @@ const Footer = ({
 
 Footer.propTypes = propTypes;
 
-Footer.defaultProps = {
-  closeLabel: 'Close'
-};
+Footer.defaultProps = defaultProps;
 
 export default Footer;

@@ -15,7 +15,7 @@ const propTypes = {
 /**
  * Reset password form
  *
- * @param {object} props
+ * @param {object} props - component props
  *
  * @returns {JSX} JSX
 */

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
 import 'assets/scss/styles.scss';
 import 'config/axios';
+import ErrorBoundary from './miscellaneous/ErrorBoundary';
 
 const { TIMEZONE } = process.env;
 moment().tz(TIMEZONE).format();
@@ -17,16 +18,18 @@ const propTypes = {
  *
  * @returns {JSX} JSX
  *
- * @param {object} props
+ * @param {object} props - component props
 */
 const App = ({ children }) => (
-  <div className="container-fluid">
-    <LoadingBar
-      showFastActions
-      className = "loadingBar"
-    />
-    {children}
-  </div>
+  <ErrorBoundary>
+    <div className="container-fluid">
+      <LoadingBar
+        showFastActions
+        className = "loadingBar"
+      />
+      {children}
+    </div>
+  </ErrorBoundary>
 );
 
 App.propTypes = propTypes;

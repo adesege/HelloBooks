@@ -25,7 +25,8 @@ describe('# Categories', () => {
   afterEach(() => moxios.uninstall());
 
   describe('# Add a book category', () => {
-    it('should create CATEGORY_ADDED when a category has been added', () => {
+    it('should create CATEGORY_ADDED when a category has been added', 
+      () => {
       const message = ['Category added successfully'];
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
@@ -102,7 +103,7 @@ describe('# Categories', () => {
           request.respondWith({
             status: 200,
             response: {
-              data: category,
+              categories: category,
               message
             },
           });
@@ -111,7 +112,7 @@ describe('# Categories', () => {
         const expectedActions = [
           {
             type: 'CATEGORY_FETCHED',
-            category
+            categories: category
           }
         ];
         const store = mockStore({ });
@@ -161,7 +162,7 @@ describe('# Categories', () => {
           request.respondWith({
             status: 200,
             response: {
-              data: category,
+              category,
               message
             },
           });

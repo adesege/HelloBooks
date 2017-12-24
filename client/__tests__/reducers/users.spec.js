@@ -1,5 +1,5 @@
-import userReducer from '../../src/reducers/users';
-import { usersFetched } from '../../src/actions/users';
+import userReducer from 'reducers/users';
+import { usersFetched } from 'actions/users';
 
 
 describe('# Users Reducer', () => {

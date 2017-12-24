@@ -14,7 +14,7 @@ export const response = {
 };
 
 export const searchResponse = {
-  data: {
+  books: {
     ...response.book
   }
 };

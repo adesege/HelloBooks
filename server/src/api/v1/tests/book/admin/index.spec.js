@@ -106,7 +106,8 @@ describe('# Admin Books', () => {
         expect(res.statusCode).to.equal(400);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.property('message');
-        expect(res.body.message[0]).to.equal('The description field is required');
+        expect(res.body.message[0])
+          .to.equal('The description field is required');
         if (err) return done(err);
         done();
       });
@@ -120,29 +121,34 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(409);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('A book with the same title already exist');
+        expect(res.body.message[0])
+          .to.equal('A book with the same title already exist');
         if (err) return done(err);
         done();
       });
   });
 
-  it('should not add a book if the stock quantity is not provided', (done) => {
-    newBook = {
-      ...book,
-      stockQuantity: undefined
-    };
-    request
-      .post('/api/v1/books')
-      .send(newBook)
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('The stock quantity is required');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not add a book if the stock quantity is not provided',
+    (done) => {
+      newBook = {
+        ...book,
+        stockQuantity: undefined
+      };
+      request
+        .post('/api/v1/books')
+        .send(newBook)
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0])
+            .to.equal('The stock quantity is required');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
   it(
     'should not add a book if the stock quantity is not an integer',
@@ -231,33 +237,39 @@ describe('# Admin Books', () => {
       });
   });
 
-  it('should not be able to edit a book when the id cannot be found', (done) => {
-    request
-      .put('/api/v1/books/909099880')
-      .send(book)
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(404);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Book not found');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not be able to edit a book when the id cannot be found',
+    (done) => {
+      request
+        .put('/api/v1/books/909099880')
+        .send(book)
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(404);
+          expect(res.body).to.be.an('object');
+          expect(res.body.message[0]).to.equal('Book not found');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 
-  it('should not be able to edit a book when the title field is not specified', (done) => {
-    book.title = '';
-    request
-      .put(`/api/v1/books/${global.bookId}`)
-      .send(book)
-      .set('authenticate-token', token)
-      .end((err, res) => {
-        expect(res.statusCode).to.equal(400);
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('message');
-        expect(res.body.message[0]).to.equal('The title field is required');
-        if (err) return done(err);
-        done();
-      });
-  });
+  it(
+    'should not be able to edit a book when the title field is not specified',
+    (done) => {
+      book.title = '';
+      request
+        .put(`/api/v1/books/${global.bookId}`)
+        .send(book)
+        .set('authenticate-token', token)
+        .end((err, res) => {
+          expect(res.statusCode).to.equal(400);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('message');
+          expect(res.body.message[0]).to.equal('The title field is required');
+          if (err) return done(err);
+          done();
+        });
+    }
+  );
 });
