@@ -154,11 +154,20 @@ class UserController {
           'updatedAt'],
         order: [['updatedAt', 'DESC']]
       })
-      .then(users => res
-        .status(200)
-        .send({
-          users
-        }))
+      .then((users) => {
+        if (users.length !== 0) {
+          return res
+            .status(200)
+            .send({
+              users
+            });
+        }
+        return res
+          .status(404)
+          .send({
+            message: ['User not found']
+          });
+      })
       .catch(errors => sendErrors({ res, errors }));
   }
 

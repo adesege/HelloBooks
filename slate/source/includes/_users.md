@@ -18,7 +18,7 @@
 ```javascript
 {
   "message": "Your account has been created successfully",
-  "payload": {
+  "user": {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
     "userId": 1,
     "group": "user"
@@ -115,7 +115,7 @@ This endpoint changes a user's password after the user has click on the reset pa
 }
 ```
 
-This endpoint for authenticated users to changes their password
+This endpoint is for authenticated users to changes their password
 
 ### HTTP Request
 
@@ -137,7 +137,7 @@ This endpoint for authenticated users to changes their password
 
 ```javascript
 {
-  "data": [
+  "users": [
     {
       "createdAt": "2017-12-11T16:27:39.497Z"
       "email": "johndoe@email.com"
@@ -154,7 +154,7 @@ This endpoint gets all users or a particular user by id
 
 ### HTTP Request
 
-`POST /users/[,:userId]`
+`GET /users/[,:userId]`
 
 ### HTTP Response
 

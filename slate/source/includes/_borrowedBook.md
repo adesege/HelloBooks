@@ -86,7 +86,7 @@ bookId | undefined | If defined, it will set the bookId of the book that is bein
 
 ```javascript
 {
-  "data": 
+  "books": [
     {
       "id": 1,
       "title": "Half of a yellow sun",
@@ -94,7 +94,8 @@ bookId | undefined | If defined, it will set the bookId of the book that is bein
       ...
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z"
-  },
+    }
+  ],
   "message": ["Success"]
 }
 ```
@@ -135,7 +136,7 @@ returned | false | The return status of the book
 
 ```javascript
 {
-  "data": 
+  "books": [
     {
       "id": 1,
       "title": "Half of a yellow sun",
@@ -143,7 +144,9 @@ returned | false | The return status of the book
       ...
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z"
-  },
+    }
+    ...
+  ],
   "pagination": {
       "pageSize": 1,
       "totalCount": 1,

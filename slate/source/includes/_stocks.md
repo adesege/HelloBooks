@@ -17,12 +17,24 @@
 {
   "message": ["Stock added successfully"],
   "id": 1,
-  "data": 
+  "stock": 
     {
+      "id": 1,
       "bookId": 1,
       "quantity": 8
       "createdAt": "2017-12-12T16:27:39.497Z",
-      "updatedAt": "2017-12-12T16:27:39.497Z"
+      "updatedAt": "2017-12-12T16:27:39.497Z",
+      "book": {
+        "id": 1,
+        "title": "Half of a yellow sun",
+        "description": "A sweet book from Chimamanda Adichie",
+        "bookCategoryId": 1,
+        "ISBN": "1234567890",
+        ...
+        "userId": 1,
+        "createdAt": "2017-12-12T16:27:39.497Z",
+        "updatedAt": "2017-12-12T16:27:39.497Z"
+      }
   }
 }
 ```
@@ -49,13 +61,14 @@ This endpoint creates a stock.
 
 ```javascript
 {
-  "data": 
+  "stocks": [
     {
       "bookId": 1,
       "quantity": 8
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z"
-  }
+    }
+  ]
 }
 ```
 
