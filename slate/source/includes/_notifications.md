@@ -12,7 +12,7 @@
 
 ```javascript
 {
-  "data": 
+  "notifications": [
     {
       "id": 1,
       "bookId": 1,
@@ -20,9 +20,14 @@
       "notificationType": "BOOK_RETURNED",
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z",
-      "Book": {},
-      "User": {},
-  }
+      "Book": {
+        ...
+      },
+      "User": {
+        ...
+      },
+    }
+  ]
 }
 ```
 

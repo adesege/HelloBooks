@@ -66,7 +66,7 @@ You must replace <code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code> with the s
 ```javascript
 {
   "message": "Successfully validated",
-  "payload": {
+  "user": {
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
     "userId": 1,
     "group": "user"

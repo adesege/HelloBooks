@@ -28,6 +28,7 @@
   "id": 1,
   "book": 
     {
+      "id": 1,
       "title": "Half of a yellow sun",
       "description": "A sweet book from Chimamanda Adichie",
       "bookCategoryId": 1,
@@ -55,7 +56,7 @@ This endpoint creates a book.
 
 `201 Created`
 
-## Update a book
+## Edit a book
 
 > Request body
 
@@ -99,7 +100,7 @@ This endpoint creates a book.
 }
 ```
 
-This endpoint updates a book.
+This endpoint edits a book.
 
 ### HTTP Request
 
@@ -133,15 +134,24 @@ fields | undefined | If defined, it will set the columns to update to the ones s
 
 ```javascript
 {
-  "data": 
+  "books": [
     {
       "id": 1,
       "title": "Half of a yellow sun",
       "description": "A sweet book from Chimamanda Adichie",
-      ...
+      "bookCategoryId": 1,
+      "ISBN": "1234567890",
+      "stockQuantity": 3,
+      "publishedYear": 2015,
+      "author": "Chimanmanda Adichie",
+      "bookURL": "",
+      "coverPhotoPath": "http://res.cloudinary.com/johndoe/image/upload/v1512654679/qclzzr...mwf8ktc.png",
+      "documentPath": "",
+      "userId": 1,
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z"
-  },
+    }
+  ],
   "pagination": {
       "pageSize": 1,
       "totalCount": 1,
@@ -192,19 +202,28 @@ bookCategoryId | undefined | Filter by book category
 ```javascript
 {
   "message": ["Book found"],
-  "data": 
+  "books": [
     {
       "id": 1,
       "title": "Half of a yellow sun",
       "description": "A sweet book from Chimamanda Adichie",
-      ...
+      "bookCategoryId": 1,
+      "ISBN": "1234567890",
+      "stockQuantity": 3,
+      "publishedYear": 2015,
+      "author": "Chimanmanda Adichie",
+      "bookURL": "",
+      "coverPhotoPath": "http://res.cloudinary.com/johndoe/image/upload/v1512654679/qclzzr...mwf8ktc.png",
+      "documentPath": "",
+      "userId": 1,
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z"
-  }
+    }
+  ]
 }
 ```
 
-This endpoint search books
+This endpoint searches for a book
 
 ### HTTP Request
 

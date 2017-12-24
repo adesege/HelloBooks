@@ -36,7 +36,7 @@ This endpoint creates a category.
 
 `201 Created`
 
-## Update a category
+## Edit a category
 
 > Request body
 
@@ -51,7 +51,7 @@ This endpoint creates a category.
 ```javascript
 {
   "message": ["Category updated successfully"],
-  "data": 
+  "category": 
     {
       "id": 1,
       "name": "African Fiction & tales",
@@ -89,13 +89,14 @@ categoryId | The ID of the book
 
 ```javascript
 {
-  "data": 
+  "categories": [
     {
       "id": 1,
       "name": "African Fiction and tales",
       "createdAt": "2017-12-12T16:27:39.497Z",
       "updatedAt": "2017-12-12T16:27:39.497Z"
-  }
+    }
+  ]
 }
 ```
 
@@ -134,7 +135,7 @@ categoryId | The ID of the category
 This endpoint deletes a category by id
 ### HTTP Request
 
-`DELETE /books/categories/[,:categoryId]`
+`DELETE /books/categories/:categoryId`
 
 ### HTTP Response
 
