@@ -20,8 +20,8 @@ module.exports = {
       .setValue('#confirmPassword', 'helloworld@us.com')
       .click('#signup')
       .pause(1000)
-      .waitForElementPresent('#contentArea', 1000)
       .assert.urlEquals(`${browser.launchUrl}/dashboard`)
+      .waitForElementPresent('#contentArea', 1000)
       .end();
   },
   'User should not be able to signup with an already existing email address':

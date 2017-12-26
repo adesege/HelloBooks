@@ -187,7 +187,7 @@ describe('# Admin Books', () => {
 
   it('should not delete a book when the id cannot be found', (done) => {
     request
-      .delete('/api/v1/books/12345')
+      .delete(`/api/v1/books/${global.bookId2}`)
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
