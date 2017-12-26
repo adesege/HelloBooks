@@ -223,7 +223,7 @@ class BooksModal extends Component {
             this.setState({
               isLoading: false,
               isOpenModal: false
-            });
+            }, () => window.scrollTo(0, 0));
           },
           (errors) => {
             const errorMessage =
@@ -414,7 +414,8 @@ class BooksModal extends Component {
           key="triggerUploadDoc"
           className="btn-sm btn-default"
           icon="folder"
-          onClick = {(event) => onClickOpenBookCover(event, 'triggerUploadDoc')}
+          onClick = {(event) =>
+            onClickOpenBookCover(event, 'triggerUploadDoc')}
         >
           <span
             className="hidden-xs-down">

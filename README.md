@@ -85,6 +85,8 @@ npm run test:e2e-server
 npm run test:e2e
 ```
 
+> Ensure that the server and client are up and running. The client must listen to port 3000. Otherwise, change it in [nightwatch.conf:16](./nightwatch.json#L16)
+
 > Finally, for the client test,
 ```
 # first cd to the test folder
