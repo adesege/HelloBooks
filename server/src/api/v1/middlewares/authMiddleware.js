@@ -18,10 +18,12 @@ const authMiddleware = (req, res, next) => {
       if (err) {
         return res
           .status(401)
-          .send({ message: ['Failed to authenticate user.'] });
+          .send({
+            message: ['Your session has expired. Please try logging in again']
+          });
       }
 
-      const userId = req.body.userId ||
+      const userId =
       req.query.userId ||
       req.params.userId; // get userId from request object
       if (userId || userId !== undefined) {
@@ -29,7 +31,9 @@ const authMiddleware = (req, res, next) => {
         if (parseInt(userId, 10) !== parseInt(tokenUserId, 10)) {
           return res
             .status(403)
-            .send({ message: ['Sorry, this is not you.'] });
+            .send({
+              message: ['You are not allowed to perform that action']
+            });
         }
       }
       req.decoded = decoded;
@@ -38,7 +42,9 @@ const authMiddleware = (req, res, next) => {
   } else {
     return res
       .status(403)
-      .send({ message: ['Failed to authenticate user.'] });
+      .send({
+        message: ['Your session has expired. Please try logging in again']
+      });
   }
 };
 

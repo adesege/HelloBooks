@@ -71,7 +71,7 @@ describe('# Profile', () => {
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');
         expect(res.body.message[0])
-          .to.equal('User information has been successfully edited');
+          .to.equal('Your password has been changed successfully');
         if (err) return done(err);
         done();
       });
@@ -92,7 +92,7 @@ describe('# Profile', () => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
           expect(res.body.message[0])
-            .to.equal('The passwords are not the same');
+            .to.equal('The passwords are not the same. Please try again');
           if (err) return done(err);
           done();
         });

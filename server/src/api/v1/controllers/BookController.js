@@ -125,14 +125,14 @@ class BookController {
             .then(updatedBook =>
               res.status(200)
                 .send({
-                  message: ['Book successfully updated'],
+                  message: ['Book successfully editted'],
                   book: updatedBook[1]
                 }))
             .catch(errors => sendErrors({ res, errors }));
         }
         return res
           .status(404)
-          .send({ message: ['Book not found'] });
+          .send({ message: ['We cannot find this book.'] });
       })
       .catch(errors => sendErrors({ res, errors }));
   }
@@ -170,7 +170,7 @@ class BookController {
         if (!books) {
           return res
             .status(404)
-            .send({ message: 'No book available at the moment' });
+            .send({ message: 'No books available at the moment' });
         }
         return res
           .status(200)
@@ -207,7 +207,7 @@ class BookController {
       return res
         .status(400)
         .send({
-          message: ['Book ID must be integer']
+          message: ['Book ID must be a number']
         });
     }
 
@@ -258,7 +258,8 @@ class BookController {
                   .send({
                     message: ['You have successfully borrowed this book'],
                     id: id.get('id')
-                  }));
+                  }))
+              .catch(errors => sendErrors({ res, errors }));
           })
           .catch(errors => sendErrors({ res, errors }));
       })
@@ -353,7 +354,10 @@ class BookController {
         }
         return res
           .status(404)
-          .send({ message: ['No record available'] });
+          .send({
+            message: ['You haven\'t borrowed this ' +
+          'book so you cannot return it']
+          });
       });
   }
 
@@ -387,8 +391,9 @@ class BookController {
         }
         return res
           .status(404)
-          .send({ message: ['Book not found'] });
-      });
+          .send({ message: ['We cannot find this book for deletion'] });
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**

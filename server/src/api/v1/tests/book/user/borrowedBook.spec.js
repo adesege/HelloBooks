@@ -126,7 +126,7 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(400);
           expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('Book ID must be integer');
+          expect(res.body.message[0]).to.equal('Book ID must be a number');
           expect(res.body).to.have.property('message');
           if (err) return done(err);
           done();
@@ -199,7 +199,9 @@ describe('# Borrowed Book', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('No record available');
+          expect(res.body.message[0])
+            .to.equal('You haven\'t borrowed this' +
+            ' book so you cannot return it');
           if (err) return done(err);
           done();
         });

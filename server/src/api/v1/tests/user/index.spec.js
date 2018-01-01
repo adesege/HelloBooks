@@ -142,10 +142,10 @@ describe('User account', () => {
           .post('/api/v1/users/signin')
           .send(newUser)
           .end((err, res) => {
-            expect(res.statusCode).to.equal(404);
+            expect(res.statusCode).to.equal(401);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0])
-              .to.equal('Sorry, we can\'t find this account');
+              .to.equal('You provided a wrong email address and password');
             if (err) return done(err);
             done();
           });
@@ -163,10 +163,10 @@ describe('User account', () => {
           .post('/api/v1/users/signin')
           .send(newUser)
           .end((err, res) => {
-            expect(res.statusCode).to.equal(404);
+            expect(res.statusCode).to.equal(401);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0])
-              .to.equal('Sorry, we can\'t find this account');
+              .to.equal('You provided a wrong email address and password');
             if (err) return done(err);
             done();
           });
