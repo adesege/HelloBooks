@@ -10,13 +10,11 @@ const extractSass = new ExtractTextPlugin({
   allChunks: true
 });
 
-const { ROOT_URL } = process.env;
-
 module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: 'js/[name].js',
-    publicPath: `${ROOT_URL}/`
+    publicPath: '/'
   },
   module: {
     rules: [
