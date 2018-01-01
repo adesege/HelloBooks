@@ -144,7 +144,9 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Category not found');
+        expect(res.body.message[0])
+          .to.equal('Sorry, we cannot update this ' +
+        'category because we can\'t find it');
         if (err) return done(err);
         done();
       });
@@ -188,7 +190,8 @@ describe('# Books Category', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Category not found');
+        expect(res.body.message[0])
+          .to.equal('We can\'t find this category for deletion');
         if (err) return done(err);
         done();
       });

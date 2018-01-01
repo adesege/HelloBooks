@@ -31,7 +31,8 @@ describe('Middlewares', () => { // Describe Middlewares
             expect(res.statusCode).to.equal(401);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0])
-              .to.equal('Failed to authenticate user.');
+              .to.equal('Your session has expired.' +
+              ' Please try logging in again');
             if (err) return done(err);
             done();
           });
@@ -48,7 +49,8 @@ describe('Middlewares', () => { // Describe Middlewares
           .end((err, res) => {
             expect(res.statusCode).to.equal(403);
             expect(res.body).to.be.an('object');
-            expect(res.body.message[0]).to.equal('Sorry, this is not you.');
+            expect(res.body.message[0])
+              .to.equal('You are not allowed to perform that action');
             if (err) return done(err);
             done();
           });
@@ -64,7 +66,8 @@ describe('Middlewares', () => { // Describe Middlewares
             expect(res.statusCode).to.equal(403);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0])
-              .to.equal('Failed to authenticate user.');
+              .to.equal('Your session has expired. ' +
+              'Please try logging in again');
             if (err) return done(err);
             done();
           });
@@ -103,7 +106,8 @@ describe('Middlewares', () => { // Describe Middlewares
             expect(res.statusCode).to.equal(403);
             expect(res.body).to.be.an('object');
             expect(res.body.message[0])
-              .to.equal('Well, you need to be an admin to go in here');
+              .to.equal('You don\'t have the necessary ' +
+              'right to access that page');
             if (err) return done(err);
             done();
           });

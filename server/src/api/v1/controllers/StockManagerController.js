@@ -43,7 +43,9 @@ class StockManagerController {
               }))
             .catch(errors => sendErrors({ res, errors }));
         } else {
-          return res.status(404).send({ message: ['Book not found'] });
+          return res.status(404).send({
+            message: ['We cannot find this book']
+          });
         }
       })
       .catch(errors => sendErrors({ res, errors }));
@@ -85,7 +87,7 @@ class StockManagerController {
         } else {
           return res
             .status(404)
-            .send({ message: ['Stock not found'] });
+            .send({ message: ['We cannot find this stock for deletion'] });
         }
       })
       .catch(errors => sendErrors({ res, errors }));

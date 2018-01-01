@@ -12,7 +12,9 @@ const adminMiddleware = (req, res, next) => {
   if (group !== 'admin') { // check that the signed in user is an admin
     return res
       .status(403)
-      .send({ message: ['Well, you need to be an admin to go in here'] });
+      .send({
+        message: ['You don\'t have the necessary right to access that page']
+      });
   }
   next();
 };

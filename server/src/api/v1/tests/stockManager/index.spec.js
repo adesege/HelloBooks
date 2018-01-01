@@ -81,7 +81,7 @@ describe('# Stocks', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('Book not found');
+          expect(res.body.message[0]).to.equal('We cannot find this book');
           if (err) return done(err);
           done();
         });
@@ -125,7 +125,8 @@ describe('# Stocks', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Stock not found');
+        expect(res.body.message[0]).to.equal('We cannot find this' +
+        ' stock for deletion');
         if (err) return done(err);
         done();
       });

@@ -61,7 +61,7 @@ class SearchController {
         }
         return response
           .status(404)
-          .send({ message: ['Book not found'] });
+          .send({ message: ['Book cannot be found'] });
       })
       .catch(errors => sendErrors({ res: response, errors }));
   }

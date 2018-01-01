@@ -98,8 +98,10 @@ class UserController {
       .then((oauthUser) => {
         if (oauthID && !oauthUser) {
           return res
-            .status(404)
-            .send({ message: ['Sorry, we can\'t find this account'] });
+            .status(401)
+            .send({
+              message: ['You provided a wrong email address and password']
+            });
         }
         if (!oauthID && oauthUser) {
           if (!oauthUser.validPassword(password)) {
@@ -124,8 +126,10 @@ class UserController {
             });
         }
         return res
-          .status(404)
-          .send({ message: ['Sorry, we can\'t find this account'] });
+          .status(401)
+          .send({
+            message: ['You provided a wrong email address and password']
+          });
       })
       .catch(errors => sendErrors({ res, errors }));
   }
@@ -165,7 +169,7 @@ class UserController {
         return res
           .status(404)
           .send({
-            message: ['User not found']
+            message: ['There are no users in the database']
           });
       })
       .catch(errors => sendErrors({ res, errors }));
@@ -186,7 +190,7 @@ class UserController {
     const { password, oldPassword, confirmPassword } = req.body;
     if (password !== confirmPassword) {
       return res.status(400).send({
-        message: ['The passwords are not the same']
+        message: ['The passwords are not the same. Please try again']
       });
     }
     return User
@@ -209,7 +213,7 @@ class UserController {
           .then(() =>
             res.status(200)
               .send({
-                message: ['User information has been successfully edited']
+                message: ['Your password has been changed successfully']
               }))
           .catch(errors => sendErrors({ res, errors }));
       })
@@ -277,7 +281,6 @@ class UserController {
             responseObject.key = process.env.NODE_ENV === 'test' ?
               validationKey :
               '';
-
             return res.status(200)
               .send(responseObject);
           })
@@ -353,7 +356,8 @@ class UserController {
             return res.status(200)
               .send({
                 message: [
-                  'Password successfully changed. Please login to your account.'
+                  'Password successfully changed. ' +
+                  'Please login to your account.'
                 ]
               });
           })

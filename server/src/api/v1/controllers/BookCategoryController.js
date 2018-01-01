@@ -43,7 +43,8 @@ class BookCategoryController {
           .send({
             message: ['A category with this name already exist']
           });
-      });
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
@@ -72,8 +73,9 @@ class BookCategoryController {
         }
         return res
           .status(404)
-          .send({ message: ['Category not found'] });
-      });
+          .send({ message: ['We can\'t find this category for deletion'] });
+      })
+      .catch(errors => sendErrors({ res, errors }));
   }
 
   /**
@@ -139,7 +141,10 @@ class BookCategoryController {
         }
         return res
           .status(404)
-          .send({ message: ['Category not found'] });
+          .send({
+            message: ['Sorry, we cannot update this category' +
+          ' because we can\'t find it']
+          });
       })
       .catch(errors => sendErrors({ res, errors }));
   }

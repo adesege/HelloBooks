@@ -192,7 +192,8 @@ describe('# Admin Books', () => {
       .end((err, res) => {
         expect(res.statusCode).to.equal(404);
         expect(res.body).to.be.an('object');
-        expect(res.body.message[0]).to.equal('Book not found');
+        expect(res.body.message[0])
+          .to.equal('We cannot find this book for deletion');
         if (err) return done(err);
         done();
       });
@@ -210,7 +211,8 @@ describe('# Admin Books', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message[0]).to.equal('Book successfully updated');
+        expect(res.body.message[0])
+          .to.equal('Book successfully editted');
         expect(res.body.book.title).to.equal(newBook.title);
         expect(res.body.book.description).to.equal(newBook.description);
         expect(res.body).to.be.an('object');
@@ -228,7 +230,7 @@ describe('# Admin Books', () => {
       .set('authenticate-token', token)
       .end((err, res) => {
         expect(res.statusCode).to.equal(200);
-        expect(res.body.message[0]).to.equal('Book successfully updated');
+        expect(res.body.message[0]).to.equal('Book successfully editted');
         expect(res.body.book.description).to.equal(description);
         expect(res.body.book.title).to.equal(title);
         expect(res.body).to.be.an('object');
@@ -247,7 +249,7 @@ describe('# Admin Books', () => {
         .end((err, res) => {
           expect(res.statusCode).to.equal(404);
           expect(res.body).to.be.an('object');
-          expect(res.body.message[0]).to.equal('Book not found');
+          expect(res.body.message[0]).to.equal('We cannot find this book.');
           if (err) return done(err);
           done();
         });
