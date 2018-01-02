@@ -79,7 +79,7 @@ This endpoint creates a book.
 
 ```javascript
 {
-  "message": ["Book successfully updated"],
+  "message": ["Book successfully editted"],
   "book": 
     {
       "id": 1,
