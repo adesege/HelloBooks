@@ -14,7 +14,7 @@
 
 ```javascript
 {
-  "message": ["You have successfully  borrowed this book"],
+  "message": ["You have successfully borrowed this book"],
   "id": 1
 }
 ```

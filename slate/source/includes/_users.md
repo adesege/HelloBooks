@@ -111,7 +111,7 @@ This endpoint changes a user's password after the user has click on the reset pa
 
 ```javascript
 {
-  "message": "User information has been successfully edited"
+  "message": "Your password has been changed successfully"
 }
 ```
 
