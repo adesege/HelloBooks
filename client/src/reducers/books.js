@@ -49,13 +49,14 @@ const books = (state = initialBookState, action = {}) => {
       item => parseInt(item.id, 10) === parseInt(action.book.id, 10)
     );
     if (findBookIndex > -1) {
-      // state.books[findBookIndex] = action.book;
       return {
         ...state,
-        books: [
-          action.book,
-          ...state.books.slice(0, findBookIndex),
-          ...state.books.slice(findBookIndex + 1),
+        books: [{
+          ...state.books[findBookIndex],
+          ...action.book
+        },
+        ...state.books.slice(0, findBookIndex),
+        ...state.books.slice(findBookIndex + 1),
         ]
       };
     }
