@@ -1,34 +1,23 @@
 import path from 'path';
-import express from 'express';
 import logger from 'morgan';
 import ejs from 'ejs';
+import expressStaticGzip from 'express-static-gzip';
 import routes from './routes';
 
+/**
+ * Exports a function
+ * so we can pass an instance of express as reference for use here
+ *
+ * @returns {undefined}
+ *
+ * @param {object} app - instance of express
+*/
 export default (app) => {
   const { renderFile } = ejs;
   app.use(logger('dev'));
-  app.use(express.static(path.join(__dirname, '../../../client/build')));
+  app.use(expressStaticGzip(path.join(__dirname, '../../../client/build')));
   app.set('views', path.join(__dirname, '../../../client/build'));
   app.engine('.html', renderFile);
 
   app.use(routes);
-
-
-  // catch 404 and forward to error handler
-  app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
-
-  // error handler
-  app.use((err, req, res) => {
-  // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  });
 };

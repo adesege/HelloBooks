@@ -4,7 +4,15 @@ import { initialAuthState } from '../reducers/initialState';
 
 const { SET_CURRENT_USER } = types;
 
-export default (state = initialAuthState, action = {}) => {
+/**
+ * Handles user authentication
+ *
+ * @param {object} state - redux state
+ * @param {object} action - action creator
+ *
+ * @returns {object} new state
+*/
+const auth = (state = initialAuthState, action = {}) => {
   switch (action.type) {
   case SET_CURRENT_USER:
     return {
@@ -14,3 +22,5 @@ export default (state = initialAuthState, action = {}) => {
   default: return state;
   }
 };
+
+export default auth;

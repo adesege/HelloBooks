@@ -1,14 +1,17 @@
-import NotificationsClass from './Notifications';
+import Notifications from './Notifications';
 
 /**
+ * Exports a function so we can pass socket as parameter
+ *
  * @returns {undefined}
- * @param {object} io
+ *
+ * @param {object} io - instance of socket.io
  */
 export default (io) => {
   io.on('connect', (socket) => {
-    const Notifications = new NotificationsClass(io);
-    socket.on('GET_NOTIFICATIONS', (data) => {
-      Notifications.getNotificationById(data);
+    const notifications = new Notifications(io);
+    socket.on('GET_NOTIFICATIONS', (options) => {
+      notifications.getNotification(options);
     });
 
     socket.on('JOIN', () => {

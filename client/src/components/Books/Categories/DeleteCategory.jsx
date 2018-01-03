@@ -2,13 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'Modal';
 
+const propTypes = {
+  onDeleteSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isOpenModal: PropTypes.bool.isRequired,
+  toggleOpenModal: PropTypes.func.isRequired
+};
+
+/**
+ * Renders delete category component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} jsx
+ */
 const DeleteCategory = ({
   onDeleteSubmit,
   isLoading,
   isOpenModal,
   toggleOpenModal
 }) => (
-
   <Modal
     isOpenModal={isOpenModal}
     toggleOpenModal={toggleOpenModal}
@@ -21,16 +34,11 @@ const DeleteCategory = ({
     closeOnClick = {toggleOpenModal}
   >
     <span>
-  Are you sure you want to delete this category?
-  This action cannot be undone
+      Are you sure you want to delete this category?
+      This action cannot be undone
     </span>
   </Modal>);
 
-DeleteCategory.propTypes = {
-  onDeleteSubmit: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isOpenModal: PropTypes.bool.isRequired,
-  toggleOpenModal: PropTypes.func.isRequired
-};
+DeleteCategory.propTypes = propTypes;
 
 export default DeleteCategory;

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   borrowBook,
-  getBorrowedBook,
+  getBorrowedBooks,
   returnBorrowedBook
 } from 'actions/borrowedBooks';
 import { showCoverPhoto } from 'utils/';
@@ -18,7 +18,7 @@ const propTypes = {
   userId: PropTypes.number.isRequired,
   borrowedBook: PropTypes.object,
   borrowBookAction: PropTypes.func.isRequired,
-  getBorrowedBookAction: PropTypes.func.isRequired,
+  getBorrowedBooksAction: PropTypes.func.isRequired,
   returnBorrowedBookAction: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   getBooks: PropTypes.func.isRequired,
@@ -29,43 +29,67 @@ const contextTypes = {
 };
 
 /**
+ * View books modal
+ *
  * @class ViewBooks
+ *
  * @extends {React.Component}
  */
 class ViewBooks extends React.Component {
   /**
-     * Creates an instance of ViewBooks.
-     * @param {object} props
-     * @memberof ViewBooks
-     */
+   * Creates an instance of ViewBooks.
+   *
+   * @param {object} props - component props
+   *
+   * @memberof ViewBooks
+  */
   constructor(props) {
     super(props);
     const { userId, params } = this.props;
     this.state = {
-      book: this.props.book ? this.props.book : {},
+      book: this.props.book ? this.props.book : {
+        Category: {
+          name: ''
+        }
+      },
       borrowBook: {
         userId,
         bookId: params.id
       },
-      borrowedBook: {}
+      borrowedBook: {},
+      borrowedBookId: 0,
+      isDropdownOpen: false,
+      isBorrowedBook: false,
+      isLoading: false
     };
+    this.onBorrowBook = this.onBorrowBook.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.onReturnBorrowedBook = this.onReturnBorrowedBook.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
   }
 
 
   /**
-   * @returns {void}
+   * Lifecycle method invoked when component did mount
+   *
+   * @returns {undefined}
+   *
    * @memberof ViewBooks
    */
   componentDidMount() {
     const { params } = this.props;
     this.props.getBooks({ id: params.id });
-    this.props.getBorrowedBookAction(this.state.borrowBook);
+    this.props.getBorrowedBooksAction(this.state.borrowBook);
   }
 
 
   /**
-   * @returns {void}
-   * @param {object} nextProps
+   * Lifecycle method invoked when component receives props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
    * @memberof ViewBooks
    */
   componentWillReceiveProps(nextProps) {
@@ -73,12 +97,99 @@ class ViewBooks extends React.Component {
       this.setState({ book: nextProps.book });
     }
     if (nextProps.borrowedBook !== this.props.borrowedBook) {
-      this.setState({ borrowedBook: nextProps.borrowedBook });
+      this.setState({
+        borrowedBook: nextProps.borrowedBook,
+        isBorrowedBook: !!nextProps.borrowedBook
+      });
+    }
+    if (nextProps.borrowedBook && nextProps.borrowedBook.id) {
+      this.setState({
+        borrowedBookId: nextProps.borrowedBook.id
+      });
     }
   }
 
   /**
-   * @returns  {object} JSX
+   * Borrow a book
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof ViewBooks
+  */
+  onBorrowBook(event) {
+    event.preventDefault();
+    const { borrowedBookId } = this.state;
+    this.props.borrowBookAction({
+      ...this.state.borrowBook,
+      borrowedBookId
+    })
+      .then((response) => {
+        this.setState({
+          isBorrowedBook: true,
+          borrowedBookId: response.data.id
+        });
+      });
+  }
+
+
+  /**
+   * Return a borrowed book
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof ViewBooks
+  */
+  onReturnBorrowedBook(event) {
+    event.preventDefault();
+    const { borrowedBookId } = this.state;
+    this.props.returnBorrowedBookAction({
+      ...this.state.borrowBook,
+      borrowedBookId
+    })
+      .then((response) => {
+        this.setState({
+          isBorrowedBook: false,
+          borrowedBookId: response.data.id
+        });
+      });
+  }
+
+
+  /**
+   * Handle file input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof ViewBooks
+  */
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  /**
+   * Toggle open dropdown modal
+   *
+   * @returns {undefined}
+   *
+   * @memberof BorrowBook
+   */
+  toggleDropdown() {
+    this.setState({
+      isDropdownOpen: !this.state.isDropdownOpen
+    });
+  }
+
+  /**
+   * Renders component
+   *
+   * @returns {JSX} JSX
+   *
    * @memberof ViewBooks
    */
   render() {
@@ -92,12 +203,6 @@ class ViewBooks extends React.Component {
       ISBN,
       Category
     } = this.state.book;
-    const {
-      params,
-      borrowBookAction,
-      userId,
-      returnBorrowedBookAction
-    } = this.props;
     return (
       <div className="row" id="borrowBook">
         <div className="col-sm-8 offset-sm-2">
@@ -108,12 +213,12 @@ class ViewBooks extends React.Component {
                 src={showCoverPhoto(coverPhotoPath)}
                 alt={title}/>
               <BorrowBook
-                borrowBookAction={borrowBookAction}
-                bookId={params.id}
-                userId={userId}
-                isBorrowedBook={!!this.props.borrowedBook}
-                returnBorrowedBookAction={returnBorrowedBookAction}
-                borrowedBook={this.state.borrowedBook} />
+                onBorrowBook={this.onBorrowBook}
+                isBorrowedBook={this.state.isBorrowedBook}
+                onReturnBorrowedBook={this.onReturnBorrowedBook}
+                isDropdownOpen={this.state.isDropdownOpen}
+                toggleDropdown={this.toggleDropdown}
+              />
             </div>
             <div className="col-sm-8 col-6 mt-3 mt-sm-0">
               <div className="details">
@@ -150,11 +255,20 @@ ViewBooks.propTypes = propTypes;
 
 ViewBooks.contextTypes = contextTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state - redux store state
+ * @param {object} props - component props
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = (state, props) => {
   const { params } = props;
   const { userId } = state.auth.user;
   return {
-    book: state.books.books.find(book => parseInt(book.id, 10) === parseInt(params.id, 10)),
+    book: state.books.books
+      .find(book => parseInt(book.id, 10) === parseInt(params.id, 10)),
     userId,
     borrowedBook: state.borrowedBooks.find(borrowedBook =>
       (
@@ -170,7 +284,7 @@ export default connect(
   {
     getBooks,
     borrowBookAction: borrowBook,
-    getBorrowedBookAction: getBorrowedBook,
+    getBorrowedBooksAction: getBorrowedBooks,
     returnBorrowedBookAction: returnBorrowedBook
   }
 )(ViewBooks);

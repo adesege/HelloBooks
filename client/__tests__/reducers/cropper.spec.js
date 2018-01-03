@@ -1,5 +1,5 @@
-import cropperReducer from '../../src/reducers/cropper';
-import { setImageData, deleteImageData } from '../../src/actions/cropper';
+import cropperReducer from 'reducers/cropper';
+import { setImageData, deleteImageData } from 'actions/cropper';
 
 
 describe('# Cropper Reducer', () => {

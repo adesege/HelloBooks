@@ -7,6 +7,13 @@ const propTypes = {
   config: PropTypes.object.isRequired
 };
 
+/**
+ * Book comment component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const BookComment = ({
   title,
   config

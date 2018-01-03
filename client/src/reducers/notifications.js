@@ -1,18 +1,18 @@
 import types from 'actions/types';
+import { initialNotificationState } from './initialState';
 
 const { GET_NOTIFICATIONS } = types;
 
-const initialState = {
-  pagination: {},
-  notifications: []
-};
 
 /**
- * @returns {undefined}
- * @param {object} state
- * @param {object} action
- */
-export default (state = initialState, action = {}) => {
+ * Handles notifications reducer
+ *
+ * @returns {object} new state
+ *
+ * @param {object} state - redux state
+ * @param {object} action - action creator
+*/
+const notifications = (state = initialNotificationState, action = {}) => {
   switch (action.type) {
   case GET_NOTIFICATIONS:
     return { ...action };
@@ -20,3 +20,5 @@ export default (state = initialState, action = {}) => {
   default: return state;
   }
 };
+
+export default notifications;

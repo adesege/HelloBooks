@@ -17,18 +17,19 @@ const propTypes = {
   pagination: PropTypes.object.isRequired
 };
 
-const contextTypes = {
-  router: PropTypes.object.isRequired
-};
-
 /**
+ * Histories list component
+ *
  * @class List
+ *
  * @extends {Component}
  */
 class List extends Component {
   /**
      * Creates an instance of List.
-     * @param {any} props
+     *
+     * @param {object} props - component props
+     *
      * @memberof List
      */
   constructor(props) {
@@ -57,11 +58,17 @@ class List extends Component {
 
 
   /**
+   * Lifecycle method when component did mount
+   *
+   * @memberof List
+   *
    * @returns {undefined}
-   * @memberOf List
    */
   componentDidMount() {
-    const { userId, isReturned } = this.props;
+    const {
+      userId,
+      isReturned
+    } = this.props;
     this.props.getHistoriesAction({
       userId,
       isReturned
@@ -69,10 +76,14 @@ class List extends Component {
   }
 
   /**
-     * @returns {void}
-     * @param {any} nextProps
-     * @memberof List
-     */
+   * Life cycle method when component recieves props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
+   * @memberof List
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.histories !== this.props.histories) {
       this.setState({ histories: nextProps.histories });
@@ -90,9 +101,13 @@ class List extends Component {
 
 
   /**
+   * Get new record based on search, filter and pagination
+   *
    * @returns {undefined}
-   * @param {any} pageNumber
-   * @memberOf List
+   *
+   * @param {number} pageNumber - current page number
+   *
+   * @memberof List
    */
   handlePageChange(pageNumber) {
     const offset = this.state.searchFilter.limit * (pageNumber - 1);
@@ -117,9 +132,13 @@ class List extends Component {
 
 
   /**
+   * Handle onChange event for form input
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof List
+   *
    * @returns {undefined}
-   * @param {any} event
-   * @memberOf List
    */
   onChangeInput(event) {
     const { target } = event;
@@ -134,9 +153,13 @@ class List extends Component {
 
 
   /**
+   * Search and filter histories
+   *
+   * @param {object} event - event handler
+   *
+   * @memberOo List
+   *
    * @returns {undefined}
-   * @param {any} event
-   * @memberOf List
    */
   onSearchFilter(event) {
     event.preventDefault();
@@ -149,9 +172,12 @@ class List extends Component {
   }
 
   /**
-     * @returns {object} JSX
-     * @memberof List
-     */
+   * Renders component
+   *
+   * @returns {object} JSX
+   *
+   * @memberof List
+  */
   render() {
     return (
       <div>
@@ -165,35 +191,40 @@ class List extends Component {
           this.state.histories.length !== 0 ?
             <div>
               <div className="row pr-3" id="bookList">
-                {this.state.histories.map((object, index) => (
+                {this.state.histories.map((history, index) => (
                   <div
-                    className="col-sm-4 col-md-4 col-lg-3 col-12 mb-4"
+                    className="col-sm-6 col-md-4 col-lg-3 col-12 mb-4"
                     key={index}>
                     <div className="row">
                       <div className="col-sm-6 col-6 align-self-center">
                         <img
                           className="img-thumbnail"
-                          src={showCoverPhoto(object.Book.coverPhotoPath)}
-                          alt={object.Book.title}/>
+                          src={showCoverPhoto(history.Book.coverPhotoPath)}
+                          alt={history.Book.title}/>
                       </div>
                       <div className="col-sm-6 col-6 p-sm-0 align-self-center">
                         <h6 className="mt-4 mt-sm-0 mb-0">
                           <Link
-                            to={`/books/view/${object.Book.id}`}
+                            to={`/books/view/${history.Book.id}`}
                           >
-                            {object.Book.title}</Link>
+                            {history.Book.title}</Link>
                         </h6>
                         <h6 className="mb-1 text-muted">
-                          <small>{object.Book.author}</small>
+                          <small>{history.Book.author}</small>
                         </h6>
                         <p className="mb-0">
                           <small>
-                            <Timestamp time={object.Book.updatedAt} format="ago" precision={1} />
+                            <Timestamp
+                              time={history.Book.updatedAt}
+                              format="ago"
+                              precision={1} />
                           </small>
                         </p>
-                        {object.isReturned ? (<small>Returned</small>) : (<small>Yet to return</small>)}
-                      </div>{/* col sm 8 */}
-                    </div>{/* row */}
+                        {history.isReturned ?
+                          (<small>Returned</small>) :
+                          (<small>Yet to return</small>)}
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -210,14 +241,21 @@ class List extends Component {
 }
 
 List.propTypes = propTypes;
-List.contextTypes = contextTypes;
 
+/**
+ * Map state to props
+ *
+ * @param {object} state - redux store state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   histories: state.histories.histories,
   pagination: state.histories.pagination,
   userId: state.auth.user.userId
 });
 
+export { List };
 export default connect(
   mapStateToProps,
   { getHistoriesAction: getHistories }

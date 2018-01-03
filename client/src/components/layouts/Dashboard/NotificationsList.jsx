@@ -2,9 +2,16 @@ import React from 'react';
 import Timestamp from 'react-timestamp';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import user from 'assets/images/user.png';
 import EmptyMessage from 'components/miscellaneous/EmptyMessage';
+import { userAvatar } from 'utils';
 
+/**
+ * notification type function
+ *
+ * @param {string} type - notification type
+ *
+ * @returns {string} returned or borrowed status
+*/
 const notificationType = (type) => {
   let text = '';
   switch (type) {
@@ -19,15 +26,22 @@ const notificationType = (type) => {
   }
   return text;
 };
-const propTypes = ({
+const propTypes = {
   notifications: PropTypes.array.isRequired,
   isPagination: PropTypes.bool.isRequired
-});
+};
 
-const defaultProps = ({
+const defaultProps = {
   isPagination: true
-});
+};
 
+/**
+ * Notification list component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const NotificationList = ({
   notifications,
   isPagination
@@ -36,12 +50,14 @@ const NotificationList = ({
     {notifications.length !== 0 ?
       <div>
         {notifications.map((notification, index) => (
-          <div key={index} className="row p-3 mx-auto notification align-items-center">
+          <div
+            key={index}
+            className="row p-3 mx-auto notification align-items-center">
             <div className="col-sm-1 col-1 col-md-1 text-center px-0 col-lg-1">
               <img
                 className="rounded-circle img-thumbnail w-100"
                 alt=""
-                src={user}
+                src={userAvatar(notification.User.email)}
                 style={{ borderRadius: '50px' }}/>
             </div>
             <div className="col-sm-11 col-11 col-md-11 col-lg-11 pr-0">
@@ -67,7 +83,11 @@ const NotificationList = ({
       <EmptyMessage
         absolute={false}
       />}
-    <Link className="btn btn-primary btn-sm btn-block" to="/notifications">See more</Link>
+    <Link
+      className="btn btn-primary btn-sm btn-block"
+      to="/notifications">
+    See more
+    </Link>
   </div>
 );
 

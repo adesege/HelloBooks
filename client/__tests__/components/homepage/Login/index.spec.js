@@ -47,25 +47,29 @@ describe('# Login', () => {
   });
 
   it('should call the onFacebookCallback method', () => {
-    const onFacebookCallbackOnSpy = jest.spyOn(wrapper.instance(), 'onFacebookCallback');
+    const onFacebookCallbackOnSpy = jest
+      .spyOn(wrapper.instance(), 'onFacebookCallback');
     wrapper.instance().onFacebookCallback(user);
     expect(onFacebookCallbackOnSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should call the onGoogleCallback method', () => {
-    const onGoogleCallbackOnSpy = jest.spyOn(wrapper.instance(), 'onGoogleCallback');
+    const onGoogleCallbackOnSpy = jest
+      .spyOn(wrapper.instance(), 'onGoogleCallback');
     wrapper.instance().onGoogleCallback({ profileObj: user });
     expect(onGoogleCallbackOnSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should call the onGoogleFailure method', () => {
-    const onGoogleFailureOnSpy = jest.spyOn(wrapper.instance(), 'onGoogleFailure');
+    const onGoogleFailureOnSpy = jest
+      .spyOn(wrapper.instance(), 'onGoogleFailure');
     wrapper.instance().onGoogleFailure(errorResponse);
     expect(onGoogleFailureOnSpy).toHaveBeenCalledTimes(1);
   });
 
   it('should call the isFormValid method', () => {
-    const isFormValidOnSpy = jest.spyOn(wrapper.instance(), 'isFormValid');
+    const isFormValidOnSpy = jest
+      .spyOn(wrapper.instance(), 'isFormValid');
     wrapper.instance().isFormValid();
     expect(isFormValidOnSpy).toHaveBeenCalledTimes(1);
   });
@@ -84,7 +88,9 @@ describe('# Login', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedLogin {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedLogin 
+      {...props} 
+      store={store} />);
     expect(connectedComponent.length).toBe(1);
   });
 });

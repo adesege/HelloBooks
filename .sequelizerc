@@ -2,7 +2,7 @@
 const path = require('path');
 const version = 'v1';
 module.exports = {
-    "config": path.resolve('./server/dist/config', 'config.js'),
+    "config": path.resolve('./server/dist/config', 'index.js'),
     "models-path": path.resolve(`./server/dist/api/${version}/models`),
     "seeders-path": path.resolve(`./server/dist/api/${version}/seeders`),
     "migrations-path": path.resolve(`./server/dist/api/${version}/migrations`)

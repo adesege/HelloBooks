@@ -1,12 +1,12 @@
-import bookReducer from '../../src/reducers/books';
-import { initialBookState } from '../../src/reducers/initialState';
+import bookReducer from 'reducers/books';
+import { initialBookState } from 'reducers/initialState';
 import {
   setBooks,
   bookAdded,
   booksSearched,
   bookUpdated,
   bookDeleted
-} from '../../src/actions/books';
+} from 'actions/books';
 
 
 describe('# Book Reducer', () => {

@@ -1,7 +1,14 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-export default (fields, type) => {
+/**
+ * Handles book validation
+ *
+ * @param {object} fields - fields to validate
+ *
+ * @returns {object} error messages
+ */
+const category = (fields) => {
   let errors = {};
   const {
     name
@@ -16,3 +23,5 @@ export default (fields, type) => {
     isValid: isEmpty(errors)
   };
 };
+
+export default category;

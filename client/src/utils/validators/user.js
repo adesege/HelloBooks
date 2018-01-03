@@ -1,7 +1,15 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-export default (fields, type) => {
+/**
+* Handles user validation
+*
+* @param {object} fields - fields to validate
+* @param {object} type - type of action that is being performed
+*
+* @returns {object} error messages
+*/
+const user = (fields, type) => {
   let errors = {};
   const {
     name,
@@ -21,7 +29,10 @@ export default (fields, type) => {
     }
   }
 
-  if (type === "signup" || type === "login" || type === "change-password" || type === "change-password-user") {
+  if (type === "signup" ||
+  type === "login" ||
+  type === "change-password" ||
+  type === "change-password-user") {
     if (!Validator.isLength(password, { min: 4 })) {
       errors.password = 'Password must have a minimum of 4 characters';
     }
@@ -31,7 +42,9 @@ export default (fields, type) => {
     }
   }
 
-  if (type === "signup" || type === "change-password" || type === "change-password-user") {
+  if (type === "signup" ||
+  type === "change-password" ||
+  type === "change-password-user") {
     if (!Validator.equals(confirmPassword, password)) {
       errors.confirmPassword = 'Passwords do not match';
     }
@@ -62,3 +75,5 @@ export default (fields, type) => {
     isValid: isEmpty(errors)
   };
 };
+
+export default user;

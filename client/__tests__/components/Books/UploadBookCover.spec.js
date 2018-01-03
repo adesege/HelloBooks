@@ -4,7 +4,9 @@ import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
 import CropperJs from 'react-cropperjs';
 import TestUtils from 'react-dom/test-utils';
-import ConnectedUploadBookCover, { UploadBookCover } from 'components/Books/UploadBookCover';
+import ConnectedUploadBookCover, { 
+  UploadBookCover
+ } from 'components/Books/UploadBookCover';
 
 const book = {
   id: 2,
@@ -49,13 +51,16 @@ describe('# UploadBookCover', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedUploadBookCover {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedUploadBookCover 
+      {...props} 
+      store={store} />);
     expect(connectedComponent.length).toBe(1);
   });
 
   it('should call the crop method', () => {
     const spy = jest.fn();
-    const cropRefs = TestUtils.renderIntoDocument(<UploadBookCover {...props}/>);
+    const cropRefs = TestUtils
+      .renderIntoDocument(<UploadBookCover {...props}/>);
     cropRefs.refs.cropper.getCroppedCanvas = jest.fn(() => ({
       toDataURL: jest.fn()
     }));

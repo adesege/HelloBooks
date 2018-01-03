@@ -35,27 +35,30 @@ describe('# Signup', () => {
   const wrapper = shallow(<Signup {...props}/>, context);
   wrapper.setState({ user });
   it('should call the onFacebookCallback method', () => {
-    const onFacebookCallbackOnSpy = jest.spyOn(wrapper.instance(), 'onFacebookCallback');
+    const onFacebookCallbackOnSpy = jest
+    .spyOn(wrapper.instance(), 'onFacebookCallback');
     wrapper.instance().onFacebookCallback(user);
     expect(onFacebookCallbackOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the onGoogleCallback method', () => {
-    const onGoogleCallbackOnSpy = jest.spyOn(wrapper.instance(), 'onGoogleCallback');
+    const onGoogleCallbackOnSpy = jest
+    .spyOn(wrapper.instance(), 'onGoogleCallback');
     wrapper.instance().onGoogleCallback({ profileObj: user });
     expect(onGoogleCallbackOnSpy).toHaveBeenCalledTimes(1);
   });
-
+  
   it('should call the onGoogleFailure method', () => {
-    const onGoogleFailureOnSpy = jest.spyOn(wrapper.instance(), 'onGoogleFailure');
+    const onGoogleFailureOnSpy = jest
+    .spyOn(wrapper.instance(), 'onGoogleFailure');
     wrapper.instance().onGoogleFailure();
     expect(onGoogleFailureOnSpy).toHaveBeenCalledTimes(1);
   });
-
+  
   it('should render Signup component', () => {
     expect(wrapper).toBeDefined();
     expect(wrapper.getElement().type).toBe('div');
   });
-
+  
   it('should call the onChange method', () => {
     const newEvent = {
       ...global.event,
@@ -68,16 +71,20 @@ describe('# Signup', () => {
     wrapper.instance().onChange(newEvent);
     expect(onChangeOnSpy).toHaveBeenCalledTimes(1);
   });
-
+  
   it('should call the onSubmit method', () => {
     wrapper.setState({ user });
     const onSubmitOnSpy = jest.spyOn(wrapper.instance(), 'onSubmit');
     wrapper.instance().onSubmit(global.event);
     expect(onSubmitOnSpy).toHaveBeenCalledTimes(1);
   });
-
+  
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedSignup {...props} store={store} />, context);
-    expect(connectedComponent.length).toBe(1);
+    const connectedComponent = shallow(<ConnectedSignup 
+      {...props} 
+      store={store} 
+      />, context);
+      expect(connectedComponent.length).toBe(1);
+    });
   });
-});
+  

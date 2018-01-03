@@ -41,9 +41,10 @@ module.exports = merge(common, {
     publicPath: `http://localhost:${PORT}/`,
     historyApiFallback: true,
     hot: true,
-    proxy: {
-      '/api': 'http://0.0.0.0:5000'
-    },
+    proxy: [{
+      context: ['/api', '/docs'],
+      target: 'http://0.0.0.0:5000',
+    }],
     overlay: true,
     watchContentBase: true,
     watchOptions: {

@@ -13,7 +13,7 @@
         "config": "./config/webpack.dev.js"
       },
       "node": {
-        "extensions": [".js",".jsx"]
+        "extensions": [".js",".jsx", ".spec.js", ".spec.jsx"]
       }
     }
   },
@@ -34,13 +34,16 @@
       "requireReturn": true,
       "requireReturnType": true,
       "requireParamDescription": false,
-      "requireReturnDescription": true
+      "requireReturnDescription": true,
+      "matchDescription": ".+" 
       }],
       "require-jsdoc": ["error", {
         "require": {
           "FunctionDeclaration": true,
           "MethodDefinition": true,
-          "ClassDeclaration": true
+          "ClassDeclaration": true,
+          "ArrowFunctionExpression": true,
+          "FunctionExpression": true
         }
         }]
       }

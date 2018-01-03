@@ -3,11 +3,14 @@ import types from '../actions/types';
 const { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } = types;
 
 /**
- * @returns {undefined}
- * @param {object} state
- * @param {object} action
+ * Handles flash messages reducer
+ *
+ * @returns {object} new state
+ *
+ * @param {object} state - redux state
+ * @param {object} action - action creator
  */
-export default (state = {}, action = {}) => {
+const flashMessages = (state = {}, action = {}) => {
   switch (action.type) {
   case ADD_FLASH_MESSAGE:
     return {
@@ -19,3 +22,5 @@ export default (state = {}, action = {}) => {
   default: return state;
   }
 };
+
+export default flashMessages;

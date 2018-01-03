@@ -1,13 +1,16 @@
-[![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=development)](https://travis-ci.org/adesege/HelloBooks)
+[![Build Status](https://travis-ci.org/adesege/HelloBooks.svg?branch=chore/153550278/feedback-implementation)](https://travis-ci.org/adesege/HelloBooks)
 [![Code Climate](https://codeclimate.com/github/adesege/HelloBooks/badges/gpa.svg)](https://codeclimate.com/github/adesege/HelloBooks)
 [![Test Coverage](https://codeclimate.com/github/adesege/HelloBooks/badges/coverage.svg)](https://codeclimate.com/github/adesege/HelloBooks/coverage)
-[![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=development)](https://coveralls.io/github/adesege/HelloBooks?branch=development)
+[![Coverage Status](https://coveralls.io/repos/github/adesege/HelloBooks/badge.svg?branch=chore/153550278/feedback-implementation)](https://coveralls.io/github/adesege/HelloBooks?branch=chore/153550278/feedback-implementation)
 [![Issue Count](https://codeclimate.com/github/adesege/HelloBooks/badges/issue_count.svg)](https://codeclimate.com/github/adesege/HelloBooks)
 
-# Hello-Books
+# Hello-Books 
 A simple application that helps manage a library and its processes like stocking, tracking and renting books.
 
-Built on `Javascript` with `Postgres` as database.
+Built on `Nodejs`.
+
+<img width="1440" alt="screen shot 2017-12-13 at 5 29 15 pm" src="https://user-images.githubusercontent.com/20769821/33949896-313c8d4c-e02b-11e7-89c6-df0f6dfd6b95.png">
+
 
 ## How to install
 ### Pre-requisites
@@ -17,7 +20,10 @@ You will need to have the following installed in your working environment before
 ### Installing
 1. Download or clone this branch at https://github.com/adesege/HelloBooks.git
 2. Install dependencies by running `npm install`. Ensure you are in your working directory. Run `cd /path/to/HelloBooks` to change.
-3. Start the server by running `npm run watch`.
+1. Go to client directory and run `npm run install` to install dependencies.
+3. Go to the root dir `cd ../`
+1. Then type `npm run transpile` to transpile from es6 to es5
+1. and then run `npm run start:dev` in your terminal to start the server.
 1. To start the client, `cd client`
 1. Then `npm run start`
 
@@ -32,11 +38,64 @@ This application uses JSON web token to sign and verify users. The default expir
 Some endpoints are restricted to logged users and admins only. E.g. Only admin can access `api/:versionNumber/books/stocks`.
 
 There are two middlewares defined in this application.
-* middleware - verifies a user's token and checks if the user is valid.
-* adminAuthenticate middleware - checks if the user is `admin`.
+* authMiddleware - verifies a user's token and checks if the user is valid.
+* adminMiddleware - checks if the user is `admin`.
 
 ## Documentation
-Please visit the application documentation at https://app.swaggerhub.com/apis/adesege/Hello-Books/1.0.0
+> If Ruby is already installed, but the bundle command doesn't work, just run `gem install bundler` in a terminal.
+### Starting the server
+1. `cd slate` from the root directory.
+1. Initialize and start Slate. You can either do this locally, or with Vagrant:
+```js
+    npm run slate:install
+  # then
+    npm run slate:build 
+  # finally
+    npm run slate:start
+  # OR run this to run with vagrant
+    vagrant up
+```
+
+Please visit the application documentation at http://hellobooks.herokuapp.com/docs/v1 or http://localhost:4567 to test locally
+
+To deploy generated files into your application, run `npm run slate:build`
+
+# Testing
+There are three different kind of testing in this application; client, server and end-to-end testing.
+
+> To start the server test. In your CMD, run
+```js
+  npm run test
+
+  # To get coverage result, run
+  npm run test:coverage
+```
+
+> To start the end-to-end test
+```js
+# For the first time you are running it, 
+# you'll need to install the selenium server and chrome driver.
+# To do that, run
+npm run test:e2e-install
+
+# then start the server with
+npm run test:e2e-server
+
+# finally, run the test with
+npm run test:e2e
+```
+
+> Ensure that the server and client are up and running. The client must listen to port 3000. Otherwise, change it in [nightwatch.conf:16](./nightwatch.json#L16)
+
+> Finally, for the client test,
+```
+# first cd to the test folder
+# then run
+npm run test
+
+# for coverage report, run
+npm run test:coverage
+```
 
 # Author
 
@@ -49,7 +108,7 @@ To contribute,
 1. Fork the project
 1. Create a feature branch, branch away from `master`
 1. Write tests, using `Mocha and Chai` or any other testing frameworks, and code
-1. If you have multiple commits please combine them into a few logically organized commits by [squashing them](git-squash)
+1. If you have multiple commits please combine them into a few logically organized commits by squashing them.
 1. Push the commit(s) to your fork
 1. Submit a merge request (MR) to the `master` branch
 1. The MR title should describe the change you want to make
@@ -61,3 +120,6 @@ To contribute,
   1. If a discussion has been addressed, select the "Resolve discussion" button beneath it to mark it resolved.
 1. When writing commit messages please follow
    [these guidelines](http://chris.beams.io/posts/git-commit).
+
+# License
+This project is licensed under the MIT license. Click **[here](./LICENSE.md)** to read the license in full

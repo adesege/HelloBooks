@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Pagination from 'components/miscellaneous/Pagination';
 import user from 'assets/images/user.png';
 import EmptyMessage from 'components/miscellaneous/EmptyMessage';
+import { userAvatar } from 'utils';
 import NotificationType from './NotificationType';
 
 const propTypes = ({
@@ -17,6 +18,13 @@ const defaultProps = ({
   isPagination: true
 });
 
+/**
+ * Notification list component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const List = ({
   notifications,
   pagination,
@@ -26,31 +34,57 @@ const List = ({
   <div>
     {notifications.length !== 0 ?
       <div>
-        <div className="row">
+        <div
+          className="row">
           {notifications.map((notification, index) => (
-            <div key={index} className="col-lg-4 mb-3 align-items-center">
-              <div key={index} className="row bordered p-2 mx-auto h-100">
-                <div className="col-sm-2 col-4 col-md-4 text-center px-0 col-lg-1">
+            <div
+              key={index}
+              className={"col-lg-4 col-sm-6 col-md-6" +
+              " col-12 mb-3 align-items-center"}
+            >
+              <div
+                key={index}
+                className="row bordered p-2 mx-auto h-100"
+              >
+                <div
+                  className="col-sm-2 col-4 col-md-4 text-center px-0 col-lg-1"
+                >
                   <img
                     className="rounded-circle img-thumbnail w-100"
                     alt=""
-                    src={user}/>
+                    src={userAvatar(notification.User.email)}
+                  />
                 </div>
-                <div className="col-sm-10 col-8 col-md-8 col-lg-8 pr-0">
-                  <p className="title font-weight-bold mb-1"> {notification.Book.title}
+                <div
+                  className="col-sm-10 col-8 col-md-8 col-lg-8 pr-0"
+                >
+                  <p
+                    className="title font-weight-bold mb-1"
+                  >
+                    {notification.Book.title}
                     <small> by {notification.Book.author}</small>
                   </p>
-                  <p className="small font-weight-bold mb-1"> {notification.User.name} </p>
-                  <p className="small">
-                    <i className="fa fa-calendar" />
-                &nbsp;
+                  <p
+                    className="small font-weight-bold mb-1"
+                  >
+                    {notification.User.name}
+                  </p>
+                  <p
+                    className="small"
+                  >
+                    <i
+                      className="fa fa-calendar"
+                    />
+                    &nbsp;
                     <Timestamp
                       time={notification.updatedAt}
                       format="ago"
                       precision={1} />
                   </p>
                 </div>
-                <NotificationType type={notification.notificationType} />
+                <NotificationType
+                  type={notification.notificationType}
+                />
               </div>
             </div>
           ))}
@@ -60,7 +94,8 @@ const List = ({
           handlePageChange={handlePageChange}
         /> }
       </div> :
-      <EmptyMessage text="Sorry, No record is available" />}
+      <EmptyMessage
+        text="Sorry, No record is available" />}
   </div>
 );
 

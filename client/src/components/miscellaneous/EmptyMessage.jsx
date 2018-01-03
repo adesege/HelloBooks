@@ -15,12 +15,26 @@ const defaultProps = {
   absolute: true
 };
 
+/**
+ * Empty message component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const EmptyMessage = ({
   text,
   icon,
   absolute
 }) => (
-  <div className={classnames("empty-message text-center d-sm-flex align-items-center justify-content-center flex-column", { "position-absolute": absolute })}>
+  <div
+    className={classnames(
+      "empty-message text-center d-sm-flex" +
+      " align-items-center justify-content-center flex-column",
+      {
+        "position-absolute": absolute
+      }
+    )}>
     <i className={`fa fa-${icon} text-warning`} />
     <p className="message text-muted">
       {text}

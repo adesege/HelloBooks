@@ -24,14 +24,20 @@ const propTypes = {
 };
 
 /**
+ * Login component
+ *
  * @class Login
+ *
  * @extends {React.Component}
  */
 class Login extends React.Component {
   /**
+   *
    * Creates an instance of LoginForm.
-   * @param {object} props
-   * @memberof LoginForm
+   *
+   * @param {object} props - component props
+   *
+   * @memberof Login
    */
   constructor(props) {
     super(props);
@@ -53,25 +59,42 @@ class Login extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {object} response
-   * @memberof Signup
+   * Facebook login success callback to log a user in
+   *
+   * @returns {undefined}
+   *
+   * @param {object} response - facebook response object
+   *
+   * @memberof Login
    */
   onFacebookCallback(response) {
-    this.setState({
-      user: {
-        email: response.email,
-        password: `${Math.random()}`,
-        oauthID: response.id
-      }
-    });
-    document.getElementById("login").click();
+    if (response && response.email) {
+      this.setState({
+        user: {
+          email: response.email,
+          password: `${Math.random()}`,
+          oauthID: response.id
+        }
+      });
+      document.getElementById("login").click();
+    } else {
+      this.props.addFlashMessage({
+        type: 'error',
+        text: [
+          'We experienced an error validating you on facebook. Please try again'
+        ]
+      });
+    }
   }
 
   /**
-   * @returns {void}
-   * @param {object} response
-   * @memberof Signup
+   * Google login success callback to log a user in
+   *
+   * @returns {undefined}
+   *
+   * @param {object} response - google response object
+   *
+   * @memberof Login
    */
   onGoogleCallback(response) {
     this.setState({
@@ -85,23 +108,35 @@ class Login extends React.Component {
   }
 
   /**
- * @returns {void}
- * @param {object} response
- * @memberof Login
- */
+   * Google login failure callback
+   *
+   * @returns {undefined}
+   *
+   * @param {object} response - google response object
+   *
+   * @memberof Login
+  */
   onGoogleFailure(response) {
-    if (response && (response.error === 'popup_closed_by_user' || response.error === 'access_denied')) {
+    if (response &&
+      (response.error === 'popup_closed_by_user' ||
+       response.error === 'access_denied')) {
       this.props.addFlashMessage({
         type: 'error',
-        text: 'Oh! Oh! We experienced an error validating you on google. Please try again'
+        text: [
+          'We experienced an error validating you on google. Please try again'
+        ]
       });
     }
   }
 
   /**
-   * @returns {void}
-   * @param {object} event
-   * @memberof LoginForm
+   * Handle form input onChange event
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof Login
    */
   onChange(event) {
     this.setState({
@@ -113,10 +148,14 @@ class Login extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {object} event
-   * @memberof LoginForm
-   */
+   * Log a user in
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof Login
+  */
   onSubmit(event) {
     event.preventDefault();
 
@@ -136,7 +175,10 @@ class Login extends React.Component {
   }
 
   /**
+   * Validation check
+   *
    * @returns {boolean} isValid
+   *
    * @memberof Login
    */
   isFormValid() {
@@ -149,7 +191,10 @@ class Login extends React.Component {
 
 
   /**
+   * Renders component
+   *
    * @returns  {object} JSX
+   *
    * @memberof Login
    */
   render() {
@@ -222,6 +267,13 @@ Login.contextTypes = contextTypes;
 
 Login.propTypes = propTypes;
 
+/**
+ * Map dispatch to props
+ *
+ * @param {object} dispatch
+ *
+ * @returns {object} map dispatch to props
+ */
 const mapDispatchToProps = dispatch => bindActionCreators({
   login,
   addFlashMessage,
@@ -229,6 +281,13 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   logUserIn
 }, dispatch);
 
+/**
+ * Get state from store
+ *
+ * @param {object} state - redux store state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });

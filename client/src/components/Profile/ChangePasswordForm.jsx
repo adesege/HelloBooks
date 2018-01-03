@@ -13,6 +13,13 @@ const propTypes = {
   serverErrors: PropTypes.array.isRequired
 };
 
+/**
+ * Change password component
+ *
+ * @returns {JSX} JSX
+ *
+ * @param {object} props - component props
+ */
 const ChangePassword = ({
   onChangePasswordInput,
   onChangePassword,
@@ -37,7 +44,9 @@ const ChangePassword = ({
     <div
       id="changePassword"
       className="mt-4">
-      {serverErrors.length !== 0 && <div className="alert alert-danger">{serverErrors}</div>}
+      {serverErrors.length !== 0 &&
+      <div className="alert alert-danger">{serverErrors}</div>
+      }
       <InputField
         placeholder="Current password"
         type="password"

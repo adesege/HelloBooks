@@ -2,11 +2,13 @@ import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
 /**
- * @returns {object} validation result
- * @param {object} fields
- * @param {string} type
+ * Handles notifications validation
+ *
+ * @returns {object} error messages
+ *
+ * @param {object} fields - fields to validate
  */
-export default (fields, type) => {
+const notifications = (fields) => {
   let errors = {};
   const {
     notificationType
@@ -21,3 +23,5 @@ export default (fields, type) => {
     isValid: isEmpty(errors)
   };
 };
+
+export default notifications;

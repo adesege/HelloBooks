@@ -4,11 +4,13 @@ import Autocomplete from 'react-autocomplete/dist/react-autocomplete';
 import { connect } from 'react-redux';
 import TimeAgo from 'react-timeago';
 import { searchBooks } from 'actions/books';
+import { addFlashMessage } from 'actions/flashMessages';
 import Button from 'form/Button';
 
 const propTypes = {
   searchResult: PropTypes.array.isRequired,
-  searchBooksAction: PropTypes.func.isRequired
+  searchBooksAction: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 };
 
 const contextTypes = {
@@ -16,15 +18,20 @@ const contextTypes = {
 };
 
 /**
+ * Search stock component
+ *
  * @class SearchStock
+ *
  * @extends {React.Component}
- */
+*/
 class SearchStock extends React.Component {
   /**
-     * Creates an instance of SearchStock.
-     * @param {any} props
-     * @memberof SearchStock
-     */
+   * Creates an instance of SearchStock.
+   *
+   * @param {object} props - component props
+   *
+   * @memberof SearchStock
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -39,10 +46,14 @@ class SearchStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @param {any} nextProps
-     * @memberof SearchStock
-     */
+   * Lifecycle method invoked when component receives props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps - lifecyle next props
+   *
+   * @memberof SearchStock
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.searchResult !== this.props.searchResult) {
       this.setState({ searchResult: nextProps.searchResult });
@@ -51,33 +62,51 @@ class SearchStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @param {any} event
-     * @memberof SearchStock
-     */
+   * Search stock
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof SearchStock
+  */
   onSubmit(event) {
     event.preventDefault();
     const { bookId } = this.state;
-    this.context.router.push(`/books/stock-manager/${bookId}`);
+    if (bookId) {
+      this.context.router.push(`/books/stock-manager/${bookId}`);
+    } else {
+      this.props.addFlashMessage({
+        text: ['Book not found'],
+        type: 'error'
+      });
+    }
   }
 
-
   /**
-     * @returns {void}
-     * @param {string} value
-     * @param {object} book
-     * @memberof SearchStock
-     */
+   * Autocomplete callback when a book has been selected
+   *
+   * @returns {undefined}
+   *
+   * @param {string} value - search value
+   * @param {object} book - book object
+   *
+   * @memberof SearchStock
+  */
   onSelect(value, book) {
     this.setState({ title: value, bookId: book.id });
   }
 
 
   /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof SearchStock
-     */
+   * Handle file input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof SearchStock
+  */
   onChange(event) {
     const { searchBooksAction } = this.props;
     this.setState({ title: event.target.value });
@@ -89,9 +118,12 @@ class SearchStock extends React.Component {
 
 
   /**
-     * @returns {object} JSX
-     * @memberof SearchStock
-     */
+   * Renders component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof SearchStock
+  */
   render() {
     const { title, searchResult, bookId } = this.state;
     return (
@@ -134,7 +166,11 @@ class SearchStock extends React.Component {
                 renderItem={(item, highlighted) =>
                   (<div
                     key={item.id}
-                    style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+                    style={
+                      {
+                        backgroundColor: highlighted ? '#eee' : 'transparent'
+                      }
+                    }
                     className="row p-3"
                   >
                     <div className="col-sm-3">
@@ -147,12 +183,12 @@ class SearchStock extends React.Component {
                       <h6 className="d-block title">{item.title}</h6>
                       <p className="small">{item.description}</p>
                       {item.publishedDate &&
-                                            <p
-                                              className="text-right small">
-                                            Published on: {item.publishedDate}
-                                            </p>}
+                    <p
+                      className="text-right small">
+                    Published on: {item.publishedDate}
+                    </p>}
                       <p className="text-right small">
-                                                Added:
+                        Added:
                         <TimeAgo date={item.createdAt} minPeriod={60} />
                       </p>
                     </div>
@@ -170,14 +206,9 @@ class SearchStock extends React.Component {
                   type="submit"
                   className="btn btn-success btn-sm"
                   label="Go!" />
-                <button
-                  name="reset"
-                  type="reset"
-                  className="btn btn-danger btn-sm">Reset
-                </button>
               </div>
             </form>
-          </div>{/* Stock filter form */}
+          </div>
         </div>
       </div>
     );
@@ -188,6 +219,13 @@ SearchStock.propTypes = propTypes;
 
 SearchStock.contextTypes = contextTypes;
 
+/**
+    * Get state from store
+    *
+    * @param {object} state - redux store state
+    *
+    * @returns {object} map state to props
+    */
 const mapStateToProps = state => ({
   searchResult: state.books.books
 });
@@ -196,6 +234,8 @@ export { SearchStock };
 export default connect(
   mapStateToProps,
   {
-    searchBooksAction: searchBooks
+    searchBooksAction: searchBooks,
+    addFlashMessage
   }
 )(SearchStock);
+

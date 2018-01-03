@@ -2,7 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import ConnectedDeleteModal, { DeleteModal } from 'components/Books/DeleteModal';
+import ConnectedDeleteModal, { 
+  DeleteModal
+ } from 'components/Books/DeleteModal';
 
 const book = {
   id: 2,
@@ -41,7 +43,8 @@ const store = mockStore({
 describe('# DeleteModal', () => {
   const wrapper = shallow(<DeleteModal {...props}/>, context);
   it('should call the goToBooksPage method', () => {
-    const goToBooksPageOnSpy = jest.spyOn(wrapper.instance(), 'goToBooksPage');
+    const goToBooksPageOnSpy = jest
+      .spyOn(wrapper.instance(), 'goToBooksPage');
     wrapper.instance().goToBooksPage();
     expect(goToBooksPageOnSpy).toHaveBeenCalledTimes(1);
   });
@@ -51,12 +54,15 @@ describe('# DeleteModal', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedDeleteModal {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedDeleteModal 
+      {...props} 
+      store={store} />);
     expect(connectedComponent.length).toBe(1);
   });
 
   it('should call the toggleOpenModal method', () => {
-    const toggleOpenModalOnSpy = jest.spyOn(wrapper.instance(), 'toggleOpenModal');
+    const toggleOpenModalOnSpy = jest
+      .spyOn(wrapper.instance(), 'toggleOpenModal');
     wrapper.instance().toggleOpenModal();
     expect(toggleOpenModalOnSpy).toHaveBeenCalledTimes(1);
   });

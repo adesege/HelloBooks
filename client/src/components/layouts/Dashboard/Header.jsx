@@ -2,9 +2,12 @@ import React from 'react';
 import Menu from './Menu';
 
 /**
+ * Header component
+ *
  * @returns {JSX} jsx
- * @param {object} props
- */
+ *
+ * @param {object} props - component props
+*/
 const Header = (props) => (
   <div>
     <Menu {...props} />

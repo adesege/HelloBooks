@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUsers, updateUser, userUpdated } from 'actions/users';
+import { getUsers, updateUser } from 'actions/users';
 import { addFlashMessage } from 'actions/flashMessages';
 import BorrowedBooksList from 'components/Books/Histories/List';
 import validateUser from 'utils/validators/user';
@@ -13,20 +13,24 @@ const propTypes = {
   userGroup: PropTypes.string.isRequired,
   user: PropTypes.object,
   updateUserAction: PropTypes.func.isRequired,
-  userUpdated: PropTypes.func.isRequired,
   addFlashMessage: PropTypes.func.isRequired
 };
 
 /**
+ * Profile component
+ *
  * @class Profile
+ *
  * @extends {React.Component}
  */
 class Profile extends React.Component {
   /**
-     * Creates an instance of Profile.
-     * @param {any} props
-     * @memberof Profile
-     */
+   * Creates an instance of Profile.
+   *
+   * @param {object} props - component props
+   *
+   * @memberof Profile
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -49,9 +53,12 @@ class Profile extends React.Component {
   }
 
   /**
-     * @returns {void}
-     * @memberof Profile
-     */
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @memberof Profile
+  */
   componentDidMount() {
     const { userId } = this.props;
     this.props.getUsersAction({
@@ -60,10 +67,14 @@ class Profile extends React.Component {
   }
 
   /**
-     * @returns {void}
-     * @param {any} nextProps
-     * @memberof Profile
-     */
+   * Lifecycle method invoked when component will receive props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
+   * @memberof Profile
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.user !== this.props.user) {
       this.setState({ user: nextProps.user });
@@ -71,8 +82,11 @@ class Profile extends React.Component {
   }
 
   /**
+   * Toggle open change password modal
+   *
    * @returns {undefined}
-   * @memberOf Profile
+   *
+   * @memberof Profile
    */
   toggleOpenModal() {
     this.setState({
@@ -82,31 +96,40 @@ class Profile extends React.Component {
 
 
   /**
+   * Change password
+   *
    * @returns {undefined}
-   * @param {any} event
-   * @memberOf Profile
-   */
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof Profile
+  */
   onChangePassword(event) {
     event.preventDefault();
     if (!this.isFormValid()) { return; }
     this.setState({ errors: {} });
     this.props.updateUserAction(this.state.passwordChange)
-      .then(({ response }) => {
-        this.props.addFlashMessage({
-          type: 'success',
-          text: response.message
-        });
-        this.toggleOpenModal();
-      })
-      .catch((errors) => {
-        this.setState({ serverErrors: errors.response.data.message });
+      .then((response) => {
+        if (response.response && response.response.status >= 400) {
+          this.setState({ serverErrors: response.response.data.message });
+        } else {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: response.data.message
+          });
+          this.toggleOpenModal();
+        }
       });
   }
 
   /**
+   * Handle change password form input onChange event
+   *
    * @returns {undefined}
-   * @param {any} event
-   * @memberOf Profile
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof Profile
    */
   onChangePasswordInput(event) {
     this.setState({
@@ -119,11 +142,20 @@ class Profile extends React.Component {
 
 
   /**
+   * Validation check
+   *
    * @returns {boolean} isValid
-   * @memberOf Profile
+   *
+   * @memberof Profile
    */
   isFormValid() {
-    const { errors, isValid } = validateUser(this.state.passwordChange, 'change-password-user');
+    const {
+      errors,
+      isValid
+    } = validateUser(
+      this.state.passwordChange,
+      'change-password-user'
+    );
     if (!isValid) {
       this.setState({ errors });
     }
@@ -131,8 +163,11 @@ class Profile extends React.Component {
   }
 
   /**
-  * @returns {object} JSX
-  * @memberof Profile
+   * Render component
+   *
+   * @returns {JSX} JSX
+   *
+   * @memberof Profile
   */
   render() {
     return (
@@ -164,6 +199,13 @@ class Profile extends React.Component {
 
 Profile.propTypes = propTypes;
 
+/**
+  * Get state from store
+  *
+  * @param {object} state - redux store state
+  *
+  * @returns {object} map state to props
+ */
 const mapStateToProps = (state) => {
   const { userId } = state.auth.user;
   return {
@@ -174,9 +216,9 @@ const mapStateToProps = (state) => {
   };
 };
 
+export { Profile };
 export default connect(mapStateToProps, {
   getUsersAction: getUsers,
   updateUserAction: updateUser,
-  userUpdated,
   addFlashMessage
 })(Profile);

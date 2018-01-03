@@ -12,6 +12,13 @@ const propTypes = {
   errors: PropTypes.object.isRequired,
 };
 
+/**
+ * Reset password form
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+*/
 const ResetPasswordForm = (props) => (
   <form onSubmit={props.onSubmit}>
     <FlashMessagesList />

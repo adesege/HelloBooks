@@ -1,7 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-import { Collapse, Nav, NavItem, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import {
+  Collapse,
+  Nav,
+  NavItem,
+  Dropdown,
+  DropdownToggle,
+  DropdownItem,
+  DropdownMenu
+} from 'reactstrap';
 import classnames from 'classnames';
 import NotificationList from './NotificationsList';
 
@@ -18,6 +26,13 @@ const propTypes = {
   menuNotifications: PropTypes.array.isRequired
 };
 
+/**
+ * Navigation links component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const NavigationLinks = ({
   isAuthenticated,
   user,
@@ -74,10 +89,18 @@ const NavigationLinks = ({
       </NavItem>
       {(isAuthenticated && user.group === 'admin') && (
         <NavItem>
-          <Dropdown isOpen={isNotificationDropdownOpen} toggle={toggleNotificationDropdown}
+          <Dropdown
+            isOpen={isNotificationDropdownOpen}
+            toggle={toggleNotificationDropdown}
             id="notifications"
           >
-            <DropdownToggle className={classnames("nav-link", { "text-danger": isNewNotification })} tag="a" caret>
+            <DropdownToggle
+              className={classnames("nav-link", {
+                "text-danger": isNewNotification
+              })}
+              tag="a"
+              caret
+            >
               <i className="fa fa-bell" /> Notifications
             </DropdownToggle>
             <DropdownMenu className="pb-0">

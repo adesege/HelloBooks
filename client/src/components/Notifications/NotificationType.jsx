@@ -1,6 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from 'form/Button';
 
+const propTypes = {
+  type: PropTypes.string.isRequired
+};
+/**
+ * Notification type component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const NotificationType = ({ type }) => {
   let buttonType;
   switch (type) {
@@ -29,10 +40,13 @@ const NotificationType = ({ type }) => {
     break;
   }
   return (
-    <div className="col-sm-3 p-2 text-right">
+    <div className="col-sm-3 col p-2 text-right">
       {buttonType}
     </div>
   );
 };
+
+NotificationType.propTypes = propTypes;
+
 
 export default NotificationType;

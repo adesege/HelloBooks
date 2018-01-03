@@ -14,7 +14,8 @@ describe('# SetTimeout', () => {
   });
 
   it('should call the componentWillReceiveProps method', () => {
-    const componentWillReceivePropsSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+    const componentWillReceivePropsSpy = jest
+    .spyOn(wrapper.instance(), 'componentWillReceiveProps');
     const nextProps = {
       children: <h1/>
     };
@@ -22,18 +23,21 @@ describe('# SetTimeout', () => {
     expect(componentWillReceivePropsSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the componentWillUnmount method', () => {
-    const componentWillUnmountSpy = jest.spyOn(wrapper.instance(), 'componentWillUnmount');
+    const componentWillUnmountSpy = jest
+    .spyOn(wrapper.instance(), 'componentWillUnmount');
     wrapper.instance().componentWillUnmount();
     expect(componentWillUnmountSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the setTimer method and render the child component when isVisible is true.', () => {
+  it('should call the setTimer method and '+
+  'render the child component when isVisible is true.', () => {
     const setTimerOnSpy = jest.spyOn(wrapper.instance(), 'setTimer');
     wrapper.instance().setTimer();
     expect(setTimerOnSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the setTimer method and render a span when isVisible is false.', () => {
+  it('should call the setTimer method and '+
+  'render a span when isVisible is false.', () => {
     wrapper.setState({ isVisible: false });
     expect(wrapper).toBeDefined();
     expect(wrapper.getElement().type).toBe('span');

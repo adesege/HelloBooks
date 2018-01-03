@@ -1,7 +1,10 @@
-import middleware from './middleware';
-import adminMiddleware from './adminMiddleware';
+import path from 'path';
+import { eagerLoadFiles } from '../utils';
 
-export default {
-  middleware,
-  adminMiddleware
+const config = {
+  basename: path.basename(module.filename),
+  dirname: __dirname
 };
+
+const middlewares = eagerLoadFiles(config);
+export default middlewares;

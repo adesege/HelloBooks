@@ -14,29 +14,41 @@ const contextTypes = {
 };
 
 /**
-   * @class AdminMiddleware
-   * @extends {React.Component}
-   */
+ * Admin middleware component
+ *
+ * @class AdminMiddleware
+ *
+ * @extends {React.Component}
+*/
 export class AdminMiddleware extends React.Component {
   /**
-     * @returns {void}
-     * @memberof AdminMiddleware
-     */
+   * Lifecycle method invoked when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @memberof AdminMiddleware
+  */
   componentDidMount() {
     if (this.props.group !== 'admin') {
       this.props.addFlashMessage({
         type: 'error',
-        text: ['Sorry, you don\'t have the right permission to access that page']
+        text: [
+          'Sorry, you don\'t have the right permission to access that page'
+        ]
       });
       this.context.router.push('/dashboard');
     }
   }
 
   /**
-     * @returns {void}
-     * @param {object} nextProps
-     * @memberof AdminMiddleware
-     */
+   * Lifecycle method invoked when component will update
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
+   * @memberof AdminMiddleware
+  */
   componentWillUpdate(nextProps) {
     if (nextProps.group !== 'admin') {
       this.context.router.push('/dashboard');
@@ -44,9 +56,12 @@ export class AdminMiddleware extends React.Component {
   }
 
   /**
-     * @returns  {object} JSX
-     * @memberof AdminMiddleware
-     */
+   * Renders component
+   *
+   * @returns  {JSX} JSX
+   *
+   * @memberof AdminMiddleware
+  */
   render() {
     const ComposedComponent = this.props.composedComponent;
     return (
@@ -59,7 +74,23 @@ AdminMiddleware.propTypes = propTypes;
 
 AdminMiddleware.contextTypes = contextTypes;
 
+/**
+ * Higher order component to
+ * render composed comonent for admin user
+ *
+ * @param {object} ComposedComponent - composed component to render
+ * if authenticated
+ *
+ * @returns {func} JSX
+*/
 const adminMiddleware = (ComposedComponent) => {
+  /**
+   * Get state from store
+   *
+   * @param {object} state - redux store state
+   *
+   * @returns {object} map state to props
+ */
   const mapStateToProps = (state) => ({
     group: state.auth.user.group,
     composedComponent: ComposedComponent,

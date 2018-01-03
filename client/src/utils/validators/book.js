@@ -1,7 +1,14 @@
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
-export default (fields) => {
+/**
+ * Handles book validation
+ *
+ * @param {object} fields - fields to validate
+ *
+ * @returns {object} error messages
+ */
+const book = (fields) => {
   let errors = {};
   const {
     id,
@@ -58,3 +65,5 @@ export default (fields) => {
     isValid: isEmpty(errors)
   };
 };
+
+export default book;

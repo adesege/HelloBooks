@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-  getStockManagerByBookId,
+  getStockByBookId,
   addStock,
   deleteStock } from 'actions/stockManager';
 import Button from 'form/Button';
@@ -12,31 +12,32 @@ import DeleteStock from './DeleteStock';
 
 const propTypes = {
   stocks: PropTypes.array.isRequired,
-  getStockManagerByBookIdAction: PropTypes.func.isRequired,
+  getStockByBookIdAction: PropTypes.func.isRequired,
   addStockAction: PropTypes.func.isRequired,
   deleteStockAction: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired
 };
 
 /**
+ * Show stock component
+ *
  * @class ShowStock
+ *
  * @extends {React.Component}
- */
+*/
 class ShowStock extends React.Component {
   /**
-     * Creates an instance of ShowStock.
-     * @param {object} props
-     * @memberof ShowStock
-     */
+   * Creates an instance of ShowStock.
+   *
+   * @param {object} props - component props
+   *
+   * @memberof ShowStock
+  */
   constructor(props) {
     super(props);
     this.state = {
       bookId: 0,
-      stocks: [{
-        book: {
-          title: ""
-        }
-      }],
+      stocks: [],
       quantity: '',
       isLoading: false,
       isOpenModal: false,
@@ -54,24 +55,31 @@ class ShowStock extends React.Component {
 
 
   /**
-     * @returns {void}
-     * @memberof ShowStock
-     */
+   * Get stock manager by book id when component mounts
+   *
+   * @returns {undefined}
+   *
+   * @memberof ShowStock
+  */
   componentDidMount() {
     const {
-      getStockManagerByBookIdAction,
+      getStockByBookIdAction,
       params,
     } = this.props;
     const bookId = params.id;
-    getStockManagerByBookIdAction({ bookId });
+    getStockByBookIdAction({ bookId });
   }
 
 
   /**
-     * @returns {void}
-     * @param {object} nextProps
-     * @memberof ShowStock
-     */
+   * Lifecycle method invoked when component receives props
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
+   * @memberof ShowStock
+   *
+   * @returns {undefined}
+  */
   componentWillReceiveProps(nextProps) {
     if (nextProps.stocks !== this.props.stocks) {
       this.setState({ stocks: nextProps.stocks });
@@ -79,10 +87,14 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Delete stock info
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
    * @memberof ShowStock
-   */
+  */
   onDeleteSubmit(event) {
     event.preventDefault();
     const { deleteStockAction } = this.props;
@@ -96,10 +108,14 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Add stock information for a particular book
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
    * @memberof ShowStock
-   */
+  */
   onSubmit(event) {
     event.preventDefault();
     const { addStockAction, params } = this.props;
@@ -121,8 +137,12 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {void}
-   * @param {any} event
+   * Handle file input onChange event and set state according
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
    * @memberof ShowStock
    */
   onChange(event) {
@@ -130,10 +150,14 @@ class ShowStock extends React.Component {
   }
 
   /**
- * @returns {void}
- * @param {any} event
- * @memberof ShowStock
- */
+   * Delete a particular stock information
+   *
+   * @returns {undefined}
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof ShowStock
+  */
   onDeleteModal(event) {
     event.preventDefault();
     const stockId = event.target.getAttribute('id');
@@ -144,9 +168,12 @@ class ShowStock extends React.Component {
   }
 
   /**
- * @returns {void}
- * @memberof ShowStock
- */
+   * Toggle open add modal
+   *
+   * @returns {undefined}
+   *
+   * @memberof ShowStock
+  */
   toggleOpenAddModal() {
     this.setState({
       isOpenAddModal: !this.state.isOpenAddModal
@@ -154,7 +181,10 @@ class ShowStock extends React.Component {
   }
 
   /**
-   * @returns {object} JSX
+   * Render component
+   *
+   * @returns {JSX} JSX
+   *
    * @memberof ShowStock
    */
   render() {
@@ -180,6 +210,7 @@ class ShowStock extends React.Component {
           isOpenModal = {this.state.isOpenAddModal}
           toggleOpenModal = {this.toggleOpenAddModal}
         />
+        {this.state.stocks[0] &&
         <div className="toolaction">
           <Button
             type="button"
@@ -188,12 +219,15 @@ class ShowStock extends React.Component {
             icon="plus"
           />
         </div>
-        <h4 className="title mb-2 mr-4">Viewing {this.state.stocks && this.state.stocks[0].book.title} stock</h4>
+        }
+        <h4 className="title mb-2 mr-4">
+        Viewing {this.state.stocks[0] && this.state.stocks[0].book.title} stock
+        </h4>
         <div className="mb-4">
           <small>
-                    You can add or edit stock
-                    information for {this.state.stocks && this.state.stocks[0].book.title} here.<br/>
-                    Use the filter form to view from a particular page.
+            You can add or edit stock
+            information for &nbsp;
+            {this.state.stocks[0] && this.state.stocks[0].book.title} here.
           </small>
         </div>
         <StockList
@@ -207,13 +241,20 @@ class ShowStock extends React.Component {
 
 ShowStock.propTypes = propTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state - redux store state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   stocks: state.stocks,
 });
 
 export { ShowStock };
 export default connect(mapStateToProps, {
-  getStockManagerByBookIdAction: getStockManagerByBookId,
+  getStockByBookIdAction: getStockByBookId,
   addStockAction: addStock,
   deleteStockAction: deleteStock,
 })(ShowStock);

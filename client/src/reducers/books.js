@@ -1,6 +1,6 @@
 import findIndex from 'lodash/findIndex';
 import types from '../actions/types';
-import { initialBookState, initialAuthState } from './initialState';
+import { initialBookState } from './initialState';
 
 const {
   SET_BOOKS,
@@ -10,9 +10,15 @@ const {
   BOOK_DELETED
 } = types;
 
-console.log(initialAuthState, '------------');
-
-export default (state = initialBookState, action = {}) => {
+/**
+ * Handles books reducer
+ *
+ * @param {object} state - redux state
+ * @param {object} action - action creator
+ *
+ * @returns {object} new state
+*/
+const books = (state = initialBookState, action = {}) => {
   /* eslint-disable no-case-declarations */
   switch (action.type) {
   case SET_BOOKS:
@@ -43,13 +49,14 @@ export default (state = initialBookState, action = {}) => {
       item => parseInt(item.id, 10) === parseInt(action.book.id, 10)
     );
     if (findBookIndex > -1) {
-      // state.books[findBookIndex] = action.book;
       return {
         ...state,
-        books: [
-          action.book,
-          ...state.books.slice(0, findBookIndex),
-          ...state.books.slice(findBookIndex + 1),
+        books: [{
+          ...state.books[findBookIndex],
+          ...action.book
+        },
+        ...state.books.slice(0, findBookIndex),
+        ...state.books.slice(findBookIndex + 1),
         ]
       };
     }
@@ -75,3 +82,5 @@ export default (state = initialBookState, action = {}) => {
     return state;
   }
 };
+
+export default books;

@@ -1,14 +1,20 @@
 import socket from './config';
 
 /**
+ * Emit a particular notification
+ *
+ * @param {object} options - options for getting new notifications
+ *
  * @returns {undefined}
- * @param {object} notificationId
  */
-const ioGetNotifications = (notificationId) => {
-  socket.emit('GET_NOTIFICATIONS', notificationId);
+const ioGetNotifications = (options) => {
+  socket.emit('GET_NOTIFICATIONS', options);
 };
 
 /**
+ * Emit JOIN event
+ * and get the most recent notifications
+ *
  * @returns {undefined}
  */
 const ioJoin = () => {
@@ -22,8 +28,11 @@ socket.on('GET_ALL_NOTIFICATIONS', () => {
 });
 
 /**
+ * Get new notification from server
+ *
+ * @param {func} callback - callback function to resolve new notifications
+ *
  * @returns {undefined}
- * @param {func} callback
  */
 const ioNewNotifications = (callback) => {
   socket.on('NEW_NOTIFICATIONS', (data) => {
@@ -34,5 +43,8 @@ const ioNewNotifications = (callback) => {
   });
 };
 
-export { ioGetNotifications, ioJoin, ioNewNotifications };
+export {
+  ioGetNotifications,
+  ioJoin,
+  ioNewNotifications };
 export default {};

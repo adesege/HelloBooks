@@ -1,15 +1,20 @@
 
 export default (sequelize, DataTypes) => {
-  const Book = sequelize.define(
+  const book = sequelize.define(
     'Book', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false,
         validate: {
           notEmpty: {
             args: true,
             msg: 'You haven\'t selected a book to update.'
+          },
+          not: {
+            args: ['[a-z]', 'i'],
+            msg: 'Book ID must be integer'
           }
         }
       },
@@ -86,17 +91,17 @@ export default (sequelize, DataTypes) => {
     }
   );
 
-  Book.associate = (models) => {
-    Book.hasMany(models.stockManager, {
+  book.associate = (models) => {
+    book.hasMany(models.stockManager, {
       foreignKey: 'bookId',
       as: 'stock'
     });
-    Book.belongsTo(models.bookCategory, {
+    book.belongsTo(models.bookCategory, {
       foreignKey: 'bookCategoryId',
       as: 'Category',
       targetKey: 'id'
     });
   };
 
-  return Book;
+  return book;
 };

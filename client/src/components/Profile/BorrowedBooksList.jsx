@@ -5,15 +5,29 @@ import Button from 'form/Button';
 import { showCoverPhoto } from 'utils/';
 import EmptyMessage from 'components/miscellaneous/EmptyMessage';
 
+const propTypes = {
+  content: PropTypes.array.isRequired,
+  onReturnBook: PropTypes.func.isRequired
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired
+};
+
 /**
-* @class BorrowedBooksList
-* @extends {Component}
+ * Borrowed books list component
+ *
+ * @class BorrowedBooksList
+ *
+ * @extends {Component}
 */
 class BorrowedBooksList extends Component {
   /**
-  * Creates an instance of BorrowedBooksList.
-  * @param {object} props
-  * @memberof BorrowedBooksList
+   * Creates an instance of BorrowedBooksList.
+   *
+   * @param {object} props - component props
+   *
+   * @memberof BorrowedBooksList
   */
   constructor(props) {
     super(props);
@@ -23,9 +37,13 @@ class BorrowedBooksList extends Component {
   }
 
   /**
-  * @returns {void}
-  * @param {object} nextProps
-  * @memberof BorrowedBooksList
+   * Lifecycle method invoked when component will receive props
+   *
+   * @returns {undefined}
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
+   * @memberof BorrowedBooksList
   */
   componentWillReceiveProps(nextProps) {
     if (this.props.content !== nextProps.content) {
@@ -36,8 +54,11 @@ class BorrowedBooksList extends Component {
   }
 
   /**
-  * @returns {object} JSX
-  * @memberof BorrowedBooksList
+   * Renders component
+   *
+   * @returns {object} JSX
+   *
+   * @memberof BorrowedBooksList
   */
   render() {
     return (
@@ -80,13 +101,8 @@ class BorrowedBooksList extends Component {
   }
 }
 
-BorrowedBooksList.propTypes = {
-  content: PropTypes.array.isRequired,
-  onReturnBook: PropTypes.func.isRequired
-};
+BorrowedBooksList.propTypes = propTypes;
 
-BorrowedBooksList.contextTypes = {
-  router: PropTypes.object.isRequired
-};
+BorrowedBooksList.contextTypes = contextTypes;
 
 export default BorrowedBooksList;

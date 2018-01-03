@@ -9,6 +9,4 @@ coverage/
 .DS_STORE
 client/build
 .vscode
-e2e-tests
-e2e-test-output
-nightwatch.**
+reports

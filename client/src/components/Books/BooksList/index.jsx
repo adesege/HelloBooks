@@ -26,13 +26,18 @@ const contextTypes = {
 };
 
 /**
+ * Renders books as a list
+ *
  * @class BooksList
+ *
  * @extends {Component}
  */
 class BooksList extends Component {
   /**
      * Creates an instance of BooksList.
-     * @param {any} props
+     *
+     * @param {object} props - component props
+     *
      * @memberof BooksList
      */
   constructor(props) {
@@ -62,8 +67,11 @@ class BooksList extends Component {
 
 
   /**
+   * Gets books and book categories
+   *
+   * @memberof BooksList
+   *
    * @returns {undefined}
-   * @memberOf BooksList
    */
   componentDidMount() {
     this.props.getBooks();
@@ -71,10 +79,14 @@ class BooksList extends Component {
   }
 
   /**
-     * @returns {void}
-     * @param {any} nextProps
-     * @memberof BooksList
-     */
+   * Lifecycle method invoked when component receives props
+   *
+   * @param {object} nextProps - lifecycle next props
+   *
+   * @memberof BooksList
+   *
+   * @returns {undefined}
+  */
   componentWillReceiveProps(nextProps) {
     if (this.props.categories !== nextProps.categories) {
       this.setState({
@@ -98,10 +110,14 @@ class BooksList extends Component {
   }
 
   /**
-     * @returns {void}
-     * @param {object} event
-     * @memberof Books
-     */
+   * Go to edit book page
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof BooksList
+   *
+   * @returns {undefined}
+  */
   goToEditPage(event) {
     event.preventDefault();
     const { id } = event.target;
@@ -109,10 +125,14 @@ class BooksList extends Component {
   }
 
   /**
-       * @returns {void}
-       * @param {object} event
-       * @memberof Books
-       */
+   * Go to confirm delete book page
+   *
+   * @param {object} event - event handler
+   *
+   * @memberof BooksList
+   *
+   * @returns {undefined}
+  */
   confirmDelete(event) {
     event.preventDefault();
     const { id } = event.target;
@@ -120,10 +140,14 @@ class BooksList extends Component {
   }
 
   /**
-   * @returns {undefined}
-   * @param {any} pageNumber
+   * Get new record based on search, filter and pagination
+   *
+   * @param {number} pageNumber - current page number
+   *
    * @memberof BooksList
-   */
+   *
+   * @returns {undefined}
+  */
   handlePageChange(pageNumber) {
     const offset = this.state.searchFilter.limit * (pageNumber - 1);
     this.setState({
@@ -140,10 +164,14 @@ class BooksList extends Component {
   }
 
   /**
-   * @returns {undefined}
-   * @param {object} event
+   * Handle form input onChange event and set state according
+   *
+   * @param {object} event - event handler
+   *
    * @memberof Notifications
-   */
+   *
+   * @returns {undefined}
+  */
   onChangeInput(event) {
     const { target } = event;
     const { value, name } = target;
@@ -156,19 +184,26 @@ class BooksList extends Component {
   }
 
   /**
-   * @returns {undefined}
-   * @param {any} event
+   * Search and filter books
+   *
+   * @param {object} event - event handler
+   *
    * @memberof Notifications
-   */
+   *
+   * @returns {undefined}
+  */
   onSearchFilter(event) {
     event.preventDefault();
     this.props.getBooks(this.state.searchFilter);
   }
 
   /**
-     * @returns {object} JSX
-     * @memberof BooksList
-     */
+   * Renders the component
+   *
+   * @memberof BooksList
+   *
+   * @returns {JSX} JSX
+  */
   render() {
     return (
       <div>
@@ -184,7 +219,9 @@ class BooksList extends Component {
               <div className="row pr-3" id="bookList">
                 {this.state.books.map((object, index) => (
                   <div
-                    className="col-sm-4 col-md-3 col-lg-4 col-xl-2 pr-0 col-6 mb-4 book"
+                    className=
+                      "col-sm-3 col-md-3 col-6 col-lg-3 \
+                     col-xl-2 pr-0 col-6 mb-4 book"
                     key={index}>
                     <Link
                       to={`/books/view/${object.id}`}
@@ -198,13 +235,18 @@ class BooksList extends Component {
                     </Link>
                     <div className="actions ml-3 mb-3">
                       {this.props.userGroup === 'admin' && <span>
-                        <i className="btn btn-sm btn-info card-link m-0 mr-2 fa fa-pencil"
+                        <i
+                          className=
+                            "btn btn-sm btn-info card-link \
+                             m-0 mr-2 fa fa-pencil"
                           onClick={this.goToEditPage.bind(this)}
                           id={object.id}
                         />
-                        <i className="btn btn-sm btn-danger card-link m-0 mr-2 fa fa-remove"
-                          onClick={this.confirmDelete.bind(this)}
-                          id={object.id}
+                        <i className=
+                          "btn btn-sm btn-danger card-link \
+                         m-0 mr-2 fa fa-remove"
+                        onClick={this.confirmDelete.bind(this)}
+                        id={object.id}
                         />
                       </span>
                       }
@@ -227,6 +269,13 @@ class BooksList extends Component {
 BooksList.propTypes = propTypes;
 BooksList.contextTypes = contextTypes;
 
+/**
+ * Get state from store
+ *
+ * @param {object} state - redux store state
+ *
+ * @returns {object} map state to props
+ */
 const mapStateToProps = state => ({
   books: state.books.books,
   pagination: state.books.pagination,

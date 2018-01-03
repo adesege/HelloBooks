@@ -55,12 +55,18 @@ describe('# BooksList', () => {
   });
 
   it('should render the connected component', () => {
-    const connectedComponent = shallow(<ConnectedBooksList {...props} store={store} />);
+    const connectedComponent = shallow(<ConnectedBooksList
+      {...props}
+      store={store}
+    />);
     expect(connectedComponent.length).toBe(1);
   });
 
   it('should call the componentWillReceiveProps method', () => {
-    const componentWillReceivePropsSpy = jest.spyOn(wrapper.instance(), 'componentWillReceiveProps');
+    const componentWillReceivePropsSpy = jest.spyOn(
+      wrapper.instance(),
+      'componentWillReceiveProps'
+    );
     const nextProps = {
       params: { id: 2 },
       books: '',
@@ -81,12 +87,14 @@ describe('# BooksList', () => {
     expect(confirmDeleteOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the handlePageChange method', () => {
-    const handlePageChangeOnSpy = jest.spyOn(wrapper.instance(), 'handlePageChange');
+    const handlePageChangeOnSpy = jest
+      .spyOn(wrapper.instance(), 'handlePageChange');
     wrapper.instance().handlePageChange(global.event);
     expect(handlePageChangeOnSpy).toHaveBeenCalledTimes(1);
   });
   it('should call the onSearchFilter method', () => {
-    const onSearchFilterOnSpy = jest.spyOn(wrapper.instance(), 'onSearchFilter');
+    const onSearchFilterOnSpy = jest
+      .spyOn(wrapper.instance(), 'onSearchFilter');
     wrapper.instance().onSearchFilter(global.event);
     expect(onSearchFilterOnSpy).toHaveBeenCalledTimes(1);
   });

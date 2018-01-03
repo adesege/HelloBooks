@@ -1,11 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import InputField from '../../../form/InputField';
-import Button from '../../../form/Button';
+import InputField from 'form/InputField';
+import Button from 'form/Button';
 
+const propTypes = {
+  user: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+/**
+ * Change password form component
+ *
+ * @param {object} props - component props
+ *
+ * @returns {JSX} JSX
+ */
 const ChangePasswordForm = (props) => (
   <form onSubmit={props.onSubmit}>
-    <div className="alert alert-success bg-white my-5">Reset your password below</div>
+    <div
+      className="alert alert-success bg-white my-5">
+    Reset your password below
+    </div>
     <InputField
       type="text"
       label="Email"
@@ -49,12 +67,6 @@ const ChangePasswordForm = (props) => (
   </form>
 );
 
-ChangePasswordForm.propTypes = {
-  user: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-};
+ChangePasswordForm.propTypes = propTypes;
 
 export default ChangePasswordForm;

@@ -1,10 +1,16 @@
 import React from 'react';
 import BooksList from 'components/Books/BooksList';
 
+/**
+ * Dashboard component
+ *
+ * @returns {JSX} JSX
+*/
 const Dashboard = () => (
   <div className="row">
     <div
-      className="col-sm-8 col-md-7 col-lg-8 offset-lg-2">
+      className={"col-sm-8 col-md-8 offset-md-2 " +
+      "col-lg-8 offset-lg-2 col-sm-12"}>
       <h4 className="title mb-2 mr-4">Dashboard</h4>
       <div className="mb-4">
         <small>

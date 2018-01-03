@@ -5,3 +5,6 @@ server/dist/**
 template/**
 coverage/
 .nyc_output/
+node_modules
+.env
+server/src/docs
